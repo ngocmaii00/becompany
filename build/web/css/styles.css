@@ -1,0 +1,178 @@
+:root {
+    --main-color: #543520;
+}
+
+@font-face {
+    font-family: 'MyCustomFont';
+    src: url('../font/Peace Sans.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+main {
+    padding: 20px;
+}
+
+.slide {
+    background-image: url('https://i.etsystatic.com/27758729/r/il/c66847/2913926815/il_1588xN.2913926815_bpet.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: calc(100vw * 0.45);
+    margin-bottom: 20px;
+    border-radius: 20px;
+}
+
+.slide-title {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    font-size: 3rem;
+    font-weight: bolder;
+    text-shadow: 0 0 10px #ffffffc2;
+    width: 100%;
+    text-align: center;
+    bottom: 50%;
+    font-family: 'MyCustomFont';
+    align-items: center;
+    justify-content: center;
+}
+
+.slide svg {
+    color: white;
+    margin: 0 6px;
+    opacity: 0.5;
+}
+
+
+.dots-chosen {
+    opacity: 1 !important;
+}
+
+.home-teddy-img {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 140px;
+    width: 170px;
+    border-radius: 12px;
+    border: solid 2px var(--main-color);
+}
+
+.home-teddy {
+    border: solid 2px var(--main-color);
+    display: inline-block;
+    border-radius: 12px;
+    padding: 10px;
+    background-color: #f6f0f0;
+    margin-right: 16px;
+    margin-bottom: 8px;
+}
+
+.home-teddy-color {
+    height: 16px;
+    width: 16px;
+    display: inline-block;
+    border-radius: 12px;
+    border: 1.5px solid black;
+    color: white;
+}
+
+.home-teddy-size {
+    border: 1.5px solid #696868;
+    border-radius: 12px;
+    padding: 0 4px 1px 4px;
+}
+
+.button {
+    background-color: var(--main-color);
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: white;
+    padding: 4px 12px 5px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.button-cart {
+    color: var(--main-color);
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.hightlight-container{
+    display: flex;
+    overflow-x: scroll;
+}
+
+.home-teddy-name {
+    color: var(--main-color);
+    font-weight: bold;
+}
+
+.home-teddy-price {
+    color: var(--main-color);
+}
+.home-teddy-sizes {
+    font-size: 8px;
+    margin-bottom: 10px;
+}
+
+.hightlight h2 {
+    font-size: 2rem;
+    color: var(--main-color);
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+    height: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--main-color); 
+  border-radius: 10px;
+}
+
+.type {
+    margin-top: 20px;
+    padding: 0 12px;
+    border: 2px solid var(--main-color);
+    display: inline-block;
+    border-radius: 12px;
+}
+
+.type-header {
+    display: flex;
+    color: var(--main-color);
+    font-size: 1.4rem;
+    font-weight: bold;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1.5px solid var(--main-color);
+}
+
+.type h2 {
+    margin-left: 6px;
+    padding: 6px;
+}
+
+.filter-item h4 {
+    color: var(--main-color);
+    font-weight: bold;
+}
+
+.filter-item select, .filter-item input {
+    border: 1.5px solid var(--main-color);
+    border-radius: 4px;
+    padding: 4px 10px;
+    max-width: 100px;
+}
