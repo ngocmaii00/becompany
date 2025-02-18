@@ -13,7 +13,7 @@
     <link rel="icon" type="image/svg+xml" href="images/head.png" />
     <title>Becompany</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="index.css" rel="stylesheet" type="text/css"/>
+    <link href="css/index.css" rel="stylesheet" type="text/css"/>
   </head>
   <body>
     <header class="mx-auto position-fixed justify-between relative">
