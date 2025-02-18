@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="css/styles.css"/>
     </head>
     <body>
+        <%@include file="header.jsp" %>
         <main>
             <div class="slide relative">
                 <div class="slide-title">
