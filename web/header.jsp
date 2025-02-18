@@ -10,7 +10,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/images/head.png" />
+    <link rel="icon" type="image/svg+xml" href="images/head.png" />
     <title>Becompany</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="index.css" rel="stylesheet" type="text/css"/>
@@ -19,7 +19,7 @@
     <header class="mx-auto position-fixed justify-between relative">
       <div class="flex flex-row items-center p-1">
         <div class="basis-5/6">
-          <img src="images/logo.png" alt="logo" class="h-10 md:h-12 lg:h-16" />
+          <img src="images/logo.png" alt="logo" class="h-8 md:h-12 lg:h-14 ms-2" />
         </div>
         <label
           class="flex flex-row border-2 border-[#563a2d] rounded-full basis-2/6 mr-2"
