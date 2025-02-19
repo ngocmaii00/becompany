@@ -8,13 +8,13 @@
 <!DOCTYPE html>
 <html>
     <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="images/head.png" />
-    <title>Becompany</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="css/index.css" rel="stylesheet" type="text/css"/>
-  </head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" type="image/svg+xml" href="images/head.png" />
+        <title>Becompany</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href="css/index.css" rel="stylesheet" type="text/css"/>
+    </head>
     <body>
         <%@include file="header.jsp" %>
         <div
@@ -86,13 +86,13 @@
                             type="text"
                             name="username"
                             placeholder="Enter username"
-                            class="bg-white focus:border-2 focus:border-[#563a2d] rounded-md text-[#563a2d] px-3 py-2 font-semibold"
+                            class="bg-white focus:border-2 focus:border-[#563a2d] rounded-md text-[#563a2d] px-3 py-2.5 font-semibold text-sm mt-2"
                             />
                         <input
                             type="text"
                             name="password"
                             placeholder="Enter password"
-                            class="bg-white focus:border-2 focus:border-[#563a2d] rounded-md text-[#563a2d] px-3 py-2 font-semibold"
+                            class="bg-white focus:border-2 focus:border-[#563a2d] rounded-md text-[#563a2d] px-3 py-2.5 font-semibold text-sm"
                             />
                         <div class="flex flex-row items-center gap-x-2 py-0.5">
                             <input class="accent-[#563a2d] size-3" type="checkbox" />
@@ -114,7 +114,10 @@
                         class="flex flex-col justify-center items-center gap-y-4 sm:ms-8 mt-10 sm:mt-0 col-span-4 sm:col-span-1"
                         >
                         <img src="images/mai.jpg" alt="avatar" class="rounded-full w-32" />
-                        <button>
+                        
+
+                        <label class="cursor-pointer" for="file-input">
+                            <input type="file" hidden id="file-input"/>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 24 24"
@@ -128,7 +131,8 @@
                                 clip-rule="evenodd"
                                 />
                             </svg>
-                        </button>
+                            
+                        </label>
                     </div>
                 </div>
                 <div class="flex flex-row justify-between mx-10 mt-4">
@@ -163,7 +167,7 @@
                     </button>
                     <button
                         type="submit"
-                        class="flex flex-row bg-[#563a2d] w-fit rounded-lg justify-center items-center px-6 py-3 gap-x-2 notosans-font font-bold text-white opacity-60 text-lg"
+                        class="flex flex-row bg-[#563a2d] w-fit rounded-lg justify-center items-center px-6 py-3 gap-x-2 font-bold text-white text-lg"
                         >
                         Save Profile
                     </button>
