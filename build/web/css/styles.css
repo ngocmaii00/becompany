@@ -9,6 +9,10 @@
     font-style: normal;
 }
 
+*{
+    color: var(--main-color);
+}
+
 main {
     padding: 20px;
 }
@@ -18,7 +22,7 @@ main {
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    height: calc(100vw * 0.45);
+    height: calc(100vw * 0.4);
     margin-bottom: 20px;
     border-radius: 20px;
 }
@@ -50,16 +54,17 @@ main {
 }
 
 .home-teddy-img {
+    display: block;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    height: 140px;
-    width: 170px;
+    height: 165px;
     border-radius: 12px;
     border: solid 2px var(--main-color);
 }
 
 .home-teddy {
+    
     border: solid 2px var(--main-color);
     display: inline-block;
     border-radius: 12px;
@@ -67,6 +72,11 @@ main {
     background-color: #f6f0f0;
     margin-right: 16px;
     margin-bottom: 8px;
+}
+
+.hightlight .home-teddy{
+    min-width: 225px;
+    max-width: 225px;
 }
 
 .home-teddy-color {
@@ -98,6 +108,7 @@ main {
     color: var(--main-color);
     font-size: 1rem;
     cursor: pointer;
+    margin-left: 8px;
 }
 
 .hightlight-container{
@@ -108,14 +119,19 @@ main {
 .home-teddy-name {
     color: var(--main-color);
     font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 4px 0;
 }
 
 .home-teddy-price {
     color: var(--main-color);
+    font-size: 14px;
 }
 .home-teddy-sizes {
     font-size: 8px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 .hightlight h2 {
@@ -123,12 +139,13 @@ main {
     color: var(--main-color);
     font-weight: bold;
     margin: 10px 0;
+    text-align: center;
 }
 
 /* width */
 ::-webkit-scrollbar {
   width: 10px;
-    height: 10px;
+    height: 0;
 }
 
 /* Track */
@@ -143,11 +160,34 @@ main {
 }
 
 .type {
+    display: flex;
+    margin-top: 40px;
+    align-items:flex-start;
+}
+
+.type-right {
+    flex: 1;
+    margin: 20px;
+    margin-right: 0;
+}
+.type-left {
+    width: 250px;
     margin-top: 20px;
     padding: 0 12px;
     border: 2px solid var(--main-color);
     display: inline-block;
     border-radius: 12px;
+}
+
+.type-container {
+    display: flex;
+    flex-wrap: wrap;
+    place-content: flex-start;
+}
+
+.type-right .home-teddy {
+    width: 24%;
+    margin-right: 1%;
 }
 
 .type-header {
@@ -160,7 +200,13 @@ main {
     border-bottom: 1.5px solid var(--main-color);
 }
 
-.type h2 {
+.filter-price {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.type-left h2 {
     margin-left: 6px;
     padding: 6px;
 }
@@ -168,11 +214,30 @@ main {
 .filter-item h4 {
     color: var(--main-color);
     font-weight: bold;
+    margin: 1px;
 }
-
-.filter-item select, .filter-item input {
+.filter-item {
+    flex: 1;
+}
+.filter-item input[type="text"], 
+.filter-item select {
     border: 1.5px solid var(--main-color);
     border-radius: 4px;
     padding: 4px 10px;
-    max-width: 100px;
+    width: 100%;
+}
+
+.filter .button {
+    margin: 10px 0;
+    width: 100%;
+    padding: 10px 0;
+    border-radius: 4px;
+}
+
+.type-right h2 {
+    font-size: 3rem;
+    text-transform: uppercase;
+    font-weight: bolder;
+    text-align: center;
+    margin-bottom: 20px;
 }
