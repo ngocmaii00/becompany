@@ -33,13 +33,17 @@ main {
     display: flex;
     font-size: 3rem;
     font-weight: bolder;
-    text-shadow: 0 0 10px #ffffffc2;
+    text-shadow: 0 0 10px #000000a3;
     width: 100%;
     text-align: center;
     bottom: 50%;
     font-family: 'MyCustomFont';
     align-items: center;
     justify-content: center;
+}
+
+.slide-title h3 {
+    padding: 40px;
 }
 
 .slide svg {
@@ -64,19 +68,12 @@ main {
 }
 
 .home-teddy {
-    
     border: solid 2px var(--main-color);
     display: inline-block;
     border-radius: 12px;
     padding: 10px;
     background-color: #f6f0f0;
-    margin-right: 16px;
-    margin-bottom: 8px;
-}
-
-.hightlight .home-teddy{
-    min-width: 225px;
-    max-width: 225px;
+    margin: 6px;
 }
 
 .home-teddy-color {
@@ -86,12 +83,14 @@ main {
     border-radius: 12px;
     border: 1.5px solid black;
     color: white;
+    cursor: pointer;
 }
 
 .home-teddy-size {
     border: 1.5px solid #696868;
     border-radius: 12px;
     padding: 0 4px 1px 4px;
+    cursor: pointer;
 }
 
 .button {
@@ -112,8 +111,8 @@ main {
 }
 
 .hightlight-container{
-    display: flex;
-    overflow-x: scroll;
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20% 20%;
 }
 
 .home-teddy-name {
@@ -123,6 +122,7 @@ main {
     overflow: hidden;
     text-overflow: ellipsis;
     padding: 4px 0;
+    cursor: pointer;
 }
 
 .home-teddy-price {
@@ -134,13 +134,19 @@ main {
     margin-bottom: 20px;
 }
 
+.home-teddy-sold {
+    display: flex;
+}
+
 .hightlight h2 {
     font-size: 2rem;
     color: var(--main-color);
     font-weight: bold;
     margin: 10px 0;
     text-align: center;
+    text-transform: capitalize;
 }
+
 
 /* width */
 ::-webkit-scrollbar {
@@ -240,4 +246,12 @@ main {
     font-weight: bolder;
     text-align: center;
     margin-bottom: 20px;
+}
+
+
+.home-teddy-sold svg{
+    -webkit-transform: scaleX(-1);
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    transform: scaleX(-1);
 }
