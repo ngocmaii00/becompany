@@ -13,7 +13,7 @@
         
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="css/index.css">
+
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
         <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
         <script>
@@ -27,24 +27,25 @@
 //              },
 //            };
           </script>
-          
+
+
     </head>
     <body class="w-screen h-screen pt-[3%] ">
         <div class="flex flex-row gap-6 justify-center" style="background-color: #4f362b; height:90%; width:100%; ">
             <div class="basis-1/2">
                 <img src="/becompany/image/head.png" class="w-[40%]  mx-[30%] mt-[17%] aspect-[146/107]"/>
-                <h1 class="text-gray-50 text-7xl text-center peacesans-font mt-7 uppercase font-extrabold">becompany</h1>
+
+                <h1 class="text-gray-50 text-7xl text-center mt-7 uppercase font-extrabold">becompany</h1>
+
             </div>
             <div class="basis-1/2 font-medium font-bold">
                   
                 <div class=" flex flex-col gap-8  h-[83%] w-[75%]  p-[7%] pt-[4%] px-1/5 bg-[#f2e6e6] rounded-3xl border-3 border-gray-950" style="margin:6% 14% 6% 7%;">
                     <h1 class="basicuppercase font-bold text-6xl text-center text-[#563a2d]" >
-
                         Login
                     </h1>
                 <form class="h-[50%]"action="login" method="post">
                     <div class=" mb-3 h-[4em] w-10/10">
-
                         <input type="text" name="username" id="username" class="h-full w-full text-2xl border-4 border-gray-950 rounded-3xl h-full p-1 bg-[#ffffff] hover:bg-[#ffffff]/60 pl-[16px] placeholder:font-bold" placeholder="Username">
                     </div>
                     <div class="mb-3  h-[4em] w-10/10 relative">
@@ -88,7 +89,6 @@
                     </div>
                     <div class="h-[4em] w-full mt-4">
                         <button type="submit" class="h-full text-4xl text-white w-full h-full py-2/10 font-bold cursor-pointer uppercase bg-[#563a2d] hover:bg-[#563a2d]/80 ">Login</button>    
-
                     </div>
 
                 </form>
@@ -107,7 +107,7 @@
                             <path fill="#1877f2" d="M512 256c0 127.78-93.62 233.69-216 252.89V330h59.65L367 256h-71v-48.02c0-20.25 9.92-39.98 41.72-39.98H370v-63s-29.3-5-57.31-5c-58.47 0-96.69 35.44-96.69 99.6V256h-65v74h65v178.89C93.62 489.69 0 383.78 0 256 0 114.62 114.62 0 256 0s256 114.62 256 256z" data-original="#1877f2" />
                             <path fill="#fff" d="M355.65 330 367 256h-71v-48.021c0-20.245 9.918-39.979 41.719-39.979H370v-63s-29.296-5-57.305-5C254.219 100 216 135.44 216 199.6V256h-65v74h65v178.889c13.034 2.045 26.392 3.111 40 3.111s26.966-1.066 40-3.111V330z" data-original="#ffffff" />
                         </svg>
-                        <p class="inline-block w-3/5 ml-1 notosans-font mt-1 text-[1.65rem]">Facebook</p>
+                        <p class="inline-block w-3/5 ml-1  mt-1 text-[1.65rem]">Facebook</p>
                     </button>
                     <button type="button" class="border-4 border-black outline-none py-2 rounded-3xl bg-[#ffffff] hover:bg-[#ffffff]/40 text-[#563a2d] ">
                         <svg xmlns="http://www.w3.org/2000/svg" width="47px" viewBox="0 0 512 512" class="inline mx-1">
@@ -118,13 +118,13 @@
                         <path fill="#cf2d48" d="m352.167 159.833 10.606 10.606 84.853-84.852-10.606-10.606C388.668 26.629 324.381 0 256 0l-60 60 60 60c36.326 0 70.479 14.146 96.167 39.833z" data-original="#cf2d48" />
                         <path fill="#eb4132" d="M256 120V0C187.62 0 123.333 26.629 74.98 74.98a259.849 259.849 0 0 0-22.158 25.235l86.308 86.308C162.883 146.72 206.376 120 256 120z" data-original="#eb4132" />
                         </svg>
-                        <p class="inline-block w-3/5 ml-1 mt-1 notosans-font text-[1.65rem]">Google</p>
+
+                        <p class="inline-block w-3/5 ml-1 mt-1 text-[1.65rem]">Google</p>
                     </button>
                     </div>
                 </div>
                 <div class=" mt-10  text-xl text-center ">
                     <p class="inline text-[#563a2d]">Don't have an account?</p>
-
                     <button type="button" class="inline-block ml-1 px-2.5 py-0.5 font-large text-gray-50 rounded-3xl bg-[#563a2d] hover:bg-[#563a2d]/80  cursor-pointer" >Sign up</button>
 
                 </div>
