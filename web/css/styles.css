@@ -14,6 +14,7 @@
 }
 
 main {
+    margin-top: 100px;
     padding: 20px;
 }
 
@@ -93,6 +94,22 @@ main {
     cursor: pointer;
 }
 
+
+.home-teddy-sold svg{
+    -webkit-transform: scaleX(-1);
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
+
+.see-more {
+    display: block;
+    text-align: center;
+    margin: 35px;
+    font-weight: 700;
+    text-decoration: underline;
+}
+
 .button {
     background-color: var(--main-color);
     font-size: 0.8rem;
@@ -163,95 +180,4 @@ main {
 ::-webkit-scrollbar-thumb {
   background: var(--main-color); 
   border-radius: 10px;
-}
-
-.type {
-    display: flex;
-    margin-top: 40px;
-    align-items:flex-start;
-}
-
-.type-right {
-    flex: 1;
-    margin: 20px;
-    margin-right: 0;
-}
-.type-left {
-    width: 250px;
-    margin-top: 20px;
-    padding: 0 12px;
-    border: 2px solid var(--main-color);
-    display: inline-block;
-    border-radius: 12px;
-}
-
-.type-container {
-    display: flex;
-    flex-wrap: wrap;
-    place-content: flex-start;
-}
-
-.type-right .home-teddy {
-    width: 24%;
-    margin-right: 1%;
-}
-
-.type-header {
-    display: flex;
-    color: var(--main-color);
-    font-size: 1.4rem;
-    font-weight: bold;
-    align-items: center;
-    justify-content: center;
-    border-bottom: 1.5px solid var(--main-color);
-}
-
-.filter-price {
-    display: flex;
-    justify-content: space-between;
-}
-
-
-.type-left h2 {
-    margin-left: 6px;
-    padding: 6px;
-}
-
-.filter-item h4 {
-    color: var(--main-color);
-    font-weight: bold;
-    margin: 1px;
-}
-.filter-item {
-    flex: 1;
-}
-.filter-item input[type="text"], 
-.filter-item select {
-    border: 1.5px solid var(--main-color);
-    border-radius: 4px;
-    padding: 4px 10px;
-    width: 100%;
-}
-
-.filter .button {
-    margin: 10px 0;
-    width: 100%;
-    padding: 10px 0;
-    border-radius: 4px;
-}
-
-.type-right h2 {
-    font-size: 3rem;
-    text-transform: uppercase;
-    font-weight: bolder;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-
-.home-teddy-sold svg{
-    -webkit-transform: scaleX(-1);
-    -moz-transform: scaleX(-1);
-    -o-transform: scaleX(-1);
-    transform: scaleX(-1);
 }

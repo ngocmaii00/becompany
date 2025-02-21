@@ -74,15 +74,14 @@
                             </div>
                         </div>
                     </c:forEach>
-
                 </div>
 
+                <a class="see-more" href="#">See more</a>
             </div>
 
 
         </main>
-
-
+        <%@include file="footer.jsp" %>
         <script src="scripts/home.js"></script>
     </body>
 </html>
