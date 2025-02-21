@@ -38,26 +38,18 @@
             <div class="basis-1/2 font-medium font-bold">
                   
                 <div class=" flex flex-col gap-8  h-[83%] w-[75%]  p-[7%] pt-[4%] px-1/5 bg-[#f2e6e6] rounded-3xl border-3 border-gray-950" style="margin:6% 14% 6% 7%;">
-<<<<<<< HEAD
-                    <h1 class="basicuppercase font-bold peacesans-font text-6xl text-center " style="color:#563a2d">
-=======
                     <h1 class="basicuppercase font-bold text-6xl text-center text-[#563a2d]" >
->>>>>>> 28ceed2 (add sign in page)
+
                         Login
                     </h1>
                 <form class="h-[50%]"action="login" method="post">
                     <div class=" mb-3 h-[4em] w-10/10">
-<<<<<<< HEAD
-                        <input type="text" name="username" id="username" class="h-full w-full notosans-font text-2xl border-4 border-gray-950 rounded-3xl h-full p-1 bg-grey-50 pl-[16px] placeholder:font-bold" style="background-color:#ffffff" placeholder="Username">
-                    </div>
-                    <div class="mb-3  h-[4em] w-10/10 relative">
-                        <input type="password" name="password" id="password" class="h-full w-full text-2xl notosans-font border-4 border-gray-950 rounded-3xl p-1 h-full bg-grey-50 pl-[16px] placeholder:font-bold" style="background-color:#ffffff" placeholder="Password">
-=======
+
                         <input type="text" name="username" id="username" class="h-full w-full text-2xl border-4 border-gray-950 rounded-3xl h-full p-1 bg-[#ffffff] hover:bg-[#ffffff]/60 pl-[16px] placeholder:font-bold" placeholder="Username">
                     </div>
                     <div class="mb-3  h-[4em] w-10/10 relative">
                         <input type="password" name="password" id="password" class="h-full w-full text-2xl border-4 border-gray-950 rounded-3xl p-1 h-full bg-[#ffffff] hover:bg-[#ffffff]/60 pl-[16px] placeholder:font-bold" placeholder="Password">
->>>>>>> 28ceed2 (add sign in page)
+
                         <button type="button" id="togglePassword" class="absolute top-[50%] right-[1rem] translate-y-[-50%]  cursor-pointer w-[1.5rem] flex items-center">
 
                         <svg id="eye" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -73,16 +65,6 @@
                         <!-- <label class="text-xl  font-bold text-[#563a2d] cursor-pointer"for="remember"> Remember me</label> -->
                     </div>
                     <div class="grid grid-cols-2 mb-2 mx-2">
-<<<<<<< HEAD
-                        <div class=" flex flex-row">
-                            <input type="checkbox" name="remember" id="remember" class="border-3 border-gray-400 rounded-md  p-1">
-                            <label class="text-xl ml-1 font-bold notosans-font text-[#563a2d]"for="remember"> Remember me</label>
-                        </div>
-                        <a class="inline-block text-xl notosans-font justify-self-end text-[#563a2d] hover:underline font-bold" href="#" >Forgot password?</a>
-                    </div>
-                    <div class="h-[4em] w-full mt-4">
-                        <button type="submit" class="h-full text-4xl text-white notosans-font w-full h-full py-2/10 font-bold uppercase"style="background-color: #563a2d;">Login</button>    
-=======
                         <div class="inline-flex items-center">
                             <label class="flex items-center cursor-pointer relative" for="check-2">
                               <input type="checkbox"
@@ -106,21 +88,17 @@
                     </div>
                     <div class="h-[4em] w-full mt-4">
                         <button type="submit" class="h-full text-4xl text-white w-full h-full py-2/10 font-bold cursor-pointer uppercase bg-[#563a2d] hover:bg-[#563a2d]/80 ">Login</button>    
->>>>>>> 28ceed2 (add sign in page)
+
                     </div>
 
                 </form>
                 
                 <div class="flex items-center gap-4">
-<<<<<<< HEAD
-                    <hr class="w-full border-gray-300 border-3" style=" border-color: #563a2d;" />
-                    <p class="text-xl text-gray-800 text-center notosans-font uppercase text-[#563a2d]">or</p>
-                    <hr class="w-full border-gray-300 border-3" style="border-color: #563a2d;"/>
-=======
+
                     <hr class="w-full border-3 border-[#563a2d]" />
                     <p class="text-xl text-gray-800 text-center uppercase text-[#563a2d]">or</p>
                     <hr class="w-full border-3 border-[#563a2d]"    />
->>>>>>> 28ceed2 (add sign in page)
+
                 </div>
                 <div>
                     <div class="grid grid-cols-2 gap-10">
@@ -146,11 +124,9 @@
                 </div>
                 <div class=" mt-10  text-xl text-center ">
                     <p class="inline text-[#563a2d]">Don't have an account?</p>
-<<<<<<< HEAD
-                    <button type="button" class="inline-block ml-1 px-2.5 py-0.5 font-large peacesans-font text-gray-50 rounded-3xl" style="background-color: #563a2d;">Sign up</button>
-=======
+
                     <button type="button" class="inline-block ml-1 px-2.5 py-0.5 font-large text-gray-50 rounded-3xl bg-[#563a2d] hover:bg-[#563a2d]/80  cursor-pointer" >Sign up</button>
->>>>>>> 28ceed2 (add sign in page)
+
                 </div>
             </div>
         </div>
