@@ -6,15 +6,17 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>BeCompany</title>
         <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
-        <link rel="stylesheet" href="css/styles.css"/>
+
         <link rel="stylesheet" href="css/responsiveHome.css"/>
+        <link href="css/index.css" rel="stylesheet" type="text/css"/>
+
     </head>
     <body>
         <%@include file="header.jsp" %>
         <main>
             <div class="slide relative">
                 <div class="slide-title">
-                    <h3 class="absolute text-white">Happy Valentine day!</h3>
+                    <h3 class="absolute text-white peacesans-font">Happy Valentine Day!</h3>
                 </div>
                 <div class="dots flex absolute bottom-4 w-full justify-center">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-4 ">
@@ -33,8 +35,8 @@
             </div>
 
             <div class="hightlight">
-                <h2>Best-sellers</h2>
-                <div class="hightlight-container">
+                <h2 class="peacesans-font">Best-sellers</h2>
+                <div class="hightlight-container notosans-font">
                     <div class="home-teddy">
                         <div class="home-teddy-img" style="
                              background-image: url('https://www.kawaiies.com/cdn/shop/files/kawaiies-plushies-plush-softtoy-fluffy-sleepy-capybara-with-orange-plushie-soft-toy-381962_1024x1024.jpg?v=1713722259');
