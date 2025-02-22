@@ -46,7 +46,7 @@
                                 <h4>Size</h4>
                                 <select id="size" name="size">
                                     <option style="color: grey" value="">-Size-</option>
-                                    <option value="30cm">30cm</option>
+                                    <option value="30cm">20cm</option>
                                     <option value="40cm">40cm</option>
                                     <option value="50cm">50cm</option>
                                 </select>

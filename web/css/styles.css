@@ -2,13 +2,6 @@
     --main-color: #543520;
 }
 
-@font-face {
-    font-family: 'MyCustomFont';
-    src: url('../font/Peace Sans.otf');
-    font-weight: normal;
-    font-style: normal;
-}
-
 *{
     color: var(--main-color);
 }
@@ -34,6 +27,7 @@ main {
     display: flex;
     font-size: 3rem;
     font-weight: bolder;
+    color: white;
     text-shadow: 0 0 10px #000000a3;
     width: 100%;
     text-align: center;
@@ -47,15 +41,23 @@ main {
     padding: 40px;
 }
 
-.slide svg {
-    color: white;
-    margin: 0 6px;
-    opacity: 0.5;
+.dots {
+    display: flex;
+    position: absolute ;
+    bottom: 20px; 
+    width: 100%;
+    justify-content: center;
 }
 
+.dot {    
+    fill: #dcb9b0;
+    margin: 0 6px;
+    opacity: 0.5;
+    filter: drop-shadow(0 0 3px #333);
+}
 
 .dots-chosen {
-    opacity: 1 !important;
+    opacity: 1;
 }
 
 .home-teddy-img {
@@ -167,17 +169,17 @@ main {
 
 /* width */
 ::-webkit-scrollbar {
-  width: 10px;
+    width: 10px;
     height: 0;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: transparent;
+    background: transparent;
 }
  
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: var(--main-color); 
-  border-radius: 10px;
+    background: var(--main-color); 
+    border-radius: 10px;
 }
