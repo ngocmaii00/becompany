@@ -42,9 +42,9 @@
                                 <h4>Size</h4>
                                 <select id="size" name="size">
                                     <option style="color: grey" value="">-Size-</option>
-                                    <option value="30cm">20cm</option>
-                                    <option value="40cm">40cm</option>
-                                    <option value="50cm">50cm</option>
+                                    <option value="small">Small</option>
+                                    <option value="medium">Medium</option>
+                                    <option value="large">Large</option>
                                 </select>
                             </div>
                         </div>
@@ -52,8 +52,8 @@
                         <div class="filter-item">
                             <h4>Price range</h4>
                             <div class="filter-price">
-                                <input style="margin-right: 10px" type="text" placeholder="from"/>
-                                <input type="text" placeholder="to"/>
+                                <input style="margin-right: 10px" name="from" type="text" placeholder="from"/>
+                                <input type="text" name="to" placeholder="to"/>
                             </div>
                         </div>
 
@@ -61,19 +61,19 @@
                             <h4>Status</h4>
                             <div class="filter-status">
                                 <div class="filter-status-row">
-                                    <input type="checkbox" value="available"/>
+                                    <input name="status" type="checkbox" value="available"/>
                                     <label>Available products</label>
                                 </div> 
                                 <div class="filter-status-row">
-                                    <input type="checkbox" value="pre-order"/>
+                                    <input name="status" type="checkbox" value="pre-order"/>
                                     <label>Pre-order products</label>
                                 </div> 
                                 <div class="filter-status-row">
-                                    <input type="checkbox" value="on-sale"/>
+                                    <input name="status" type="checkbox" value="on-sale"/>
                                     <label>On-sale products</label>
                                 </div> 
                                 <div class="filter-status-row">
-                                    <input type="checkbox" value="free-ship"/>
+                                    <input name="status" type="checkbox" value="free-ship"/>
                                     <label>Free-ship products</label>
                                 </div> 
                             </div>
@@ -83,23 +83,23 @@
                             <h4>Rating</h4>
                             <div class="filter-rating">
                                 <div class="filter-rating-row">
-                                    <input type="checkbox" value="5"/>
+                                    <input name="rating" type="checkbox" value="5"/>
                                     <label>Very good</label>
                                 </div> 
                                 <div class="filter-rating-row">
-                                    <input type="checkbox" value="4"/>
+                                    <input name="rating" type="checkbox" value="4"/>
                                     <label>Good</label>
                                 </div>
                                 <div class="filter-rating-row">
-                                    <input type="checkbox" value="3"/>
+                                    <input name="rating" type="checkbox" value="3"/>
                                     <label>Fine</label>
                                 </div>
                                 <div class="filter-rating-row">
-                                    <input type="checkbox" value="2"/>
+                                    <input name="rating" type="checkbox" value="2"/>
                                     <label>Not good</label>
                                 </div>
                                 <div class="filter-rating-row">
-                                    <input type="checkbox" value="1"/>
+                                    <input name="rating" type="checkbox" value="1"/>
                                     <label>Really bad</label>
                                 </div>
                             </div>
@@ -115,8 +115,8 @@
                             <div class="home-teddy">
                                 <a href="product?name=${p.getProductName()}">
                                     <div class="home-teddy-img" style="
-                                        background-image: url('${p.getImages()[0]}');
-                                        "></div>
+                                         background-image: url('${p.getImages()[0]}');
+                                         "></div>
                                 </a>
                                 <div class="flex justify-between items-baseline">
                                     <a href="product?name=${p.getProductName()}" class="home-teddy-name">${p.getProductName()}</a>
@@ -157,6 +157,7 @@
             </div>
         </main>
 
+        <%@include file="footer.jsp" %>
         <script src="scripts/type.js"></script>
     </body>
 </html>
