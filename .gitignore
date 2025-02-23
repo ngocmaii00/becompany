@@ -3,6 +3,7 @@
 **/nbproject/Package-*.bash
 build/
 nbproject/private/private.xml
+nbproject/private/private.properties
 nbbuild/
 dist/
 nbdist/
