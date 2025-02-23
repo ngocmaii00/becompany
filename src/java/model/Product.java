@@ -2,13 +2,18 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Product {
     private String productId, productName, origin, description, manufacturer;
     private int sold;
-    private String image, type;
+    private String[] images;
+    private String type;
     private List<Teddy> teddies = new ArrayList<>();
+    private Set<String> colors = new HashSet<>();
+    private Set<String> sizes = new HashSet<>();
 
     public Product() {
     }
@@ -20,12 +25,24 @@ public class Product {
         this.description = description;
         this.manufacturer = manufacturer;
         this.sold = sold;
-        this.image = image;
+        this.images = image.split(", ");
         this.type = type;
     }
 
     public void addTeddy(List<Teddy> list) {
         teddies.addAll(list);
+        list.forEach((teddy) -> {
+            colors.add(teddy.getColor());
+            sizes.add(teddy.getSize());
+        });
+    }
+
+    public Set<String> getColors() {
+        return colors;
+    }
+
+    public Set<String> getSizes() {
+        return sizes;
     }
 
     public List<Teddy> getTeddies() {
@@ -80,12 +97,12 @@ public class Product {
         this.sold = sold;
     }
 
-    public String getImage() {
-        return image;
+    public String[] getImages() {
+        return images;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImages(String image) {
+        this.images = image.split(", ");
     }
 
     public String getType() {
