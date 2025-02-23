@@ -24,11 +24,13 @@
                 <div class="hightlight-container">
                     <c:forEach items="${requestScope.data}" var="p">
                         <div class="home-teddy">
-                            <div class="home-teddy-img" style="
-                                 background-image: url('${p.getImages()[0]}');
-                                 "></div>
+                            <a href="product?name=${p.getProductName()}">
+                                <div class="home-teddy-img" style="
+                                     background-image: url('${p.getImages()[0]}');
+                                     "></div>
+                            </a>
                             <div class="flex justify-between items-baseline">
-                                <a class="home-teddy-name">${p.getProductName()}</a>
+                                <a href="product?name=${p.getProductName()}" class="home-teddy-name">${p.getProductName()}</a>
                                 <p class="home-teddy-price">${p.getTeddies().get(0).getPrice()}$</p>
                             </div>
                             <div>
