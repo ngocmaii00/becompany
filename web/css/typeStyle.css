@@ -53,6 +53,7 @@
 
 .type-right {
     margin-left: 290px;
+    min-height: 100vh;
 }
 
 .filter-item h4 {
