@@ -32,6 +32,7 @@ public class Product {
     public void addTeddy(List<Teddy> list) {
         teddies.addAll(list);
         list.forEach((teddy) -> {
+            System.out.println("get color");
             colors.add(teddy.getColor());
             sizes.add(teddy.getSize());
         });

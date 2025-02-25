@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import model.Teddy;
 import java.sql.*;
+import model.Product;
 
 public class TeddyDao extends DBConnect{
     public List<Teddy> getAllTeddyOfProduct (String productId) {
@@ -22,5 +23,11 @@ public class TeddyDao extends DBConnect{
             System.out.println(e);
         }
         return list;
+    }
+    
+    public static void main(String[] args) {
+        TeddyDao pd = new TeddyDao();
+        List<Teddy> list = pd.getAllTeddyOfProduct("P00010");
+        System.out.println(list.get(0).getSize());
     }
 }
