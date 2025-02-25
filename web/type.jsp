@@ -28,15 +28,15 @@
                     </div>
 
                     <form class="filter">
+                        <div class="flex filter-item filter-item-color">
+                            <h4>Type</h4>
+                            <input class="flex-1 ml-2" type="text" id="type" name="type" readonly value="<%= request.getParameter("type") != null ? request.getParameter("type") : "All" %>"/>
+                        </div>
                         <div class="flex justify-between">
-                            <div style="margin-right: 10px" class="filter-item filter-item-color">
+                            <div style="margin-right: 10px" class="flex flex-col filter-item filter-item-color">
                                 <h4>Color</h4>
-                                <select id="color" name="color">
-                                    <option style="color: grey" value="">-Color-</option>
-                                    <option value="brown">Brown</option>
-                                    <option value="white">White</option>
-                                    <option value="black">Black</option>
-                                </select>
+                                <input style="width: 100%" type="text" id="color" name="color" value="<%= request.getParameter("color") != null ? request.getParameter("color") : "-Color-" %>"/>
+
                             </div>
                             <div class="filter-item filter-item-size">
                                 <h4>Size</h4>
@@ -52,28 +52,29 @@
                         <div class="filter-item">
                             <h4>Price range</h4>
                             <div class="filter-price">
-                                <input style="margin-right: 10px" name="from" type="text" placeholder="from"/>
-                                <input type="text" name="to" placeholder="to"/>
+                                <input style="margin-right: 10px" name="from" type="text" placeholder="from" value="<%= request.getParameter("from") != null ? request.getParameter("from") : "" %>"/>
+                                <input type="text" name="to" placeholder="to" value="<%= request.getParameter("to") != null ? request.getParameter("to") : "" %>"/>
                             </div>
                         </div>
 
                         <div class="filter-item">
                             <h4>Status</h4>
                             <div class="filter-status">
+                                
                                 <div class="filter-status-row">
                                     <input name="status" type="checkbox" value="available"/>
                                     <label>Available products</label>
                                 </div> 
                                 <div class="filter-status-row">
-                                    <input name="status" type="checkbox" value="pre-order"/>
+                                    <input name="status" type="checkbox" value="preorder" />
                                     <label>Pre-order products</label>
                                 </div> 
                                 <div class="filter-status-row">
-                                    <input name="status" type="checkbox" value="on-sale"/>
+                                    <input name="status" type="checkbox" value="onsale" />
                                     <label>On-sale products</label>
                                 </div> 
                                 <div class="filter-status-row">
-                                    <input name="status" type="checkbox" value="free-ship"/>
+                                    <input name="status" type="checkbox" value="freeship" />
                                     <label>Free-ship products</label>
                                 </div> 
                             </div>
