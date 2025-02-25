@@ -65,7 +65,7 @@
                     </c:forEach>
                 </div>
 
-                <a class="see-more" href="#">See more</a>
+                <a class="see-more" href="type">See more</a>
             </div>
 
 
