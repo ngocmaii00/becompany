@@ -27,7 +27,7 @@
                         <h2>Filter</h2>
                     </div>
 
-                    <form class="filter">
+                    <form action="filter" class="filter">
                         <div class="flex filter-item filter-item-color">
                             <h4>Type</h4>
                             <input class="flex-1 ml-2" type="text" id="type" name="type" readonly value="<%= request.getParameter("type") != null ? request.getParameter("type") : "All" %>"/>
@@ -35,13 +35,13 @@
                         <div class="flex justify-between">
                             <div style="margin-right: 10px" class="flex flex-col filter-item filter-item-color">
                                 <h4>Color</h4>
-                                <input style="width: 100%" type="text" id="color" name="color" value="<%= request.getParameter("color") != null ? request.getParameter("color") : "-Color-" %>"/>
+                                <input placeholder="-Color-" style="width: 100%" type="text" id="color" name="color" value="<%= request.getParameter("color") != null ? request.getParameter("color") : "" %>"/>
 
                             </div>
                             <div class="filter-item filter-item-size">
                                 <h4>Size</h4>
-                                <select id="size" name="size">
-                                    <option style="color: grey" value="">-Size-</option>
+                                <select id="size" name="size" value="${request.getParameter("size") != null ? request.getParameter("size") : ""}">
+                                    <option style="color: grey">-Size-</option>
                                     <option value="small">Small</option>
                                     <option value="medium">Medium</option>
                                     <option value="large">Large</option>

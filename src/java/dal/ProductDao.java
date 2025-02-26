@@ -18,7 +18,6 @@ public class ProductDao extends DBConnect {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet result = st.executeQuery();
             while (result.next()) {
-                System.out.println("hh" + result.getString("productId"));
                 Product p = new Product(result.getString("productId"), result.getString("productName"), result.getString("origin"), result.getString("description"), result.getString("manufacturer"), result.getInt("sold"), result.getString("image"), result.getString("type"));
                 p.addTeddy(td.getAllTeddyOfProduct(p.getProductId()));
                 list.add(p);
@@ -50,14 +49,14 @@ public class ProductDao extends DBConnect {
         return list;
     }
 
+//    //////////////////////////////////////////////////////////////////////////////////////////////////////////
     public List<Product> getProductByFilter(String type, String color, String size, String from, String to, String[] status, String[] rating) {
         List<Product> list = new ArrayList<>();
-        String sql = "select distinct p.productId, p.productName, p.origin, p.description, p.image, p.manufacturer, p.sold, p.status, p.type"
-                + "from product p join rating r on p.productId = r.productId"
-                + "join TeddyDetail td on td.productId = p.productId"
-                + "where ";
+        TeddyDao td = new TeddyDao();
+        String sql = "select distinct p.productId, p.productName, p.origin, p.description, p.image, p.manufacturer, p.sold, p.status, p.type "
+                + "from product p join rating r on p.productId = r.productId join TeddyDetail td on td.productId = p.productId ";
         List<String> filters = new ArrayList<>();
-        if (type.compareTo("all") != 0) {
+        if (type.compareToIgnoreCase("all") != 0) {
             filters.add("p.type = '" + type + "'");
         }
         if (color != null && color.compareTo("") != 0) {
@@ -69,18 +68,27 @@ public class ProductDao extends DBConnect {
         if (from != null && from.compareTo("") != 0 && to != null && to.compareTo("") != 0) {
             filters.add("td.price between " + from + " and " + to + "");
         }
-        if (rating.length > 0) {
+        if (rating != null && rating.length > 0) {
             Stream<String> st = Arrays.stream(rating);
             String s = st.collect(Collectors.joining(", ", "(", ")"));
-            filters.add("r.rating in " + s);
+            filters.add("r.stars in " + s);
+        }
+        if (status != null && status.length > 0) {
+            Stream<String> st = Arrays.stream(status);
+            String s = st.collect(Collectors.joining("', '", "('", "')"));
+            filters.add("p.status in " + s);
         }
 
-        sql += filters.stream().collect(Collectors.joining(" and "));
+        if (!filters.isEmpty()) {
+            sql += "where " + filters.stream().collect(Collectors.joining(" and "));
+        }
+
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet result = st.executeQuery();
             while (result.next()) {
                 Product p = new Product(result.getString("productId"), result.getString("productName"), result.getString("origin"), result.getString("description"), result.getString("manufacturer"), result.getInt("sold"), result.getString("image"), result.getString("type"));
+                p.addTeddy(td.getAllTeddyOfProduct(p.getProductId()));
                 list.add(p);
             }
         } catch (SQLException e) {
@@ -89,9 +97,4 @@ public class ProductDao extends DBConnect {
         return list;
     }
 
-    public static void main(String[] args) {
-        ProductDao pd = new ProductDao();
-        List<Product> list = pd.getTop10();
-        System.out.println(list.get(4).getColors().size());
-    }
 }
