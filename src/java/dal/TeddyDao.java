@@ -15,7 +15,7 @@ public class TeddyDao extends DBConnect{
             st.setString(1, productId);
             ResultSet result = st.executeQuery();
             while(result.next()) {
-                Teddy teddy = new Teddy(result.getString("productId"), result.getString("color"), result.getString("size"), result.getInt("quantity"), result.getDouble("price"), result.getString("productId"));
+                Teddy teddy = new Teddy(result.getString("TeddyId"), result.getString("color"), result.getString("size"), result.getInt("quantity"), result.getDouble("price"), result.getString("productId"));
                 list.add(teddy);
             }
         } catch (SQLException e) {
