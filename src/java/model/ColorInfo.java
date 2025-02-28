@@ -43,6 +43,7 @@ public class ColorInfo {
         COLOR_MAP.put("DarkCyan", new ColorInfo("#008B8B", 0, 139, 139));
         COLOR_MAP.put("DarkGoldenrod", new ColorInfo("#B8860B", 184, 134, 11));
         COLOR_MAP.put("DarkGray", new ColorInfo("#A9A9A9", 169, 169, 169));
+        COLOR_MAP.put("DarkGrey", new ColorInfo("#A9A9A9", 169, 169, 169));
         COLOR_MAP.put("DarkGreen", new ColorInfo("#006400", 0, 100, 0));
         COLOR_MAP.put("DarkKhaki", new ColorInfo("#BDB76B", 189, 183, 107));
         COLOR_MAP.put("DarkMagenta", new ColorInfo("#8B008B", 139, 0, 139));
@@ -54,11 +55,13 @@ public class ColorInfo {
         COLOR_MAP.put("DarkSeaGreen", new ColorInfo("#8FBC8F", 143, 188, 143));
         COLOR_MAP.put("DarkSlateBlue", new ColorInfo("#483D8B", 72, 61, 139));
         COLOR_MAP.put("DarkSlateGray", new ColorInfo("#2F4F4F", 47, 79, 79));
+        COLOR_MAP.put("DarkSlateGrey", new ColorInfo("#2F4F4F", 47, 79, 79));
         COLOR_MAP.put("DarkTurquoise", new ColorInfo("#00CED1", 0, 206, 209));
         COLOR_MAP.put("DarkViolet", new ColorInfo("#9400D3", 148, 0, 211));
         COLOR_MAP.put("DeepPink", new ColorInfo("#FF1493", 255, 20, 147));
         COLOR_MAP.put("DeepSkyBlue", new ColorInfo("#00BFFF", 0, 191, 255));
         COLOR_MAP.put("DimGray", new ColorInfo("#696969", 105, 105, 105));
+        COLOR_MAP.put("DimGrey", new ColorInfo("#696969", 105, 105, 105));
         COLOR_MAP.put("DodgerBlue", new ColorInfo("#1E90FF", 30, 144, 255));
         COLOR_MAP.put("FireBrick", new ColorInfo("#B22222", 178, 34, 34));
         COLOR_MAP.put("FloralWhite", new ColorInfo("#FFFAF0", 255, 250, 240));
@@ -69,6 +72,7 @@ public class ColorInfo {
         COLOR_MAP.put("Gold", new ColorInfo("#FFD700", 255, 215, 0));
         COLOR_MAP.put("Goldenrod", new ColorInfo("#DAA520", 218, 165, 32));
         COLOR_MAP.put("Gray", new ColorInfo("#808080", 128, 128, 128));
+        COLOR_MAP.put("Grey", new ColorInfo("#808080", 128, 128, 128));
         COLOR_MAP.put("Green", new ColorInfo("#008000", 0, 128, 0));
         COLOR_MAP.put("GreenYellow", new ColorInfo("#ADFF2F", 173, 255, 47));
         COLOR_MAP.put("HoneyDew", new ColorInfo("#F0FFF0", 240, 255, 240));
@@ -86,12 +90,14 @@ public class ColorInfo {
         COLOR_MAP.put("LightCyan", new ColorInfo("#E0FFFF", 224, 255, 255));
         COLOR_MAP.put("LightGoldenrodYellow", new ColorInfo("#FAFAD2", 250, 250, 210));
         COLOR_MAP.put("LightGray", new ColorInfo("#D3D3D3", 211, 211, 211));
+        COLOR_MAP.put("LightGrey", new ColorInfo("#D3D3D3", 211, 211, 211));
         COLOR_MAP.put("LightGreen", new ColorInfo("#90EE90", 144, 238, 144));
         COLOR_MAP.put("LightPink", new ColorInfo("#FFB6C1", 255, 182, 193));
         COLOR_MAP.put("LightSalmon", new ColorInfo("#FFA07A", 255, 160, 122));
         COLOR_MAP.put("LightSeaGreen", new ColorInfo("#20B2AA", 32, 178, 170));
         COLOR_MAP.put("LightSkyBlue", new ColorInfo("#87CEFA", 135, 206, 250));
         COLOR_MAP.put("LightSlateGray", new ColorInfo("#778899", 119, 136, 153));
+        COLOR_MAP.put("LightSlateGrey", new ColorInfo("#778899", 119, 136, 153));
         COLOR_MAP.put("LightSteelBlue", new ColorInfo("#B0C4DE", 176, 196, 222));
         COLOR_MAP.put("LightYellow", new ColorInfo("#FFFFE0", 255, 255, 224));
         COLOR_MAP.put("Lime", new ColorInfo("#00FF00", 0, 255, 0));
@@ -144,6 +150,7 @@ public class ColorInfo {
         COLOR_MAP.put("SkyBlue", new ColorInfo("#87CEEB", 135, 206, 235));
         COLOR_MAP.put("SlateBlue", new ColorInfo("#6A5ACD", 106, 90, 205));
         COLOR_MAP.put("SlateGray", new ColorInfo("#708090", 112, 128, 144));
+        COLOR_MAP.put("SlateGrey", new ColorInfo("#708090", 112, 128, 144));
         COLOR_MAP.put("Snow", new ColorInfo("#FFFAFA", 255, 250, 250));
         COLOR_MAP.put("SpringGreen", new ColorInfo("#00FF7F", 0, 255, 127));
         COLOR_MAP.put("SteelBlue", new ColorInfo("#4682B4", 70, 130, 180));

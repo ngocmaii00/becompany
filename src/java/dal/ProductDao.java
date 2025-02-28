@@ -28,6 +28,41 @@ public class ProductDao extends DBConnect {
         return list;
     }
 
+     public Product getProductByName(String name) {
+        
+        String sql = "select * from Product where ProductName = '"+ name +"'";
+        
+        
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet result = st.executeQuery();
+            if(result.next()) {
+                Product p = new Product(result.getString("productId"), result.getString("productName"), result.getString("origin"), result.getString("description"), result.getString("manufacturer"), result.getInt("sold"), result.getString("image"), result.getString("type"));
+                return p;
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+     
+    public List<Integer> getProductStar(String id) {
+        List<Integer> list = new ArrayList<>();
+        String sql = "select stars from Rating where productId = '"+ id +"'";
+       
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet result = st.executeQuery();
+            while (result.next()) {
+                int p = result.getInt("stars");
+                list.add(p);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+    
     public List<Product> getProductByType(String type) {
         List<Product> list = new ArrayList<>();
         String sql = "select * from Product where type = '" + type + "'";
