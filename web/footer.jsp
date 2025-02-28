@@ -36,7 +36,7 @@
                         </div>
                         
                         <div>
-                            <h2 class="mb-4 font-bold text-gray-900 text-[#543520] peacesans-font text-xl py-2">Contact</h2>
+                            <h2 class="mb-4 font-bold text-[#543520] peacesans-font text-xl py-2">Contact</h2>
                             <ul class="text-[#543520] font-medium">
                                 <li class="mb-4">
                                     <a href="#" class="hover:underline">Hotline Order</a>
