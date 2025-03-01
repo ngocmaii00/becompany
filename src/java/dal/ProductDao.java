@@ -82,6 +82,8 @@ public class ProductDao extends DBConnect {
         if (!filters.isEmpty()) {
             sql += "where " + filters.stream().collect(Collectors.joining(" and "));
         }
+        
+        System.out.println(sql);
 
         try {
             PreparedStatement st = connection.prepareStatement(sql);
@@ -97,4 +99,9 @@ public class ProductDao extends DBConnect {
         return list;
     }
 
+    public static void main(String[] args) {
+        ProductDao pd = new ProductDao();
+        List<Product> list = pd.getProductByFilter("all", "brown", "", "", "", null, null);
+        System.out.println(list.get(1).getProductName());
+    }
 }

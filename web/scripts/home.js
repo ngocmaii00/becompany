@@ -25,4 +25,3 @@ function changeSlide(slides) {
         }
     }, 5000);
 }
-

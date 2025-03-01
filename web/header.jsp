@@ -16,7 +16,7 @@
         <link href="css/index.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        
+
         <header class="mx-auto justify-between fixed top-0 left-0 right-0 z-40 bg-white">
             <div class="flex flex-row items-center p-1">
                 <div class="basis-5/6">
@@ -88,6 +88,6 @@
                 </button>
             </div>
         </header>
-    
+
     </body>
 </html>
