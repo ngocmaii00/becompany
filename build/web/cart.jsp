@@ -345,8 +345,8 @@
                 </div>
 
                 <div class="col-span-2 flex justify-center">
-                    <button class="flex border-2 border-[#543520] bg-[#543520] rounded-md w-40 h-14 text-center items-center justify-center">
-                        <span class="text-3xl font-bold text-white ">Buy (2)</span>
+                    <button class="flex border-2 border-[#543520] bg-[#543520] rounded-md w-40 h-14 text-center items-center justify-center align-center">
+                        <span class="text-2xl font-bold text-white ">Buy (2)</span>
                     </button>
                 </div>
             </div>
