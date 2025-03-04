@@ -1,8 +1,4 @@
-<%-- 
-    Document   : login
-    Created on : Feb 15, 2025, 6:54:46 PM
-    Author     : zeryus
---%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -10,7 +6,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Login</title>
-        
+        <link rel="stylesheet" href="css/index.css">
+        <link rel="icon" type="image/svg+xml" href="images/head.png" />
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -35,21 +32,21 @@
             <div class="basis-1/2">
                 <img src="/becompany/image/head.png" class="w-[40%]  mx-[30%] mt-[17%] aspect-[146/107]"/>
 
-                <h1 class="text-gray-50 text-7xl text-center mt-7 uppercase font-extrabold">becompany</h1>
+                <h1 class="text-gray-50 text-7xl peacesans-font text-center mt-7 uppercase font-extrabold">becompany</h1>
 
             </div>
             <div class="basis-1/2 font-medium font-bold">
                   
                 <div class=" flex flex-col gap-5  h-[83%] w-[75%]  p-[7%] pt-[4%] px-1/5 bg-[#f2e6e6] rounded-3xl border-3 border-gray-950" style="margin:6% 14% 6% 7%;">
-                    <h1 class="basicuppercase font-bold text-4xl text-center text-[#563a2d]" >
+                    <h1 class="basic uppercase peacesans-font font-bold text-4xl text-center text-[#563a2d]" >
                         Login
                     </h1>
-                <form class="h-[50%]"action="login" method="post">
+                <div class="h-[80%]">
                     <div class=" mb-3 h-[3.5em] w-10/10">
-                        <input type="text" name="username" id="username" class="h-full w-full text-2xl border-4 border-gray-950 rounded-3xl h-full p-1 bg-[#ffffff] hover:bg-[#ffffff]/60 pl-[16px] placeholder:font-bold" placeholder="Username">
+                        <input type="text" name="username" id="username" class="h-full w-full text-2xl border-4 notosans-font border-gray-950 rounded-3xl h-full p-1 bg-[#ffffff] hover:bg-[#ffffff]/60 pl-[16px] placeholder:font-bold" placeholder="Username">
                     </div>
                     <div class="mb-3  h-[3.5em] w-10/10 relative">
-                        <input type="password" name="password" id="password" class="h-full w-full text-2xl border-4 border-gray-950 rounded-3xl p-1 h-full bg-[#ffffff] hover:bg-[#ffffff]/60 pl-[16px] placeholder:font-bold" placeholder="Password">
+                        <input type="password" name="password" id="password" class="h-full w-full text-2xl border-4 notosans-font border-gray-950 rounded-3xl p-1 h-full bg-[#ffffff] hover:bg-[#ffffff]/60 pl-[16px] placeholder:font-bold" placeholder="Password">
 
                         <button type="button" id="togglePassword" class="absolute top-[50%] right-[1rem] translate-y-[-50%]  cursor-pointer w-[1.5rem] flex items-center">
 
@@ -65,6 +62,7 @@
                         <!-- type="checkbox" name="peer remember" id="remember" -->
                         <!-- <label class="text-xl  font-bold text-[#563a2d] cursor-pointer"for="remember"> Remember me</label> -->
                     </div>
+                    <p class="text-red-700 ml-2" id="error"></p>
                     <div class="grid grid-cols-2 mb-2 mx-2">
                         <div class="inline-flex items-center">
                             <label class="flex items-center cursor-pointer relative" for="check-2">
@@ -81,20 +79,20 @@
                                 </svg>
                               </span>
                             </label>
-                            <label class="cursor-pointer ml-2 text-md  font-bold text-[#563a2d]" for="check-2">
+                            
+                            <label class="cursor-pointer ml-2 text-md notosans-font font-bold text-[#563a2d]" for="check-2">
                               Remember Me
                             </label>
                           </div>
-                        <a class="inline-block text-xl justify-self-end text-[#563a2d] hover:underline font-bold" href="#" >Forgot password?</a>
+                        <a class="inline-block text-xl justify-self-end text-[#563a2d] hover:underline font-bold notosans-font" href="forgot-password" >Forgot password?</a>
                     </div>
-                    <div class="h-[3.5em] w-full mt-4">
-                        <button type="submit" class="h-full text-2xl text-white w-full h-full py-2/10 font-bold cursor-pointer uppercase bg-[#563a2d] hover:bg-[#563a2d]/80 ">Login</button>    
+                    <div class="h-[3em] w-full mt-4">
+                        <button type="submit" onclick="submitForm()" class="h-full text-2xl text-white peacesans-font w-full h-full py-2/10 font-bold cursor-pointer uppercase bg-[#563a2d] hover:bg-[#563a2d]/80 ">Login</button>    
                     </div>
 
-                </form>
                 
-                <div class="flex items-center gap-4">
-
+                
+                <div class="flex items-center my-2 gap-4">
                     <hr class="w-full border-2 border-[#563a2d]" />
                     <p class="text-md text-gray-800 text-center uppercase text-[#563a2d]">or</p>
                     <hr class="w-full border-2 border-[#563a2d]"    />
@@ -102,14 +100,16 @@
                 </div>
                 <div>
                     <div class="grid grid-cols-2 gap-10">
-                        <button type="button" class="border-4 border-black outline-none py-2 rounded-3xl bg-[#ffffff] hover:bg-[#ffffff]/40 text-[#563a2d] " >
+                        <a  href="https://www.facebook.com/v2.12/dialog/oauth?client_id=3449601631840990&redirect_uri=https://localhost:8080/becompany/login-facebook&scope=email,public_profile&respond_type=code"
+                            class="border-4 border-black outline-none py-2 pl-2 rounded-3xl bg-[#ffffff] hover:bg-[#ffffff]/40 text-[#563a2d] ">
                         <svg xmlns="http://www.w3.org/2000/svg" width="47px" viewBox="0 0 512 512" class="inline mx-1">
                             <path fill="#1877f2" d="M512 256c0 127.78-93.62 233.69-216 252.89V330h59.65L367 256h-71v-48.02c0-20.25 9.92-39.98 41.72-39.98H370v-63s-29.3-5-57.31-5c-58.47 0-96.69 35.44-96.69 99.6V256h-65v74h65v178.89C93.62 489.69 0 383.78 0 256 0 114.62 114.62 0 256 0s256 114.62 256 256z" data-original="#1877f2" />
                             <path fill="#fff" d="M355.65 330 367 256h-71v-48.021c0-20.245 9.918-39.979 41.719-39.979H370v-63s-29.296-5-57.305-5C254.219 100 216 135.44 216 199.6V256h-65v74h65v178.889c13.034 2.045 26.392 3.111 40 3.111s26.966-1.066 40-3.111V330z" data-original="#ffffff" />
                         </svg>
-                        <p class="inline-block w-3/5 ml-1  mt-1 text-[1.3rem]">Facebook</p>
-                    </button>
-                    <button type="button" class="border-4 border-black outline-none py-2 rounded-3xl bg-[#ffffff] hover:bg-[#ffffff]/40 text-[#563a2d] ">
+                        <p class="inline-block w-3/5 ml-1 notosans-font font-bold mt-2 text-[1.3rem]">Facebook</p>
+                    </a>
+                    <a  href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile&redirect_uri=http://localhost:8080/becompany/login-google&response_type=code&client_id=852116808382-82db8ra9hkc52bsm7dmq7utbej4d9hi3.apps.googleusercontent.com&prompt=none" 
+                         class="border-4 border-black outline-none py-2 pl-2 rounded-3xl bg-[#ffffff] hover:bg-[#ffffff]/40 text-[#563a2d] ">
                         <svg xmlns="http://www.w3.org/2000/svg" width="47px" viewBox="0 0 512 512" class="inline mx-1">
                         <path fill="#fbbd00" d="M120 256c0-25.367 6.989-49.13 19.131-69.477v-86.308H52.823C18.568 144.703 0 198.922 0 256s18.568 111.297 52.823 155.785h86.308v-86.308C126.989 305.13 120 281.367 120 256z" data-original="#fbbd00" />
                         <path fill="#0f9d58" d="m256 392-60 60 60 60c57.079 0 111.297-18.568 155.785-52.823v-86.216h-86.216C305.044 385.147 281.181 392 256 392z" data-original="#0f9d58" />
@@ -119,13 +119,14 @@
                         <path fill="#eb4132" d="M256 120V0C187.62 0 123.333 26.629 74.98 74.98a259.849 259.849 0 0 0-22.158 25.235l86.308 86.308C162.883 146.72 206.376 120 256 120z" data-original="#eb4132" />
                         </svg>
 
-                        <p class="inline-block w-3/5 ml-1 mt-1 text-[1.3rem]">Google</p>
-                    </button>
+                        <p class="inline-block w-3/5 ml-1 font-bold notosans-font mt-2 text-[1.3rem]">Google</p>
+                    </a>
                     </div>
                 </div>
+            </div>
                 <div class=" mt-4  text-md text-center ">
                     <p class="inline text-[#563a2d]">Don't have an account?</p>
-                    <button type="button" class="inline-block ml-1 px-2.5 py-0.5 font-large text-gray-50 rounded-3xl bg-[#563a2d] hover:bg-[#563a2d]/80  cursor-pointer" >Sign up</button>
+                    <a href="signup" type="button" class="inline-block ml-1 px-2.5 py-0.5 font-large text-gray-50 rounded-3xl bg-[#563a2d] hover:bg-[#563a2d]/80  cursor-pointer" >Sign up</a>
 
                 </div>
             </div>
@@ -151,6 +152,44 @@
             
         } );
     </script>
+    <script>
+        
+        function submitForm(){
+            let errorMsg = document.querySelector("#error");
+
+            const formData = new URLSearchParams();
+
+            let username = document.querySelector("#username").value;
+            let password = document.querySelector("#password").value;
+            formData.append("username", username);
+            formData.append("password", password);
+            
+            const baseURL = window.location.origin;
+            console.log(baseURL);
+            fetch("login", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: formData.toString()
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.href = data.redirect;
+                    
+                }
+                if (data.error) {
+                
+                    errorMsg.innerHTML = data.error;
+                    
+                } 
+            })
+            .catch(error => {
+                console.error("Fetch Error:", error);
+            });
+        }
+        
+    </script>
+    
         
     </body>
 </html>

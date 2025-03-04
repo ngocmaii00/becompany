@@ -1,16 +1,10 @@
-<%-- 
-    Document   : login
-    Created on : Feb 15, 2025, 6:54:46 PM
-    Author     : zeryus
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Sign-up</title>
-        
+        <link rel="icon" type="image/svg+xml" href="images/head.png" />
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
@@ -31,20 +25,23 @@
         <div class="py-5em flex flex-row gap-6 justify-center" style="background-color: #4f362b; height:90%; width:100%; ">
             <div class="basis-1/2">
                 <img src="/becompany/image/head.png" class="w-[40%]  mx-[30%] mt-[17%] aspect-[146/107]"/>
-                <h1 class="text-gray-50 text-7xl text-center mt-7 uppercase font-extrabold">becompany</h1>
+                <h1 class="text-gray-50 text-7xl text-center mt-7 peacesans-font uppercase font-extrabold">becompany</h1>
             </div>
             <div class="basis-1/2 font-medium font-bold">
                   
-                <div class=" flex flex-col gap-8  h-[83%] w-[75%]  p-[7%] pt-[4%] px-1/5 bg-[#f2e6e6] rounded-3xl border-3 border-gray-950" style="margin:6% 14% 6% 7%;">
-                    <h1 class="basic uppercase font-bold text-3xl text-center text-[#563a2d]" >
+                <div class=" flex flex-col gap-4  h-[83%] w-[75%]  p-[7%] pt-[4%] px-1/5 bg-[#f2e6e6] rounded-3xl border-3 border-gray-950" style="margin:6% 14% 6% 7%;">
+                    <h1 class="basic uppercase font-bold peacesans-font text-3xl text-center text-[#563a2d]" >
                         Sign Up
                     </h1>
-                <form class="h-[70%]"action="login" method="post">
-                    <div class=" mb-5 h-[3.5em] w-10/10">
-                        <input type="text" name="username" id="username" class="h-full w-full text-2xl border-4 border-gray-950 rounded-3xl h-full p-1  bg-[#ffffff] hover:bg-[#ffffff]/40  pl-[16px] placeholder:font-bold" placeholder="Username">
+                <div class="h-[65%]">
+                    <div class=" mb-3 h-[3.4em] w-10/10">
+                        <input type="text" name="email" id="email" class="h-full w-full text-2xl border-4 notosans-font border-gray-950 rounded-2xl h-full p-1  bg-[#ffffff] hover:bg-[#ffffff]/40  pl-[16px] placeholder:font-bold" placeholder="Email">
                     </div>
-                    <div class="mb-5  h-[3.5em] w-10/10 relative">
-                        <input type="password" name="password" id="password" class="h-full w-full text-2xl border-4 border-gray-950 rounded-3xl p-1 h-full bg-[#ffffff] hover:bg-[#ffffff]/40  pl-[16px] placeholder:font-bold"  placeholder="Password">
+                    <div class=" mb-3 h-[3.4em] w-10/10">
+                        <input type="text" name="username" id="username" class="h-full w-full text-2xl border-4 notosans-font border-gray-950 rounded-2xl h-full p-1  bg-[#ffffff] hover:bg-[#ffffff]/40  pl-[16px] placeholder:font-bold" placeholder="Username">
+                    </div>
+                    <div class="mb-3  h-[3.4em] w-10/10 relative">
+                        <input type="password" name="password" id="password" class="h-full w-full text-2xl border-4 notosans-font border-gray-950 rounded-2xl p-1 h-full bg-[#ffffff] hover:bg-[#ffffff]/40  pl-[16px] placeholder:font-bold"  placeholder="Password">
                         <button type="button" id="togglePassword" class="absolute top-[50%] right-[1rem] translate-y-[-50%]  cursor-pointer w-[1.5rem] flex items-center">
 
                         <svg id="eye" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -58,8 +55,8 @@
                         </button>
                           
                     </div>
-                    <div class="mb-5  h-[3.5em] w-10/10 relative">
-                        <input type="password" name="password_re_enter" id="password_re_enter" class="h-full w-full text-2xl border-4 border-gray-950 rounded-3xl p-1 h-full bg-[#ffffff] hover:bg-[#ffffff]/60  pl-[16px] placeholder:font-bold" placeholder="Re-enter password">
+                    <div class="mb-3  h-[3.4em] w-10/10 relative">
+                        <input type="password" name="password_re_enter" id="password_re_enter" class="h-full w-full text-2xl border-4 notosans-font border-gray-950 rounded-2xl p-1 h-full bg-[#ffffff] hover:bg-[#ffffff]/60  pl-[16px] placeholder:font-bold" placeholder="Re-enter password">
                         <button type="button" id="toggleReEnter" class="absolute top-[50%] right-[1rem] translate-y-[-50%]  cursor-pointer w-[1.5rem] flex items-center">
 
                         <svg id="eye-re" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -71,17 +68,18 @@
                           </svg>
                                                     
                         </button>
-                    </div>    
-                    <div class="h-[3.5em] w-full mt-12">
-                        <button type="submit" class="h-full text-2xl text-white w-full h-full py-2/10 font-bold uppercase bg-[#563a2d] hover:bg-[#563a2d]/80 cursor-pointer">Sign Up</button>    
+                    </div>
+                   
+                    <div class="h-[3em] w-full mt-8">
+                        <button type="button" onclick="submitForm()" class="h-full text-2xl text-white w-full h-full py-2/10 peacesans-font font-bold uppercase bg-[#563a2d] hover:bg-[#563a2d]/80 cursor-pointer">Sign Up</button>    
                     </div>
 
-                </form>
+                </div>
                 
-                
-                <div class=" mt-12 text-xl text-center ">
-                    <p class="inline text-[#563a2d]">Already had an account?</p>
-                    <button type="button" class="inline-block ml-1 px-6 py-0.5 font-large text-gray-50 rounded-3xl cursor-pointer bg-[#563a2d] hover:bg-[#563a2d]/80 cursor-pointer">Login</button>
+                <p id="error" class="text-red-500 text-center mt-8 mb-2 "></p>    
+                <div class="text-xl text-center ">
+                    <p class="inline notosans-font text-[#563a2d]">Already had an account?</p>
+                    <a type="button" href="login" class="inline-block ml-1 px-6 py-0.5 font-large text-gray-50 rounded-3xl cursor-pointer bg-[#563a2d] hover:bg-[#563a2d]/80 cursor-pointer">Login</a>
                 </div>
             </div>
         </div>
@@ -120,6 +118,45 @@
             }
         }); 
             
+        
+    </script>
+    <script>
+        
+        function submitForm(){
+            let errorMsg = document.querySelector("#error");
+
+            const formData = new URLSearchParams();
+            let email = document.querySelector("#email").value;
+            let username = document.querySelector("#username").value;
+            let password = document.querySelector("#password").value;
+            let password_re_enter = document.querySelector("#password_re_enter").value;
+
+            formData.append("email", email);
+            formData.append("username", username);
+            formData.append("password", password);
+            formData.append("password_re_enter", password_re_enter);
+            
+            
+           
+            fetch("signup", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: formData.toString()
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.href = data.redirect;
+                    
+                }
+                if (data.error) {
+                
+                    errorMsg.innerHTML = data.error;
+                    
+                } 
+            });
+           
+        }
         
     </script>
         
