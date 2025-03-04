@@ -132,7 +132,7 @@ public class UserDAO extends DBConnect {
     }
     
     public User findByResetPasswordToken(String token){
-        String sql = "select * from [User] where reset_password =?";
+        String sql = "select * from [User] where reset_password_token =?";
         try{
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1,token);

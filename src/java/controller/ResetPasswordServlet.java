@@ -22,7 +22,7 @@ import model.User;
  */
 @WebServlet(name = "ResetPassWordServlet", urlPatterns = {"/reset-password"})
 public class ResetPasswordServlet extends HttpServlet {
-    User getUser ;
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -53,9 +53,10 @@ public class ResetPasswordServlet extends HttpServlet {
         
         UserDAO ud = new UserDAO();
         
-         getUser= ud.findByResetPasswordToken(token);
+         User getUser= ud.findByResetPasswordToken(token);
         if(getUser != null){
-            
+            HttpSession session = request.getSession();
+            session.setAttribute("changePwdUser", getUser);
             request.getRequestDispatcher("resetPassword.jsp").forward(request, response);
         }else{
             request.getRequestDispatcher("error.jsp").forward(request,response);
@@ -81,6 +82,9 @@ public class ResetPasswordServlet extends HttpServlet {
         String confirmPassword = request.getParameter("confirmPassword");
         
         if(password.equals(confirmPassword)){
+            HttpSession session = request.getSession(false);
+            
+            User getUser = new User(session.getAttribute())
             
             UserDAO ud = new UserDAO();
             getUser.setPassword(password);

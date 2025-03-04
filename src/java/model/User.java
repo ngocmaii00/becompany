@@ -24,6 +24,10 @@ public class User {
     private String resetPasswordToken;
     private UserDetail userDetail;
 
+    public User() {
+    }
+
+    
     public User(String userId,String email, String username, String status){
         this.userId = userId;
         this.email = email;
