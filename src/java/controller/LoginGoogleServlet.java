@@ -76,15 +76,20 @@ public class LoginGoogleServlet extends HttpServlet {
         response.sendRedirect("https://accounts.google.com/o/oauth2/auth?scope=email%20profile&redirect_uri=http://localhost:8080/becompany/login-google&response_type=code&client_id=852116808382-82db8ra9hkc52bsm7dmq7utbej4d9hi3.apps.googleusercontent.com&prompt=consent"); // Force login again
         
         }else{
+            
         String code = request.getParameter("code");
         GoogleUtils gg = new GoogleUtils();
         String accessToken = gg.getToken(code);
-        GooglePojo acc = gg.getUserInfo(accessToken);
+        GooglePojo googleAccountInfo = gg.getUserInfo(accessToken);
         
         UserDAO ud = new UserDAO();
+        User ggUser = ud.findByEmail(googleAccountInfo.getEmail());
         
-        if(ud.getSignUpEmail(acc.getEmail())!= null && ud.getSignUpEmail(acc.getEmail()).equals(acc.getEmail())){
+        if(ggUser!= null && ggUser.getAuth_provider().equals("GOOGLE")){
             response.sendRedirect("home");
+        }else if(ggUser!= null && !ggUser.getAuth_provider().equals("GOOGLE")){
+            request.setAttribute("nonLocalError", "This email has already been Sign Up");
+            request.getRequestDispatcher("login").forward(request, response);
         }else{
             
             String userId;
@@ -94,10 +99,10 @@ public class LoginGoogleServlet extends HttpServlet {
                         break;
                 }
 
-            String email = acc.getEmail();
-            String username = acc.getEmail().split("@")[0];
+            String email = googleAccountInfo.getEmail();
+            String username = googleAccountInfo.getEmail().split("@")[0];
             
-            ud.addUserGoogleFacebook(userId, email, username);
+            ud.addUserGoogleFacebook(userId, email, username,"GOOGLE");
             HttpSession session = request.getSession();
             User newUser = new User(userId,email,username,"active");
             session.setAttribute("account",newUser);

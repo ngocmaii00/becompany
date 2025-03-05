@@ -20,6 +20,7 @@ public class User {
     private String username;
     private String password;
     private String status;
+    private String auth_provider;
     private String image;
     private String resetPasswordToken;
     private UserDetail userDetail;
@@ -36,29 +37,38 @@ public class User {
         this.status = status;
     }
     
-    public User(String userId,String email, String username, String password, String status){
+    public User(String userId,String email, String username, String password, String status,String auth_provider){
         this.userId = userId;
         this.email = email;
         this.username = username;
         this.password = password;
         this.status = status;
+        this.auth_provider = auth_provider;
     }
 
-    public UserDetail getUserDetail() {
-        return userDetail;
+    public User(String userId, String email, String username, String password, String status, String auth_provider, String image, String resetPasswordToken) {
+        this.userId = userId;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+        this.status = status;
+        this.auth_provider = auth_provider;
+        this.image = image;
+        this.resetPasswordToken = resetPasswordToken;
+        
     }
 
-    public String getEmail() {
-        return email;
-    }
-    
    
     
-
+    
     public String getUserId() {
         return userId;
     }
-
+    
+    public String getEmail() {
+        return email;
+    }
+   
     public String getUsername() {
         return username;
     }
@@ -71,21 +81,32 @@ public class User {
         return status;
     }
 
+    public String getAuth_provider() {
+        return auth_provider;
+    }
+
+    public String getImage() {
+        return image;
+    }
+      
     public String getResetPasswordToken() {
         return resetPasswordToken;
     }
+     
+    public UserDetail getUserDetail() {
+        return userDetail;
+    }
+    
+    
     
 
-    public void setUserDetail(UserDetail userDetail) {
-        this.userDetail = userDetail;
-    }
-
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }  
+    
     public void setEmail(String email) {
         this.email = email;
-    }
-
-   
-    
+    }  
 
     public void setUsername(String username) {
         this.username = username;
@@ -100,11 +121,22 @@ public class User {
         this.status = status;
     }
 
+    public void setAuth_provider(String auth_provider) {
+        this.auth_provider = auth_provider;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+    
+    
     public void updateResetPasswordToken(String token){
         this.resetPasswordToken = token;
         
             
     }
     
-    
+    public void setUserDetail(UserDetail userDetail) {
+        this.userDetail = userDetail;
+    }
 }

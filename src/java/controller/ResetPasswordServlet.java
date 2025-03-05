@@ -50,10 +50,9 @@ public class ResetPasswordServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String token = request.getParameter("token");
-        
         UserDAO ud = new UserDAO();
+        User getUser= ud.findByResetPasswordToken(token);
         
-         User getUser= ud.findByResetPasswordToken(token);
         if(getUser != null){
             HttpSession session = request.getSession();
             session.setAttribute("changePwdUser", getUser);
@@ -84,13 +83,14 @@ public class ResetPasswordServlet extends HttpServlet {
         if(password.equals(confirmPassword)){
             HttpSession session = request.getSession(false);
             
-            User getUser = new User(session.getAttribute())
+            User getUser = (User)session.getAttribute("changePwdUser");
             
             UserDAO ud = new UserDAO();
             getUser.setPassword(password);
             ud.update(getUser);
             jsonResponse.addProperty("error", "Change password completed! You may press Return to return to Login Page");
             
+            session.removeAttribute("changePwdUser");
             response.getWriter().write(jsonResponse.toString());
         }else{
             

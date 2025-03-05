@@ -43,10 +43,21 @@
                     </h1>
                 <div class="h-[80%]">
                     <div class=" mb-3 h-[3.5em] w-10/10">
-                        <input type="text" name="username" id="username" class="h-full w-full text-2xl border-4 notosans-font border-gray-950 rounded-3xl h-full p-1 bg-[#ffffff] hover:bg-[#ffffff]/60 pl-[16px] placeholder:font-bold" placeholder="Username">
+                        <input type="text" 
+                               name="username" 
+                               id="username" 
+                               class="h-full w-full text-2xl border-4 notosans-font border-gray-950 rounded-3xl h-full p-1 bg-[#ffffff] hover:bg-[#ffffff]/60 pl-[16px] placeholder:font-bold" 
+                               value="${cookie.cu.value}"
+                               placeholder="Username">
                     </div>
+                               
                     <div class="mb-3  h-[3.5em] w-10/10 relative">
-                        <input type="password" name="password" id="password" class="h-full w-full text-2xl border-4 notosans-font border-gray-950 rounded-3xl p-1 h-full bg-[#ffffff] hover:bg-[#ffffff]/60 pl-[16px] placeholder:font-bold" placeholder="Password">
+                        <input type="password" 
+                               name="password" 
+                               id="password" 
+                               class="h-full w-full text-2xl border-4 notosans-font border-gray-950 rounded-3xl p-1 h-full bg-[#ffffff] hover:bg-[#ffffff]/60 pl-[16px] placeholder:font-bold" 
+                               value="${cookie.cp.value}"
+                               placeholder="Password">
 
                         <button type="button" id="togglePassword" class="absolute top-[50%] right-[1rem] translate-y-[-50%]  cursor-pointer w-[1.5rem] flex items-center">
 
@@ -62,14 +73,18 @@
                         <!-- type="checkbox" name="peer remember" id="remember" -->
                         <!-- <label class="text-xl  font-bold text-[#563a2d] cursor-pointer"for="remember"> Remember me</label> -->
                     </div>
-                    <p class="text-red-700 ml-2" id="error"></p>
+                    <p class="text-red-700 ml-2" id="error">${requestScope.nonLocalError}</p>
+                    
                     <div class="grid grid-cols-2 mb-2 mx-2">
                         <div class="inline-flex items-center">
                             <label class="flex items-center cursor-pointer relative" for="check-2">
                               <input type="checkbox"
-                                checked
+                                
+                                name="rememberme"
                                 class="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded shadow hover:shadow-md  border border-3 border-[#563a2d] checked:bg-[#563a2d] checked:border-[#563a2d]"
-                                id="check-2" />
+                                id="check-2"
+                                ${cookie.cr.value == 'on'?"checked":""}
+                                />
                               <span class="absolute text-white opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor"
                                   stroke="currentColor" stroke-width="1">
@@ -84,7 +99,7 @@
                               Remember Me
                             </label>
                           </div>
-                        <a class="inline-block text-xl justify-self-end text-[#563a2d] hover:underline font-bold notosans-font" href="forgot-password" >Forgot password?</a>
+                        <a class="inline-block text-md justify-self-end text-[#563a2d] hover:underline font-bold notosans-font" href="forgot-password" >Forgot password?</a>
                     </div>
                     <div class="h-[3em] w-full mt-4">
                         <button type="submit" onclick="submitForm()" class="h-full text-2xl text-white peacesans-font w-full h-full py-2/10 font-bold cursor-pointer uppercase bg-[#563a2d] hover:bg-[#563a2d]/80 ">Login</button>    

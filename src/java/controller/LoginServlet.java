@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -65,6 +66,10 @@ public class LoginServlet extends HttpServlet {
             
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        String rememberMe = request.getParameter("rememberme");
+        
+        Cookie cUsername = new Cookie("usr",username);
+        Cookie cPassword = new Cookie("pwd",password);
         
         UserDAO ud = new UserDAO();
         User newUser = ud.getAuthentication(username);
@@ -77,6 +82,18 @@ public class LoginServlet extends HttpServlet {
         }
         else{
             if(newUser.getPassword().equals(password)){
+                Cookie cUser = new Cookie("cu",username);
+                Cookie cPass = new Cookie("cp",password);
+                Cookie cRem = new Cookie("cr",rememberMe);
+                if(rememberMe != null){
+                    cUser.setMaxAge(60*60*24*2);
+                    cPass.setMaxAge(60*60*24*2);
+                    cRem.setMaxAge(60*60*24*2);
+                }else{
+                    cUser.setMaxAge(0);
+                    cPass.setMaxAge(0);
+                    cRem.setMaxAge(0);
+                }
                 HttpSession session = request.getSession();
                 session.setAttribute("account",newUser);
                 jsonResponse.addProperty("error",false);
