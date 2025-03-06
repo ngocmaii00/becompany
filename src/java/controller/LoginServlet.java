@@ -95,7 +95,7 @@ public class LoginServlet extends HttpServlet {
                     cRem.setMaxAge(0);
                 }
                 HttpSession session = request.getSession();
-                session.setAttribute("account",newUser);
+                session.setAttribute("user" + newUser.getUserId(),newUser);
                 jsonResponse.addProperty("error",false);
                 
                 jsonResponse.addProperty("success",true);
