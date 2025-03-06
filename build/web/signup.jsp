@@ -36,14 +36,14 @@
             <div class="basis-1/2 font-medium font-bold">
                   
                 <div class=" flex flex-col gap-8  h-[83%] w-[75%]  p-[7%] pt-[4%] px-1/5 bg-[#f2e6e6] rounded-3xl border-3 border-gray-950" style="margin:6% 14% 6% 7%;">
-                    <h1 class="basic uppercase font-bold text-6xl text-center text-[#563a2d]" >
+                    <h1 class="basic uppercase font-bold text-3xl text-center text-[#563a2d]" >
                         Sign Up
                     </h1>
                 <form class="h-[70%]"action="login" method="post">
-                    <div class=" mb-5 h-[4em] w-10/10">
+                    <div class=" mb-5 h-[3.5em] w-10/10">
                         <input type="text" name="username" id="username" class="h-full w-full text-2xl border-4 border-gray-950 rounded-3xl h-full p-1  bg-[#ffffff] hover:bg-[#ffffff]/40  pl-[16px] placeholder:font-bold" placeholder="Username">
                     </div>
-                    <div class="mb-5  h-[4em] w-10/10 relative">
+                    <div class="mb-5  h-[3.5em] w-10/10 relative">
                         <input type="password" name="password" id="password" class="h-full w-full text-2xl border-4 border-gray-950 rounded-3xl p-1 h-full bg-[#ffffff] hover:bg-[#ffffff]/40  pl-[16px] placeholder:font-bold"  placeholder="Password">
                         <button type="button" id="togglePassword" class="absolute top-[50%] right-[1rem] translate-y-[-50%]  cursor-pointer w-[1.5rem] flex items-center">
 
@@ -58,7 +58,7 @@
                         </button>
                           
                     </div>
-                    <div class="mb-5  h-[4em] w-10/10 relative">
+                    <div class="mb-5  h-[3.5em] w-10/10 relative">
                         <input type="password" name="password_re_enter" id="password_re_enter" class="h-full w-full text-2xl border-4 border-gray-950 rounded-3xl p-1 h-full bg-[#ffffff] hover:bg-[#ffffff]/60  pl-[16px] placeholder:font-bold" placeholder="Re-enter password">
                         <button type="button" id="toggleReEnter" class="absolute top-[50%] right-[1rem] translate-y-[-50%]  cursor-pointer w-[1.5rem] flex items-center">
 
@@ -72,8 +72,8 @@
                                                     
                         </button>
                     </div>    
-                    <div class="h-[4em] w-full mt-12">
-                        <button type="submit" class="h-full text-3xl text-white w-full h-full py-2/10 font-bold uppercase bg-[#563a2d] hover:bg-[#563a2d]/80 cursor-pointer">Sign Up</button>    
+                    <div class="h-[3.5em] w-full mt-12">
+                        <button type="submit" class="h-full text-2xl text-white w-full h-full py-2/10 font-bold uppercase bg-[#563a2d] hover:bg-[#563a2d]/80 cursor-pointer">Sign Up</button>    
                     </div>
 
                 </form>

@@ -41,7 +41,7 @@
                             <div class="filter-item filter-item-size">
                                 <h4>Size</h4>
                                 <select id="size" name="size" value="${request.getParameter("size") != null ? request.getParameter("size") : ""}">
-                                    <option style="color: grey">-Size-</option>
+                                    <option style="color: grey" value="">-Size-</option>
                                     <option value="small">Small</option>
                                     <option value="medium">Medium</option>
                                     <option value="large">Large</option>
@@ -60,7 +60,7 @@
                         <div class="filter-item">
                             <h4>Status</h4>
                             <div class="filter-status">
-                                
+
                                 <div class="filter-status-row">
                                     <input name="status" type="checkbox" value="available"/>
                                     <label>Available products</label>
@@ -123,15 +123,21 @@
                                     <a href="product?name=${p.getProductName()}" class="home-teddy-name">${p.getProductName()}</a>
                                     <p class="home-teddy-price">${p.getTeddies().get(0).getPrice()}$</p>
                                 </div>
-                                <div>
-                                    <c:forEach items="${p.getColors()}" var="color">
-                                        <span class="home-teddy-color" style="background-color: ${color}"></span>
-                                    </c:forEach>
-                                </div>
-                                <div class="home-teddy-sizes">
-                                    <c:forEach items="${p.getSizes()}" var="size">
-                                        <span class="home-teddy-size">${size}</span>
-                                    </c:forEach>
+                                <div class="home-teddy-${p.productId}">
+                                    <div class="home-teddy-colors">
+                                        <c:forEach items="${p.getColors()}" var="color">
+                                            <span onclick="changeSize('${color}', '${p.productId}', '${p.colors}', '${p.sizes}')" class="home-teddy-color" style="background-color: ${color}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-4 check-icon">
+                                                <path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd" />
+                                                </svg>
+                                            </span>
+                                        </c:forEach>
+                                    </div>
+                                    <div class="home-teddy-sizes">
+                                        <c:forEach items="${p.getSizes()}" var="size">
+                                            <span onclick="changeColor('${size}', '${p.productId}', '${p.colors}', '${p.sizes}')" class="home-teddy-size">${size}</span>
+                                        </c:forEach>
+                                    </div>
                                 </div>
                                 <div class="flex justify-between align-center">
                                     <div class="home-teddy-sold">
@@ -160,5 +166,38 @@
 
         <%@include file="footer.jsp" %>
         <script src="scripts/type.js"></script>
+
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+
+        <script>
+
+            function changeSize(color, productId, colors, sizes) {
+                'application/x-www-form-urlencoded; charset=UTF-8'
+                $.ajax({
+                    url: "colorsize",
+                    type: 'POST',
+                    data: jQuery.param({color: color, productId: productId, sizes: sizes, colors: colors}),
+                    dataType: 'application/json',
+                    success: function (res) {
+                        const classname = ".home-teddy-" + productId;
+                        document.querySelector(classname).innerHTML = res;
+                    }
+                });
+            }
+
+            function changeColor(size, productId, colors, sizes) {
+                $.ajax({
+                    url: "colorsize",
+                    type: 'POST',
+                    data: jQuery.param({size: size, productId: productId, colors: colors, sizes: sizes}),
+                    dataType: 'application/json',
+                    success: function (res) {
+                        const classname = ".home-teddy-" + productId;
+                        document.querySelector(classname).innerHTML = res;
+                    }
+                });
+            }
+
+        </script>
     </body>
 </html>
