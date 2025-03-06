@@ -93,7 +93,7 @@
                               Remember Me
                             </label>
                           </div>
-                        <a class="inline-block text-md justify-self-end text-[#563a2d] hover:underline font-bold notosans-font" href="forgot-password" >Forgot password?</a>
+                        
                     </div>
                     <div class="h-[3em] w-full mt-4">
                         <button type="submit" onclick="submitForm()" class="h-full text-2xl text-white peacesans-font w-full h-full py-2/10 font-bold cursor-pointer uppercase bg-[#563a2d] hover:bg-[#563a2d]/80 ">Login</button>    
@@ -109,7 +109,8 @@
          <div class="basis-1/2">
                 <img src="/becompany/image/head.png" class="w-[40%]  mx-[30%] mt-[17%] aspect-[146/107]"/>
 
-                <h1 class="text-gray-700 text-7xl peacesans-font text-center mt-7 uppercase font-extrabold">becompany</h1>
+                <h1 class="text-[#563a2d] text-7xl peacesans-font text-center mt-7 uppercase font-extrabold">becompany</h1>
+                <h1 class="text-[#563a2d] text-5xl peacesans-font text-center mt-7 uppercase font-extrabold">Insider's site</h1>
 
         </div>
     </div>

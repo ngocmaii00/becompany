@@ -104,7 +104,7 @@ public class LoginServlet extends HttpServlet {
             }
             else{
                 response.setContentType("application/json");
-            response.setCharacterEncoding("UTF-8");
+                response.setCharacterEncoding("UTF-8");
             
             jsonResponse.addProperty("success",false);
             jsonResponse.addProperty("error", "Password are incorrect");
