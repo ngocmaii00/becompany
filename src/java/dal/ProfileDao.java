@@ -25,8 +25,8 @@ public class ProfileDao extends DBConnect {
             st.setString(1, userId);
             ResultSet result = st.executeQuery();
             while (result.next()) {
-                User user = new User(result.getString("userId"), result.getString("username"), result.getString("password"), result.getString("status"), result.getString("status"), result.getString("dob"));
-                list.add(user);
+//                User user = new User(result.getString("userId"), result.getString("username"), result.getString("password"), result.getString("status"), result.getString("status"), result.getString("dob"));
+//                list.add(user);
             }
         } catch (SQLException e) {
             System.out.println(e);

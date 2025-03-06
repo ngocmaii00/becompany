@@ -84,7 +84,7 @@ public class ResetPasswordServlet extends HttpServlet {
         if(password.equals(confirmPassword)){
             HttpSession session = request.getSession(false);
             
-            User getUser = new User(session.getAttribute())
+            User getUser = (User)session.getAttribute("changePwdUser");
             
             UserDAO ud = new UserDAO();
             getUser.setPassword(password);
