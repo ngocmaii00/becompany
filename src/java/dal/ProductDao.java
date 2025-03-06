@@ -9,6 +9,23 @@ import java.util.stream.Stream;
 import model.Product;
 
 public class ProductDao extends DBConnect {
+    public List<Product> getAll() {
+        List<Product> list = new ArrayList<>();
+        TeddyDao td = new TeddyDao();
+        String sql = "select * from Product order by sold desc";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet result = st.executeQuery();
+            while (result.next()) {
+                Product p = new Product(result.getString("productId"), result.getString("productName"), result.getString("origin"), result.getString("description"), result.getString("manufacturer"), result.getInt("sold"), result.getString("image"), result.getString("type"), result.getString("status"));
+                p.addTeddy(td.getAllTeddyOfProduct(p.getProductId()));
+                list.add(p);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
 
     public List<Product> getTop10() {
         List<Product> list = new ArrayList<>();
@@ -18,7 +35,7 @@ public class ProductDao extends DBConnect {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet result = st.executeQuery();
             while (result.next()) {
-                Product p = new Product(result.getString("productId"), result.getString("productName"), result.getString("origin"), result.getString("description"), result.getString("manufacturer"), result.getInt("sold"), result.getString("image"), result.getString("type"));
+                Product p = new Product(result.getString("productId"), result.getString("productName"), result.getString("origin"), result.getString("description"), result.getString("manufacturer"), result.getInt("sold"), result.getString("image"), result.getString("type"), result.getString("status"));
                 p.addTeddy(td.getAllTeddyOfProduct(p.getProductId()));
                 list.add(p);
             }
@@ -37,7 +54,7 @@ public class ProductDao extends DBConnect {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet result = st.executeQuery();
             if(result.next()) {
-                Product p = new Product(result.getString("productId"), result.getString("productName"), result.getString("origin"), result.getString("description"), result.getString("manufacturer"), result.getInt("sold"), result.getString("image"), result.getString("type"));
+                Product p = new Product(result.getString("productId"), result.getString("productName"), result.getString("origin"), result.getString("description"), result.getString("manufacturer"), result.getInt("sold"), result.getString("image"), result.getString("type"), result.getString("status"));
                 return p;
             }
         } catch (SQLException e) {
@@ -74,7 +91,7 @@ public class ProductDao extends DBConnect {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet result = st.executeQuery();
             while (result.next()) {
-                Product p = new Product(result.getString("productId"), result.getString("productName"), result.getString("origin"), result.getString("description"), result.getString("manufacturer"), result.getInt("sold"), result.getString("image"), result.getString("type"));
+                Product p = new Product(result.getString("productId"), result.getString("productName"), result.getString("origin"), result.getString("description"), result.getString("manufacturer"), result.getInt("sold"), result.getString("image"), result.getString("type"), result.getString("status"));
                 p.addTeddy(td.getAllTeddyOfProduct(p.getProductId()));
                 list.add(p);
             }
@@ -117,12 +134,14 @@ public class ProductDao extends DBConnect {
         if (!filters.isEmpty()) {
             sql += "where " + filters.stream().collect(Collectors.joining(" and "));
         }
+        
+        System.out.println(sql);
 
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet result = st.executeQuery();
             while (result.next()) {
-                Product p = new Product(result.getString("productId"), result.getString("productName"), result.getString("origin"), result.getString("description"), result.getString("manufacturer"), result.getInt("sold"), result.getString("image"), result.getString("type"));
+                Product p = new Product(result.getString("productId"), result.getString("productName"), result.getString("origin"), result.getString("description"), result.getString("manufacturer"), result.getInt("sold"), result.getString("image"), result.getString("type"), result.getString("status"));
                 p.addTeddy(td.getAllTeddyOfProduct(p.getProductId()));
                 list.add(p);
             }
@@ -132,4 +151,5 @@ public class ProductDao extends DBConnect {
         return list;
     }
 
+//    public void addProduct(String productId, String productName)
 }

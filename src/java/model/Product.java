@@ -2,6 +2,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -11,6 +12,7 @@ public class Product {
     private int sold;
     private String[] images;
     private String type;
+    private String status;
     private List<Teddy> teddies = new ArrayList<>();
     private Set<String> colors = new HashSet<>();
     private Set<String> sizes = new HashSet<>();
@@ -18,7 +20,7 @@ public class Product {
     public Product() {
     }
 
-    public Product(String productId, String productName, String origin, String description, String manufacturer, int sold, String image, String type) {
+    public Product(String productId, String productName, String origin, String description, String manufacturer, int sold, String image, String type, String status) {
         this.productId = productId;
         this.productName = productName;
         this.origin = origin;
@@ -27,6 +29,15 @@ public class Product {
         this.sold = sold;
         this.images = image.split(", ");
         this.type = type;
+        this.status = status;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public void addTeddy(List<Teddy> list) {

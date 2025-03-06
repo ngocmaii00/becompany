@@ -1,0 +1,28 @@
+.notosans-font {
+  font-family: "NotoSans";
+}
+
+@font-face {
+  font-family: "NotoSans";
+  src: local("NotoSans"), url("../fonts/NotoSans.ttf") format("truetype");
+}
+
+.peacesans-font {
+  font-family: "PeaceSans";
+}
+
+@font-face {
+  font-family: "PeaceSans";
+  src: local("PeaceSans"), url("../fonts/PeaceSans.ttf") format("truetype");
+}
+
+/* Ẩn thanh cuộn trên Chrome, Safari */
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+/* Ẩn thanh cuộn trên Firefox */
+.scrollbar-hidden {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
