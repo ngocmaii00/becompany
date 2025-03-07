@@ -104,7 +104,7 @@
                         <div>
                             <div class="flex justify-between">
                                 <a  href="https://www.facebook.com/v2.12/dialog/oauth?client_id=3449601631840990&redirect_uri=https://localhost:8080/becompany/login-facebook&scope=email,public_profile&respond_type=code"
-                                    class="inline-flex items-center bg-white text-lg p-3 border-2 border-gray-950 rounded-xl" style="width: 49%">
+                                    class="inline-flex justify-center items-center bg-white text-lg p-3 border-2 border-gray-950 rounded-xl" style="width: 49%">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="36px" viewBox="0 0 512 512" class="mr-2">
                                     <path fill="#1877f2" d="M512 256c0 127.78-93.62 233.69-216 252.89V330h59.65L367 256h-71v-48.02c0-20.25 9.92-39.98 41.72-39.98H370v-63s-29.3-5-57.31-5c-58.47 0-96.69 35.44-96.69 99.6V256h-65v74h65v178.89C93.62 489.69 0 383.78 0 256 0 114.62 114.62 0 256 0s256 114.62 256 256z" data-original="#1877f2" />
                                     <path fill="#fff" d="M355.65 330 367 256h-71v-48.021c0-20.245 9.918-39.979 41.719-39.979H370v-63s-29.296-5-57.305-5C254.219 100 216 135.44 216 199.6V256h-65v74h65v178.889c13.034 2.045 26.392 3.111 40 3.111s26.966-1.066 40-3.111V330z" data-original="#ffffff" />
@@ -112,7 +112,7 @@
                                     <p class="notosans-font">Facebook</p>
                                 </a>
                                 <a  href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile&redirect_uri=http://localhost:8080/becompany/login-google&response_type=code&client_id=852116808382-82db8ra9hkc52bsm7dmq7utbej4d9hi3.apps.googleusercontent.com&prompt=none" 
-                                    class="inline-flex items-center bg-white text-lg p-3 border-2 border-gray-950 rounded-xl" style="width: 49%">
+                                    class="inline-flex justify-center items-center bg-white text-lg p-3 border-2 border-gray-950 rounded-xl" style="width: 49%">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="30px" viewBox="0 0 512 512" class="mr-2">
                                     <path fill="#fbbd00" d="M120 256c0-25.367 6.989-49.13 19.131-69.477v-86.308H52.823C18.568 144.703 0 198.922 0 256s18.568 111.297 52.823 155.785h86.308v-86.308C126.989 305.13 120 281.367 120 256z" data-original="#fbbd00" />
                                     <path fill="#0f9d58" d="m256 392-60 60 60 60c57.079 0 111.297-18.568 155.785-52.823v-86.216h-86.216C305.044 385.147 281.181 392 256 392z" data-original="#0f9d58" />
