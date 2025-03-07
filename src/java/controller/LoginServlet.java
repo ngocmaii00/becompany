@@ -5,6 +5,7 @@
 package controller;
 
 import com.google.gson.JsonObject;
+import dal.StaffDao;
 import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,6 +16,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import model.Staff;
+import model.Customer;
 import model.User;
 
 /**
@@ -71,46 +74,71 @@ public class LoginServlet extends HttpServlet {
         Cookie cUsername = new Cookie("usr",username);
         Cookie cPassword = new Cookie("pwd",password);
         
-        UserDAO ud = new UserDAO();
-        User newUser = ud.getAuthentication(username);
-        JsonObject jsonResponse = new JsonObject();
-        if(newUser == null){
+        
+        
+        
             
-            jsonResponse.addProperty("success",false);
-            jsonResponse.addProperty("error", "Username and Password are incorrect");
-            response.getWriter().write(jsonResponse.toString());
-        }
-        else{
-            if(newUser.getPassword().equals(password)){
-                Cookie cUser = new Cookie("cu",username);
-                Cookie cPass = new Cookie("cp",password);
-                Cookie cRem = new Cookie("cr",rememberMe);
-                if(rememberMe != null){
-                    cUser.setMaxAge(60*60*24*2);
-                    cPass.setMaxAge(60*60*24*2);
-                    cRem.setMaxAge(60*60*24*2);
-                }else{
-                    cUser.setMaxAge(0);
-                    cPass.setMaxAge(0);
-                    cRem.setMaxAge(0);
-                }
-                HttpSession session = request.getSession();
-                session.setAttribute("user" + newUser.getUserId(),newUser);
-                jsonResponse.addProperty("error",false);
-                
-                jsonResponse.addProperty("success",true);
-                jsonResponse.addProperty("redirect","home");
+            
+        
+            UserDAO ud = new UserDAO();
+            User newUser = ud.getAuthentication(username);
+            JsonObject jsonResponse = new JsonObject();
+            if(newUser == null){
+                //if username not found
+                jsonResponse.addProperty("success",false);
+                jsonResponse.addProperty("error", "Username and Password are incorrect");
                 response.getWriter().write(jsonResponse.toString());
             }
             else{
-                response.setContentType("application/json");
-                response.setCharacterEncoding("UTF-8");
-            
-            jsonResponse.addProperty("success",false);
-            jsonResponse.addProperty("error", "Password are incorrect");
-            response.getWriter().write(jsonResponse.toString());
+                //if username is found
+                if(newUser.getPassword().equals(password)){
+                    //if the password is correct
+                    Cookie cUser = new Cookie("cu",username);
+                    Cookie cPass = new Cookie("cp",password);
+                    Cookie cRem = new Cookie("cr",rememberMe);
+                    if(rememberMe != null){
+                        //save username to cookie if Remember Me is checked
+                        // 
+                        cUser.setMaxAge(60*60*24*2);
+                        cPass.setMaxAge(60*60*24*2);
+                        cRem.setMaxAge(60*60*24*2);
+                    }else{
+                        cUser.setMaxAge(0);
+                        cPass.setMaxAge(0);
+                        cRem.setMaxAge(0);
+                    }
+
+                    if(newUser.getRole().trim().equals("USER")){
+                        //if the user is logging in, redirect him/her to home page
+                        HttpSession session = request.getSession();
+                        session.setAttribute("user",newUser);
+                        jsonResponse.addProperty("error",false);
+
+                        jsonResponse.addProperty("success",true);
+                        jsonResponse.addProperty("redirect","home");
+                        response.getWriter().write(jsonResponse.toString());
+                    }else{
+                        //if the Admin/Staff is logging in, redirect them to management page
+                        HttpSession session = request.getSession();
+                        session.setAttribute("admin",newUser);
+                        jsonResponse.addProperty("error",false);
+
+                        jsonResponse.addProperty("success",true);
+                        jsonResponse.addProperty("redirect","admin.jsp");
+                        response.getWriter().write(jsonResponse.toString());
+                    }
+                }
+                else{
+                    //if the password is incorrect
+                    response.setContentType("application/json");
+                    response.setCharacterEncoding("UTF-8");
+
+                jsonResponse.addProperty("success",false);
+                jsonResponse.addProperty("error", "Password are incorrect");
+                response.getWriter().write(jsonResponse.toString());
+                }
             }
-        }
+        
     }
 
     /**

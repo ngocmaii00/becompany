@@ -15,7 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.Random;
 import model.GooglePojo;
-import model.User;
+import model.Customer;
 import utilities.GoogleUtils;
 
 /**
@@ -72,7 +72,7 @@ public class LoginGoogleServlet extends HttpServlet {
         String error = request.getParameter("error");
         String error_subtype=request.getParameter("error_subtype");
         if ("interaction_required".equals(error) || "login_required".equals(error) ||"access_denied".equals(error_subtype) ) {
-        // User is not logged in, so redirect them to normal login flow
+        // Customer is not logged in, so redirect them to normal login flow
         response.sendRedirect("https://accounts.google.com/o/oauth2/auth?scope=email%20profile&redirect_uri=http://localhost:8080/becompany/login-google&response_type=code&client_id=852116808382-82db8ra9hkc52bsm7dmq7utbej4d9hi3.apps.googleusercontent.com&prompt=consent"); // Force login again
         
         }else{
@@ -83,13 +83,14 @@ public class LoginGoogleServlet extends HttpServlet {
         GooglePojo googleAccountInfo = gg.getUserInfo(accessToken);
         
         UserDAO ud = new UserDAO();
-        User ggUser = ud.findByEmail(googleAccountInfo.getEmail());
+        Customer ggUser = ud.findByEmail(googleAccountInfo.getEmail());
         
         if(ggUser!= null && ggUser.getAuth_provider().equals("GOOGLE")){
             response.sendRedirect("home");
         }else if(ggUser!= null && !ggUser.getAuth_provider().equals("GOOGLE")){
             request.setAttribute("nonLocalError", "This email has already been Sign Up");
             request.getRequestDispatcher("login").forward(request, response);
+            
         }else{
             
             String userId;
@@ -102,9 +103,9 @@ public class LoginGoogleServlet extends HttpServlet {
             String email = googleAccountInfo.getEmail();
             String username = googleAccountInfo.getEmail().split("@")[0];
             
-            ud.addUserGoogleFacebook(userId, email, username,"GOOGLE");
+            ud.addUserGoogleFacebook(userId, email, username,"GOOGLE","USER");
             HttpSession session = request.getSession();
-            User newUser = new User(userId,email,username,"active");
+            Customer newUser = new Customer(userId,email,username,null,"active","USER");
             session.setAttribute("account",newUser);
             response.sendRedirect("home");
         }

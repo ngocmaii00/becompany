@@ -1,4 +1,4 @@
-/*
+    /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
@@ -10,7 +10,7 @@ import java.util.Date;
  *
  * @author zeryus
  */
-public class UserDetail {
+public class CustomerDetail {
    
     private String firstName;
     private String lastName;
@@ -23,7 +23,7 @@ public class UserDetail {
 
     
         
-    public UserDetail( String firstName, String lastName, int age, String phone, String address, Date dob) {
+    public CustomerDetail( String firstName, String lastName, int age, String phone, String address, Date dob) {
         
         this.firstName = firstName;
         this.lastName = lastName;

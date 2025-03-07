@@ -49,5 +49,5 @@ public class TeddyDao extends DBConnect {
             System.out.println(e);
         }
         return list;
-    }
+    }   
 }

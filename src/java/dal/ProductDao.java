@@ -151,5 +151,10 @@ public class ProductDao extends DBConnect {
         return list;
     }
 
-//    public void addProduct(String productId, String productName)
+
+    public static void main(String[] args) {
+        ProductDao pd = new ProductDao();
+        List<Product> list = pd.getProductByFilter("all", "brown", "", "", "", null, null);
+        System.out.println(list.get(1).getProductName());
+    }
 }

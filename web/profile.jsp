@@ -1,7 +1,7 @@
-<%-- 
-Document   : profile
-Created on : Feb 20, 2025, 6:54:01 PM
-Author     : PC
+    <%-- 
+    Document   : profile
+    Created on : Feb 20, 2025, 6:54:01 PM
+    Author     : PC
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -44,31 +44,55 @@ Author     : PC
                     </span>
                 </div>
             </div>
-            <form class="mb-16">
-                <div class=" bg-[#f2e6e6] w-fit mx-10 rounded-lg border-2 border-[#563a2d] notosans-font font-bold px-10 py-8 items-center">
-                    <c:forEach items="${requestScope.data}" var="p">
-                        <label for="username">
-                            <span>Username: ${p.getUsername()}</span>
-                            <span></span>
-                        </label>
-                        <label for="dob">
-                            <span>Date Of Birth: ${p.getDob()}</span>
-                            <span></span> 
-                        </label>
-                        <label for="status">
-                            <span>Status: ${p.getStatus()}</span>
-                            <span></span> 
-                        </label>
-                        <label for="email">
-                            <span>Email: ${p.getEmail()}</span>
-                            <span></span> 
-                        </label>
-                        <label for="address">
-                            <span>Address: ${p.getAddress()}</span>
-                            <span></span> 
-                        </label>
-                    </c:forEach>
+            <form class="mb-16 ">
+                <div class="grid grid-cols-4 bg-[#f2e6e6] w-fit mx-10 rounded-lg border-2 border-[#563a2d] notosans-font font-bold px-10 py-8 items-center">
+                    <div class="flex flex-col col-span-2 sm:col-span-1">
+                        <label for="username" class="py-2">Username: </label>
+                        <label for="password" class="py-3">Password:</label>
+                        <label for="gender" class="py-2">Gender:</label>
+                        <label for="dob" class="py-2">Date Of Birth:</label>
+                    </div>
+                    <div class="flex flex-col gap-y-2 col-span-2">
+                        <span class="bg-white focus:border-2 focus:border-[#563a2d] rounded-md text-[#563a2d] px-3 py-2.5 font-semibold text-md">Ngoc Maii</span>
 
+                        <div class="max-w-sm">
+                            <div class="relative">
+                                <input id="hs-toggle-password" type="password" class="py-3 ps-4 pe-10 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" placeholder="Enter password" value="12345qwerty">
+                                <button type="button" data-hs-toggle-password="{#hs-toggle-password&quot;
+                                        }" class="absolute inset-y-0 end-0 flex items-center z-20 px-3 cursor-pointer text-gray-400 rounded-e-md focus:outline-none focus:text-blue-600">
+                                    <svg class="shrink-0 size-3.5" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path class="hs-password-active:hidden" d="M9.88 9.88a3 3 0 1 0 4.24 4.24"></path>
+                                    <path class="hs-password-active:hidden" d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"></path>
+                                    <path class="hs-password-active:hidden" d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"></path>
+                                    <line class="hs-password-active:hidden" x1="2" x2="22" y1="2" y2="22"></line>
+                                    <path class="hidden hs-password-active:block" d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
+                                    <circle class="hidden hs-password-active:block" cx="12" cy="12" r="3"></circle>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="flex flex-row items-center gap-x-2 py-0.5">
+                            <input class="accent-[#563a2d] size-3" type="checkbox">
+                            Male
+                            <input class="accent-[#563a2d] md:ms-8 ms-3 size-3" type="checkbox" checked="">
+                            Female
+                        </div>
+
+                        <input type="date" value="2005-01-23" class="placeholder-white border-gray-300 text-gray-900 text-sm rounded-md focus:#563a2d focus:border-[#563a2d] block w-full p-2.5">
+                    </div>
+                    <div class="flex flex-col justify-center items-center gap-y-4 sm:ms-8 mt-10 sm:mt-0 col-span-4 sm:col-span-1">
+                        <div class="ms-2 bg-[url('images/head_left.png')] bg-cover bg-center md:size-[6em] size-[8em] rounded-full border-2 border-[#543520] shadow-lg"></div>
+
+
+                        <label class="cursor-pointer" for="file-input">
+                            <input type="file" hidden="" id="file-input">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-8">
+                            <path d="M12 9a3.75 3.75 0 1 0 0 7.5A3.75 3.75 0 0 0 12 9Z"></path>
+                            <path fill-rule="evenodd" d="M9.344 3.071a49.52 49.52 0 0 1 5.312 0c.967.052 1.83.585 2.332 1.39l.821 1.317c.24.383.645.643 1.11.71.386.054.77.113 1.152.177 1.432.239 2.429 1.493 2.429 2.909V18a3 3 0 0 1-3 3h-15a3 3 0 0 1-3-3V9.574c0-1.416.997-2.67 2.429-2.909.382-.064.766-.123 1.151-.178a1.56 1.56 0 0 0 1.11-.71l.822-1.315a2.942 2.942 0 0 1 2.332-1.39ZM6.75 12.75a5.25 5.25 0 1 1 10.5 0 5.25 5.25 0 0 1-10.5 0Zm12-1.5a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z" clip-rule="evenodd"></path>
+                            </svg>
+
+                        </label>
+                    </div>
                 </div>
                 <div class="flex flex-row justify-between mx-10 mt-4">
                     <button class="flex flex-row bg-[#563a2d] w-fit rounded-lg justify-center items-center px-4 py-3 gap-x-2">

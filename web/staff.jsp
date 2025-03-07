@@ -40,32 +40,32 @@
 
                 <c:forEach items="${requestScope.staffs}" var="s">
                     <div class="table-data">
-                        <p class="table-id">${s.staffId}</p>
+                        <p class="table-id">${s.getId()}</p>
                         <p class="table-firstname">${s.firstname}</p>
                         <p class="table-lastname">${s.lastname}</p>
                         <p class="table-age">${s.dob}</p>
-                        <c:if test="${s.status == 1}">
+                        <c:if test="${s.status == 'active'}">
                             <p class="table-status">
                                 <button class="table-status-active">Active</button>
                             </p>
                         </c:if>
 
-                        <c:if test="${s.status == 0}">
+                        <c:if test="${s.status == 'inactive'}">
                             <p class="table-status">
-                                <button class="table-status-deactive">Deactive</button>
+                                <button class="table-status-deactive">Inactive</button>
                             </p>
                         </c:if>
-                        <p class="table-role">${s.position}</p>
+                        <p class="table-role">${s.role}</p>
                         <p class="table-mail">${s.email}</p>
                         <p class="table-address">${s.address}</p>
                         <p class="table-action">
 
-                            <svg data-staff-id="${s.staffId}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 edit-button">
+                            <svg data-staff-id="${s.getId()}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 edit-button">
                             <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
                             <title>Edit</title>
                             </svg>
 
-                            <svg data-staff-id="${s.staffId}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 delete-button">
+                            <svg data-staff-id="${s.getId()}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 delete-button">
                             <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
                             <title>Delete</title>
                             </svg>
@@ -73,28 +73,28 @@
                     </div>
 
                             <!--edit-form-->
-                    <form class="table-edit table-edit-${s.staffId}" action="staffupdate" method="post">
-                        <input class="table-id" type="text" value="${s.staffId}" name="staffId" readonly/>
+                    <form class="table-edit table-edit-${s.getId()}" action="staffupdate" method="post">
+                        <input class="table-id" type="text" value="${s.getId()}" name="getId()" readonly/>
                         <input class="table-firstname" type="text" value="${s.firstname}" name="firstname"/>
                         <input class="table-lastname" type="text" value="${s.lastname}" name="lastname"/>
                         <input class="table-age" type="date" value="${s.dob}" name="dob"/>
-                        <c:if test="${s.status == 1}">
+                        <c:if test="${s.status == 'active'}">
                             <select class="table-status" value="${s.status}" name="status">
-                                <option selected value="1">Active</option>
-                                <option value="0">Deactive</option>
+                                <option selected value="active">Active</option>
+                                <option value="inactive">Inactive</option>
                             </select>
                         </c:if>
 
-                        <c:if test="${s.status == 0}">
+                        <c:if test="${s.status == 'inactive'}">
                             <select class="table-status" value="${s.status}" name="status">
-                                <option value="1">Active</option>
-                                <option selected value="0">Deactive</option>
+                                <option value="active">Active</option>
+                                <option selected value="inactive">Inactive</option>
                             </select>
                         </c:if>
                         <h1></h1>
                         <select class="table-role" name="position">
-                            <option ${s.position.compareTo('STAFF') == 1 ? 'selected' : ''} value="STAFF">STAFF</option>
-                            <option ${s.position.compareTo('ADMIN') == 1 ? 'selected' : ''} value="ADMIN">ADMIN</option>
+                            <option ${s.role.compareTo('STAFF') == 1 ? 'selected' : ''} value="STAFF">STAFF</option>
+                            <option ${s.role.compareTo('ADMIN') == 1 ? 'selected' : ''} value="ADMIN">ADMIN</option>
                         </select>
 
                         <input class="table-mail" type="email" value="${s.email}" name="email"/>
@@ -145,7 +145,7 @@
                 </div>
                 <div class="form-row">
                     <label>Position</label>
-                    <select class="table-role" value="${s.position}" name="position">
+                    <select class="table-role" value="${s.role}" name="position">
                         <option value="STAFF">STAFF</option>
                         <option value="ADMIN">ADMIN</option>
                     </select>
@@ -169,7 +169,7 @@
         <div class="delete-container">
             <form class="delete-form" action="staffupdate" method="get">
                 <h2 class="delete-form-header" >Delete staff</h2>
-                <input class="delete-form-staffid"  readonly type="text" value="staffId" name="staffId"/>
+                <input class="delete-form-staffid"  readonly type="text" value="getId()" name="getId()"/>
 
                 <div class="button-container">
                     <button>Delete</button>
@@ -188,19 +188,19 @@
         document.querySelectorAll(".edit-button").forEach((button) => {
             let clicked = false;
             button.addEventListener('click', () => {
-                const staffId = button.dataset.staffId;
+                const getId = button.dataset.staffId;
                 clicked = !clicked;
-                document.querySelector('.table-edit-' + staffId).style.display = clicked ? 'flex' : 'none';
+                document.querySelector('.table-edit-' + getId).style.display = clicked ? 'flex' : 'none';
             });
         });
 
         document.querySelectorAll(".delete-button").forEach((button) => {
             button.addEventListener('click', () => {
-                const staffId = button.dataset.staffId;
+                const getId = button.dataset.staffId;
 
                 document.querySelector('.delete-container').style.display = 'flex';
-                document.querySelector('.delete-form-header').innerText = "Delete Staff " + staffId;
-                document.querySelector('.delete-form-staffid').value = staffId;
+                document.querySelector('.delete-form-header').innerText = "Delete Staff " + getId;
+                document.querySelector('.delete-form-staffid').value = getId;
             });
         });
 
