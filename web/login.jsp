@@ -27,17 +27,17 @@
 
 
     </head>
-    <body class="w-screen h-screen pt-[3%] ">
-        <div class="flex flex-row gap-6 justify-center" style="background-color: #4f362b; height:90%; width:100%; ">
-            <div class="basis-1/2">
-                <img src="/becompany/image/head.png" class="w-[40%]  mx-[30%] mt-[17%] aspect-[146/107]"/>
+    <body class="w-screen h-screen flex items-center">
+        <div class="flex flex-row gap-6 justify-between" style="background-color: #4f362b; height: 80%; width:100%;">
+            <div class="flex flex-col items-center justify-center p-8">
+                <img src="/becompany/image/head.png" class="w-[40%]"/>
 
-                <h1 class="text-gray-50 text-7xl peacesans-font text-center mt-7 uppercase font-extrabold">becompany</h1>
+                <h1 class="text-gray-50 text-6xl peacesans-font text-center mt-7 uppercase font-extrabold">becompany</h1>
 
             </div>
-            <div class="basis-1/2 font-medium font-bold">
+            <div class="font-medium font-bold w-[50%] flex items-center justify-center">
                   
-                <div class=" flex flex-col gap-5  h-[83%] w-[75%]  p-[7%] pt-[4%] px-1/5 bg-[#f2e6e6] rounded-3xl border-3 border-gray-950" style="margin:6% 14% 6% 7%;">
+                <div class=" flex flex-col p-10 bg-[#f2e6e6] rounded-3xl border-3 border-gray-950">
                     <h1 class="basic uppercase peacesans-font font-bold text-4xl text-center text-[#563a2d]" >
                         Login
                     </h1>
