@@ -69,7 +69,7 @@ public class LoginServlet extends HttpServlet {
             
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        String rememberMe = request.getParameter("rememberme");
+        String rememberMe = request.getParameter("rem");
         
         Cookie cUsername = new Cookie("usr",username);
         Cookie cPassword = new Cookie("pwd",password);
