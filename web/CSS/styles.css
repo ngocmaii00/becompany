@@ -146,9 +146,14 @@ main {
     font-size: 0.8rem;
     font-weight: bold;
     color: white;
-    padding: 4px 12px 5px 12px;
-    border-radius: 20px;
+    border-radius: 9px;
     cursor: pointer;
+    
+}
+
+.button a {
+    display: block;
+    padding: 7px 20px;    
 }
 
 .button-cart {

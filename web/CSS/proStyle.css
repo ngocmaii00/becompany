@@ -1,0 +1,288 @@
+:root {
+    --main-color: #543520;
+    --sub-color: #f7f0f0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing:border-box;
+    color: var(--main-color);    
+}
+
+main {
+    padding: 0 16px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: var(--sub-color);
+    border-bottom: 2px solid var(--main-color);
+}
+
+nav {
+    display: flex;
+    justify-content: right;
+    margin: 16px 0;
+}
+
+.search {
+    display: flex;
+    margin-right: 10px;
+}
+
+.search svg {
+    display: block;
+    width: 40px;
+    padding: 10px;
+    background-color: var(--main-color);
+    fill: var(--sub-color);
+    border-radius: 4px;
+    margin-left: 1px;
+}
+
+.search svg:hover{
+    cursor: pointer;
+    opacity: 0.95;
+}
+
+.search input {
+    padding: 8px;
+    font-size: 15px;
+    border: 1.5px solid var(--main-color);
+    border-radius: 4px;
+}
+
+.table-edit a,
+.table-edit button,
+.add-button {
+    background-color: var(--main-color);
+    color: var(--sub-color);
+    padding: 11px 20px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.table-edit a {
+    text-decoration: none;
+    width: fit-content;
+    display:block;
+    align-content: center;
+    text-align: center;
+    height: fit-content;
+    margin-left: 10px;
+}
+
+.table-edit button {
+    border: none;
+    margin-left: 10px;
+}
+.add-button:hover {
+    cursor: pointer;
+    opacity: 0.95;
+}
+
+.table {
+    width: 100%;
+    text-align: left;
+    font-weight: bolder;
+}
+
+.table-head {
+    display: flex;
+    padding: 10px 20px
+}
+
+.table-edit,
+.table-data {
+    display: flex;
+    background-color: var(--sub-color);
+    border: 2px solid var(--main-color);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 10px;
+    font-weight: lighter;
+}
+
+.table-data p, .table-head p {
+    display: block;
+    align-self:center;
+}
+
+.table-edit {
+    background-color: white;
+    margin-top: -10px;
+    border: 1px solid;
+    display: none;
+}
+
+.table-edit input {
+    min-width: 60px;
+    height: fit-content;
+    padding: 8px 0;
+}
+
+.table-edit select {
+    height: fit-content;
+    padding: 9px 0;
+}
+
+.submit-edit-button {
+    margin-bottom: 4px;
+    cursor: pointer;
+}
+.table-id {
+    flex: 1;
+    font-weight: bold;
+}
+
+.table-name {
+    flex: 2;
+}
+
+.table-origin {
+    flex:1.5;
+}
+
+.table-descrip {
+    flex: 2;
+    padding-right: 16px;
+}
+
+.table-manu {
+    flex: 1.5;
+}
+
+.table-sold {
+    flex: 1;
+}
+
+.table-image {
+    flex: 1;
+}
+
+.table-type {
+    flex: 1.5;
+}
+
+.table-status {
+    flex: 1;
+}
+
+.table-action {
+    flex: 1.5;
+}
+
+.table svg {
+    width: 23px;
+    margin: 0 4px;
+}
+
+.table-status-active {
+    background-color: green;
+    border: none;
+    color:white;
+    padding: 8px 16px;
+    border-radius: 4px;
+    box-shadow: 0 0 1.5px black;
+}
+
+.table-status-deactive {
+    background-color: #a71919;
+    border: none;
+    color:white;
+    padding: 8px 16px;
+    border-radius: 4px;
+    box-shadow: 0 0 1.5px black;
+}
+
+.home-button {
+    background-color: var(--main-color);
+    display: inline-flex;
+    text-decoration: none;
+    padding: 10px;
+    align-items: center;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+.home-button:hover{
+    opacity: 0.95;
+}
+.home-button svg{
+    fill: white;
+}
+
+
+.delete-container,
+.form-container {
+    position: fixed;
+    background-color: #00000085;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    display: none;
+}
+
+.delete-form,
+.add-form {
+    background-color: white;
+    padding: 0 20px;
+    min-width: 400px;
+}
+
+.form-row {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+
+
+.delete-form h2,
+.add-form h2 {
+    margin: 20px 0;
+}
+
+.add-form label {
+    flex: 1.3;
+    margin-right: 10px;
+}
+
+.add-form select,
+.add-form input {
+    padding: 6px;
+    flex: 3;
+}
+
+.cancel-delete,
+.delete-form button,
+.add-form button {
+    margin-top: 20px;
+    border: none;
+    color: white;
+    width: 49%;
+    display: flex;
+    justify-content:center;
+    padding: 14px;
+    cursor: pointer;
+}
+
+.cancel-delete,
+.delete-form button {
+    margin-bottom: 20px;
+    background-color: var(--main-color);
+}
+.button-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.button-container button {
+    margin-bottom: 20px;
+    background-color: var(--main-color);    
+}
