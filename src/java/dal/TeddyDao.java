@@ -23,31 +23,4 @@ public class TeddyDao extends DBConnect {
         }
         return list;
     }
-
-    public List<String> filterTeddyBySizeOrColor(String productId, String color, String size) {
-        List<String> list = new ArrayList<>();
-
-        try {
-            if (size.length() > 0) {
-                String sql = "select color from TeddyDetail where productId='" + productId + "' and size='" + size + "'";
-                PreparedStatement st = connection.prepareStatement(sql);
-                ResultSet result = st.executeQuery();
-                while (result.next()) {
-                    list.add(result.getString("color"));
-                }
-            }
-            if (color.length() > 0) {
-                String sql = "select size from TeddyDetail where productId='" + productId + "' and color='" + color + "'";
-                PreparedStatement st = connection.prepareStatement(sql);
-                ResultSet result = st.executeQuery();
-                while (result.next()) {
-                    list.add(result.getString("size"));
-                }
-            }
-
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-        return list;
-    }
 }

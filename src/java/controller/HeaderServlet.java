@@ -1,8 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
-
 package controller;
 
 import dal.HeaderDao;
@@ -22,15 +17,24 @@ import model.Product;
  *
  * @author PC
  */
-@WebServlet(name="HeaderServlet", urlPatterns={"/header"})
+@WebServlet(name = "HeaderServlet", urlPatterns = {"/header"})
 public class HeaderServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HeaderDao hd = new HeaderDao();
-        List<String> list = hd.getAll();
-        req.setAttribute("data", list);
-        req.getRequestDispatcher("header.jsp").forward(req, resp);
+        PrintWriter out = resp.getWriter();
+
+        try {
+            HeaderDao hd = new HeaderDao();
+            List<String> list = hd.getAll();
+            list.forEach((name) -> {
+                out.print("<button class=\"flex justify-center items-center hover:bg-[#563a2d] hover:text-white text-sm md:text-base\">\n"
+                        + "<a class=\"md:px-12 px-6 \" href=\"type?type="+name+"\">"+name+"</a>\n"
+                        + "</button>");
+            });
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
-    
+
 }

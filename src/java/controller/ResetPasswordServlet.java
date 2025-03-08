@@ -14,7 +14,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import model.User;
+import model.Customer;
 
 /**
  *
@@ -32,7 +32,7 @@ public class ResetPasswordServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    private void updatePassword(User user, String newPassword){
+    private void updatePassword(Customer user, String newPassword){
         UserDAO ud = new UserDAO();
         user.setPassword(newPassword);
         
@@ -50,10 +50,9 @@ public class ResetPasswordServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String token = request.getParameter("token");
-        
         UserDAO ud = new UserDAO();
+        Customer getUser= ud.findByResetPasswordToken(token);
         
-         User getUser= ud.findByResetPasswordToken(token);
         if(getUser != null){
             HttpSession session = request.getSession();
             session.setAttribute("changePwdUser", getUser);
@@ -84,13 +83,14 @@ public class ResetPasswordServlet extends HttpServlet {
         if(password.equals(confirmPassword)){
             HttpSession session = request.getSession(false);
             
-            User getUser = (User)session.getAttribute("changePwdUser");
+            Customer getUser = (Customer)session.getAttribute("changePwdUser");
             
             UserDAO ud = new UserDAO();
             getUser.setPassword(password);
             ud.update(getUser);
             jsonResponse.addProperty("error", "Change password completed! You may press Return to return to Login Page");
             
+            session.removeAttribute("changePwdUser");
             response.getWriter().write(jsonResponse.toString());
         }else{
             
