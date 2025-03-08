@@ -47,7 +47,9 @@
                         <p class="table-descrip">${s.description}</p>
                         <p class="table-manu">${s.manufacturer}</p>
                         <p class="table-sold">${s.sold}</p>
-                        <p class="table-image"><a>View</a></p>
+                        <p class="table-image">
+                            <a href="image?productId=${s.productId}">View</a>
+                        </p>
                         <p class="table-type">${s.type}</p>
                         <p class="table-status">${s.status}</p>
                         <p class="table-action">
@@ -56,10 +58,12 @@
                             <title>Edit</title>
                             </svg>
 
-                            <svg data-product-id="${s.productId}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 delete-button">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
-                            <title>Delete</title>
+                            <svg data-product-id="${s.productId}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 detail-button">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                            <title>See teddies' details</title>
                             </svg>
+
                         </p>
                     </div>
 
@@ -71,17 +75,20 @@
                         <input class="table-descrip" type="text" value="${s.description}" name="description" />
                         <input class="table-manu" type="text" value="${s.manufacturer}" name="manufacturer" />
                         <p class="table-sold"></p>
-                        <a class="table-image" href="image?productId=${s.productId}">Change</a>
+                        <p class="table-image"></p>
                         <input class="table-type" type="text" value="${s.type}" name="type" />
                         <select class="table-status" value="${s.status}" name="status">
                             <option ${s.status.compareTo('available') == 0 ? 'selected' : ''} value="available">available</option>
-                            <option ${s.status.compareTo('preorder') == 0 ? 'selected' : ''} value="preorder">preorder</option>
-                            <option ${s.status.compareTo('onsale') == 0 ? 'selected' : ''} value="onsale">onsale</option>
-                            <option ${s.status.compareTo('freeship') == 0 ? 'selected' : ''} value="freeship">freeship</option>
+                            <option ${s.status.compareTo('preorder') == 0 ? 'selected' : ''} value="preorder">pre-order</option>
+                            <option ${s.status.compareTo('onsale') == 0 ? 'selected' : ''} value="onsale">on-sale</option>
+                            <option ${s.status.compareTo('freeship') == 0 ? 'selected' : ''} value="freeship">free-ship</option>
+                            <option ${s.status.compareTo('outofstock') == 0 ? 'selected' : ''} value="outofstock">out of stock</option>
+                            <option ${s.status.compareTo('layoff') == 0 ? 'selected' : ''} value="layoff">lay-off</option>
                         </select>
 
                         <p class="table-action">
                             <button class="submit-edit-button">Submit</button>
+                            <a href="teddy" class="add-teddy-button">Add teddy</a>
                         </p>
                     </form>
                 </c:forEach>
@@ -101,12 +108,8 @@
         </main>
         <!--add-form-->
         <div class="form-container">
-            <form class="add-form" action="staff" method="POST">
+            <form class="add-form" action="pros" method="POST">
                 <h2>Add New Product</h2>
-                <div class="form-row">
-                    <label>Product Id</label>
-                    <input required type="text" name="productId" />
-                </div>
                 <div class="form-row">
                     <label>Product Name</label>
                     <input required type="text" name="productName"/>
@@ -117,7 +120,7 @@
                 </div>
                 <div class="form-row">
                     <label>Description</label>
-                    <input required type="text" name="Description" />
+                    <input required type="text" name="description" />
                 </div>
                 <div class="form-row">
                     <label>Manufacturer</label>
@@ -147,18 +150,6 @@
                 </div>
             </form>
         </div>
-        <!--delete-form-->
-        <div class="delete-container">
-            <form class="delete-form" action="staffupdate" method="get">
-                <h2 class="delete-form-header" >Delete staff</h2>
-                <input class="delete-form-staffid"  readonly type="text" value="staffId" name="staffId"/>
-
-                <div class="button-container">
-                    <button>Delete</button>
-                    <div class="cancel-delete">Cancel</div>
-                </div>
-            </form>
-        </div>   
 
         <script>
             document.querySelector(".add-button").addEventListener('click', () => {
@@ -176,19 +167,6 @@
                 });
             });
 
-            document.querySelectorAll(".delete-button").forEach((button) => {
-                button.addEventListener('click', () => {
-                    const productId = button.dataset.productId;
-
-                    document.querySelector('.delete-container').style.display = 'flex';
-                    document.querySelector('.delete-form-header').innerText = "Delete Staff " + productId;
-                    document.querySelector('.delete-form-staffid').value = productId;
-                });
-            });
-
-            document.querySelector(".cancel-delete").addEventListener('click', () => {
-                document.querySelector('.delete-container').style.display = 'none';
-            });
         </script>
     </body>
 </html>

@@ -9,10 +9,11 @@ import java.util.stream.Stream;
 import model.Product;
 
 public class ProductDao extends DBConnect {
+
     public List<Product> getAll() {
         List<Product> list = new ArrayList<>();
         TeddyDao td = new TeddyDao();
-        String sql = "select * from Product order by sold desc";
+        String sql = "select * from Product";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet result = st.executeQuery();
@@ -45,15 +46,14 @@ public class ProductDao extends DBConnect {
         return list;
     }
 
-     public Product getProductByName(String name) {
-        
-        String sql = "select * from Product where ProductName = '"+ name +"'";
-        
-        
+    public Product getProductByName(String name) {
+
+        String sql = "select * from Product where ProductName = '" + name + "'";
+
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet result = st.executeQuery();
-            if(result.next()) {
+            if (result.next()) {
                 Product p = new Product(result.getString("productId"), result.getString("productName"), result.getString("origin"), result.getString("description"), result.getString("manufacturer"), result.getInt("sold"), result.getString("image"), result.getString("type"), result.getString("status"));
                 return p;
             }
@@ -62,11 +62,28 @@ public class ProductDao extends DBConnect {
         }
         return null;
     }
-     
+
+    public Product getProductById(String productId) {
+
+        String sql = "select * from Product where ProductId = '" + productId + "'";
+
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet result = st.executeQuery();
+            if (result.next()) {
+                Product p = new Product(result.getString("productId"), result.getString("productName"), result.getString("origin"), result.getString("description"), result.getString("manufacturer"), result.getInt("sold"), result.getString("image"), result.getString("type"), result.getString("status"));
+                return p;
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
     public List<Integer> getProductStar(String id) {
         List<Integer> list = new ArrayList<>();
-        String sql = "select stars from Rating where productId = '"+ id +"'";
-       
+        String sql = "select stars from Rating where productId = '" + id + "'";
+
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet result = st.executeQuery();
@@ -79,12 +96,12 @@ public class ProductDao extends DBConnect {
         }
         return list;
     }
-    
+
     public List<Product> getProductByType(String type) {
         List<Product> list = new ArrayList<>();
         String sql = "select * from Product where type = '" + type + "'";
         TeddyDao td = new TeddyDao();
-        if (type.compareTo("all") == 0) {
+        if (type.compareToIgnoreCase("all") == 0) {
             sql = "select * from Product";
         }
         try {
@@ -134,7 +151,7 @@ public class ProductDao extends DBConnect {
         if (!filters.isEmpty()) {
             sql += "where " + filters.stream().collect(Collectors.joining(" and "));
         }
-        
+
         System.out.println(sql);
 
         try {
@@ -151,5 +168,65 @@ public class ProductDao extends DBConnect {
         return list;
     }
 
-//    public void addProduct(String productId, String productName)
+    public void addProduct(String productId, String productName, String origin, String description, String manufacturer, String image, String type, String status) {
+        String sql = "INSERT INTO Product (productId, productName, origin, [description], manufacturer, [image], [type], [status]) VALUES (?,?,?,?,?,?,?,?)";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, productId);
+            st.setString(2, productName);
+            st.setString(3, origin);
+            st.setString(4, description);
+            st.setString(5, manufacturer);
+            st.setString(6, image);
+            st.setString(7, type);
+            st.setString(8, status);
+            st.execute();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public void updateProduct(String productId, String productName, String origin, String description, String manufacturer, String type, String status) {
+        String sql = "update Product set productName=?, origin=?, description=?, manufacturer=?, type=?, status=? where productId=?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, productName);
+            st.setString(2, origin);
+            st.setString(3, description);
+            st.setString(4, manufacturer);
+            st.setString(5, type);
+            st.setString(6, status);
+            st.setString(7, productId);
+            st.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+    
+    public void updateProductImage(String productId, String images) {
+        String sql = "update Product set image='"+images+"' where productId='"+productId+"'";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public void deleteProduct(String productId) {
+        String sql = "delete from Product where productId=?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, productId);
+            st.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+//    public static void main(String[] args) {
+//        ProductDao pd = new ProductDao();
+//        pd.updateProductImage("P00020", "https://gaubongcaocap.com/wp-content/uploads/2025/01/gaubong-baby-three-galaxy-1.jpg, https://bizweb.dktcdn.net/thumb/1024x1024/100/510/400/products/f9add37b-4202-48b1-a924-d81c584227a7.jpg?v=1734779390567");
+//        
+//    }
 }

@@ -66,13 +66,13 @@ nav {
 }
 
 .table-edit a {
-    padding: 0;
     text-decoration: none;
     width: fit-content;
     display:block;
     align-content: center;
     text-align: center;
-    margin-right: 10px;
+    height: fit-content;
+    margin-left: 10px;
 }
 
 .table-edit button {
@@ -120,6 +120,18 @@ nav {
 
 .table-edit input {
     min-width: 60px;
+    height: fit-content;
+    padding: 8px 0;
+}
+
+.table-edit select {
+    height: fit-content;
+    padding: 9px 0;
+}
+
+.submit-edit-button {
+    margin-bottom: 4px;
+    cursor: pointer;
 }
 .table-id {
     flex: 1;
@@ -237,7 +249,7 @@ nav {
 }
 
 .add-form label {
-    flex: 1;
+    flex: 1.3;
     margin-right: 10px;
 }
 
