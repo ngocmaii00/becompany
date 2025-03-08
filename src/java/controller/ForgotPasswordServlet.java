@@ -17,7 +17,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.Random;
 
-import model.User;
+import model.Customer;
 import utilities.MailUtil;
 import utilities.Utility;
 
@@ -52,7 +52,7 @@ public class ForgotPasswordServlet extends HttpServlet {
     protected void updateResetPassword(String token, String email,HttpServletResponse response){
          try {
              UserDAO ud = new UserDAO();
-             User user = ud.findByEmail(email);
+             Customer user = ud.findByEmail(email);
              JsonObject jsonResponse = new JsonObject();
              
              if(user != null){
@@ -69,7 +69,7 @@ public class ForgotPasswordServlet extends HttpServlet {
         
     }
     
-    private void updatePassword(User user, String newPassword){
+    private void updatePassword(Customer user, String newPassword){
         UserDAO ud = new UserDAO();
         user.setPassword(newPassword);
         

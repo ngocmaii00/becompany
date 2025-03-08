@@ -41,12 +41,26 @@
                     <h1 class="basic uppercase peacesans-font font-bold text-4xl text-center text-[#563a2d]" >
                         Login
                     </h1>
+                <div class="h-[80%]">
+                  
+
                     <div>
                         <div class=" mt-5 h-[3.5em] w-10/10">
-                            <input type="text" name="username" id="username" class="h-full w-full text-lg border-2 notosans-font border-gray-950 rounded-xl h-full p-3 bg-[#ffffff] hover:bg-[#ffffff]/60 pl-[16px] placeholder:font-bold" placeholder="Username">
+                            <input type="text" 
+                                   name="username" 
+                                   id="username" 
+                                   class="h-full w-full text-lg border-2 notosans-font border-gray-950 rounded-xl h-full p-3 bg-[#ffffff] hover:bg-[#ffffff]/60 pl-[16px] placeholder:font-bold" 
+                                   placeholder="Username"
+                                   value="${cookie.cu.value}">
+                                   
                         </div>
                         <div class="mt-3 mb-3  h-[3.5em] w-10/10 relative">
-                            <input type="password" name="password" id="password" class="h-full w-full text-lg border-2 notosans-font border-gray-950 rounded-xl h-full p-3 bg-[#ffffff] hover:bg-[#ffffff]/60 pl-[16px] placeholder:font-bold" placeholder="Password">
+                            <input type="password" 
+                                   name="password" 
+                                   id="password"
+                                   value="${cookie.cp.value}"
+                                   class="h-full w-full text-lg border-2 notosans-font border-gray-950 rounded-xl h-full p-3 bg-[#ffffff] hover:bg-[#ffffff]/60 pl-[16px] placeholder:font-bold" 
+                                   placeholder="Password">
 
                             <button type="button" id="togglePassword" class="absolute top-[50%] right-[1rem] translate-y-[-50%]  cursor-pointer w-[1.5rem] flex items-center">
 
@@ -67,10 +81,13 @@
                             <div class="inline-flex items-center">
                                 <label class="flex items-center cursor-pointer relative" for="check-2">
                                     <input type="checkbox"
-                                           checked
+                                           id="check-2"
+                                           name="rem"
+                                            
                                            class="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded shadow hover:shadow-md  border border-3 border-[#563a2d] checked:bg-[#563a2d] checked:border-[#563a2d]"
-                                           id="check-2" />
-                                    <span class="absolute text-white opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                                           value="on"
+                                           ${cookie.cr.value == 'on'?"checked":""}  />
+                                    <span for="check-2" class="absolute text-white opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor"
                                              stroke="currentColor" stroke-width="1">
                                         <path fill-rule="evenodd"
@@ -126,6 +143,7 @@
                                 </a>
                             </div>
                         </div>
+
                     </div>
                     <div class=" mt-3  text-md text-center ">
                         <p class="inline text-[#563a2d]">Don't have an account?</p>
@@ -164,8 +182,10 @@
 
                 let username = document.querySelector("#username").value;
                 let password = document.querySelector("#password").value;
+                let rem = document.querySelector("#check-2").value
                 formData.append("username", username);
                 formData.append("password", password);
+                formData.append("rem",rem);
 
                 const baseURL = window.location.origin;
                 console.log(baseURL);

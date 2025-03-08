@@ -41,7 +41,7 @@ public class StaffUpdateServlet extends HttpServlet {
             String email = req.getParameter("email");
             Date dob = Date.valueOf(req.getParameter("dob"));
             String position = req.getParameter("position");
-            int status = Integer.parseInt(req.getParameter("status"));
+            String status = req.getParameter("status");
 
             StaffDao st = new StaffDao();
             st.updateStaff(staffId, lastname, firstname, position, email, address, dob, status);

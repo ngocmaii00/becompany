@@ -13,12 +13,16 @@ public class StaffDao extends DBConnect {
 
     public List<Staff> getAll() {
         List<Staff> list = new ArrayList<>();
-        String sql = "select * from Staff";
+        String sql = """
+                     select u.[userId],u.username,u.[password],u.role , ud.firstName, ud.lastname, u.email, ud.address, ud.DOB, u.[status]
+                     	from [User] u JOIN UserDetail ud on u.userId = ud.userId where u.role <> 'USER'""";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet result = st.executeQuery();
             while (result.next()) {
-                list.add(new Staff(result.getString("staffId"), result.getString("username"), result.getString("password"), result.getString("position"), result.getString("firstname"), result.getString("lastname"), result.getString("email"), result.getString("address"), result.getString("dob"), result.getInt("status")));
+                list.add(new Staff(result.getString("userId"), result.getString("username"), result.getString("password"), 
+                                    result.getString("role"), result.getString("firstName"), result.getString("lastname"), 
+                                    result.getString("email"), result.getString("address"), result.getString("DOB"), result.getString("status")));
             }
         } catch (SQLException e) {
             System.out.println(e);
@@ -27,19 +31,24 @@ public class StaffDao extends DBConnect {
     }
 
     public void createStaff(String staffId, String lastName, String firstName, String username, String password, String position, String email, String address, Date dob) {
-        String sql = "INSERT INTO Staff (staffId, username, [password], position, firstName, lastName, email, [address], dob) VALUES "
-                + "(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO [User] (userId, username, [password], role, email) VALUES "
+                + "(?, ?, ?, ?, ?);"
+                + "INSERT INTO UserDetail(userId,firstName, lastName, [address], dob) values"
+                + "(?, ?, ?, ?, ?)";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, staffId);
             st.setString(2, username);
             st.setString(3, password);
             st.setString(4, position);
-            st.setString(5, firstName);
-            st.setString(6, lastName);
-            st.setString(7, email);
-            st.setString(8, address);
-            st.setDate(9, dob);
+            st.setString(5, email);
+            
+            st.setString(6, staffId);
+            st.setString(7, firstName);
+            st.setString(8, lastName);
+            
+            st.setString(9, address);
+            st.setDate(10, dob);
 
             st.execute();
         } catch (SQLException e) {
@@ -48,32 +57,47 @@ public class StaffDao extends DBConnect {
     }
 
     public void deleteStaff(String staffId) {
-        String sql = "delete from Staff where staffId = '" + staffId + "'";
+        String sql = "delete from UserDetail where userId = '" + staffId + "';"
+        +"delete from [User] where userId = '" + staffId + "';";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             System.out.println(sql);
             st.executeUpdate();
+           
         } catch (SQLException e) {
             System.out.println(e);
         }
     }
 
-    public void updateStaff(String staffId, String lastName, String firstName, String position, String email, String address, Date dob, int status) {
-        String sql = "update Staff set firstName=?, lastName=?, position=?, dob=?, email=?, [address] = ?, [status] = ? where  staffId = ?";
+    public void updateStaff(String staffId, String lastName, String firstName, String position, String email, String address, Date dob, String status) {
+         String sql = "UPDATE [User] " +
+                 "SET role = ?, email = ?, [status] = ? " +
+                 "WHERE userId = '" + staffId +"' ; " +
+                 
+                 "UPDATE UserDetail " +
+                 "SET firstName = ?, lastName = ?, dob = ?, [address] = ? " +
+                 "WHERE userId = '" + staffId +"' ; ";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
-            st.setString(1, firstName);
-            st.setString(2, lastName);
-            st.setString(3, position);
-            st.setDate(4, dob);
-            st.setString(5, email);
-            st.setString(6, address);
-            st.setInt(7, status);
-            st.setString(8, staffId);
+            st.setString(1, position);
+            st.setString(2, email);
+            st.setString(3, status);
+           
 
-            st.executeUpdate();
+            // Updating UserDetail table
+            st.setString(4, firstName);
+            st.setString(5, lastName);
+            st.setDate(6, dob);
+            st.setString(7, address);
+            
+                st.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);
         }
+    }
+    
+    public static void main(String []args){
+        StaffDao sd = new StaffDao();
+        sd.createStaff("S00006","Super","User","sa","123","ADMIN","sa@gmail.com","Hoang van Thu",Date.valueOf("1999-9-9"));
     }
 }
