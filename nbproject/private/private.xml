@@ -7,14 +7,20 @@
             <file>file:/D:/KODE/BeCompany/becompany/src/java/model/Teddy.java</file>
             <file>file:/D:/KODE/BeCompany/becompany/src/java/model/Item.java</file>
             <file>file:/D:/KODE/BeCompany/becompany/src/java/controller/ProductServlet.java</file>
-            <file>file:/D:/KODE/BeCompany/becompany/src/java/model/Cart.java</file>
+            <file>file:/D:/KODE/BeCompany/becompany/src/java/model/Color.java</file>
+            <file>file:/D:/KODE/BeCompany/becompany/src/java/model/AttributePair.java</file>
+            <file>file:/D:/KODE/BeCompany/becompany/web/order.jsp</file>
             <file>file:/D:/KODE/BeCompany/becompany/src/java/controller/TypeServlet.java</file>
             <file>file:/D:/KODE/BeCompany/becompany/web/cart.jsp</file>
             <file>file:/D:/KODE/BeCompany/becompany/web/type.jsp</file>
             <file>file:/D:/KODE/BeCompany/becompany/src/java/dal/ProductDao.java</file>
             <file>file:/D:/KODE/BeCompany/becompany/web/buyProduct.jsp</file>
             <file>file:/D:/KODE/BeCompany/becompany/src/java/controller/HomeServlet.java</file>
+            <file>file:/D:/KODE/BeCompany/becompany/web/home.jsp</file>
+            <file>file:/D:/KODE/BeCompany/becompany/src/java/model/ColorInfo.java</file>
             <file>file:/D:/KODE/BeCompany/becompany/src/java/dal/TeddyDao.java</file>
+            <file>file:/D:/KODE/BeCompany/becompany/web/product.jsp</file>
+            <file>file:/D:/KODE/BeCompany/becompany/src/java/controller/StaffController.java</file>
             <file>file:/D:/KODE/BeCompany/becompany/src/java/controller/FilterServlet.java</file>
             <file>file:/D:/KODE/BeCompany/becompany/src/java/dal/DBConnect.java</file>
             <file>file:/D:/KODE/BeCompany/becompany/src/java/model/SlideShow.java</file>

@@ -314,6 +314,55 @@
                 window.onload = submitForm;
         </script>
         
+                
+                
+                
+                <!-- Form gửi đến CartServlet -->
+                <form id="cartForm" action="cart" method="post">
+                    <input type="hidden" name="image" value="${product.getImages()[0]}">
+                    <input type="hidden" name="name" value="${product.getProductName()}">
+                    <input type="hidden" id="sizeInput" name="size" value="">
+                    <input type="hidden" id="colorInput" name="color" value="">
+                    <input type="hidden" id="priceInput" name="price" value="${requestScope.price}">
+                    <input type="hidden" id="quantityInput" name="quantity" value="1">
+                </form>
 
+
+                <script>
+
+                    function updateForm() {
+                        const selectedColor = document.querySelector('input[name="color"]:checked').value;
+                        const selectedSize = document.querySelector('input[name="size"]:checked').value;
+                        const quantity = document.querySelector("#quantity-num").innerText;
+                        const price = document.querySelector("#price").innerText.replace("$", "").trim();
+
+                        document.querySelector("#colorInput").value = selectedColor;
+                        document.querySelector("#sizeInput").value = selectedSize;
+                        document.querySelector("#quantityInput").value = quantity;
+                        document.querySelector("#priceInput").value = price;
+                    }
+
+                    
+                    document.querySelectorAll('input[name="color"]').forEach(input => {
+                        input.addEventListener('change', updateForm);
+                    });
+                    document.querySelectorAll('input[name="size"]').forEach(input => {
+                        input.addEventListener('change', updateForm);
+                    });
+                    document.querySelector("#plus").addEventListener('click', updateForm);
+                    document.querySelector("#minus").addEventListener('click', updateForm);
+
+                    
+                    document.querySelector('button:contains("Add to Cart")').addEventListener('click', function() {
+                        updateForm();
+                        document.querySelector("#cartForm").submit();
+                    });
+
+                    window.onload = function() {
+                        updateForm();
+                        submitForm();
+                    };
+                </script>
+                
     </body>
 </html>
