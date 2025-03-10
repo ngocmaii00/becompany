@@ -46,7 +46,7 @@ public class StaffController extends HttpServlet {
 
             StaffDao st = new StaffDao();
             List<Staff> staffs = st.getAll();
-            String laststaffId = staffs.get(staffs.size() - 1).getStaffId();
+            String laststaffId = staffs.get(staffs.size() - 1).getId();
             String staffId = "S"+ String.format("%05d", (Integer.parseInt(laststaffId.substring(1)) + 1));
             st.createStaff(staffId, lastname, firstname, username, password, position, email, address, dob);
             resp.sendRedirect("staff");

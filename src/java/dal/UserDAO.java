@@ -4,19 +4,21 @@
  */
 package dal;
 
-import model.User;
+import model.Customer;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import model.UserDetail;
+import model.CustomerDetail;
+import model.User;
 /**
  *
  * @author zeryus
  */
 public class UserDAO extends DBConnect {
     
-    public User getAuthentication(String usr){
-        String sql = "select * from [User] where username =?";
+    
+     public User getAuthentication(String usr){
+        String sql = "select userId,email,username,password,status,role from [User] where username =?";
         
         try{
             PreparedStatement st = connection.prepareStatement(sql);
@@ -24,7 +26,27 @@ public class UserDAO extends DBConnect {
            
             ResultSet rs = st.executeQuery();
             if(rs.next()){
-                User u = new User(rs.getString("userId"),rs.getString("email"),usr,rs.getString("password"),rs.getString("status"));
+                User u = new Customer(rs.getString("userId"),rs.getString("email"),usr,rs.getString("password"),rs.getString("status"),rs.getString("role"));
+                return u;
+            }
+            
+        }catch(SQLException e){
+            System.err.println(e);
+        }
+        
+        return null;
+    }
+     
+    public Customer getCustomerAuthentication(String usr){
+        String sql = "select userId,email,username,password,status,role,auth_provider from [User] where username =?";
+        
+        try{
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1,usr);
+           
+            ResultSet rs = st.executeQuery();
+            if(rs.next()){
+                Customer u = new Customer(rs.getString("userId"),rs.getString("email"),usr,rs.getString("password"),rs.getString("status"),rs.getString("role"));
                 return u;
             }
             
@@ -84,7 +106,7 @@ public class UserDAO extends DBConnect {
     }
     
     public void addUser(String usrId, String email, String username, String password){
-        String sql = "insert into [User] values(?,?,?,?,'active')";
+        String sql = "insert into [User] (userId,email,username,password,status,auth_provider) values(?,?,?,?,'active','LOCAL)";
         
         try{
             PreparedStatement st = connection.prepareStatement(sql);
@@ -100,14 +122,18 @@ public class UserDAO extends DBConnect {
         }
     }
     
-    public void addUserGoogleFacebook(String usrId, String email, String username){
-        String sql = "insert into [User] (userId,email, username,[status]) VALUES VALUES (?,?,?,'active')";
+    public void addUserGoogleFacebook(String usrId, String email, String username,String auth_provider,String role){
+        String sql = """
+                     INSERT INTO [User] (userId, email, username, [status], auth_provider,role) 
+                     VALUES (?, ?, ?, 'active', ?,?)""";
         
         try{
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1,usrId);
             st.setString(2, email);
             st.setString(3,username);
+            st.setString(4,auth_provider);
+            st.setString(5,role);
             st.executeUpdate();
            
             
@@ -116,14 +142,14 @@ public class UserDAO extends DBConnect {
         }
     }
     
-    public User findByEmail(String email){
-        String sql = "select * from [User] where email =?";
+    public Customer findByEmail(String email){
+        String sql = "select * from [User] where email =? and role = 'USER'";
         try{
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1,email);
             ResultSet rs = st.executeQuery();
             if(rs.next()){
-                return new User(rs.getString("userId"),rs.getString("email"),rs.getString("username"),rs.getString("password"),rs.getString("status"));
+                return new Customer(rs.getString("userId"),rs.getString("email"),rs.getString("username"),rs.getString("password"),rs.getString("status"),rs.getString("auth_provider"));
             }
         }catch(SQLException e){
             System.err.println(e);
@@ -131,14 +157,14 @@ public class UserDAO extends DBConnect {
         return null;
     }
     
-    public User findByResetPasswordToken(String token){
-        String sql = "select * from [User] where reset_password_token =?";
+    public Customer findByResetPasswordToken(String token){
+        String sql = "select userId,email,username,password from [User] where reset_password_token =? AND role ='USER'";
         try{
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1,token);
             ResultSet rs = st.executeQuery();
             if(rs.next()){
-                return new User(rs.getString("userId"),rs.getString("email"),rs.getString("password"),rs.getString("status"));
+                return new Customer(rs.getString("userId"),rs.getString("email"),rs.getString("username"),rs.getString("password"),rs.getString("reset_password_token"));
             }
         }catch(SQLException e){
             System.err.println(e);
@@ -149,18 +175,18 @@ public class UserDAO extends DBConnect {
         UserDAO ud = new UserDAO();
     }
     
-    public void update(User user){
-        String sql ="update [User] set reset_password_token = ?, username = ? ";
+    public void update(Customer user){
+        String sql ="update [User] set reset_password_token = ? and role = 'USER'";
         
         if(user.getPassword() != null)
             sql += ", [password] = '" + user.getPassword() + "' ";
         
-        sql += "where userId = '" + user.getUserId() + "'";
+        sql += "where userId = '" + user.getId() + "'";
         try{
             PreparedStatement st = connection.prepareStatement(sql);
            
             st.setString(1,user.getResetPasswordToken());
-            st.setString(2,user.getUsername());
+            
            
             st.executeUpdate();
         }catch(SQLException e){
