@@ -107,7 +107,7 @@ public class UserDAO extends DBConnect {
     }
     
     public void addUser(String usrId, String email, String username, String password){
-        String sql = "insert into [User] (userId,email,username,password,status,auth_provider) values(?,?,?,?,'active','LOCAL)";
+        String sql = "insert into [User] (userId,email,username,password,status,auth_provider) values(?,?,?,?,'active','LOCAL')";
         
         try{
             PreparedStatement st = connection.prepareStatement(sql);
@@ -203,8 +203,8 @@ public class UserDAO extends DBConnect {
         }
     }
     public void addCustomerProfile(Customer c){
-        String sql="insert into [User] (userId,firstName,lastName,gender,phone,address,dob)"
-                + "value(?, ?, ?, ?, ?, ?, ?);";
+        String sql="insert into [UserDetail] (userId,firstName,lastName,gender,phone,address,dob)"
+                + "values(?, ?, ?, ?, ?, ?, ?);";
         try{
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, c.getId());
