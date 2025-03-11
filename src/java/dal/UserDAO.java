@@ -262,7 +262,7 @@ public class UserDAO extends DBConnect {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet result = st.executeQuery();
             while(result.next()) {
-                Customer c = new Customer("", "", "", new CustomerDetail(result.getString("firstname"), result.getString("lastname"), result.getInt("gender") == 1 ? true : false, result.getString("phone"), result.getString("address"), result.getDate("dob")), result.getString("userId"), result.getString("email"), result.getString("username"), "", result.getString("status"), result.getString("role"));
+                Customer c = new Customer("", "", "", result.getString("userId"), result.getString("email"), result.getString("username"), "", result.getString("status"), result.getString("role"),new CustomerDetail(result.getString("firstname"), result.getString("lastname"), result.getInt("gender") == 1 ? true : false, result.getString("phone"), result.getString("address"), result.getDate("dob")));
                 list.add(c);
             }
         } catch (Exception e) {
