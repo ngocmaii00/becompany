@@ -241,4 +241,14 @@ public class UserDAO extends DBConnect {
         }
         return list;
     }
+    
+    public void updateCustomerStatus(String userId, String status){
+        String sql="update [User] set status='"+ status + "' where userId = '" + userId + "'";
+        try{
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.executeUpdate();
+        }catch(SQLException e){
+            System.err.println(e);
+        }
+    }
 }

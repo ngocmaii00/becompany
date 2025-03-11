@@ -243,7 +243,11 @@
                                 </div>
                                 <div class="teddy-size">
                                     <label>Size</label>
-                                    <input placeholder="Size" type="text" name="size">
+                                    <select name="size">
+                                        <option value="Small" >Small</option>
+                                        <option value="Medium" >Medium</option>
+                                        <option value="Large" >Large</option>
+                                    </select>
                                 </div>
                                 <div class="teddy-quantity">
                                     <label>Quantity</label>

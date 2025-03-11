@@ -77,11 +77,9 @@
                     </div>
 
                     <!--edit-form-->
-                    <form class="table-edit table-edit-${s.getId()}" action="staffupdate" method="post">
-                        <input class="table-id" type="text" value="${s.getId()}" name="getId()" readonly/>
-                        <input class="table-firstname" type="text" value="${s.userDetail.firstName}" name="firstname"/>
-                        <input class="table-lastname" type="text" value="${s.userDetail.lastName}" name="lastname"/>
-                        <input class="table-age" type="date" value="${s.userDetail.dob}" name="dob"/>
+                    <form class="table-edit table-edit-${s.getId()}" action="user" method="post">
+                        <input class="table-id" type="text" value="${s.getId()}" name="userId" readonly/>
+                        
                         <c:if test="${s.status == 'active'}">
                             <select class="table-status" value="${s.status}" name="status">
                                 <option selected value="active">Active</option>
@@ -95,11 +93,7 @@
                                 <option selected value="inactive">Inactive</option>
                             </select>
                         </c:if>
-                        <div class="table-role" name="position">
-                        </div>
-
-                        <input class="table-mail" type="email" value="${s.email}" name="email"/>
-                        <input class="table-address" type="text" value="${s.userDetail.address}" name="address"/>
+                        
                         <p class="table-action">
                             <button class="submit-edit-button">Submit</button>
                         </p>
