@@ -181,8 +181,11 @@
                             </svg>                          
                         </button>
                     </div>
-                    <div class="mt-1 notosans-font text-[#563a2d] w-3/4 font-bold"
-                         align="right" id="instock"> </div>
+                    <div class="mt-1 flex flex-row notosans-font text-[#563a2d] w-3/4 font-bold"
+                         align="right" > 
+                            <p class="notosans-font basis-55 text-[#563a2d] font-bold">In Stock: </p>
+                            <p class="notosans-font basis-7 text-[#563a2d] font-bold" id="instock"></p>
+                    </div>
                 </div>
                 <div class="grid grid-cols-3 gap-4 h-1/10 justify">
                     <div></div>
@@ -234,8 +237,9 @@
         <script>
             function plus(){
                 let quantity = parseInt(document.querySelector("#quantity-num").innerText,10);
-                let stock = parseInt(document.querySelector("#instock").innerText,10);
-                if(quantity <stock){
+                let stockText = document.querySelector("#instock").innerText;
+                let stock = stockText ? parseInt(stockText, 10) : 0;
+                if(quantity < stock){
                     quantity = quantity + 1;
                     document.querySelector("#quantity-num").innerHTML = quantity;
                 }
@@ -308,7 +312,7 @@
                         body: formData.toString()
                     }).then(response => response.json()).then(data =>{
                       price.innerHTML = "$ " +data.price;
-                      instock.innerHTML = "In Stock: " + data.quantity ;
+                      instock.innerHTML = data.quantity ;
                     })
                   }
                 window.onload = submitForm;

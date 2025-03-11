@@ -109,7 +109,7 @@ public class UserDAO extends DBConnect {
     }
     
     public void addUser(String usrId, String email, String username, String password){
-        String sql = "insert into [User] (userId,email,username,password,status,auth_provider) values(?,?,?,?,'active','LOCAL)";
+        String sql = "insert into [User] (userId,email,username,password,status,auth_provider) values(?,?,?,?,'active','LOCAL')";
         
         try{
             PreparedStatement st = connection.prepareStatement(sql);
@@ -125,18 +125,26 @@ public class UserDAO extends DBConnect {
         }
     }
     
-    public void addUserGoogleFacebook(String usrId, String email, String username,String auth_provider,String role){
+    public void addUserGoogleFacebook(Customer c){
         String sql = """
-                     INSERT INTO [User] (userId, email, username, [status], auth_provider,role) 
-                     VALUES (?, ?, ?, 'active', ?,?)""";
+                     INSERT INTO [User] (userId, email, username, [status], auth_provider,role,image) 
+                     VALUES (?, ?, ?, 'active', ?,?,?);
+                     INSERT INTO UserDetail (userId,firstName, lastName)
+                     VALUES(?,?,?)
+                     """;
         
         try{
             PreparedStatement st = connection.prepareStatement(sql);
-            st.setString(1,usrId);
-            st.setString(2, email);
-            st.setString(3,username);
-            st.setString(4,auth_provider);
-            st.setString(5,role);
+            st.setString(1,c.getId());
+            st.setString(2,c.getEmail());
+            st.setString(3,c.getUsername());
+            st.setString(4,c.getAuth_provider());
+            st.setString(5,c.getRole());
+            st.setString(6,c.getImage());
+            
+            st.setString(7,c.getId());
+            st.setString(8,c.getUserDetail().getFirstName());
+            st.setString(9,c.getUserDetail().getLastName());
             st.executeUpdate();
            
             
@@ -152,7 +160,7 @@ public class UserDAO extends DBConnect {
             st.setString(1,email);
             ResultSet rs = st.executeQuery();
             if(rs.next()){
-                return new Customer(rs.getString("userId"),rs.getString("email"),rs.getString("username"),rs.getString("password"),rs.getString("status"),rs.getString("auth_provider"));
+                return new Customer(rs.getString("userId"),rs.getString("email"),rs.getString("username"),rs.getString("password"),rs.getString("status"),rs.getString("role"),rs.getString("auth_provider"));
             }
         }catch(SQLException e){
             System.err.println(e);
@@ -196,9 +204,30 @@ public class UserDAO extends DBConnect {
             System.err.println(e);
         }
     }
+    public void addCustomerProfile(Customer c){
+        String sql="insert into [UserDetail] (userId,firstName,lastName,gender,phone,address,dob)"
+                + "values(?, ?, ?, ?, ?, ?, ?);";
+        try{
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, c.getId());
+            st.setString(2, c.getUserDetail().getFirstName());  
+            
+            st.setString(3, c.getUserDetail().getLastName());
+            st.setBoolean(4, c.getUserDetail().getGender());
+            st.setString(5,c.getUserDetail().getPhone() );
+            st.setString(6,c.getUserDetail().getAddress());
+            st.setDate(7, c.getUserDetail().getDob());
+            
+            st.executeUpdate();
+        }catch(SQLException e){
+            System.err.println(e);
+        }
+        
+    }
+    
     
     public void updateCustomerProfile(Customer c){
-        String sql="update [User] set "
+        String sql=" update [User] set "
                 + "password=?,"//1
                 + "image=? " //1
                 +"where userId = '" + c.getId()+"' ;"

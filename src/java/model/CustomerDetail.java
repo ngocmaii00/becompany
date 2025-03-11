@@ -20,6 +20,11 @@ public class CustomerDetail {
     private String address;
     private Date dob;
 
+    public CustomerDetail(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
 
     
         
