@@ -28,8 +28,8 @@ public class ProfileDao extends DBConnect {
             ResultSet rs = st.executeQuery();
             if (rs.next()) {///public CustomerDetail( String firstName, String lastName, boolean gender, String phone, String address, Date dob) {
                 CustomerDetail userDetail = new CustomerDetail(rs.getString("firstName"),rs.getString("lastName"), rs.getBoolean("gender"), rs.getString("phone"), rs.getString("address"), rs.getDate("dob"));
-                Customer c = new Customer(rs.getString("auth_provider"),rs.getString("image"), rs.getString("reset_password_token"),
-                        userDetail,userId, rs.getString("email"), rs.getString("username"), rs.getString("password"),rs.getString("status"),rs.getString("role"));
+                Customer c = new Customer(userId, rs.getString("email"), rs.getString("username"), rs.getString("password")
+                        ,rs.getString("status"),rs.getString("role"),rs.getString("auth_provider"),rs.getString("image"), rs.getString("reset_password_token"),userDetail);
                 return c;
                 
                 

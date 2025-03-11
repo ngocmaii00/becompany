@@ -226,13 +226,13 @@
 
             imgInput.addEventListener('change',(event)=>{
                 const file = event.target.files[0]; // Get the first uploaded file
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        for(let i = 0; i < img.length; i++)
-                            img[i].style.backgroundImage = `url('${e.target.result}')` // Set the background image to the file's data URL
-                    };
-                    reader.readAsDataURL(file); // Read the file as a data URL
+                // if (file) {
+                //     const reader = new FileReader();
+                //     reader.onload = function(e) {
+                //         for(let i = 0; i < img.length; i++)
+                //             img[i].style.backgroundImage = `url('${e.target.result}')` // Set the background image to the file's data URL
+                //     };
+                //     reader.readAsDataURL(file); // Read the file as a data URL
 
                     let formData = new FormData();
                     formData.append("file", file);
@@ -256,8 +256,8 @@
                             console.error("Fetch Error:", error);
                         }
                     )
-                }
-            });
+                });
+            // });
         </script>
 
         <script>
