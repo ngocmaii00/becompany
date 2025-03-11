@@ -274,3 +274,26 @@ nav {
     margin-bottom: 20px;
     background-color: var(--main-color);    
 }
+
+.table-teddy {
+    display: flex;
+}
+
+.table-teddy > div {
+    display: flex;
+    margin-right: 10px;
+    margin-top: 10px;
+    flex-direction: column;
+}
+
+.add-teddy-button {
+    margin: 10px 0;
+}
+
+.product-detail {
+    display: none;
+}
+
+.edit-teddy-submit {
+    display: none;
+}

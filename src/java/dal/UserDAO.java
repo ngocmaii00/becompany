@@ -9,6 +9,8 @@ import model.Customer;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import model.CustomerDetail;
 import model.User;
 /**
@@ -251,5 +253,21 @@ public class UserDAO extends DBConnect {
         }catch(SQLException e){
             System.err.println(e);
         }
+    }
+    
+    public List<User> getAll() {
+        String sql = "select * from [User] u join UserDetail ud on u.userId = ud.userId";
+        List<User> list = new ArrayList<>();
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet result = st.executeQuery();
+            while(result.next()) {
+                Customer c = new Customer("", "", "", new CustomerDetail(result.getString("firstname"), result.getString("lastname"), result.getInt("gender") == 1 ? true : false, result.getString("phone"), result.getString("address"), result.getDate("dob")), result.getString("userId"), result.getString("email"), result.getString("username"), "", result.getString("status"), result.getString("role"));
+                list.add(c);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return list;
     }
 }
