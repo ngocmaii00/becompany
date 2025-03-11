@@ -18,9 +18,10 @@ import model.Product;
  */
 @WebServlet(name = "Pros", urlPatterns = {"/pros"})
 public class ProsServlet extends HttpServlet {
+
     ProductDao pd = new ProductDao();
     List<Product> list = new ArrayList<>();
-    
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         this.list = pd.getAll();
@@ -30,26 +31,17 @@ public class ProsServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        try {
-            String productName = req.getParameter("productName");
-            String origin = req.getParameter("origin");
-            String description = req.getParameter("description");
-            String images = req.getParameter("images");
-            String type = req.getParameter("type");
-            String status = req.getParameter("status");
-            String manufacturer = req.getParameter("manufacturer");
+        String search = req.getParameter("search");
+        List<Product> result = new ArrayList<>();
+        list.forEach((product) -> {
+            if (product.getProductName().toLowerCase().contains(search.toLowerCase())
+                    || product.getProductId().toLowerCase().contains(search.toLowerCase())) {
+                result.add(product);
+            }
+        });
 
-//            ProductDao pd = new ProductDao();
-//
-//            List<Product> products = pd.getAll();
-
-            String lastProsId = this.list.get(this.list.size() - 1).getProductId();
-            String productId = "P" + String.format("%05d", (Integer.parseInt(lastProsId.substring(1)) + 1));
-            pd.addProduct(productId, productName, origin, description, manufacturer, images, type, status);
-            resp.sendRedirect("pros");
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+        req.setAttribute("pros", result);
+        req.getRequestDispatcher("pros.jsp").forward(req, resp);
     }
 
 }

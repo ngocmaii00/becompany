@@ -4,6 +4,7 @@
  */
 package dal;
 
+import java.sql.Date;
 import model.Customer;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
@@ -188,6 +189,35 @@ public class UserDAO extends DBConnect {
             st.setString(1,user.getResetPasswordToken());
             
            
+            st.executeUpdate();
+        }catch(SQLException e){
+            System.err.println(e);
+        }
+    }
+    
+    public void updateCustomerProfile(Customer c){
+        String sql="update [User] set "
+                + "password=?,"//1
+                + "image=? " //1
+                +"where userId = '" + c.getId()+"' ;"
+                +"update UserDetail set "
+                +"firstName = ?,"//3
+                +"lastName = ?,"//4
+                +"gender = ?,"//5
+                +"address = ? ,"//6
+                +"dob = ?, "//7
+                +"phone = ? "//8
+                +"where userId = '" + c.getId()+"' ";
+        try{
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, c.getPassword());
+            st.setString(2, c.getImage());  
+            st.setString(3, c.getUserDetail().getFirstName());
+            st.setString(4, c.getUserDetail().getLastName());
+            st.setBoolean(5, c.getUserDetail().getGender());
+            st.setString(6,c.getUserDetail().getAddress());
+            st.setDate(7, c.getUserDetail().getDob());
+            st.setString(8,c.getUserDetail().getPhone() );
             st.executeUpdate();
         }catch(SQLException e){
             System.err.println(e);

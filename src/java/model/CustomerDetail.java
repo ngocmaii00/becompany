@@ -1,10 +1,10 @@
-    /*
+            /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  *
@@ -14,22 +14,22 @@ public class CustomerDetail {
    
     private String firstName;
     private String lastName;
-    private int age;
+    private String fullName;
     private String phone;
-
+    private boolean gender;
     private String address;
     private Date dob;
 
 
     
         
-    public CustomerDetail( String firstName, String lastName, int age, String phone, String address, Date dob) {
+    public CustomerDetail( String firstName, String lastName, boolean gender, String phone, String address, Date dob) {
         
         this.firstName = firstName;
         this.lastName = lastName;
-        this.age = age;
+        this.gender = gender;
         this.phone = phone;
-        
+        this.fullName = lastName + " " + firstName;
         this.address = address;
         this.dob = dob;
     }
@@ -44,15 +44,24 @@ public class CustomerDetail {
         return lastName;
     }
 
-    public int getAge() {
-        return age;
-    }
 
     public String getPhone() {
         return phone;
     }
 
-   
+    public String getFullName() {
+        return fullName;
+    }
+
+    public boolean getGender() {
+        return gender;
+    }
+
+    public void setGender(boolean gender) {
+        this.gender = gender;
+    }
+
+    
 
     public String getAddress() {
         return address;
@@ -72,10 +81,6 @@ public class CustomerDetail {
         this.lastName = lastName;
     }
 
-    public void setAge(int age) {
-        this.age = age;
-    }
-
     public void setPhone(String phone) {
         this.phone = phone;
     }
@@ -87,6 +92,11 @@ public class CustomerDetail {
 
     public void setDob(Date dob) {
         this.dob = dob;
+    }
+
+    @Override
+    public String toString() {
+        return "CustomerDetail{" + "firstName=" + firstName + ", lastName=" + lastName + ", phone=" + phone + ", address=" + address + ", dob=" + dob + '}';
     }
     
     
