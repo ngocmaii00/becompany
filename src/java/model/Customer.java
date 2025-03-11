@@ -105,4 +105,11 @@ public class Customer extends User {
     public void setUserDetail(CustomerDetail userDetail) {
         this.userDetail = userDetail;
     }
+
+    @Override
+    public String toString() {
+        return "Customer{" + "auth_provider=" + auth_provider + ", image=" + image + ", resetPasswordToken=" + resetPasswordToken + ", userDetail=" + userDetail.toString() + '}';
+    }
+    
+    
 }
