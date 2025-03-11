@@ -108,7 +108,7 @@ public class LoginServlet extends HttpServlet {
                         cRem.setMaxAge(0);
                     }
 
-                    if(newUser.getRole().trim().equals("USER")){
+//                    if(newUser.getRole().trim().equals("USER")){
                         //if the user is logging in, redirect him/her to home page
                         HttpSession session = request.getSession();
                         session.setAttribute("user",newUser);
@@ -117,16 +117,16 @@ public class LoginServlet extends HttpServlet {
                         jsonResponse.addProperty("success",true);
                         jsonResponse.addProperty("redirect","home");
                         response.getWriter().write(jsonResponse.toString());
-                    }else{
+//                    }else{
                         //if the Admin/Staff is logging in, redirect them to management page
-                        HttpSession session = request.getSession();
-                        session.setAttribute("admin",newUser);
-                        jsonResponse.addProperty("error",false);
-
-                        jsonResponse.addProperty("success",true);
-                        jsonResponse.addProperty("redirect","admin.jsp");
-                        response.getWriter().write(jsonResponse.toString());
-                    }
+//                        HttpSession session = request.getSession();
+//                        session.setAttribute("admin",newUser);
+//                        jsonResponse.addProperty("error",false);
+//
+//                        jsonResponse.addProperty("success",true);
+//                        jsonResponse.addProperty("redirect","admin.jsp");
+//                        response.getWriter().write(jsonResponse.toString());
+//                    }
                 }
                 else{
                     //if the password is incorrect

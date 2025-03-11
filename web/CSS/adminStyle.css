@@ -70,3 +70,21 @@ svg {
     cursor: pointer;
 }
 
+button {
+    background-color: var(--main-color);
+    border: none;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+button a {
+    display: block;
+    color: var(--sub-color);
+    padding: 16px 28px;
+}
+
+button:hover {
+    opacity: 0.96;
+    box-shadow: 0 0 3px black;
+}

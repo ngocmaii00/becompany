@@ -5,7 +5,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Becompany</title>
-        <link rel="stylesheet" href="CSS/proStyle.css"/>
+        <link rel="stylesheet" href="css/proStyle.css"/>
     </head>
     <body>
         <header>
@@ -15,12 +15,14 @@
 
         <main>
             <nav>
-                <div class="search">
-                    <input type="text" placeholder="Search"/>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
-                    <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11ZM2 9a7 7 0 1 1 12.452 4.391l3.328 3.329a.75.75 0 1 1-1.06 1.06l-3.329-3.328A7 7 0 0 1 2 9Z" clip-rule="evenodd" />
-                    </svg>
-                </div>
+                <form action="pros" method="post" class="search">
+                    <input name="search" class="search-input" type="text" placeholder="Search"/>
+                    <button style="background: transparent; border: none">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
+                        <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11ZM2 9a7 7 0 1 1 12.452 4.391l3.328 3.329a.75.75 0 1 1-1.06 1.06l-3.329-3.328A7 7 0 0 1 2 9Z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                </form>
 
                 <div class="add-button">Add new</div>
             </nav>
@@ -67,6 +69,43 @@
                         </p>
                     </div>
 
+                    <!--teddy detail table-->
+                    <div class="product-detail product-detail-${s.productId}">
+                        <c:forEach items="${s.teddies}" var="t">
+                            <form action="teddy" class="table-teddy table-teddy-${t.teddyId}">
+                                <div class="teddy-id">
+                                    <label>TeddyId</label>
+                                    <input readonly="true" type="text" name="teddyId" value="${t.teddyId}">
+                                </div>
+                                <div class="teddy-color">
+                                    <label>Color</label>
+                                    <input readonly="true" type="text" name="color" value="${t.color}">
+
+                                </div>
+                                <div class="teddy-size">
+                                    <label>Size</label>
+                                    <input readonly="true" type="text" name="size" value="${t.size}">
+                                </div>
+                                <div class="teddy-quantity">
+                                    <label>Quantity</label>
+                                    <input readonly="true" type="number" name="quantity" value="${t.quantity}"></div>
+                                <div class="teddy-price">
+                                    <label>Price</label>
+                                    <input readonly="true" type="text" name="price" value="${t.price}">
+                                </div>
+                                <div class="table-action">
+                                    <svg data-teddy-id="${t.teddyId}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 edit-teddy-button">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                                    <title>Edit</title>
+                                    </svg>
+
+                                    <button class="edit-teddy-submit">Submit</button>
+                                </div>
+                            </form>
+                        </c:forEach>
+                        <button data-product-id="${s.productId}" class="add-teddy-button">Add teddy</button>
+                    </div>
+
                     <!--edit-form-->
                     <form class="table-edit table-edit-${s.productId}" action="prosupdate" method="post">
                         <input class="table-id" type="text" value="${s.productId}" name="productId" readonly/>
@@ -88,7 +127,6 @@
 
                         <p class="table-action">
                             <button class="submit-edit-button">Submit</button>
-                            <a href="teddy" class="add-teddy-button">Add teddy</a>
                         </p>
                     </form>
                 </c:forEach>
@@ -108,7 +146,7 @@
         </main>
         <!--add-form-->
         <div class="form-container">
-            <form class="add-form" action="pros" method="POST">
+            <form class="add-form" action="prosupdate" method="POST">
                 <h2>Add New Product</h2>
                 <div class="form-row">
                     <label>Product Name</label>
@@ -164,6 +202,61 @@
                     const productId = button.dataset.productId;
                     clicked = !clicked;
                     document.querySelector('.table-edit-' + productId).style.display = clicked ? 'flex' : 'none';
+                });
+            });
+
+            document.querySelectorAll(".detail-button").forEach((button) => {
+                let clicked = false;
+                button.addEventListener('click', () => {
+                    const productId = button.dataset.productId;
+                    clicked = !clicked;
+                    document.querySelector('.product-detail-' + productId).style.display = clicked ? 'block' : 'none';
+                });
+            });
+
+            document.querySelectorAll(".edit-teddy-button").forEach((button) => {
+                button.addEventListener('click', () => {
+                    const teddyId = button.dataset.teddyId;
+                    document.querySelector('.table-teddy-' + teddyId + ' button').style.display = 'block';
+                    document.querySelector('.table-teddy-' + teddyId + ' .teddy-color input').readOnly = false;
+                    document.querySelector('.table-teddy-' + teddyId + ' .teddy-size input').readOnly = false;
+                    document.querySelector('.table-teddy-' + teddyId + ' .teddy-price input').readOnly = false;
+                    document.querySelector('.table-teddy-' + teddyId + ' .teddy-quantity input').readOnly = false;
+                });
+            });
+
+            document.querySelectorAll(".add-teddy-button").forEach((button) => {
+                button.addEventListener('click', () => {
+                    const productId = button.dataset.productId;
+                    document.querySelector('.product-detail-' + productId).innerHTML += `
+                            <form action="teddy" method="post" class="table-teddy">
+                                <div class="teddy-color">
+                                    <label>ProductId</label>
+                                    <input readonly value='` + productId + `' name="productId"/>
+
+                                </div>
+                                
+                                <div class="teddy-color">
+                                    <label>Color</label>
+                                    <input placeholder="Color" type="text" name="color">
+
+                                </div>
+                                <div class="teddy-size">
+                                    <label>Size</label>
+                                    <input placeholder="Size" type="text" name="size">
+                                </div>
+                                <div class="teddy-quantity">
+                                    <label>Quantity</label>
+                                    <input placeholder="Quantity" type="number" name="quantity"></div>
+                                <div class="teddy-price">
+                                    <label>Price</label>
+                                    <input placeholder="Price" type="text" name="price">
+                                </div>
+                                <div class="table-action">
+                                    <button>Create teddy</button>
+                                </div>
+                            </form>
+`
                 });
             });
 

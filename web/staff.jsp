@@ -5,7 +5,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Becompany</title>
-        <link rel="stylesheet" href="CSS/staffStyle.css"/>
+        <link rel="stylesheet" href="css/staffStyle.css"/>
     </head>
     <body>
         <header>
@@ -15,12 +15,14 @@
 
         <main>
             <nav>
-                <div class="search">
-                    <input type="text" placeholder="Search"/>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
-                    <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11ZM2 9a7 7 0 1 1 12.452 4.391l3.328 3.329a.75.75 0 1 1-1.06 1.06l-3.329-3.328A7 7 0 0 1 2 9Z" clip-rule="evenodd" />
-                    </svg>
-                </div>
+                <form action="staff" method="post" class="search">
+                    <input name="search" class="search-input" type="text" placeholder="Search"/>
+                    <button style="background: transparent; border: none">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
+                        <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11ZM2 9a7 7 0 1 1 12.452 4.391l3.328 3.329a.75.75 0 1 1-1.06 1.06l-3.329-3.328A7 7 0 0 1 2 9Z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                </form>
 
                 <div class="add-button">Add new</div>
             </nav>
@@ -65,14 +67,10 @@
                             <title>Edit</title>
                             </svg>
 
-                            <svg data-staff-id="${s.getId()}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 delete-button">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
-                            <title>Delete</title>
-                            </svg>
                         </p>
                     </div>
 
-                            <!--edit-form-->
+                    <!--edit-form-->
                     <form class="table-edit table-edit-${s.getId()}" action="staffupdate" method="post">
                         <input class="table-id" type="text" value="${s.getId()}" name="getId()" readonly/>
                         <input class="table-firstname" type="text" value="${s.firstname}" name="firstname"/>
@@ -121,7 +119,7 @@
 
         <!--add-form-->
         <div class="form-container">
-            <form class="add-form" action="staff" method="POST">
+            <form class="add-form" action="staffupdate">
                 <h2>Add New Staff</h2>
                 <div class="form-row">
                     <label>First Name</label>
@@ -165,18 +163,7 @@
                 </div>
             </form>
         </div>
-        <!--delete-form-->
-        <div class="delete-container">
-            <form class="delete-form" action="staffupdate" method="get">
-                <h2 class="delete-form-header" >Delete staff</h2>
-                <input class="delete-form-staffid"  readonly type="text" value="getId()" name="getId()"/>
 
-                <div class="button-container">
-                    <button>Delete</button>
-                    <div class="cancel-delete">Cancel</div>
-                </div>
-            </form>
-        </div>    
     </body>
     <script>
         document.querySelector(".add-button").addEventListener('click', () => {
@@ -194,18 +181,5 @@
             });
         });
 
-        document.querySelectorAll(".delete-button").forEach((button) => {
-            button.addEventListener('click', () => {
-                const getId = button.dataset.staffId;
-
-                document.querySelector('.delete-container').style.display = 'flex';
-                document.querySelector('.delete-form-header').innerText = "Delete Staff " + getId;
-                document.querySelector('.delete-form-staffid').value = getId;
-            });
-        });
-
-        document.querySelector(".cancel-delete").addEventListener('click', () => {
-            document.querySelector('.delete-container').style.display = 'none';
-        });
     </script>
 </html>
