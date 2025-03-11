@@ -19,17 +19,19 @@ public class Order {
     private int boughtQuantity;
     private double price;
     private String image;
+    private String orderStatus;
 
     public Order() {
     }
 
-    public Order(String productName, String color, String size, int boughtQuantity, double price, String image) {
+    public Order(String productName, String color, String size, int boughtQuantity, double price, String image, String orderStatus) {
         this.productName = productName;
         this.color = color;
         this.size = size;
         this.boughtQuantity = boughtQuantity;
         this.price = price;
         this.image = image.split(", ")[0];
+        this.orderStatus = orderStatus;
     }
 
     public String getProductName() {
@@ -79,6 +81,13 @@ public class Order {
     public void setImages(String image) {
         this.image = image.split(", ")[0];
     }
-    
+
+    public String getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(String orderStatus) {
+        this.orderStatus = orderStatus;
+    }
 
 }

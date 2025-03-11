@@ -73,7 +73,7 @@
                 <button class="flex justify-center items-center hover:bg-[#563a2d] hover:text-white text-sm md:text-base">
                     <a class="md:px-12 px-6" href="type?type=all">All</a>
                 </button>
-                <div class="type-names flex"></div>
+                <div class="type-names flex text-nowrap"></div>
             </div>
         </header>
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>

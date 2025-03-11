@@ -31,9 +31,7 @@
                                 <path d="M5.25 5.25a3 3 0 0 0-3 3v10.5a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3V13.5a.75.75 0 0 0-1.5 0v5.25a1.5 1.5 0 0 1-1.5 1.5H5.25a1.5 1.5 0 0 1-1.5-1.5V8.25a1.5 1.5 0 0 1 1.5-1.5h5.25a.75.75 0 0 0 0-1.5H5.25Z"></path>
                                 </svg>
                                 <button class="notosans-font font-bold text-center text-xl hover:underline">
-
                                     Edit profile
-
                                 </button>
                             </span>
                         </a>
@@ -64,12 +62,24 @@
                             </div>
                             <span>x${o.boughtQuantity}</span>
                             <div class="mx-4">
-                                <span class="font-bold text-2xl">${o.price}$</span>
+                                <span class="font-bold text-2xl">${o.boughtQuantity*o.price}$</span>
                             </div>
+
+                        </div>
+                        <div class="flex justify-end mx-8 mb-4">
+                            <c:if test="${o.orderStatus != 'Completed'}">
+                                <button type="submit" class="bg-[#563a2d] w-fit rounded-lg justify-end items-center px-4 py-2 font-bold text-white text-md opacity-60">
+                                    ${o.orderStatus}
+                                </button>
+                            </c:if>
+                            <c:if test="${o.orderStatus == 'Completed'}">
+                                <button type="submit" class="bg-[#563a2d] w-fit rounded-lg justify-end items-center px-4 py-2 font-bold text-white text-md">
+                                    ${o.orderStatus}
+                                </button>
+                            </c:if>
                         </div>
                     </c:forEach>
-                    <div class="flex flex-row justify-between mx-10 mt-4">
-                        <button class="flex flex-row bg-[#563a2d] w-fit rounded-lg justify-center items-center px-4 py-3 gap-x-2">
+                        <button class="flex flex-row bg-[#563a2d] w-fit rounded-lg justify-center items-center px-4 py-3 gap-x-2 mx-8 mb-12">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" class="size-6">
                             <path fill-rule="evenodd" d="M7.28 7.72a.75.75 0 0 1 0 1.06l-2.47 2.47H21a.75.75 0 0 1 0 1.5H4.81l2.47 2.47a.75.75 0 1 1-1.06 1.06l-3.75-3.75a.75.75 0 0 1 0-1.06l3.75-3.75a.75.75 0 0 1 1.06 0Z" clip-rule="evenodd"></path>
                             </svg>
@@ -78,12 +88,10 @@
                             <path d="m12 5.432 8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.432Z"></path>
                             </svg>
                         </button>
-                        <button type="submit" class="flex flex-row bg-[#563a2d] w-fit rounded-lg justify-center items-center px-6 py-3 gap-x-2 font-bold text-white text-lg opacity-60">
-                            Received
-                        </button>
-                    </div>
                 </div>
             </div>
         </main>
+        
+        <%@include file="footer.jsp" %>
     </body>
 </html>

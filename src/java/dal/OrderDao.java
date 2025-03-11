@@ -17,7 +17,7 @@ import model.Product;
  * @author PC
  */
 public class OrderDao extends DBConnect {
-
+    
     public List<Order> getAll() {
         List<Order> list = new ArrayList<>();
         String sql = "select * from [Order] o left join (select od.orderId, A.productName, A.image, od.boughtQuantity, A.color, A.price, A.size from OrderDetail od join (select p.productName, p.image, td.teddyId, td.color, td.price, td.size from Product p join TeddyDetail td on p.productId = td.productId) as A on od.teddyId = A.teddyId) as B on o.orderId = B.orderId";
@@ -30,7 +30,8 @@ public class OrderDao extends DBConnect {
                         result.getString("size"),
                         result.getInt("boughtQuantity"),
                         result.getDouble("price"),
-                        result.getString("image"));
+                        result.getString("image"),
+                        result.getString("orderStatus"));
                 list.add(o);
             }
         } catch (SQLException e) {
@@ -38,11 +39,11 @@ public class OrderDao extends DBConnect {
         }
         return list;
     }
-
+    
     public static void main(String[] args) {
         OrderDao od = new OrderDao();
         List<Order> list = od.getAll();
         System.out.println(list.get(0).getProductName());
-
+        
     }
 }
