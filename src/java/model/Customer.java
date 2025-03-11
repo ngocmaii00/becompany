@@ -24,7 +24,7 @@ public class Customer extends User {
         super();
     }
 
-    public Customer(String auth_provider, String image, String resetPasswordToken, CustomerDetail userDetail, String Id, String email, String username, String password, String status, String role) {
+    public Customer(String Id, String email, String username, String password, String status, String role,String auth_provider, String image, String resetPasswordToken, CustomerDetail userDetail) {
         super(Id, email, username, password, status, role);
         this.auth_provider = auth_provider;
         this.image = image;
