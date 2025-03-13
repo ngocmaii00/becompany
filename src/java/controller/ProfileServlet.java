@@ -24,6 +24,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.nio.file.Paths;
 import java.sql.Date;
+import java.time.LocalDate;
 
 import model.Customer;
 import model.CustomerDetail;
@@ -42,7 +43,8 @@ public class ProfileServlet extends HttpServlet {
         Customer user = (Customer) userSession.getAttribute("user");
 
         ProfileDao pd = new ProfileDao();
-        user = pd.getProfile(user.getId());
+        if(pd.getProfile(user.getId()) != null)
+            user = pd.getProfile(user.getId());
 
         userSession.setAttribute("user", user);
 
@@ -59,7 +61,9 @@ public class ProfileServlet extends HttpServlet {
         HttpSession userSession = req.getSession(false);
 
         Customer user = (Customer) userSession.getAttribute("user");
-        boolean hasCustomerDetail = user.getUserDetail() == null ? true : false;
+        boolean hasCustomerDetail = user.getUserDetail() != null;
+        
+        
         JsonObject jsonResponse = new JsonObject();
         String old_password = user.getPassword();
 
@@ -80,24 +84,33 @@ public class ProfileServlet extends HttpServlet {
 //         String publicUrl = DriveFileUploader.uploadFile(driveService, file, fileName, "image/jpeg");
 //         System.err.println("Public link: " + publicUrl);
 //******************************************************************************************************
-        Date dateofbirth = null;
+        
 
+
+            
         password = password.equals("") ? user.getPassword() : password;
         firstName = firstName.equals("") ? user.getUserDetail().getFirstName() : firstName;
         lastName = lastName.equals("") ? user.getUserDetail().getLastName() : lastName;
-        email = email.equals("") ? user.getEmail() : email;
-        phone = phone.equals("") ? user.getUserDetail().getPhone() : phone;
-        address = address.equals("") ? user.getUserDetail().getAddress() : address;
-        dob = dob.equals("") ? user.getUserDetail().getDob().toString() : dob;
+        email = email.equals("") ? " " : email;
+        phone = phone.equals("") ? " " : phone;
+        address = address.equals("") ? " " : address;
+        
         gender = gender.equals("") ? "1" : gender;
-
-        dateofbirth = Date.valueOf(dob);
+        Date dateofbirth;
+        if(dob.equals(""))
+            dateofbirth = Date.valueOf(LocalDate.now());
+        else{
+            dateofbirth = Date.valueOf(dob);
+        }
 
         if (password.equals(old_password)) {
             user.setUsername(username);
-
-            user.getUserDetail().setFirstName(firstName);
-            user.getUserDetail().setLastName(lastName);
+            if(!hasCustomerDetail)
+                user.setUserDetail(new CustomerDetail(firstName,lastName));
+            else{
+                user.getUserDetail().setFirstName(firstName);
+                user.getUserDetail().setLastName(lastName);
+            }
             user.setEmail(email);
             user.getUserDetail().setPhone(phone);
             user.getUserDetail().setAddress(address);
@@ -120,8 +133,12 @@ public class ProfileServlet extends HttpServlet {
 
                 user.setUsername(username);
                 user.setPassword(password);
-                user.getUserDetail().setFirstName(firstName);
-                user.getUserDetail().setLastName(lastName);
+                if(!hasCustomerDetail)
+                    user.setUserDetail(new CustomerDetail(firstName,lastName));
+                else{
+                    user.getUserDetail().setFirstName(firstName);
+                    user.getUserDetail().setLastName(lastName);
+                }
                 user.setEmail(email);
                 user.getUserDetail().setPhone(phone);
                 user.getUserDetail().setAddress(address);
