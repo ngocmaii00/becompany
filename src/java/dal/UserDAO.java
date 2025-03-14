@@ -121,7 +121,7 @@ public class UserDAO extends DBConnect {
            
             
         }catch(SQLException e){
-            
+            System.err.println(e);
         }
     }
     
