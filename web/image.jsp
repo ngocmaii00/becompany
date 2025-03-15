@@ -35,8 +35,11 @@
                         </c:forEach>
                     </div>
 
+                    <button>Submit</button>
                     <button class="add-button" type="button">Add image</button>
-                    <button>Change</button>
+                    <button>
+                        <a href="pros" style="color: white">Product page</a>
+                    </button>
                 </form>
             </div>
         </main>
@@ -51,9 +54,10 @@
 
             document.querySelector('.add-button').addEventListener(('click'), () => {
                 const count = document.querySelectorAll('.image-link').length;
-                document.querySelector('.form-rows').innerHTML += `<div class="form-row">
+                document.querySelector('.form-rows').innerHTML += `
+                            <div class="form-row">
                                 <p class="image-index">Image `+count+`</p>
-                                <input class="image-link" placeholder="Image link"/>
+                                <input class="image-link" name="image" placeholder="Image link"/>
                             </div>`;
             });
         </script>

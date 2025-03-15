@@ -22,4 +22,20 @@ public class SlideShowDao extends DBConnect{
         }
         return list;
     }
+    
+    public void changeSlide (List<SlideShow> list) {
+        String sql = "delete from SlideShow;"
+                + "insert into SlideShow(image, description) values";
+        for (SlideShow slide : list) {
+            sql += "('"+slide.getImage()+"', '"+slide.getDescription()+"'),";
+        }
+        sql = sql.substring(0, sql.length()-1);
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.execute();
+            System.out.println(sql);
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
 }

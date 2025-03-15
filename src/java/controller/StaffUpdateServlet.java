@@ -9,6 +9,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.sql.Date;
+import java.util.List;
+import model.Staff;
 
 /**
  *
@@ -19,21 +21,33 @@ public class StaffUpdateServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        String staffId = req.getParameter("staffId");
         try {
+//            add staff
+//            String staffId = req.getParameter("staffId");
+            String firstname = req.getParameter("firstName");
+            String lastname = req.getParameter("lastName");
+            String address = req.getParameter("address");
+            String email = req.getParameter("email");
+            Date dob = Date.valueOf(req.getParameter("dob"));
+            String position = req.getParameter("position");
+            String username = req.getParameter("username");
+            String password = req.getParameter("password");
+
             StaffDao st = new StaffDao();
-            st.deleteStaff(staffId);
+            List<Staff> staffs = st.getAll();
+            String laststaffId = staffs.get(staffs.size() - 1).getId();
+            String staffId = "S" + String.format("%05d", (Integer.parseInt(laststaffId.substring(1)) + 1));
+            st.createStaff(staffId, lastname, firstname, username, password, position, email, address, dob);
+            resp.sendRedirect("staff");
         } catch (Exception e) {
             System.out.println(e);
         }
-
-        resp.sendRedirect("staff");
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
+//            update staff
             String staffId = req.getParameter("staffId");
             String firstname = req.getParameter("firstname");
             String lastname = req.getParameter("lastname");

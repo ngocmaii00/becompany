@@ -100,7 +100,7 @@ public class SignUpServlet extends HttpServlet {
             }
         } catch (Exception e) {
             jsonResponse.addProperty("error", "Internal server error: " + e.getMessage());
-            e.printStackTrace();
+            
         } finally {
             response.getWriter().write(jsonResponse.toString());
         }

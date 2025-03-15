@@ -5,17 +5,25 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Becompany</title>
-        <link rel="stylesheet" href="css/staffStyle.css"/>
+        <link rel="stylesheet" href="css/userStyle.css"/>
     </head>
     <body>
         <header>
             <h2>BECOMPANY</h2>
-            <h2>STAFFS</h2>
+            <h2>USER</h2>
         </header>
 
         <main>
             <nav>
-                <form action="staff" method="post" class="search">
+<!--                <ul>
+                    <li>Most consume</li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>-->
+                
+                <form action="pros" method="post" class="search">
                     <input name="search" class="search-input" type="text" placeholder="Search"/>
                     <button style="background: transparent; border: none">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
@@ -23,8 +31,6 @@
                         </svg>
                     </button>
                 </form>
-
-                <div class="add-button">Add new</div>
             </nav>
 
             <div class="table">
@@ -34,18 +40,18 @@
                     <p class="table-lastname">Last Name</p>
                     <p class="table-age">Birth</p>
                     <p class="table-status">Status</p>
-                    <p class="table-role">Position</p>
+                    <p class="table-role">Role</p>
                     <p class="table-mail">Email</p>
                     <p class="table-address">Address</p>
                     <p class="table-action">Actions</p>
                 </div>
 
-                <c:forEach items="${requestScope.staffs}" var="s">
+                <c:forEach items="${requestScope.users}" var="s">
                     <div class="table-data">
                         <p class="table-id">${s.getId()}</p>
-                        <p class="table-firstname">${s.firstname}</p>
-                        <p class="table-lastname">${s.lastname}</p>
-                        <p class="table-age">${s.dob}</p>
+                        <p class="table-firstname">${s.userDetail.firstName}</p>
+                        <p class="table-lastname">${s.userDetail.lastName}</p>
+                        <p class="table-age">${s.userDetail.dob}</p>
                         <c:if test="${s.status == 'active'}">
                             <p class="table-status">
                                 <button class="table-status-active">Active</button>
@@ -59,7 +65,7 @@
                         </c:if>
                         <p class="table-role">${s.role}</p>
                         <p class="table-mail">${s.email}</p>
-                        <p class="table-address">${s.address}</p>
+                        <p class="table-address">${s.userDetail.address}</p>
                         <p class="table-action">
 
                             <svg data-staff-id="${s.getId()}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 edit-button">
@@ -71,11 +77,9 @@
                     </div>
 
                     <!--edit-form-->
-                    <form class="table-edit table-edit-${s.getId()}" action="staffupdate" method="post">
-                        <input class="table-id" type="text" value="${s.getId()}" name="getId()" readonly/>
-                        <input class="table-firstname" type="text" value="${s.firstname}" name="firstname"/>
-                        <input class="table-lastname" type="text" value="${s.lastname}" name="lastname"/>
-                        <input class="table-age" type="date" value="${s.dob}" name="dob"/>
+                    <form class="table-edit table-edit-${s.getId()}" action="user" method="post">
+                        <input class="table-id" type="text" value="${s.getId()}" name="userId" readonly/>
+                        
                         <c:if test="${s.status == 'active'}">
                             <select class="table-status" value="${s.status}" name="status">
                                 <option selected value="active">Active</option>
@@ -89,14 +93,7 @@
                                 <option selected value="inactive">Inactive</option>
                             </select>
                         </c:if>
-                        <h1></h1>
-                        <select class="table-role" name="position">
-                            <option ${s.role.compareTo('STAFF') == 1 ? 'selected' : ''} value="STAFF">STAFF</option>
-                            <option ${s.role.compareTo('ADMIN') == 1 ? 'selected' : ''} value="ADMIN">ADMIN</option>
-                        </select>
-
-                        <input class="table-mail" type="email" value="${s.email}" name="email"/>
-                        <input class="table-address" type="text" value="${s.address}" name="address"/>
+                        
                         <p class="table-action">
                             <button class="submit-edit-button">Submit</button>
                         </p>
@@ -117,69 +114,17 @@
             </div>
         </main>
 
-        <!--add-form-->
-        <div class="form-container">
-            <form class="add-form" action="staffupdate">
-                <h2>Add New Staff</h2>
-                <div class="form-row">
-                    <label>First Name</label>
-                    <input required type="text" name="firstName"/>
-                </div>
-                <div class="form-row">
-                    <label>Last Name</label>
-                    <input required type="text" name="lastName" />
-                </div>
-                <div class="form-row">
-                    <label>Date of birth</label>
-                    <input required type="date" name="dob"/>
-                </div>
-                <div class="form-row">
-                    <label>Address</label>
-                    <input required type="text" name="address" />
-                </div>
-                <div class="form-row">
-                    <label>Email</label>
-                    <input required type="email" name="email" />
-                </div>
-                <div class="form-row">
-                    <label>Position</label>
-                    <select class="table-role" value="${s.role}" name="position">
-                        <option value="STAFF">STAFF</option>
-                        <option value="ADMIN">ADMIN</option>
-                    </select>
-                </div>
-                <div class="form-row">
-                    <label>Username</label>
-                    <input required type="text" name="username"/>
-                </div>
-                <div class="form-row">
-                    <label>Password</label>
-                    <input required type="password" name="password"/>
-                </div>
+        <script>
 
-                <div class="button-container">
-                    <button type="submit">Add staff</button>
-                    <button class="cancel-button" type="reset">Cancel</button>
-                </div>
-            </form>
-        </div>
+            document.querySelectorAll(".edit-button").forEach((button) => {
+                let clicked = false;
+                button.addEventListener('click', () => {
+                    const getId = button.dataset.staffId;
+                    clicked = !clicked;
+                    document.querySelector('.table-edit-' + getId).style.display = clicked ? 'flex' : 'none';
+                });
+            });
+        </script>
 
     </body>
-    <script>
-        document.querySelector(".add-button").addEventListener('click', () => {
-            document.querySelector('.form-container').style.display = 'flex';
-        });
-        document.querySelector(".cancel-button").addEventListener('click', () => {
-            document.querySelector('.form-container').style.display = 'none';
-        });
-        document.querySelectorAll(".edit-button").forEach((button) => {
-            let clicked = false;
-            button.addEventListener('click', () => {
-                const getId = button.dataset.staffId;
-                clicked = !clicked;
-                document.querySelector('.table-edit-' + getId).style.display = clicked ? 'flex' : 'none';
-            });
-        });
-
-    </script>
 </html>

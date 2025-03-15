@@ -4,10 +4,13 @@
  */
 package dal;
 
+import java.sql.Date;
 import model.Customer;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import model.CustomerDetail;
 import model.User;
 /**
@@ -106,7 +109,7 @@ public class UserDAO extends DBConnect {
     }
     
     public void addUser(String usrId, String email, String username, String password){
-        String sql = "insert into [User] (userId,email,username,password,status,auth_provider) values(?,?,?,?,'active','LOCAL)";
+        String sql = "insert into [User] (userId,email,username,password,status,auth_provider,role) values(?,?,?,?,'active','LOCAL',USER)";
         
         try{
             PreparedStatement st = connection.prepareStatement(sql);
@@ -118,22 +121,30 @@ public class UserDAO extends DBConnect {
            
             
         }catch(SQLException e){
-            
+            System.err.println(e);
         }
     }
     
-    public void addUserGoogleFacebook(String usrId, String email, String username,String auth_provider,String role){
+    public void addUserGoogleFacebook(Customer c){
         String sql = """
-                     INSERT INTO [User] (userId, email, username, [status], auth_provider,role) 
-                     VALUES (?, ?, ?, 'active', ?,?)""";
+                     INSERT INTO [User] (userId, email, username, [status], auth_provider,role,image) 
+                     VALUES (?, ?, ?, 'active', ?,?,?);
+                     INSERT INTO UserDetail (userId,firstName, lastName)
+                     VALUES(?,?,?)
+                     """;
         
         try{
             PreparedStatement st = connection.prepareStatement(sql);
-            st.setString(1,usrId);
-            st.setString(2, email);
-            st.setString(3,username);
-            st.setString(4,auth_provider);
-            st.setString(5,role);
+            st.setString(1,c.getId());
+            st.setString(2,c.getEmail());
+            st.setString(3,c.getUsername());
+            st.setString(4,c.getAuth_provider());
+            st.setString(5,c.getRole());
+            st.setString(6,c.getImage());
+            
+            st.setString(7,c.getId());
+            st.setString(8,c.getUserDetail().getFirstName());
+            st.setString(9,c.getUserDetail().getLastName());
             st.executeUpdate();
            
             
@@ -149,7 +160,7 @@ public class UserDAO extends DBConnect {
             st.setString(1,email);
             ResultSet rs = st.executeQuery();
             if(rs.next()){
-                return new Customer(rs.getString("userId"),rs.getString("email"),rs.getString("username"),rs.getString("password"),rs.getString("status"),rs.getString("auth_provider"));
+                return new Customer(rs.getString("userId"),rs.getString("email"),rs.getString("username"),rs.getString("password"),rs.getString("status"),rs.getString("role"),rs.getString("auth_provider"));
             }
         }catch(SQLException e){
             System.err.println(e);
@@ -188,6 +199,82 @@ public class UserDAO extends DBConnect {
             st.setString(1,user.getResetPasswordToken());
             
            
+            st.executeUpdate();
+        }catch(SQLException e){
+            System.err.println(e);
+        }
+    }
+    public void addCustomerProfile(Customer c){
+        String sql="insert into [UserDetail] (userId,firstName,lastName,gender,phone,address,dob)"
+                + "values(?, ?, ?, ?, ?, ?, ?);";
+        try{
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, c.getId());
+            st.setString(2, c.getUserDetail().getFirstName());  
+            
+            st.setString(3, c.getUserDetail().getLastName());
+            st.setBoolean(4, c.getUserDetail().getGender());
+            st.setString(5,c.getUserDetail().getPhone() );
+            st.setString(6,c.getUserDetail().getAddress());
+            st.setDate(7, c.getUserDetail().getDob());
+            
+            st.executeUpdate();
+        }catch(SQLException e){
+            System.err.println(e);
+        }
+        
+    }
+    
+    
+    public void updateCustomerProfile(Customer c){
+        String sql=" update [User] set "
+                + "password=?,"//1
+                + "image=? " //1
+                +"where userId = '" + c.getId()+"' ;"
+                +"update UserDetail set "
+                +"firstName = ?,"//3
+                +"lastName = ?,"//4
+                +"gender = ?,"//5
+                +"address = ? ,"//6
+                +"dob = ?, "//7
+                +"phone = ? "//8
+                +"where userId = '" + c.getId()+"' ";
+        try{
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, c.getPassword());
+            st.setString(2, c.getImage());  
+            st.setString(3, c.getUserDetail().getFirstName());
+            st.setString(4, c.getUserDetail().getLastName());
+            st.setBoolean(5, c.getUserDetail().getGender());
+            st.setString(6,c.getUserDetail().getAddress());
+            st.setDate(7, c.getUserDetail().getDob());
+            st.setString(8,c.getUserDetail().getPhone() );
+            st.executeUpdate();
+        }catch(SQLException e){
+            System.err.println(e);
+        }
+    }
+    
+    public List<User> getAll() {
+        String sql = "select * from [User] u join UserDetail ud on u.userId = ud.userId";
+        List<User> list = new ArrayList<>();
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet result = st.executeQuery();
+            while(result.next()) { //                       
+                Customer c = new Customer(result.getString("userId"), result.getString("email"), result.getString("username"), "", result.getString("status"), result.getString("role"),"", "", "", new CustomerDetail(result.getString("firstname"), result.getString("lastname"), result.getInt("gender") == 1 , result.getString("phone"), result.getString("address"), result.getDate("dob")));
+                list.add(c);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+    
+    public void updateCustomerStatus(String userId, String status){
+        String sql="update [User] set status='"+ status + "' where userId = '" + userId + "'";
+        try{
+            PreparedStatement st = connection.prepareStatement(sql);
             st.executeUpdate();
         }catch(SQLException e){
             System.err.println(e);

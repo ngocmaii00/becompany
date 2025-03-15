@@ -16,6 +16,7 @@ import jakarta.servlet.http.HttpSession;
 import java.util.Random;
 import model.GooglePojo;
 import model.Customer;
+import model.CustomerDetail;
 import utilities.GoogleUtils;
 
 /**
@@ -37,6 +38,36 @@ public class LoginGoogleServlet extends HttpServlet {
         return id.toString();
         
     }
+     
+        private CustomerDetail nameProcessor(GooglePojo ggAccount){
+            String firstName = ggAccount.getFirst_name();
+            String givenName = ggAccount.getGiven_name();
+            String familyName = ggAccount.getFamily_name();
+            String fullName = ggAccount.getFamily_name();
+            
+            if(firstName !=null && givenName != null && familyName != null)
+                return new CustomerDetail(firstName.concat(givenName),familyName);
+            
+            else if(firstName !=null && givenName == null && familyName != null)
+                return new CustomerDetail(firstName,familyName);
+            
+            else if(firstName == null && givenName != null && familyName != null)
+                return new CustomerDetail(givenName,familyName);
+            else if(firstName !=null && givenName != null && familyName == null)
+                return new CustomerDetail(firstName,givenName);
+            else if(firstName !=null && givenName == null && familyName != null)
+                return new CustomerDetail(firstName,familyName);
+            else if(firstName ==null && givenName == null && familyName != null)
+                return new CustomerDetail(" ",familyName);
+            else if(firstName !=null && givenName == null && familyName == null)
+                return new CustomerDetail(firstName," ");
+            else if(firstName ==null && givenName != null && familyName == null)
+                return new CustomerDetail(givenName," ");
+            else
+                return new CustomerDetail(" "," ");
+            
+        
+        }
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -81,13 +112,18 @@ public class LoginGoogleServlet extends HttpServlet {
         GoogleUtils gg = new GoogleUtils();
         String accessToken = gg.getToken(code);
         GooglePojo googleAccountInfo = gg.getUserInfo(accessToken);
+        System.err.println(googleAccountInfo.toString());
         
         UserDAO ud = new UserDAO();
         Customer ggUser = ud.findByEmail(googleAccountInfo.getEmail());
         
         if(ggUser!= null && ggUser.getAuth_provider().equals("GOOGLE")){
+            //if user has already exist
+            HttpSession session = request.getSession();
+            session.setAttribute("user",ggUser);
             response.sendRedirect("home");
         }else if(ggUser!= null && !ggUser.getAuth_provider().equals("GOOGLE")){
+            //check if the user is using a google acount email on local login
             request.setAttribute("nonLocalError", "This email has already been Sign Up");
             request.getRequestDispatcher("login").forward(request, response);
             
@@ -102,11 +138,14 @@ public class LoginGoogleServlet extends HttpServlet {
 
             String email = googleAccountInfo.getEmail();
             String username = googleAccountInfo.getEmail().split("@")[0];
+            String picture = googleAccountInfo.getPicture();
             
-            ud.addUserGoogleFacebook(userId, email, username,"GOOGLE","USER");
+            
             HttpSession session = request.getSession();
-            Customer newUser = new Customer(userId,email,username,null,"active","USER");
-            session.setAttribute("account",newUser);
+            
+            ggUser = new Customer(userId,email,username,null,"active","USER","GOOGLE",picture,null,nameProcessor(googleAccountInfo));
+            ud.addUserGoogleFacebook(ggUser);
+            session.setAttribute("user",ggUser);
             response.sendRedirect("home");
         }
         
