@@ -17,7 +17,7 @@
         <title>Product</title>      
         <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
         
-        <link rel="stylesheet" href="css/index.css">
+        <link rel="stylesheet" href="CSS/index.css">
        
        
 
@@ -37,8 +37,9 @@
                     
                     <ul id="slider">
                         <li class="h-[50vh] relative">
+                            
                             <img id="main-img" class="h-full w-full object-cover border-[3px] border-gray-900 rounded-[20px]" src="${product.getImages()[0]}" alt="">
-                        
+                            
                         </li>
                         
                     </ul>
@@ -64,7 +65,9 @@
             
             <div id="description" class="basis-53/100 flex flex-col gap-8 p-10 mr-25">
                 <div class="flex flex-row">
-                    <p class=" text-[#563a2d] font-semibold text-4xl peacesans-font justify-items-start flex-2">${product.getProductName()}</p>
+                    
+                        <p class=" text-[#563a2d] font-semibold text-4xl peacesans-font justify-items-start flex-2">${product.getProductName()}</p>
+                    
                     <div class="flex items-center justify-end flex-1">
                         <!--Print yellow Star -->
                         <c:if test="${requestScope.rating != -1}">
@@ -186,7 +189,10 @@
                 </div>
                 <div class="grid grid-cols-3 gap-4 h-1/10 justify">
                     <div></div>
-                    <button class="w-full h-full font-semibold py-2 px-3 font-semibold text-2xl bg-white border border-[#563a2d] border-4 text-[#563a2d] rounded-2xl cursor-pointer hover:text-gray-600 hover:bg-gray-100 peer-checked:bg-[#563a2d] peacesans-font peer-checked:border-gray-950">Add to Cart</button>
+                    
+                    <!-- submit gui vao Cart qua onclick -->
+                    <input type="button" value="Add to Cart" onclick="submitCart()" class="w-full h-full font-semibold py-2 px-3 font-semibold text-2xl bg-white border border-[#563a2d] border-4 text-[#563a2d] rounded-2xl cursor-pointer hover:text-gray-600 hover:bg-gray-100 peer-checked:bg-[#563a2d] peacesans-font peer-checked:border-gray-950"/>
+                    
                     <button class="bg-[#563a2d]  py-2 px-3 h-full w-9/10 font-semibold peacesans-font text-2xl text-[#ffffff] rounded-2xl cursor-pointer justify-self-end hover:bg-[#563a2d]/70">Buy now</button>
                 </div>
             </div>
@@ -314,6 +320,35 @@
                 window.onload = submitForm;
         </script>
         
+                <form id="cartForm" action="cart" method="post">
+                    <input type="hidden" name="id" value="${product.getProductId()}">
+                    <input type="hidden" name="image" value="${product.getImages()[0]}">
+                    <input type="hidden" name="name" value="${product.getProductName()}">
+                    <input type="hidden" id="sizeInput" name="size" value="">
+                    <input type="hidden" id="colorInput" name="color" value="">
+                    <input type="hidden" id="priceInput" name="price" value="${requestScope.price}">
+                    <input type="hidden" id="quantityInput" name="quantity" value="1">
+                </form>
+
+
+                <script>
+                    function submitCart() {
+                        updateForm();
+                        document.getElementById("cartForm").submit(); // chuyển ttin sang svl
+                    }
+
+                    function updateForm() {
+                        const selectedColor = document.querySelector('input[name="color"]:checked').value;
+                        const selectedSize = document.querySelector('input[name="size"]:checked').value;
+                        const quantity = document.querySelector("#quantity-num").innerText;
+                        const price = document.querySelector("#price").innerText.replace("$", "").trim();
+
+                        document.querySelector("#colorInput").value = selectedColor;
+                        document.querySelector("#sizeInput").value = selectedSize;
+                        document.querySelector("#quantityInput").value = quantity;
+                        document.querySelector("#priceInput").value = price;
+                    }
+                </script>
 
     </body>
 </html>
