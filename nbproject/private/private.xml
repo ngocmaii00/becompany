@@ -3,12 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Admin/Becompany/becompany/web/scripts/home.js</file>
-            <file>file:/C:/Users/Admin/Becompany/becompany/web/css/styles.css</file>
-            <file>file:/C:/Users/Admin/Becompany/becompany/src/java/model/SlideShow.java</file>
-            <file>file:/C:/Users/Admin/Becompany/becompany/src/java/dal/SlideShowDao.java</file>
-            <file>file:/C:/Users/Admin/Becompany/becompany/web/home.jsp</file>
-            <file>file:/C:/Users/Admin/Becompany/becompany/src/java/controller/HomeServlet.java</file>
+            <file>file:/D:/KODE/BeCompany/becompany/web/product.jsp</file>
+            <file>file:/D:/KODE/BeCompany/becompany/web/cart.jsp</file>
+            <file>file:/D:/KODE/BeCompany/becompany/src/java/dal/TeddyDao.java</file>
+            <file>file:/D:/KODE/BeCompany/becompany/src/java/controller/TeddyServlet.java</file>
         </group>
     </open-files>
 </project-private>

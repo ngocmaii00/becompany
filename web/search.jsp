@@ -7,7 +7,7 @@
         <title>BeCompany</title>
         <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
         <link rel="stylesheet" href="css/styles.css"/>
-        <link rel="stylesheet" href="css/responsiveHome.css"/>
+        <link rel="stylesheet" href="CSS/responsiveHome.css"/>
         
     </head>
     <body>
