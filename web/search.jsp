@@ -6,8 +6,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>BeCompany</title>
         <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
-        <link rel="stylesheet" href="CSS/styles.css"/>
-        <link rel="stylesheet" href="CSS/responsiveHome.css"/>
+        <link rel="stylesheet" href="css/styles.css"/>
+        <link rel="stylesheet" href="css/responsiveHome.css"/>
         
     </head>
     <body>
