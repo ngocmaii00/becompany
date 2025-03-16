@@ -3,10 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/KODE/BeCompany/becompany/web/product.jsp</file>
-            <file>file:/D:/KODE/BeCompany/becompany/web/cart.jsp</file>
-            <file>file:/D:/KODE/BeCompany/becompany/src/java/dal/TeddyDao.java</file>
-            <file>file:/D:/KODE/BeCompany/becompany/src/java/controller/TeddyServlet.java</file>
+            <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/src/java/dal/UserDAO.java</file>
+            <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/web/WEB-INF/web.xml</file>
+            <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/web/product.jsp</file>
+            <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/src/java/dal/DBConnect.java</file>
+            <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/src/java/controller/vnpayQuery.java</file>
+            <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/web/cart.jsp</file>
+            <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/src/java/controller/ajaxServlet.java</file>
+            <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/src/java/controller/CartServlet.java</file>
+            <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/src/java/controller/vnpayRefund.java</file>
+            <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/web/buyProduct.jsp</file>
         </group>
     </open-files>
 </project-private>

@@ -35,12 +35,13 @@ public class ProductDao extends DBConnect {
     public List<Product> getTop10() {
         List<Product> list = new ArrayList<>();
         TeddyDao td = new TeddyDao();
-        String sql = "select distinct top 10 p.productId, p.productName, p.origin, p.description, p.manufacturer, p.image, p.type, p.status, iif(m.sold is null,  0, m.sold) as [sold] from Product p join TeddyDetail t on p.productId = t.productId\n"
-                + "left join (\n"
-                + "select td.productId ,sum(od.boughtQuantity) as [sold] from OrderDetail od join TeddyDetail td on td.teddyId = od.teddyId\n"
-                + "group by td.productId\n"
-                + ") as m on m.productId = p.productId\n"
-                + "order by sold desc";
+        String sql = """
+                     select distinct top 10 p.productId, p.productName, p.origin, p.description, p.manufacturer, p.image, p.type, p.status, iif(m.sold is null,  0, m.sold) as [sold] from Product p join TeddyDetail t on p.productId = t.productId
+                     left join (
+                     select td.productId ,sum(od.boughtQuantity) as [sold] from OrderDetail od join TeddyDetail td on td.teddyId = od.teddyId
+                     group by td.productId
+                     ) as m on m.productId = p.productId
+                     order by sold desc""";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet result = st.executeQuery();
@@ -57,12 +58,13 @@ public class ProductDao extends DBConnect {
 
     public Product getProductByName(String name) {
 
-        String sql = "select distinct p.productId, p.productName, p.origin, p.description, p.manufacturer, p.image, p.type, p.status, iif(m.sold is null,  0, m.sold) as [sold] from Product p join TeddyDetail t on p.productId = t.productId\n"
-                + "left join (\n"
-                + "select td.productId ,sum(od.boughtQuantity) as [sold] from OrderDetail od join TeddyDetail td on td.teddyId = od.teddyId\n"
-                + "group by td.productId\n"
-                + ") as m on m.productId = p.productId\n"
-                + " where p.ProductName = '" + name + "'";
+        String sql = """
+                     select distinct p.productId, p.productName, p.origin, p.description, p.manufacturer, p.image, p.type, p.status, iif(m.sold is null,  0, m.sold) as [sold] from Product p join TeddyDetail t on p.productId = t.productId
+                     left join (
+                     select td.productId ,sum(od.boughtQuantity) as [sold] from OrderDetail od join TeddyDetail td on td.teddyId = od.teddyId
+                     group by td.productId
+                     ) as m on m.productId = p.productId
+                      where p.ProductName = '""" + name + "'";
 
         try {
             PreparedStatement st = connection.prepareStatement(sql);
@@ -79,12 +81,13 @@ public class ProductDao extends DBConnect {
 
     public Product getProductById(String productId) {
 
-        String sql = "select distinct p.productId, p.productName, p.origin, p.description, p.manufacturer, p.image, p.type, p.status, iif(m.sold is null,  0, m.sold) as [sold] from Product p join TeddyDetail t on p.productId = t.productId\n"
-                + "left join (\n"
-                + "select td.productId ,sum(od.boughtQuantity) as [sold] from OrderDetail od join TeddyDetail td on td.teddyId = od.teddyId\n"
-                + "group by td.productId\n"
-                + ") as m on m.productId = p.productId\n"
-                + " where p.ProductId = '" + productId + "'";
+        String sql = """
+                     select distinct p.productId, p.productName, p.origin, p.description, p.manufacturer, p.image, p.type, p.status, iif(m.sold is null,  0, m.sold) as [sold] from Product p join TeddyDetail t on p.productId = t.productId
+                     left join (
+                     select td.productId ,sum(od.boughtQuantity) as [sold] from OrderDetail od join TeddyDetail td on td.teddyId = od.teddyId
+                     group by td.productId
+                     ) as m on m.productId = p.productId
+                      where p.ProductId = '""" + productId + "'";
 
         try {
             PreparedStatement st = connection.prepareStatement(sql);
@@ -118,12 +121,13 @@ public class ProductDao extends DBConnect {
 
     public List<Product> getProductByType(String type) {
         List<Product> list = new ArrayList<>();
-        String sql = "select distinct p.productId, p.productName, p.origin, p.description, p.manufacturer, p.image, p.type, p.status, iif(m.sold is null,  0, m.sold) as [sold] from Product p join TeddyDetail t on p.productId = t.productId\n"
-                + "left join (\n"
-                + "select td.productId ,sum(od.boughtQuantity) as [sold] from OrderDetail od join TeddyDetail td on td.teddyId = od.teddyId\n"
-                + "group by td.productId\n"
-                + ") as m on m.productId = p.productId\n"
-                + " where type = '" + type + "'";
+        String sql = """
+                     select distinct p.productId, p.productName, p.origin, p.description, p.manufacturer, p.image, p.type, p.status, iif(m.sold is null,  0, m.sold) as [sold] from Product p join TeddyDetail t on p.productId = t.productId
+                     left join (
+                     select td.productId ,sum(od.boughtQuantity) as [sold] from OrderDetail od join TeddyDetail td on td.teddyId = od.teddyId
+                     group by td.productId
+                     ) as m on m.productId = p.productId
+                      where type = '""" + type + "'";
         TeddyDao td = new TeddyDao();
         if (type.compareToIgnoreCase("all") == 0) {
             return getAll();
@@ -146,14 +150,15 @@ public class ProductDao extends DBConnect {
     public List<Product> getProductByFilter(String type, String color, String size, String from, String to, String[] status, String[] rating) {
         List<Product> list = new ArrayList<>();
         TeddyDao td = new TeddyDao();
-        String sql = "select distinct p.productId, p.productName, p.origin, p.description, p.image, p.manufacturer, p.status, p.type, h.sold \n"
-                + "from product p join rating r on p.productId = r.productId join TeddyDetail td on td.productId = p.productId join (\n"
-                + "select distinct p.productId, p.productName, p.origin, p.description, p.manufacturer, p.image, p.type, p.status, iif(m.sold is null,  0, m.sold) as [sold] from Product p join TeddyDetail t on p.productId = t.productId\n"
-                + "left join (\n"
-                + "select td.productId ,sum(od.boughtQuantity) as [sold] from OrderDetail od join TeddyDetail td on td.teddyId = od.teddyId\n"
-                + "group by td.productId\n"
-                + ") as m on m.productId = p.productId\n"
-                + ") as h on h.productId = p.productId ";
+        String sql = """
+                     select distinct p.productId, p.productName, p.origin, p.description, p.image, p.manufacturer, p.status, p.type, h.sold 
+                     from product p join rating r on p.productId = r.productId join TeddyDetail td on td.productId = p.productId join (
+                     select distinct p.productId, p.productName, p.origin, p.description, p.manufacturer, p.image, p.type, p.status, iif(m.sold is null,  0, m.sold) as [sold] from Product p join TeddyDetail t on p.productId = t.productId
+                     left join (
+                     select td.productId ,sum(od.boughtQuantity) as [sold] from OrderDetail od join TeddyDetail td on td.teddyId = od.teddyId
+                     group by td.productId
+                     ) as m on m.productId = p.productId
+                     ) as h on h.productId = p.productId """;
         List<String> filters = new ArrayList<>();
         if (type.compareToIgnoreCase("all") != 0) {
             filters.add("p.type = '" + type + "'");
@@ -211,7 +216,7 @@ public class ProductDao extends DBConnect {
             st.setString(7, type);
             st.setString(8, status);
             st.execute();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e);
         }
     }
@@ -228,7 +233,7 @@ public class ProductDao extends DBConnect {
             st.setString(6, status);
             st.setString(7, productId);
             st.executeUpdate();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e);
         }
     }
@@ -238,7 +243,7 @@ public class ProductDao extends DBConnect {
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.executeUpdate();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e);
         }
     }
@@ -249,7 +254,7 @@ public class ProductDao extends DBConnect {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, productId);
             st.executeUpdate();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e);
         }
     }

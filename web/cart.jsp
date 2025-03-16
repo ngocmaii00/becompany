@@ -132,11 +132,10 @@
                 </c:choose>
             </div>
 
-<<<<<<< Updated upstream
-            <!-- tổng tiền + nút mua -->
-=======
+
+
             <!-- Totalmoney và nút Buy -->
->>>>>>> Stashed changes
+
             <div class="mt-12 bottom-8 left-0 right-0 grid grid-cols-9 border-2 border-[#543520] rounded-lg bg-[#f2e6e6] mx-16 h-20 items-center">
                 <div class="col-span-3 text-center">
                     <span class="text-3xl font-bold text-[#543520]"> Total Amount: </span>

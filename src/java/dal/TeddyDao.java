@@ -35,7 +35,7 @@ public class TeddyDao extends DBConnect {
             st.setString(5, teddyId);
 
             st.executeUpdate();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e);
         }
     }
@@ -53,7 +53,7 @@ public class TeddyDao extends DBConnect {
             st.setString(6, productId);
 
             st.executeUpdate();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e);
         }
     }

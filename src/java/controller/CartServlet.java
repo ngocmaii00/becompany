@@ -4,7 +4,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-
 package controller;
 
 import java.io.IOException;
@@ -15,8 +14,8 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 
-import jakarta.servlet.http.HttpServletResponse;
 
+import jakarta.servlet.http.HttpServletResponse;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -179,8 +178,12 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
 }
 
 
+
     @Override
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
 }
+
+

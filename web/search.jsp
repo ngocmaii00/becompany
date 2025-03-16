@@ -10,6 +10,9 @@
         <link rel="stylesheet" href="CSS/styles.css"/>
 =======
         <link rel="stylesheet" href="css/styles.css"/>
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
         <link rel="stylesheet" href="CSS/responsiveHome.css"/>
         
