@@ -15,6 +15,40 @@
 
         <main>
             <nav>
+                <div>
+                    <div class="type-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
+                        <path fill-rule="evenodd" d="M2.628 1.601C5.028 1.206 7.49 1 10 1s4.973.206 7.372.601a.75.75 0 0 1 .628.74v2.288a2.25 2.25 0 0 1-.659 1.59l-4.682 4.683a2.25 2.25 0 0 0-.659 1.59v3.037c0 .684-.31 1.33-.844 1.757l-1.937 1.55A.75.75 0 0 1 8 18.25v-5.757a2.25 2.25 0 0 0-.659-1.591L2.659 6.22A2.25 2.25 0 0 1 2 4.629V2.34a.75.75 0 0 1 .628-.74Z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+
+                    <form class="type-form" action="prosfilter" method="get">
+                        <div class="type">
+                            <label for="gender">Gender</label>
+                            <input type="radio" name="gender" id="gender" value="1"/><span>Male</span> 
+                            <input type="radio" name="gender" id="gender" value="0"/> <span>Female</span>                             
+                        </div>
+                        <div class="type">
+                            <label for="type">Type</label>
+                            <input checked type="radio" name="type" id="type" value="mostorder"/><span>Most Order</span>
+                            <input type="radio" name="type" id="type" value="leastorder"/><span>Least Order</span>                          
+                        </div>
+                        <div class="type">
+                            <label for="types">Teddy Type</label>
+                            <input checked type="radio" name="types" id="type" value="all"/><span>All</span> 
+                            <c:forEach items="${requestScope.types}" var="type">
+                                <input type="radio" name="types" id="type" value="${type.trim()}"/><span>${type.trim()}</span> 
+                            </c:forEach>                         
+                        </div>
+                        <div class="type">
+                            <label for="top">Top</label>
+                            <input checked type="radio" name="top" id="top" value="1"/><span>Top 1</span>  
+                            <input type="radio" name="top" id="top" value="5"/><span>Top 5</span> 
+                            <input type="radio" name="top" id="top" value="10"/><span>Top 10</span>                          
+                        </div>
+                        <button>Filter</button>
+                    </form>
+                </div>
                 <form action="pros" method="post" class="search">
                     <input name="search" class="search-input" type="text" placeholder="Search"/>
                     <button style="background: transparent; border: none">
@@ -190,6 +224,12 @@
         </div>
 
         <script>
+            let clicked = false;
+            document.querySelector(".type-icon").addEventListener('click', () => {
+                clicked = !clicked;
+                document.querySelector(".type-form").style.display = clicked ? 'block' : 'none';
+            });
+
             document.querySelector(".add-button").addEventListener('click', () => {
                 document.querySelector('.form-container').style.display = 'flex';
             });

@@ -1,4 +1,4 @@
-            /*
+/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
@@ -11,7 +11,7 @@ import java.sql.Date;
  * @author zeryus
  */
 public class CustomerDetail {
-   
+
     private String firstName;
     private String lastName;
     private String fullName;
@@ -19,17 +19,27 @@ public class CustomerDetail {
     private boolean gender;
     private String address;
     private Date dob;
+    private int numberOfOrder = 0;
+    private double totalMoney = 0;
+
+    public CustomerDetail(String firstName, String lastName, String phone, boolean gender, String address, Date dob, int numberOfOrder, double totalMoney) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phone = phone;
+        this.gender = gender;
+        this.address = address;
+        this.dob = dob;
+        this.numberOfOrder = numberOfOrder;
+        this.totalMoney = totalMoney;
+    }
 
     public CustomerDetail(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
     }
 
+    public CustomerDetail(String firstName, String lastName, boolean gender, String phone, String address, Date dob) {
 
-    
-        
-    public CustomerDetail( String firstName, String lastName, boolean gender, String phone, String address, Date dob) {
-        
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
@@ -39,8 +49,6 @@ public class CustomerDetail {
         this.dob = dob;
     }
 
-  
-
     public String getFirstName() {
         return firstName;
     }
@@ -48,7 +56,6 @@ public class CustomerDetail {
     public String getLastName() {
         return lastName;
     }
-
 
     public String getPhone() {
         return phone;
@@ -66,8 +73,6 @@ public class CustomerDetail {
         this.gender = gender;
     }
 
-    
-
     public String getAddress() {
         return address;
     }
@@ -75,8 +80,6 @@ public class CustomerDetail {
     public Date getDob() {
         return dob;
     }
-
-    
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
@@ -90,7 +93,6 @@ public class CustomerDetail {
         this.phone = phone;
     }
 
-
     public void setAddress(String address) {
         this.address = address;
     }
@@ -103,6 +105,20 @@ public class CustomerDetail {
     public String toString() {
         return "CustomerDetail{" + "firstName=" + firstName + ", lastName=" + lastName + ", phone=" + phone + ", address=" + address + ", dob=" + dob + '}';
     }
-    
-    
+
+    public void setNumberOfOrder(int numberOfOrder) {
+        this.numberOfOrder = numberOfOrder;
+    }
+
+    public void setTotalMoney(double totalMoney) {
+        this.totalMoney = totalMoney;
+    }
+
+    public int getNumberOfOrder() {
+        return numberOfOrder;
+    }
+
+    public double getTotalMoney() {
+        return totalMoney;
+    }
 }
