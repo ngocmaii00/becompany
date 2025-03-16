@@ -261,6 +261,7 @@ public class UserDAO extends DBConnect {
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet result = st.executeQuery();
+
             while(result.next()) { //                       
                 Customer c = new Customer(result.getString("userId"), result.getString("email"), result.getString("username"), "", result.getString("status"), result.getString("role"),"", "", "", new CustomerDetail(result.getString("firstname"), result.getString("lastname"), result.getInt("gender") == 1 , result.getString("phone"), result.getString("address"), result.getDate("dob")));
                 list.add(c);
