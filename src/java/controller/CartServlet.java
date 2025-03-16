@@ -16,7 +16,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.util.List;
 
 @WebServlet(name = "CartServlet", urlPatterns = {"/cart"})
 public class CartServlet extends HttpServlet {
@@ -25,7 +24,6 @@ public class CartServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
@@ -59,13 +57,15 @@ public class CartServlet extends HttpServlet {
             if (!cartData.isEmpty()) {
                 String[] items = cartData.split(",");
                 String id = request.getParameter("id");
+                String size = request.getParameter("size"); // Lấy size từ request
+                String color = request.getParameter("color"); // Lấy color từ request
                 StringBuilder newCart = new StringBuilder();
 
                 if (action.equals("update")) {
                     String newQuantity = request.getParameter("quantity");
                     for (String item : items) {
                         String[] details = item.split("\\$");
-                        if (details[0].equals(id)) {
+                        if (details[0].equals(id) && details[3].equals(size) && details[4].equals(color)) {
                             details[6] = newQuantity; // Cập nhật số lượng
                             newCart.append(String.join("$", details));
                         } else {
@@ -78,7 +78,8 @@ public class CartServlet extends HttpServlet {
                 } else if (action.equals("remove")) {
                     for (String item : items) {
                         String[] details = item.split("\\$");
-                        if (!details[0].equals(id)) {
+                        // Chỉ giữ lại các sản phẩm không khớp cả id, size và color
+                        if (!(details[0].equals(id) && details[3].equals(size) && details[4].equals(color))) {
                             newCart.append(item).append(",");
                         }
                     }
@@ -88,7 +89,6 @@ public class CartServlet extends HttpServlet {
                 if (updatedCart.endsWith(",")) {
                     updatedCart = updatedCart.substring(0, updatedCart.length() - 1);
                 }
-                // mã hoá - cookie đọc được dấu $
                 String encodedCart = URLEncoder.encode(updatedCart, StandardCharsets.UTF_8.toString());
                 Cookie c = new Cookie("cart", encodedCart);
                 c.setMaxAge(60 * 60 * 24 * 7);
@@ -101,82 +101,77 @@ public class CartServlet extends HttpServlet {
     }
 
     @Override
-protected void doPost(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
-    Cookie[] arr = request.getCookies();
-    String txt = "";
-    if (arr != null) {
-        for (Cookie o : arr) {
-            if (o.getName().equals("cart")) {
-                txt = URLDecoder.decode(o.getValue(), StandardCharsets.UTF_8.toString());
-                o.setMaxAge(0); // Xóa cookie cũ
-                response.addCookie(o);
-            }
-        }
-    }
-
-    String id = request.getParameter("id");
-    String image = request.getParameter("image");
-    String name = request.getParameter("name");
-    String size = request.getParameter("size");
-    String color = request.getParameter("color");
-    String price = request.getParameter("price");
-    String quantity = request.getParameter("quantity");
-
-    if (id != null && image != null && name != null && size != null && color != null && price != null && quantity != null) {
-        String cartItem = id + "$" + image + "$" + name + "$" + size + "$" + color + "$" + price + "$" + quantity;
-
-        if (txt.isEmpty()) {
-            txt = cartItem;
-        } else {
-            String[] items = txt.split(",");
-            StringBuilder newCart = new StringBuilder();
-            boolean productExists = false;
-
-            for (String item : items) {
-                String[] details = item.split("\\$");
-                if (details.length == 7) {
-                    String existingId = details[0];
-                    String existingSize = details[3];
-                    String existingColor = details[4];
-
-                    // kiểm tra nếu trùng sp thì + vào quan có sẵn
-                    if (existingId.equals(id) && existingSize.equals(size) && existingColor.equals(color)) {
-                        int existingQuantity = Integer.parseInt(details[6]);
-                        int newQuantity = Integer.parseInt(quantity);
-                        details[6] = String.valueOf(existingQuantity + newQuantity);
-                        productExists = true;
-                        newCart.append(String.join("$", details));
-                    } else {
-                        newCart.append(item); // giữ các sp khác
-                    }
-                    newCart.append(",");
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        Cookie[] arr = request.getCookies();
+        String txt = "";
+        if (arr != null) {
+            for (Cookie o : arr) {
+                if (o.getName().equals("cart")) {
+                    txt = URLDecoder.decode(o.getValue(), StandardCharsets.UTF_8.toString());
+                    o.setMaxAge(0); // Xóa cookie cũ
+                    response.addCookie(o);
                 }
             }
-            // chưa có sp thì thêm mới
-            if (!productExists) {
-                newCart.append(cartItem).append(",");
-            }
-            // xoá ,
-            txt = newCart.toString();
-            if (txt.endsWith(",")) {
-                txt = txt.substring(0, txt.length() - 1);
-            }
         }
 
-        // mã hoá + lưu cookie
-        String encodedTxt = URLEncoder.encode(txt, StandardCharsets.UTF_8.toString());
-        Cookie c = new Cookie("cart", encodedTxt);
-        c.setMaxAge(60 * 60 * 24 * 7);
-        response.addCookie(c);
-    }
+        String id = request.getParameter("id");
+        String image = request.getParameter("image");
+        String name = request.getParameter("name");
+        String size = request.getParameter("size");
+        String color = request.getParameter("color");
+        String price = request.getParameter("price");
+        String quantity = request.getParameter("quantity");
 
-    response.sendRedirect("cart");
-}
+        if (id != null && image != null && name != null && size != null && color != null && price != null && quantity != null) {
+            String cartItem = id + "$" + image + "$" + name + "$" + size + "$" + color + "$" + price + "$" + quantity;
+
+            if (txt.isEmpty()) {
+                txt = cartItem;
+            } else {
+                String[] items = txt.split(",");
+                StringBuilder newCart = new StringBuilder();
+                boolean productExists = false;
+
+                for (String item : items) {
+                    String[] details = item.split("\\$");
+                    if (details.length == 7) {
+                        String existingId = details[0];
+                        String existingSize = details[3];
+                        String existingColor = details[4];
+
+                        if (existingId.equals(id) && existingSize.equals(size) && existingColor.equals(color)) {
+                            int existingQuantity = Integer.parseInt(details[6]);
+                            int newQuantity = Integer.parseInt(quantity);
+                            details[6] = String.valueOf(existingQuantity + newQuantity);
+                            productExists = true;
+                            newCart.append(String.join("$", details));
+                        } else {
+                            newCart.append(item);
+                        }
+                        newCart.append(",");
+                    }
+                }
+                if (!productExists) {
+                    newCart.append(cartItem).append(",");
+                }
+                txt = newCart.toString();
+                if (txt.endsWith(",")) {
+                    txt = txt.substring(0, txt.length() - 1);
+                }
+            }
+
+            String encodedTxt = URLEncoder.encode(txt, StandardCharsets.UTF_8.toString());
+            Cookie c = new Cookie("cart", encodedTxt);
+            c.setMaxAge(60 * 60 * 24 * 7);
+            response.addCookie(c);
+        }
+
+        response.sendRedirect("cart");
+    }
 
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
-
+    }
 }
