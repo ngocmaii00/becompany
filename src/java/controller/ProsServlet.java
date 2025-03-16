@@ -25,7 +25,14 @@ public class ProsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         this.list = pd.getAll();
-        req.setAttribute("pros", list);
+        List<String> types = new ArrayList<>();
+        for (Product p : list) {
+            if(!types.contains(p.getType())) {
+                types.add(p.getType());
+            }
+        }
+        req.setAttribute("pros", list);        
+        req.setAttribute("types", types);
         req.getRequestDispatcher("pros.jsp").forward(req, resp);
     }
 
