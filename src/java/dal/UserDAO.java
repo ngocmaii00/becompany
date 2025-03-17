@@ -108,7 +108,6 @@ public class UserDAO extends DBConnect {
     }
 
 
-
     public void addUser(String usrId, String email, String username, String password) {
         String sql = "insert into [User] (userId,email,username,password,status,auth_provider,role) values(?,?,?,?,'active','LOCAL',USER)";
 
@@ -119,7 +118,6 @@ public class UserDAO extends DBConnect {
             st.setString(3, username);
             st.setString(4, password);
             st.executeUpdate();
-
 
         } catch (SQLException e) {
             System.err.println(e);
@@ -183,7 +181,7 @@ public class UserDAO extends DBConnect {
         return null;
     }
 
-  
+
     public void update(Customer user) {
         String sql = "update [User] set reset_password_token = ? and role = 'USER'";
 
@@ -259,12 +257,9 @@ public class UserDAO extends DBConnect {
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet result = st.executeQuery();
-
-
-
             while(result.next()) { //                       
                 Customer c = new Customer(result.getString("userId"), result.getString("email"), result.getString("username"), "", result.getString("status"), result.getString("role"),"", "", "", new CustomerDetail(result.getString("firstname"), result.getString("lastname"), result.getInt("gender") == 1 , result.getString("phone"), result.getString("address"), result.getDate("dob")));
-                
+               
                 list.add(c);
             }
         } catch (SQLException e) {
@@ -341,6 +336,7 @@ public class UserDAO extends DBConnect {
                 list.add(c);
             }
         } catch (SQLException e) {
+
             System.out.println(e);
         }
         return list;
