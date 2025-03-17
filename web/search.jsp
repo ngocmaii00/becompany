@@ -8,7 +8,7 @@
         <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
         <link rel="stylesheet" href="CSS/styles.css"/>
         <link rel="stylesheet" href="CSS/responsiveHome.css"/>
-        
+
     </head>
     <body>
         <%@include file="header.jsp" %>
@@ -18,7 +18,7 @@
                 <h2 style="margin-bottom: 20px">Result for ${requestScope.search}</h2>
                 <div class="hightlight-container">
                     <c:forEach items="${requestScope.result}" var="p">
-<!--                        <div class="home-teddy">
+                        <div class="home-teddy">
                             <a href="product?name=${p.getProductName()}">
                                 <div class="home-teddy-img" style="
                                      background-image: url('${p.getImages()[0]}');
@@ -59,9 +59,10 @@
                                     </button>
                                 </div>
                             </div>
-                        </div>-->
+                        </div>
 
-                        
+
+
                     </c:forEach>
                 </div>
 
@@ -72,34 +73,34 @@
         <%@include file="footer.jsp" %>
 
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-        
+
         <script>
 
-            function changeSize(color, productId) {
-                $.ajax({
-                    url: "home",
-                    type: 'POST',
-                    data: jQuery.param({color: color, productId: productId}),
-                    dataType: 'application/json',
-                    success: function (res) {
-                        const classname = ".home-teddy-" + productId;
-                        document.querySelector(classname).innerHTML = res;
-                    }
-                });
-            }
+                                            function changeSize(color, productId) {
+                                                $.ajax({
+                                                    url: "home",
+                                                    type: 'POST',
+                                                    data: jQuery.param({color: color, productId: productId}),
+                                                    dataType: 'application/json',
+                                                    success: function (res) {
+                                                        const classname = ".home-teddy-" + productId;
+                                                        document.querySelector(classname).innerHTML = res;
+                                                    }
+                                                });
+                                            }
 
-            function changeColor(size, productId) {
-                $.ajax({
-                    url: "home",
-                    type: 'POST',
-                    data: jQuery.param({size: size, productId: productId}),
-                    dataType: 'application/json',
-                    success: function (res) {
-                        const classname = ".home-teddy-" + productId;
-                        document.querySelector(classname).innerHTML = res;
-                    }
-                });
-            }
+                                            function changeColor(size, productId) {
+                                                $.ajax({
+                                                    url: "home",
+                                                    type: 'POST',
+                                                    data: jQuery.param({size: size, productId: productId}),
+                                                    dataType: 'application/json',
+                                                    success: function (res) {
+                                                        const classname = ".home-teddy-" + productId;
+                                                        document.querySelector(classname).innerHTML = res;
+                                                    }
+                                                });
+                                            }
 
         </script>
     </body>

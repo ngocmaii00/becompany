@@ -265,6 +265,19 @@ public class ProductDao extends DBConnect {
                 + ") ) as a group by a.productId\n"
                 + ") as m right join Product p on m.productId = p.productId ";
 
+        if(gender == 2) {
+            sql = "select top " + top + " * from (\n"
+                + "select sum(a.boughtQuantity) as [sold], a.productId from (\n"
+                + "(select b.orderId, b.teddyId, b.boughtQuantity, b.userId, b.gender, td.productId from (\n"
+                + "select o.orderId, od.teddyId, od.boughtQuantity, ud.userId, ud.gender from [Order] o join OrderDetail od on o.orderId = od.orderId\n"
+                + "join [User] u on u.userId = o.userId \n"
+                + "join [UserDetail] ud on ud.userId = u.userId) as b join TeddyDetail td on td.teddyId = b.teddyId\n"
+                + ") ) as a group by a.productId\n"
+                + ") as m right join Product p on m.productId = p.productId ";
+        }
+        if (types.compareToIgnoreCase("all") != 0) {
+            sql += " " + types;
+        }
         switch (type) {
             case "mostorder":
                 sql += "order by sold desc";
