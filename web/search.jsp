@@ -18,7 +18,7 @@
                 <h2 style="margin-bottom: 20px">Result for ${requestScope.search}</h2>
                 <div class="hightlight-container">
                     <c:forEach items="${requestScope.result}" var="p">
-                        <div class="home-teddy">
+<!--                        <div class="home-teddy">
                             <a href="product?name=${p.getProductName()}">
                                 <div class="home-teddy-img" style="
                                      background-image: url('${p.getImages()[0]}');
@@ -59,7 +59,9 @@
                                     </button>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
+
+                        
                     </c:forEach>
                 </div>
 
