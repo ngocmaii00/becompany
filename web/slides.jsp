@@ -5,7 +5,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Becompany</title>
-        <link rel="stylesheet" href="css/imageStyle.css"/>
+        <link rel="stylesheet" href="CSS/imageStyle.css"/>
     </head>
     <body>
         <main>
