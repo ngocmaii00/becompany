@@ -1,0 +1,91 @@
+:root {
+    --main-color: #543520;
+    --sub-color: #f7f0f0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing:border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+}
+
+main {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
+}
+
+h1 {
+    font-size: 60px;
+    font-weight: bolder;
+    color: var(--main-color);
+}
+
+h3 {
+    font-size: 20px;
+    color: var(--main-color);
+    text-align: center;
+    text-transform: uppercase;
+}
+
+a {
+    text-decoration:none;
+    color: black;
+}
+
+svg {
+    width: 100px;
+    font-weight: 300;
+    padding: 20px;
+}
+
+.manage {
+    margin-top: 60px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.manage h3 {
+    font-weight: 300;
+    font-size: 36px;
+    text-transform: capitalize;
+}
+
+.manage-item {
+    border: 4px solid var(--main-color);
+    border-radius: 8px;
+    margin: 20px;
+    background-color: var(--sub-color);
+    padding: 20px 60px;
+    text-align:center;
+    cursor: pointer;
+}
+
+button {
+    background-color: var(--main-color);
+    border: none;
+    box-shadow: 0 0 2px var(--main-color);
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+button a {
+    display: block;
+    padding: 10px 28px;
+    color: var(--sub-color);
+}
+
+button:hover,
+.manage-item:hover {
+    box-shadow: 0 0 5px var(--main-color);
+    opacity: 0.9;
+}

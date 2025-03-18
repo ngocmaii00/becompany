@@ -8,9 +8,11 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 import model.Product;
+import model.User;
 
 /**
  *
@@ -24,6 +26,9 @@ public class ProsServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        HttpSession session = req.getSession();
+//        User user = ((User) session.getAttribute("user"));
+//        req.setAttribute("id", user.getId());
         this.list = pd.getAll();
         List<String> types = new ArrayList<>();
         for (Product p : list) {

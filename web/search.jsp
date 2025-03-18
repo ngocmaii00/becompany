@@ -15,7 +15,7 @@
 =======
 >>>>>>> Stashed changes
         <link rel="stylesheet" href="CSS/responsiveHome.css"/>
-        
+
     </head>
     <body>
         <%@include file="header.jsp" %>
@@ -67,6 +67,9 @@
                                 </div>
                             </div>
                         </div>
+
+
+
                     </c:forEach>
                 </div>
 
@@ -77,34 +80,34 @@
         <%@include file="footer.jsp" %>
 
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-        
+
         <script>
 
-            function changeSize(color, productId) {
-                $.ajax({
-                    url: "home",
-                    type: 'POST',
-                    data: jQuery.param({color: color, productId: productId}),
-                    dataType: 'application/json',
-                    success: function (res) {
-                        const classname = ".home-teddy-" + productId;
-                        document.querySelector(classname).innerHTML = res;
-                    }
-                });
-            }
+                                            function changeSize(color, productId) {
+                                                $.ajax({
+                                                    url: "home",
+                                                    type: 'POST',
+                                                    data: jQuery.param({color: color, productId: productId}),
+                                                    dataType: 'application/json',
+                                                    success: function (res) {
+                                                        const classname = ".home-teddy-" + productId;
+                                                        document.querySelector(classname).innerHTML = res;
+                                                    }
+                                                });
+                                            }
 
-            function changeColor(size, productId) {
-                $.ajax({
-                    url: "home",
-                    type: 'POST',
-                    data: jQuery.param({size: size, productId: productId}),
-                    dataType: 'application/json',
-                    success: function (res) {
-                        const classname = ".home-teddy-" + productId;
-                        document.querySelector(classname).innerHTML = res;
-                    }
-                });
-            }
+                                            function changeColor(size, productId) {
+                                                $.ajax({
+                                                    url: "home",
+                                                    type: 'POST',
+                                                    data: jQuery.param({size: size, productId: productId}),
+                                                    dataType: 'application/json',
+                                                    success: function (res) {
+                                                        const classname = ".home-teddy-" + productId;
+                                                        document.querySelector(classname).innerHTML = res;
+                                                    }
+                                                });
+                                            }
 
         </script>
     </body>

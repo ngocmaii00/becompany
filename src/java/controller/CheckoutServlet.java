@@ -27,6 +27,7 @@ import model.ShippingOption;
 import model.User;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -37,7 +38,7 @@ import java.time.format.DateTimeFormatter;
 public class CheckoutServlet extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession userSession = request.getSession(false);
         User user = (User) userSession.getAttribute("user");
@@ -87,7 +88,7 @@ public class CheckoutServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
             HttpSession session = request.getSession();
             User u = (User)session.getAttribute("user");
@@ -126,11 +127,18 @@ public class CheckoutServlet extends HttpServlet {
 //                    }
 //                }
 //            }
-            
+            LocalDateTime datetime = LocalDateTime.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+            String date = datetime.format(formatter);
+            date = datetime.getDayOfWeek() +" " + date;
+            request.setAttribute("date", date);
             request.setAttribute("orderId", orderId);
             request.setAttribute("totalAmount",totalAmount);
             request.setAttribute("order",cart);
-            request.getRequestDispatcher("checkout-complete").forward(request, response);
+           
+//            request.getRequestDispatcher("checkout-complete").forward(request, response);
+    request.getRequestDispatcher("checkoutComplete.jsp").forward(request, response);
+    
             
     }
 

@@ -166,9 +166,9 @@
                     </span>
                 </div>
                 <div class="col-span-2 flex justify-center">
-                    <a href="checkout" class="flex border-2 border-[#543520] bg-[#543520] rounded-md w-40 h-14 text-center items-center justify-center align-center">
+                    <button onclick="postToServlet('checkout')" class="flex border-2 border-[#543520] bg-[#543520] rounded-md w-40 h-14 text-center items-center justify-center align-center">
                         <span class="text-2xl font-bold text-white">Buy</span>
-                    </a>
+                    </button>
                 </div>
             </div>
         </div>
@@ -198,6 +198,18 @@
                     checkbox.checked = isChecked;
                 });
             });
+        </script>
+        <script>
+            function postToServlet(url) {
+                // Create a hidden form
+         
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = url;
+
+                document.body.appendChild(form);
+                form.submit();
+        }
         </script>
     </body>
 </html>

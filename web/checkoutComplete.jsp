@@ -1,14 +1,12 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <fmt:setLocale value="vi_VN" />
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Checkout Success - BeCompany</title>
+    <title>Checkout Success</title>
     <style>
         .peacesans-font {
             font-family: 'Peace Sans', sans-serif;
@@ -42,7 +40,7 @@
                     <div class="space-y-2 notosans-font">
                         <div class="flex justify-between">
                             <span class="text-[#563a2d]/80">Order ID:</span>
-                            <span class="text-[#563a2d] font-semibold">#${requestScope.orderId}/span>
+                            <span class="text-[#563a2d] font-semibold">#${requestScope.orderId}</span>
                         </div>
                         <div class="flex justify-between">
                             <span class="text-[#563a2d]/80">Date:</span>
@@ -50,7 +48,7 @@
                         </div>
                         <div class="flex justify-between">
                             <span class="text-[#563a2d]/80">Total Amount:</span>
-                            <span class="text-[#563a2d] font-semibold"><fmt:formatNumber value="${requestScope.totalPrice}" type="currency"/></span>
+                            <span class="text-[#563a2d] font-semibold"><fmt:formatNumber value="${requestScope.totalAmount}" type="currency"/></span>
                         </div>
                     </div>
                 </div>
@@ -61,12 +59,12 @@
                     <hr class="bg-[#563a2d]/20 mb-3" />
                     <div class="grid grid-cols-2 gap-4 notosans-font">
                         <!-- Product Item 1 -->
-                        <c:forEach items="${requestScope.cart}" var="item">
+                        <c:forEach items="${requestScope.order}" var="item">
                         <div class="flex items-center gap-4 p-4 bg-[#563a2d]/5 rounded-lg">
                             <div class="w-16 h-16 bg-[#563a2d]/10 rounded-lg flex items-center justify-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#563a2d" class="w-8 h-8">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
-                                </svg>
+                                <div
+                                    class="rounded-lg border-2 border-[#543520] size-20 bg-cover bg-center bg-[url('${item.image}')]">
+                                  </div>
                             </div>
                             <div class="flex-1">
                                 <h3 class="text-[#563a2d] font-semibold">${item.name}</h3>

@@ -40,6 +40,7 @@ public class CheckoutCompleteServlet extends HttpServlet {
         request.setAttribute("totalAmount",totalAmount);
         request.setAttribute("order",cart);
         request.setAttribute("date", date);
+//        response.sendRedirect("product");
         request.getRequestDispatcher("checkoutComplete.jsp").forward(request, response);
             
     }

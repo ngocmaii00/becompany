@@ -17,8 +17,9 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <title>BuyProductPage</title>
   </head>
-
+  
   <body>
+       <%@include file="header.jsp" %>
     <div class="border-2 border-[#543520] mx-12 my-12 rounded-lg bg-[#f2e6e6]">
       <span
         class="grid grid-cols-11 font-bold text-xl items-center mx-16 text-[#543520] py-4 border-b-4 border-[#543520]">
@@ -224,6 +225,7 @@
               },
               success: function (response) {
                   console.log("Session stored successfully!");
+                  window.location.href = "checkout";
               },
               error: function () {
                   console.error("Failed to store session data.");
