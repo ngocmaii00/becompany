@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 package controller;
 
 import java.io.IOException;
@@ -12,7 +11,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;    
+import jakarta.servlet.http.HttpServletResponse;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -57,16 +56,19 @@ public class CartServlet extends HttpServlet {
             if (!cartData.isEmpty()) {
                 String[] items = cartData.split(",");
                 String id = request.getParameter("id");
-                String size = request.getParameter("size"); // Lấy size từ request
-                String color = request.getParameter("color"); // Lấy color từ request
+                String size = request.getParameter("size");
+                String color = request.getParameter("color");
                 StringBuilder newCart = new StringBuilder();
 
                 if (action.equals("update")) {
                     String newQuantity = request.getParameter("quantity");
+                    int newQty = Integer.parseInt(newQuantity);
                     for (String item : items) {
                         String[] details = item.split("\\$");
-                        if (details[0].equals(id) && details[3].equals(size) && details[4].equals(color)) {
-                            details[6] = newQuantity; // Cập nhật số lượng
+                        if (details.length >= 8 && details[0].equals(id) && details[3].equals(size) && details[4].equals(color)) {
+                            int stockLimit = Integer.parseInt(details[7]); // Lấy instock
+                            newQty = Math.min(newQty, stockLimit); // Giới hạn theo instock
+                            details[6] = String.valueOf(newQty); // Cập nhật số lượng
                             newCart.append(String.join("$", details));
                         } else {
                             newCart.append(item);
@@ -78,7 +80,6 @@ public class CartServlet extends HttpServlet {
                 } else if (action.equals("remove")) {
                     for (String item : items) {
                         String[] details = item.split("\\$");
-                        // Chỉ giữ lại các sản phẩm không khớp cả id, size và color
                         if (!(details[0].equals(id) && details[3].equals(size) && details[4].equals(color))) {
                             newCart.append(item).append(",");
                         }
@@ -122,9 +123,10 @@ public class CartServlet extends HttpServlet {
         String color = request.getParameter("color");
         String price = request.getParameter("price");
         String quantity = request.getParameter("quantity");
+        String instock = request.getParameter("instock");
 
-        if (id != null && image != null && name != null && size != null && color != null && price != null && quantity != null) {
-            String cartItem = id + "$" + image + "$" + name + "$" + size + "$" + color + "$" + price + "$" + quantity;
+        if (id != null && image != null && name != null && size != null && color != null && price != null && quantity != null && instock != null) {
+            String cartItem = id + "$" + image + "$" + name + "$" + size + "$" + color + "$" + price + "$" + quantity + "$" + instock;
 
             if (txt.isEmpty()) {
                 txt = cartItem;
@@ -135,7 +137,7 @@ public class CartServlet extends HttpServlet {
 
                 for (String item : items) {
                     String[] details = item.split("\\$");
-                    if (details.length == 7) {
+                    if (details.length >= 7) { // Kiểm tra độ dài để tương thích với dữ liệu cũ
                         String existingId = details[0];
                         String existingSize = details[3];
                         String existingColor = details[4];
@@ -143,7 +145,10 @@ public class CartServlet extends HttpServlet {
                         if (existingId.equals(id) && existingSize.equals(size) && existingColor.equals(color)) {
                             int existingQuantity = Integer.parseInt(details[6]);
                             int newQuantity = Integer.parseInt(quantity);
-                            details[6] = String.valueOf(existingQuantity + newQuantity);
+                            int totalQuantity = existingQuantity + newQuantity;
+                            int stockLimit = details.length > 7 ? Integer.parseInt(details[7]) : Integer.MAX_VALUE; // Lấy instock hoặc mặc định không giới hạn
+                            totalQuantity = Math.min(totalQuantity, stockLimit); // Giới hạn theo instock
+                            details[6] = String.valueOf(totalQuantity);
                             productExists = true;
                             newCart.append(String.join("$", details));
                         } else {
