@@ -17,26 +17,26 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author zeryus
  */
-@WebServlet(name = "StoreCheckoutInfoServlet", urlPatterns = {"/store_checkout"})
+@WebServlet(name = "StoreCheckoutInfoServlet", urlPatterns = {"/checkout_info"})
 public class StoreCheckoutInfoServlet extends HttpServlet {
-
  
 
   
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-      
+     
     }
 
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String purpose = request.getParameter("purpose");
-        String deliveryId = request.getParameter("deliveryId");
-        double totalAmount = Double.parseDouble(request.getParameter("totalAmount"));
-        HttpSession order = request.getSession(true);
+            HttpSession order = request.getSession();
+            
+            String purpose = request.getParameter("purpose");
+            String deliveryId = request.getParameter("shippingOption");
+            Double totalAmount = Double.valueOf(request.getParameter("amount"));
         
             purpose = purpose==null?"":purpose;
             deliveryId = deliveryId==null?"D1":deliveryId;
@@ -45,7 +45,7 @@ public class StoreCheckoutInfoServlet extends HttpServlet {
             order.setAttribute("deliveryId", deliveryId);
         
 
-        response.setStatus(HttpServletResponse.SC_OK); // Respond with success
+        response.sendRedirect("checkout");
     }
 
 

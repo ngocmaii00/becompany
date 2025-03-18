@@ -38,7 +38,7 @@ import java.time.format.DateTimeFormatter;
 public class CheckoutServlet extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession userSession = request.getSession(false);
         User user = (User) userSession.getAttribute("user");
@@ -88,9 +88,11 @@ public class CheckoutServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
             HttpSession session = request.getSession();
+       
+            
             User u = (User)session.getAttribute("user");
             
             String purpose = (String)session.getAttribute("purpose");
@@ -107,26 +109,26 @@ public class CheckoutServlet extends HttpServlet {
             for(CartItem i : cart){
                 od.insertOrderDetail(orderId,td.searchTeddyId(i.id, i.color, i.size), deliveryId, i.getQuantity(), Date.valueOf(today));
             }
-//            Cookie[] cookies = request.getCookies();
-//    
-//            if (cookies != null) {
-//                for (Cookie cookie : cookies) {
-//                    if (cookie.getName().equals(u.getUsername() + "_cart")) {
-//                        // Set the cookie to an empty value
-//                        cookie.setValue("");
-//
-//                        // Set maxAge to 0 to delete the cookie immediately
-//                        cookie.setMaxAge(0);
-//
-//                        // Ensure the correct path (important if cookie has a path set)
-//                        cookie.setPath("/");
-//
-//                        // Add the cookie back to the response to overwrite it
-//                        response.addCookie(cookie);
-//                        break;
-//                    }
-//                }
-//            }
+            Cookie[] cookies = request.getCookies();
+    
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    if (cookie.getName().equals(u.getUsername() + "_cart")) {
+                        // Set the cookie to an empty value
+                        cookie.setValue("");
+
+                        // Set maxAge to 0 to delete the cookie immediately
+                        cookie.setMaxAge(0);
+
+                        // Ensure the correct path (important if cookie has a path set)
+                        cookie.setPath("/");
+
+                        // Add the cookie back to the response to overwrite it
+                        response.addCookie(cookie);
+                        break;
+                    }
+                }
+            }
             LocalDateTime datetime = LocalDateTime.now();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
             String date = datetime.format(formatter);

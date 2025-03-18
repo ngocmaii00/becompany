@@ -18,7 +18,9 @@
         <title>BuyProductPage</title>
   </head>
   
-  <body>
+  <body class="pt-20">
+      <%@ page session="true" %>
+       
        <%@include file="header.jsp" %>
     <div class="border-2 border-[#543520] mx-12 my-12 rounded-lg bg-[#f2e6e6]">
       <span
@@ -65,7 +67,7 @@
 
 
 
-                  <div class="col-span-2 flex justify-center items-center">
+                   <div class="col-span-2 flex justify-center items-center">
                       <span class="text-xl font-bold text-[#543520]"><fmt:formatNumber value="${item.estimate}" type="currency"/></span>
                       <input type="hidden" name="total-product-price" value="${item.estimate}">
                   </div>
@@ -88,14 +90,10 @@
         <div class="flex flex-col col-span-4 justify-center">
             <span class="font-bold text-xl text-[#543520]">Shipping Option: </span>
 
-                <select id="shippingOption" onchange="updateShippingPrice()" class="border-2 border-[#543520] w-full max-w-xs  px-2 py-2 rounded-lg my-2 bg-white">
-                    <c:forEach items="${requestScope.shippings}" var="shippings">
-                        <option value="${shippings.price}" data-id="${shippings.deliveryID}" class="">${shippings.description} (${shippings.duration}-${shippings.duration+1} days)</option>
-                    </c:forEach>
-<!--                    
-                    <option value="Fast" class="">Fast (2-3 days)</option>
-                    <option value="Express">Express (1-2 days)</option>
-                    <option value="Economy">Economy (7-8 days)</option>-->
+                <select id="shippingOption" name="shippingOption" onchange="updateShippingPrice()" class="border-2 border-[#543520] w-full max-w-xs  px-2 py-2 rounded-lg my-2 bg-white">
+                    <c:forEach items="${requestScope.shippings}" var="shippings" varStatus="stat">
+                        <option data-price="${shippings.price}" value="${shippings.deliveryID}" ${stat.index==0?"checked":""} class="">${shippings.description} (${shippings.duration}-${shippings.duration+1} days)</option>
+                    </c:forEach>  
                 </select>
             <span class="font-bold text-xl text-[#543520]">Payment Method: </span>
             <select name="bankCode" onchange="redirect()" class="payment-method border-2 border-[#543520] w-full max-w-xs  px-2 py-2 rounded-lg my-2 bg-white">
@@ -144,9 +142,11 @@
       </div>
     </form>
     </div>
-      <link href="https://pay.vnpay.vn/lib/vnpay/vnpay.css" rel="stylesheet" />
+     
+        
+        <link href="https://pay.vnpay.vn/lib/vnpay/vnpay.css" rel="stylesheet" />
         <script src="https://pay.vnpay.vn/lib/vnpay/vnpay.min.js"></script>
-        <script type="text/javascript">
+        <script id="vnpayScript" type="text/javascript">
             $("#frmCreateOrder").submit(function () {
                 var postData = $("#frmCreateOrder").serialize();
                 var submitUrl = $("#frmCreateOrder").attr("action");
@@ -176,21 +176,26 @@
             style: 'currency',
             currency: 'VND',
           });
-                  function redirect(){
+              function redirect(){
               const payment_method =  document.querySelector(".payment-method").value;
               const amount = document.querySelector("#amount");
               const form = document.querySelector("#frmCreateOrder");
+              const vnpayScript = document.querySelector("#vnpayScript");
 
               if(payment_method === "CASH"){
-                  form.setAttribute("action","checkout");
+                  form.setAttribute("action","checkout_info");
+                  vnpayScript.setAttribute("type","text/plain");
               }else if(payment_method === "VNBANK" || payment_method === "INTCARD"){
                   form.setAttribute("action","vnpayajax");
+                  vnpayScript.setAttribute("type","text/javascript");
+                  
               }
 
           }
           let shipping = document.querySelector("#shippingOption");
           function updateShippingPrice(){
-              let shippingPrice = parseFloat(document.querySelector("#shippingOption").value);
+              let shippingOption = document.querySelector("#shippingOption");
+              let shippingPrice = parseFloat(shippingOption.options[shippingOption.selectedIndex].getAttribute("data-price"));
               document.querySelector("#shippingPrice").innerText = formatter.format(shippingPrice);
 
               let allProductPrice = document.querySelectorAll("[name='total-product-price']");
@@ -208,35 +213,7 @@
           redirect();
           
         }
-        function storeSessionData() {
-          const purpose = document.querySelector("#purpose").value;
-          const shippingOption = document.querySelector("#shippingOption");
-          const deliveryId = shippingOption.options[shippingOption.selectedIndex].getAttribute("data-id");
-          const totalAmount = document.querySelector("#amount").value;
-
-          // Send data to storeSession.jsp
-          $.ajax({
-              type: "POST",
-              url: "store_checkout",
-              data: {
-                  purpose: purpose,
-                  deliveryId: deliveryId,
-                  totalAmount: totalAmount
-              },
-              success: function (response) {
-                  console.log("Session stored successfully!");
-                  window.location.href = "checkout";
-              },
-              error: function () {
-                  console.error("Failed to store session data.");
-              }
-          });
-      }
-
-      // Call this function when the form is submitted
-      $("#frmCreateOrder").submit(function () {
-          storeSessionData(); // Save session before redirect
-      });
+       
       </script>
   </body>
-  <html/>
+  </html>

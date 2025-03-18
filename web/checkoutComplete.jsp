@@ -32,7 +32,7 @@
                 <h1 class="basic uppercase font-bold peacesans-font text-3xl text-center text-[#563a2d] mb-8">
                     Checkout Successful
                 </h1>
-
+    
                 <!-- Order Summary -->
                 <div class="bg-white rounded-xl p-4 mb-6">
                     <h2 class="text-[#563a2d] peacesans-font text-lg mb-2">Order Summary</h2>

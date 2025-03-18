@@ -166,9 +166,10 @@
                     </span>
                 </div>
                 <div class="col-span-2 flex justify-center">
-                    <button onclick="postToServlet('checkout')" class="flex border-2 border-[#543520] bg-[#543520] rounded-md w-40 h-14 text-center items-center justify-center align-center">
+                    <a href="checkout"  class="flex border-2 border-[#543520] bg-[#543520] rounded-md w-40 h-14 text-center items-center justify-center align-center">
                         <span class="text-2xl font-bold text-white">Buy</span>
-                    </button>
+                    </a>
+<!--                    onclick="postToServlet('checkout')"-->
                 </div>
             </div>
         </div>

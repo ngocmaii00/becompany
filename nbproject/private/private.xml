@@ -3,33 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/src/java/controller/OrderManageServlet.java</file>
-            <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/src/java/controller/ProductServlet.java</file>
-            <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/src/java/controller/LoginGoogleServlet.java</file>
+            <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/src/java/controller/CheckoutServlet.java</file>
+            <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/src/java/controller/StaffServlet.java</file>
             <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/web/home.jsp</file>
             <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/src/java/controller/StoreCheckoutInfoServlet.java</file>
-            <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/src/java/controller/ProsFilterServlet.java</file>
-            <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/src/java/dal/TeddyDao.java</file>
-            <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/web/WEB-INF/web.xml</file>
-            <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/src/java/dal/ProductDao.java</file>
-            <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/src/java/dal/UserDAO.java</file>
-            <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/src/java/dal/OrderDao.java</file>
-            <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/src/java/controller/CheckoutServlet.java</file>
-            <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/web/temp.jsp</file>
-            <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/src/java/controller/ForgotPasswordServlet.java</file>
-            <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/web/css/proStyle.css</file>
             <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/web/checkoutComplete.jsp</file>
-            <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/src/java/controller/HeaderServlet.java</file>
-            <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/src/java/controller/ProsServlet.java</file>
-            <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/src/java/model/Product.java</file>
-            <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/web/buyProduct.jsp</file>
-            <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/web/product.jsp</file>
-            <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/src/java/model/Teddy.java</file>
+            <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/src/java/utilities/MailUtil.java</file>
             <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/web/cart.jsp</file>
-            <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/src/java/controller/LoginServlet.java</file>
-            <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/web/login.jsp</file>
-            <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/web/header.jsp</file>
-            <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/src/java/controller/CartServlet.java</file>
+            <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/src/java/controller/ajaxServlet.java</file>
+            <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/src/java/controller/StaffUpdateServlet.java</file>
+            <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/web/buyProduct.jsp</file>
         </group>
     </open-files>
 </project-private>
