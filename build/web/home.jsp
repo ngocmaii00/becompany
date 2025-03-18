@@ -1,5 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<fmt:setLocale value="vi_VN" />
 <!DOCTYPE html>
 <html>
     <head>
@@ -32,7 +34,7 @@
                             </a>
                             <div class="flex justify-between items-baseline">
                                 <a href="product?name=${p.getProductName()}" class="home-teddy-name">${p.getProductName()}</a>
-                                <p class="home-teddy-price">${p.getTeddies().get(0).getPrice()}$</p>
+                                <p class="home-teddy-price"><fmt:formatNumber value="${p.getTeddies().get(0).getPrice()}" type="currency"/></p>
                             </div>
                             <div class="home-teddy-${p.productId}">
                                 <div class="home-teddy-colors">

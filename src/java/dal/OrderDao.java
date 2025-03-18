@@ -3,9 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package dal;
-
+import java.sql.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +40,57 @@ public class OrderDao extends DBConnect {
         }
         return list;
     }
+    
+    
+    
+
+        public int addNewOrder(String userId, Date orderDate, String orderStatus, String purpose) {
+            String sql = "INSERT INTO [Order](userId, orderDate, orderStatus, purpose) VALUES (?, ?, ?, ?);";
+            try {
+                // Use RETURN_GENERATED_KEYS to get the auto-generated ID
+                PreparedStatement st = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+                st.setString(1, userId);
+                st.setDate(2, orderDate);
+                st.setString(3, orderStatus);
+                st.setString(4, purpose);
+
+                // Execute the insert
+                int rowsInserted = st.executeUpdate();
+
+                // Retrieve the generated key (orderId)
+                if (rowsInserted > 0) {
+                    ResultSet rs = st.getGeneratedKeys();
+                    if (rs.next()) {
+                        int orderId = rs.getInt(1);  // Fetch by column index (not name)
+                        return orderId;  // Successfully return the order ID
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace(); // Log the error
+            }
+            return -1; // Return -1 if something goes wrong
+        }
+
+    
+    public void insertOrderDetail(int OrderId, String teddyId, String deliveryId, int quantity,Date orderDate){
+        String sql = "INSERT INTO OrderDetail (orderId, teddyId, deliveryId, boughtQuantity, orderDate) values(?,?,?,?,?)";
+        
+        try{
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1,OrderId);
+            st.setString(2, teddyId);
+            st.setString(3, deliveryId);
+            st.setInt(4, quantity);
+            st.setDate(5, orderDate);
+            st.executeUpdate();
+        }catch(SQLException e){
+            System.err.println(e);
+        }
+    }
+    
+    //String orderId, String teddyId,String deliveryId,int quantity,Date orderDate,Date receiveDate
+    
     
     public static void main(String[] args) {
         OrderDao od = new OrderDao();

@@ -13,13 +13,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
-
+import jakarta.servlet.http.HttpSession;
 
 import jakarta.servlet.http.HttpServletResponse;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import model.User;
 
 @WebServlet(name = "CartServlet", urlPatterns = {"/cart"})
 public class CartServlet extends HttpServlet {
@@ -44,13 +45,16 @@ public class CartServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession userSession = request.getSession(false);
+        User user = (User)userSession.getAttribute("user");
+        String cartId = user.getUsername() + "_cart";
         String action = request.getParameter("action");
         if (action != null) {
             Cookie[] cookies = request.getCookies();
             String cartData = "";
             if (cookies != null) {
                 for (Cookie cookie : cookies) {
-                    if (cookie.getName().equals("cart")) {
+                    if (cookie.getName().equals(cartId)) {
                         cartData = URLDecoder.decode(cookie.getValue(), StandardCharsets.UTF_8.toString());
                         cookie.setMaxAge(0); // Xóa cookie cũ
                         response.addCookie(cookie);
@@ -93,7 +97,8 @@ public class CartServlet extends HttpServlet {
                 }
                 // mã hoá - cookie đọc được dấu $
                 String encodedCart = URLEncoder.encode(updatedCart, StandardCharsets.UTF_8.toString());
-                Cookie c = new Cookie("cart", encodedCart);
+                
+                Cookie c = new Cookie(cartId, encodedCart);
                 c.setMaxAge(60 * 60 * 24 * 7);
                 response.addCookie(c);
             }
@@ -106,11 +111,14 @@ public class CartServlet extends HttpServlet {
     @Override
 protected void doPost(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
+    HttpSession userSession = request.getSession(false);
+    User user = (User)userSession.getAttribute("user");
+    String cartId = user.getUsername() + "_cart";
     Cookie[] arr = request.getCookies();
     String txt = "";
     if (arr != null) {
         for (Cookie o : arr) {
-            if (o.getName().equals("cart")) {
+            if (o.getName().equals(cartId)) {
                 txt = URLDecoder.decode(o.getValue(), StandardCharsets.UTF_8.toString());
                 o.setMaxAge(0); // Xóa cookie cũ
                 response.addCookie(o);
@@ -169,7 +177,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
 
         // mã hoá + lưu cookie
         String encodedTxt = URLEncoder.encode(txt, StandardCharsets.UTF_8.toString());
-        Cookie c = new Cookie("cart", encodedTxt);
+        Cookie c = new Cookie(cartId, encodedTxt);
         c.setMaxAge(60 * 60 * 24 * 7);
         response.addCookie(c);
     }

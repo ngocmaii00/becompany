@@ -3,7 +3,8 @@
         <%@page contentType="text/html" pageEncoding="UTF-8" %>
             <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
                 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<fmt:setLocale value="vi_VN" />
                     <html>
 
                     <head>
@@ -87,7 +88,7 @@
                                     <div
                                         class="flex flex-row justify-between text-[#563a2d] bg-[#f2e6e6] py-4 px-4 mb-8">
                                         <div class="text-4xl peacesans-font text-nowrap" id="price">
-                                            ${requestScope.price}$</div>
+                                            <fmt:formatNumber value="${requestScope.price}" type="currency"/></div>
                                         <div class="flex flex-row w-3/4 justify-end gap-x-2 items-center">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#543520"
                                                 class="size-8">

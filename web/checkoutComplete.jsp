@@ -1,167 +1,116 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<fmt:setLocale value="vi_VN" />
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Sign-up</title>
-        <link rel="icon" type="image/svg+xml" href="images/head.png" />
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-        <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
-        <script>
-//            tailwind.config = {
-//              theme: {
-//                extend: {
-//                  colors: {
-//                    backgroundBrown: '#4f362b',
-//                  },
-//                },
-//              },
-//            };
-        </script>
-    </head>
-    <body class="w-screen h-screen flex items-center ">
-        <div class="flex flex-row gap-6 justify-between p-8" style="background-color: #4f362b; height:90%; width:100%; ">
-            <div class="flex flex-col items-center justify-center p-8">
-                <img src="/becompany/image/head.png" class="w-[40%]"/>
+<head>
+    <meta charset="UTF-8">
+    <title>Checkout Success - BeCompany</title>
+    <style>
+        .peacesans-font {
+            font-family: 'Peace Sans', sans-serif;
+        }
+        .notosans-font {
+            font-family: 'Noto Sans', sans-serif;
+        }
+    </style>
+</head>
+<body class="flex flex-col my-10 gap-4 items-center">
+    <div class="flex flex-row gap-6 justify-between p-8" style="background-color: #4f362b; height: 90%; width: 100%">
+        <!-- Left Section - Logo & Company Name -->
+        <div class="flex flex-col items-center justify-center p-8">
+            <img src="/becompany/image/head.png" class="w-[60%]"/>
+            <h1 class="text-gray-50 peacesans-font text-center mt-7 uppercase font-extrabold" style="font-size: 5vw">
+                becompany
+            </h1>
+        </div>
 
-                <h1 class="text-gray-50 peacesans-font text-center mt-7 uppercase font-extrabold" style="font-size: 5vw">becompany</h1>
+        <!-- Right Section - Checkout Card -->
+        <div class="font-medium font-bold w-[70%] flex items-center justify-center">
+            <div class="flex flex-col py-8 px-10 bg-[#f2e6e6] rounded-3xl border-3 border-gray-950 w-[800px]" style="margin: 6% 7%">
+                <h1 class="basic uppercase font-bold peacesans-font text-3xl text-center text-[#563a2d] mb-8">
+                    Checkout Successful
+                </h1>
 
-            </div>
-
-            <div class="font-medium font-bold w-[50%] flex items-center justify-center">
-                <!--sign up-->
-                <div class=" flex flex-col py-8 px-10 bg-[#f2e6e6] rounded-3xl border-3 border-gray-950 w-[450px]" style="margin:6% 14% 6% 7%;">
-                    <h1 class="basic uppercase font-bold peacesans-font text-3xl text-center text-[#563a2d]" >
-                        Sign Up
-                    </h1>
-                    <div>
-                        <div class=" mt-5 h-[3.5em] w-10/10">
-                            <input type="text" name="email" id="email" class="h-full w-full text-lg border-2 notosans-font border-gray-950 rounded-xl h-full p-3 bg-[#ffffff] hover:bg-[#ffffff]/60 pl-[16px] placeholder:font-bold" placeholder="Email">
+                <!-- Order Summary -->
+                <div class="bg-white rounded-xl p-4 mb-6">
+                    <h2 class="text-[#563a2d] peacesans-font text-lg mb-2">Order Summary</h2>
+                    <hr class="bg-[#563a2d]/20 mb-3" />
+                    <div class="space-y-2 notosans-font">
+                        <div class="flex justify-between">
+                            <span class="text-[#563a2d]/80">Order ID:</span>
+                            <span class="text-[#563a2d] font-semibold">#${requestScope.orderId}/span>
                         </div>
-                        <div class="  mt-3 h-[3.5em] w-10/10">
-                            <input type="text" name="username" id="username" class="h-full w-full text-lg border-2 notosans-font border-gray-950 rounded-xl h-full p-3 bg-[#ffffff] hover:bg-[#ffffff]/60 pl-[16px] placeholder:font-bold" placeholder="Username">
+                        <div class="flex justify-between">
+                            <span class="text-[#563a2d]/80">Date:</span>
+                            <span class="text-[#563a2d]">${requestScope.date}</span>
                         </div>
-                        <div class=" mt-3 h-[3.5em] w-10/10 relative">
-                            <input type="password" name="password" id="password" class="h-full w-full text-lg border-2 notosans-font border-gray-950 rounded-xl h-full p-3 bg-[#ffffff] hover:bg-[#ffffff]/60 pl-[16px] placeholder:font-bold"  placeholder="Password">
-                            <button type="button" id="togglePassword" class="absolute top-[50%] right-[1rem] translate-y-[-50%]  cursor-pointer w-[1.5rem] flex items-center">
-
-                                <svg id="eye" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                <path id="firstPath" stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
-                                <path id="secondPath"stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                                </svg>
-                                <svg id="eye-slash" style="display:none" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88" />
-                                </svg>
-
-                            </button>
-
+                        <div class="flex justify-between">
+                            <span class="text-[#563a2d]/80">Total Amount:</span>
+                            <span class="text-[#563a2d] font-semibold"><fmt:formatNumber value="${requestScope.totalPrice}" type="currency"/></span>
                         </div>
-                        <div class=" mt-3 h-[3.5em] w-10/10 relative">
-                            <input type="password" name="password_re_enter" id="password_re_enter" class="h-full w-full text-lg border-2 notosans-font border-gray-950 rounded-xl h-full p-3 bg-[#ffffff] hover:bg-[#ffffff]/60 pl-[16px] placeholder:font-bold" placeholder="Re-enter password">
-                            <button type="button" id="toggleReEnter" class="absolute top-[50%] right-[1rem] translate-y-[-50%]  cursor-pointer w-[1.5rem] flex items-center">
-
-                                <svg id="eye-re" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                <path id="firstPath" stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
-                                <path id="secondPath"stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                                </svg>
-                                <svg id="eye-slash-re" style="display:none" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88" />
-                                </svg>
-
-                            </button>
-                        </div>
-
-                        <div class="h-[3em] w-full mt-8">
-                            <button type="button" onclick="submitForm()" class="text-xl text-white peacesans-font w-full pt-4 pb-3 rounded-xl cursor-pointer uppercase bg-[#563a2d] hover:bg-[#563a2d]/80 ">Sign Up</button>    
-                        </div>
-
-                    </div>
-
-                    <p id="error" class="text-red-500 text-center mt-8 mb-2 "></p>    
-                    <div class="text-base text-center ">
-                        <p class="inline notosans-font text-[#563a2d]">Already had an account?</p>
-                        <a type="button" href="login" class="inline-block ml-1 font-base underline text-[#563a2d] hover:text-[#563a2d]/80  cursor-pointer">Login</a>
                     </div>
                 </div>
+
+                <!-- Ordered Products -->
+                <div class="bg-white rounded-xl p-4 mb-6">
+                    <h2 class="text-[#563a2d] peacesans-font text-lg mb-2">Ordered Products</h2>
+                    <hr class="bg-[#563a2d]/20 mb-3" />
+                    <div class="grid grid-cols-2 gap-4 notosans-font">
+                        <!-- Product Item 1 -->
+                        <c:forEach items="${requestScope.cart}" var="item">
+                        <div class="flex items-center gap-4 p-4 bg-[#563a2d]/5 rounded-lg">
+                            <div class="w-16 h-16 bg-[#563a2d]/10 rounded-lg flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#563a2d" class="w-8 h-8">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
+                                </svg>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-[#563a2d] font-semibold">${item.name}</h3>
+                                <p class="text-[#563a2d]/60 text-sm">Quantity: ${item.quantity}</p>
+                            </div>
+                                <span class="text-[#563a2d] font-semibold"><fmt:formatNumber value="${item.estimate}" type="currency"/></span>
+                        </div>
+                        </c:forEach>
+                        
+                    </div>
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="flex justify-between mb-6">
+                    <a href="${pageContext.request.contextPath}/home" 
+                       class="inline-flex justify-center items-center bg-white text-lg p-2 border-2 border-gray-950 rounded-xl hover:bg-[#563a2d]/5 transition-colors"
+                       style="width: 49%">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#563a2d" class="md:size-8 size-10">
+                            <path d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06l8.69-8.689Z" />
+                            <path d="m12 5.432 8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.432Z" />
+                        </svg>
+                        <p class="notosans-font ml-2">Home Page</p>
+                    </a>
+                    <a href="${pageContext.request.contextPath}/order" 
+                       class="inline-flex justify-center items-center bg-white text-lg p-2 border-2 border-gray-950 rounded-xl hover:bg-[#563a2d]/5 transition-colors"
+                       style="width: 49%">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="#563a2d" viewBox="0 0 24 24" stroke-width="1.5" stroke="#563a2d" class="size-10">
+                            <path d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 0 0-3.213-9.193 2.056 2.056 0 0 0-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 0 0-10.026 0 1.106 1.106 0 0 0-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" />
+                        </svg>
+                        <p class="notosans-font ml-2">Order Page</p>
+                    </a>
+                </div>
+
+                <hr class="my-8 bg-[#563a2d]/20" />
+
+                <!-- Email Confirmation -->
+                <p class="text-center text-[#563a2d]/80 notosans-font">
+                    
+                </p>
             </div>
         </div>
-        <script>
-            const toggle_password = document.querySelector('#togglePassword');
-            const eye_icon = document.querySelector('#eye');
-            const eye_slash_icon = document.querySelector('#eye-slash');
-            const password = document.querySelector('#password');
+    </div>
 
-            const toggleReEnter = document.querySelector("#toggleReEnter");
-            const eye_re_icon = document.querySelector('#eye-re');
-            const eye_slash_re_icon = document.querySelector('#eye-slash-re');
-            const password_re_enter = document.querySelector('#password_re_enter');
-
-            toggle_password.addEventListener('click', () => {
-                if (password.type === 'password') {
-                    password.type = 'text';
-                    eye_icon.style.display = 'none';
-                    eye_slash_icon.style.display = 'inline';
-                } else {
-                    password.type = 'password';
-                    eye_icon.style.display = 'inline';
-                    eye_slash_icon.style.display = 'none';
-                }
-            });
-            toggleReEnter.addEventListener('click', () => {
-                if (password_re_enter.type === 'password') {
-                    password_re_enter.type = 'text';
-                    eye_re_icon.style.display = 'none';
-                    eye_slash_re_icon.style.display = 'inline';
-                } else {
-                    password_re_enter.type = 'password';
-                    eye_re_icon.style.display = 'inline';
-                    eye_slash_re_icon.style.display = 'none';
-                }
-            });
-
-
-        </script>
-        <script>
-
-            function submitForm() {
-                let errorMsg = document.querySelector("#error");
-
-                const formData = new URLSearchParams();
-                let email = document.querySelector("#email").value;
-                let username = document.querySelector("#username").value;
-                let password = document.querySelector("#password").value;
-                let password_re_enter = document.querySelector("#password_re_enter").value;
-
-                formData.append("email", email);
-                formData.append("username", username);
-                formData.append("password", password);
-                formData.append("password_re_enter", password_re_enter);
-
-
-
-                fetch("signup", {
-                    method: "POST",
-                    headers: {"Content-Type": "application/x-www-form-urlencoded"},
-                    body: formData.toString()
-                })
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.success) {
-                                window.location.href = data.redirect;
-
-                            }
-                            if (data.error) {
-
-                                errorMsg.innerHTML = data.error;
-
-                            }
-                        });
-
-            }
-
-        </script>
-
-    </body>
+    <!-- Include Tailwind CSS -->   
+    <script src="https://cdn.tailwindcss.com"></script>
+</body>
 </html>

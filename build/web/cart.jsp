@@ -3,9 +3,12 @@
     Created on : Feb 17, 2025, 9:31:39 PM
     Author     : DucAnhDepTrai
 --%>
+<%@page import="model.User"%>
 <%@page import="java.util.*" %>
 <%@page import="java.net.URLDecoder" %>
 <%@page import="java.nio.charset.StandardCharsets" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<fmt:setLocale value="vi_VN" />
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -29,11 +32,14 @@
 
             <div class="border-2 border-[#543520] mx-16 rounded-lg py-4 bg-[#f2e6e6]">
                 <%
+                    HttpSession userSession = request.getSession(false);
+                    User user = (User)userSession.getAttribute("user");
+                    String cartId = user.getUsername() + "_cart";
                     Cookie[] cookies = request.getCookies();
                     String cartData = "";
                     if (cookies != null) {
                         for (Cookie cookie : cookies) {
-                            if (cookie.getName().equals("cart")) {
+                            if (cookie.getName().equals(cartId)) {
                                 cartData = URLDecoder.decode(cookie.getValue(), StandardCharsets.UTF_8.toString());
                                 break;
                             }
@@ -46,7 +52,7 @@
                     }
                 %>
                 <c:choose>
-                    <c:when test="${not empty cartItems}">
+                        <c:when test="${not empty cartItems}">
                         <c:forEach var="item" items="${cartItems}">
                             <%
                                 String[] details = ((String) pageContext.getAttribute("item")).split("\\$");
@@ -67,7 +73,7 @@
                                     pageContext.setAttribute("color", color);
                                     pageContext.setAttribute("price", price);
                                     pageContext.setAttribute("quantity", quantity);
-                                    pageContext.setAttribute("estimate", String.format("%.2f", estimate));
+                                    pageContext.setAttribute("estimate", estimate);
                                 }
                             %>
                             <div class="grid grid-cols-11 items-center py-4">
@@ -86,7 +92,7 @@
                                     </div>
                                 </div>
                                 <div class="col-span-2 text-center text-xl font-bold">
-                                    <span>${price}</span>
+                                    <span><fmt:formatNumber value="${price}" type="currency"/></span>
                                 </div>
                                 <div class="col-span-2 place-items-center">
                                     <div class="flex flex-row border-2 border-black h-fit w-fit rounded-md col-span-2 items-center">
@@ -104,7 +110,7 @@
                                     </div>
                                 </div>
                                 <div class="col-span-2 text-center text-xl font-bold">
-                                    <span>${estimate}</span>
+                                    <span><fmt:formatNumber value="${estimate}" type="currency"/></span>
                                 </div>
                                 <div class="col-span-1 place-items-center">
                                     <div class="flex flex-row gap-x-4 lg:mx-8 mx-4 col-span-1 items-end">
@@ -141,8 +147,8 @@
                     <span class="text-3xl font-bold text-[#543520]"> Total Amount: </span>
                 </div>
                 <div class="col-span-4 text-center">
-                    <span class="text-4xl font-bold text-[#543520]">
-                        <%
+                    <span id="total" class="text-4xl font-bold text-[#543520]">               
+                            <%
                             double totalAmount = 0;
                             if (!cartData.isEmpty()) {
                                 String[] items = cartData.split(",");
@@ -155,19 +161,26 @@
                                     }
                                 }
                             }
-                            out.print(String.format("%.2f", totalAmount));
-                        %>$
+                            out.print(String.format("%.0f", totalAmount));
+                        %> 
                     </span>
                 </div>
                 <div class="col-span-2 flex justify-center">
-                    <button class="flex border-2 border-[#543520] bg-[#543520] rounded-md w-40 h-14 text-center items-center justify-center align-center">
+                    <a href="checkout" class="flex border-2 border-[#543520] bg-[#543520] rounded-md w-40 h-14 text-center items-center justify-center align-center">
                         <span class="text-2xl font-bold text-white">Buy</span>
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>
 
         <script>
+            const formatter = new Intl.NumberFormat('vi-VN', {
+            style: 'currency',
+            currency: 'VND'
+          });
+            let totalElement = document.querySelector('#total');
+            totalElement.innerHTML = formatter.format(totalElement.innerHTML);
+            
             function updateQuantity(id, newQuantity) {
                 if (newQuantity < 1) return;
                 window.location.href = "cart?action=update&id=" + id + "&quantity=" + newQuantity;

@@ -71,4 +71,20 @@ public class TeddyDao extends DBConnect {
         }
         return null;
     }
+    public String searchTeddyId(String productId, String color, String size){
+        String sql ="select teddyId from TeddyDetail where productId = ? and color = ? and size =?";
+        try{
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, productId);
+            st.setString(2, color);
+            st.setString(3, size);
+            ResultSet rs = st.executeQuery();
+            if(rs.next()){
+                return rs.getString("teddyId");
+            }
+        }catch(SQLException e){
+            System.err.println(e);
+        }
+        return null;
+    }
 }
