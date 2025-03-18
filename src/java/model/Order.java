@@ -78,7 +78,7 @@ public class Order {
         return image;
     }
 
-    public void setImages(String image) {
+    public void setImage(String image) {
         this.image = image.split(", ")[0];
     }
 

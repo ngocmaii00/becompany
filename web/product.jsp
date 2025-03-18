@@ -47,7 +47,7 @@
 
                         <div id="description" class="px-10 lg:col-span-3 col-span-1 lg:mt-20 mt-16">
                             <div class="flex flex-row justify-between items-center mb-6">
-                                <p class=" text-[#563a2d] lg:text-5xl text-4xl uppercase peacesans-font justify-items-start">${product.getProductName()}</p>
+                                <p class=" text-[#563a2d] lg:text-5xl md:text-4xl text-3xl uppercase peacesans-font justify-items-start">${product.getProductName()}</p>
                                 <div class="flex flex-row justify-center items-baseline text-nowrap">
                                     <!--Print yellow Star -->
                                     <c:if test="${requestScope.rating != -1}">
@@ -173,7 +173,7 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="fixed bottom-6 right-6 font-bold z-10">
+                            <div class="fixed bottom-6 right-6 font-bold z-10 drop-shadow-xl">
                                 <button class="flex gap-x-2 text-[#543520] text-nowrap border-4 border-[#543520] rounded-lg px-4 py-3 text-xl uppercase bg-white hover:bg-[#543520] hover:text-white hover:-translate-y-1 hover:scale-105 htext-[#543520]over:duration-300 hover:transition-all hover:ease-in-out animate-bounce">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-7">
                                         <path fill-rule="evenodd" d="M7.5 6v.75H5.513c-.96 0-1.764.724-1.865 1.679l-1.263 12A1.875 1.875 0 0 0 4.25 22.5h15.5a1.875 1.875 0 0 0 1.865-2.071l-1.263-12a1.875 1.875 0 0 0-1.865-1.679H16.5V6a4.5 4.5 0 1 0-9 0ZM12 3a3 3 0 0 0-3 3v.75h6V6a3 3 0 0 0-3-3Zm-3 8.25a3 3 0 1 0 6 0v-.75a.75.75 0 0 1 1.5 0v.75a4.5 4.5 0 1 1-9 0v-.75a.75.75 0 0 1 1.5 0v.75Z" clip-rule="evenodd" />
@@ -183,13 +183,57 @@
                             </div>
                         </div>
 
-                        <!--Information-->
-                        <div>
-                            <div class="bg-white drop-shadow-xl mx-10 mb-16 z-5 border">
-                                <span class="peacesans-font">Information About ${product.getProductName()}</span>
-                            </div>
-                        </div>   
+
                     </main>
+                    <div class="grid md:grid-cols-2 grid-cols-1 md:mx-14 mx-10 gap-10 mt-8">
+                        <!--Information-->
+                        <div class="flex flex-col bg-white drop-shadow-md z-5 border rounded-md">
+                            <span class="peacesans-font px-8 py-4 uppercase text-2xl bg-[#f2e6e6] w-full">Information</span>
+                            <div class="grid grid-cols-2">
+                                <div class="col-span-1 px-8 py-4 font-semibold">
+                                    <p>Name</p>
+                                    <p>Type</p>
+                                    <p>Status</p>
+                                    <p>Origin</p>
+                                    <p>Manufacturer</p>
+                                </div>
+                                <div class="col-span-1 py-4">
+                                    <p>${product.getProductName()}</p>
+                                    <p>${product.getType()}</p>
+                                    <p>${product.getStatus()}</p>
+                                    <p>${product.getOrigin()}</p>
+                                    <p>${product.getManufacturer()}</p>
+                                </div>
+                            </div>
+
+                        </div> 
+
+                        <!--Description-->
+                        <div class="flex flex-col bg-white drop-shadow-md z-5 border rounded-md">
+                            <span class="peacesans-font px-8 py-4 uppercase text-2xl bg-[#f2e6e6] w-full">Description</span>
+                            <p class="py-4 px-8">${product.getDescription()}</p>
+
+                        </div> 
+                    </div>  
+                    <!--Rating-->
+                    <div class="flex flex-col bg-white drop-shadow-md z-5 border rounded-md md:mx-14 mx-10 mb-16 mt-8">
+                        <span class="peacesans-font px-8 py-4 uppercase text-2xl bg-[#f2e6e6] w-full">Rating</span>
+                        
+                        <c:forEach items="${requestScope.data}" var="r">
+                            <div class="px-8 py-4">
+                                <img src="${r.image}" class="h-16 w-16"/>
+                                <span>${r.username}</span>
+                            </div>
+                            
+                            
+                        </c:forEach>
+                        
+                        <form action="rating" class="flex flex-row px-8 gap-x-2 py-4">
+                            <input type="text" name="rate" class="border-2 rounded-md w-full">
+                            <button type="submit" class="rounded-md px-2 py-1 bg-[#543520] text-white font-semibold"/>Send
+                        </form>
+                        
+                    </div> 
                     <%@include file="footer.jsp" %> 
                     <script>
                         currentSlideId = 1;
@@ -313,6 +357,6 @@
                         window.onload = submitForm;
                     </script>
 
-
+                    
                 </body>
                 </html>

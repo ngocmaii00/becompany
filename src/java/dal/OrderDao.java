@@ -18,11 +18,12 @@ import model.Product;
  */
 public class OrderDao extends DBConnect {
     
-    public List<Order> getAll() {
+    public List<Order> getAll(String userId) {
         List<Order> list = new ArrayList<>();
-        String sql = "select * from [Order] o left join (select od.orderId, A.productName, A.image, od.boughtQuantity, A.color, A.price, A.size from OrderDetail od join (select p.productName, p.image, td.teddyId, td.color, td.price, td.size from Product p join TeddyDetail td on p.productId = td.productId) as A on od.teddyId = A.teddyId) as B on o.orderId = B.orderId";
+        String sql = "select * from [Order] o left join (select od.orderId, A.productName, A.image, od.boughtQuantity, A.color, A.price, A.size from OrderDetail od join (select p.productName, p.image, td.teddyId, td.color, td.price, td.size from Product p join TeddyDetail td on p.productId = td.productId) as A on od.teddyId = A.teddyId) as B on o.orderId = B.orderId where o.userId = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, userId);
             ResultSet result = st.executeQuery();
             while (result.next()) {
                 Order o = new Order(result.getString("productName"),
@@ -38,12 +39,5 @@ public class OrderDao extends DBConnect {
             System.out.println(e);
         }
         return list;
-    }
-    
-    public static void main(String[] args) {
-        OrderDao od = new OrderDao();
-        List<Order> list = od.getAll();
-        System.out.println(list.get(0).getProductName());
-        
     }
 }
