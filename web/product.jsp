@@ -1,6 +1,6 @@
 <%@page import="java.util.List" %>
 <%@page import="java.util.ArrayList" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -234,46 +234,20 @@
                     <%@include file="footer.jsp" %>
                     
                     <script>
-                        function showSize() {
-                            let selectedValue = document.querySelector("input[name='color']:checked").value;
-                            let sizeArray = document.querySelectorAll('ul[name="size"]');
-                            for (let i = 0; i < sizeArray.length; i++) {
-                                if (sizeArray[i].getAttribute('id') === selectedValue) {
-                                    sizeArray[i].style.display = "block";
-                                } else {
-                                    sizeArray[i].style.display = "none";
-                                }
+                        function plus(){
+                            let quantity = parseInt(document.querySelector("#quantity-num").innerText, 10);
+                            let stockText = document.querySelector("#instock").innerText;
+                            let stock = stockText ? parseInt(stockText, 10) : 0;
+                            if (quantity < stock) {
+                                quantity = quantity + 1;
+                                document.querySelector("#quantity-num").innerHTML = quantity;
                             }
                         }
-
-
-                        function next() {
-                            if (currentSlideId < totalSlide) {
-                                currentSlideId++;
-                                showSlide();
-                            } else if (currentSlideId === totalSlide) {
-                                currentSlideId = 1;
-                                showSlide();
-                            }
-                        }
-                        function previous() {
-                            if (currentSlideId > 1) {
-                                currentSlideId--;
-                                showSlide();
-                            } else if (currentSlideId === 1) {
-                                currentSlideId = totalSlide;
-                                showSlide();
-                            }
-                        }
-                        function showSlide() {
-                            slide = document.querySelector("#slider").querySelectorAll("li");
-                            for (let i = 0; i < totalSlide; i++) {
-                                const element = slide[i];
-                                if (currentSlideId === i + 1) {
-                                    element.classList.remove('hidden');
-                                } else {
-                                    element.classList.add('hidden');
-                                }
+                        function minus(){
+                            let quantity = parseInt(document.querySelector("#quantity-num").innerText, 10);
+                            if (quantity > 1) {
+                                quantity = quantity - 1;
+                                document.querySelector("#quantity-num").innerHTML = quantity;
                             }
                         }
                     </script>
@@ -321,36 +295,36 @@
                     </script>
                     <script>
                         function showSize() {
-                        let selectedValue = document.querySelector("input[name='color']:checked").value;
-                                let sizeArray = document.querySelectorAll('ul[name="size"]');
-                                for (let i = 0; i < sizeArray.length; i++) {
-                        if (sizeArray[i].getAttribute('id') === selectedValue) {
-                        sizeArray[i].style.display = "block";
-                                sizeArray[i].querySelector('input').checked = true;
-                        } else {
-                        sizeArray[i].style.display = "none";
-                                let sizeArrayChild = sizeArray[i].querySelectorAll('input');
-                                for (let j = 0; j < sizeArrayChild.length; j++) {
-                        sizeArrayChild[j].checked = false;
-                        }
-                        }
-                        }
+                            let selectedValue = document.querySelector("input[name='color']:checked").value;
+                            let sizeArray = document.querySelectorAll('ul[name="size"]');
+                            for (let i = 0; i < sizeArray.length; i++) {
+                                if (sizeArray[i].getAttribute('id') === selectedValue) {
+                                sizeArray[i].style.display = "block";
+                                        sizeArray[i].querySelector('input').checked = true;
+                                } else {
+                                sizeArray[i].style.display = "none";
+                                    let sizeArrayChild = sizeArray[i].querySelectorAll('input');
+                                    for (let j = 0; j < sizeArrayChild.length; j++) {
+                                        sizeArrayChild[j].checked = false;
+                                    }
+                                }
+                            }
                         }
                         (function () {
-                        let selectedValue = document.querySelector("input[name='color']:checked").value;
-                                let sizeArray = document.querySelectorAll('ul[name="size"]');
-                                for (let i = 0; i < sizeArray.length; i++) {
-                        if (sizeArray[i].getAttribute('id') === selectedValue) {
-                        sizeArray[i].style.display = "block";
-                                sizeArray[i].firstChild.checked = true;
-                        } else {
-                        sizeArray[i].style.display = "none";
-                                let sizeArrayChild = sizeArray[i].querySelectorAll('input');
-                                for (let j = 0; j < sizeArrayChild.length; j++) {
-                        sizeArrayChild[j].checked = false;
-                        }
-                        }
-                        }
+                            let selectedValue = document.querySelector("input[name='color']:checked").value;
+                            let sizeArray = document.querySelectorAll('ul[name="size"]');
+                            for (let i = 0; i < sizeArray.length; i++) {
+                                if (sizeArray[i].getAttribute('id') === selectedValue) {
+                                sizeArray[i].style.display = "block";
+                                        sizeArray[i].querySelector('input').checked = true;
+                                } else {
+                                sizeArray[i].style.display = "none";
+                                    let sizeArrayChild = sizeArray[i].querySelectorAll('input');
+                                    for (let j = 0; j < sizeArrayChild.length; j++) {
+                                        sizeArrayChild[j].checked = false;
+                                    }
+                                }
+                            }
                         })();
                                 function submitForm() {
                                 const color = document.querySelector('input[name="color"]:checked')?.value;
@@ -389,7 +363,7 @@
 
                         window.onload = function() {
                         submitForm();
-                                showSize();
+                        showSize();
                         }
                         (function () {
                         let selectedValue = document.querySelector("input[name='color']:checked").value;
