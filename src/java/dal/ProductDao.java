@@ -143,7 +143,7 @@ public class ProductDao extends DBConnect {
     }
 
 //    //////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public List<Product> getProductByFilter(String type, String color, String size, String from, String to, String[] status, String[] rating) {
+    public List<Product> getProductByFilter(String type, String[] colors, String[] sizes, String from, String to, String[] status, String[] rating) {
         List<Product> list = new ArrayList<>();
         TeddyDao td = new TeddyDao();
         String sql = "select distinct p.productId, p.productName, p.origin, p.description, p.image, p.manufacturer, p.status, p.type, h.sold \n"
@@ -158,11 +158,13 @@ public class ProductDao extends DBConnect {
         if (type.compareToIgnoreCase("all") != 0) {
             filters.add("p.type = '" + type + "'");
         }
-        if (color != null && color.compareTo("") != 0) {
-            filters.add("td.color='" + color + "'");
+        if (colors != null && colors.length > 0) {
+            String cc = String.join("', '", colors);
+            filters.add("td.color in ('" + cc + "')");
         }
-        if (size != null && size.compareTo("") != 0) {
-            filters.add("td.size='" + size + "'");
+        if (sizes != null && sizes.length > 0) {
+            String ss = String.join("', '", sizes);
+            filters.add("td.size in ('" + ss + "')");
         }
         if (from != null && from.compareTo("") != 0 && to != null && to.compareTo("") != 0) {
             filters.add("td.price between " + from + " and " + to + "");

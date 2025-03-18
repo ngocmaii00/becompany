@@ -7,11 +7,12 @@
         <title>BeCompany</title>
         <link rel="stylesheet" href="CSS/styles.css"/>
         <link rel="stylesheet" href="CSS/typeStyle.css"/>
+        <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
 
     </head>
     <body>
         <%@include file="header.jsp" %>
-        <main>
+        <main class="min-h-[120vh]">
             <div class="type"> 
                 <div class="filter-icon">
                     <h2>${requestScope.title}</h2>
@@ -32,20 +33,34 @@
                             <h4>Type</h4>
                             <input class="flex-1 ml-2" type="text" id="type" name="type" readonly value="<%= request.getParameter("type") != null ? request.getParameter("type") : "All" %>"/>
                         </div>
-                        <div class="flex justify-between">
-                            <div style="margin-right: 10px" class="flex flex-col filter-item filter-item-color">
-                                <h4>Color</h4>
-                                <input placeholder="-Color-" style="width: 100%" type="text" id="color" name="color" value="<%= request.getParameter("color") != null ? request.getParameter("color") : "" %>"/>
+                        <div style="margin-right: 10px" class="filter-item filter-item-color">
+                            <h4>Color</h4>
+                            <div class='grid grid-cols-4'>
+                                <c:forEach items="${requestScope.colors}" var="color">
+                                    <div class="flex p-2 gap-2 justify-center">
+                                        <input type="checkbox" value="${color}" name="color"/>
+                                        <div class="h-6 w-6 bg-[${color}] rounded-full" style="box-shadow: 0 0 3px #543520"></div>
+                                    </div>
+                                </c:forEach>
 
                             </div>
-                            <div class="filter-item filter-item-size">
-                                <h4>Size</h4>
-                                <select id="size" name="size" value="${request.getParameter("size") != null ? request.getParameter("size") : ""}">
-                                    <option style="color: grey" value="">-Size-</option>
-                                    <option value="small">Small</option>
-                                    <option value="medium">Medium</option>
-                                    <option value="large">Large</option>
-                                </select>
+
+                        </div>
+                        <div class="filter-item filter-item-size">
+                            <h4>Size</h4>
+                            <div class='flex justify-between'>
+                                <div class="flex gap-2 align-center">
+                                    <input type="checkbox" value="Small" name="size"/>
+                                    <p class="">Small</p>
+                                </div>
+                                <div class="flex gap-2 align-center">
+                                    <input type="checkbox" value="Medium" name="size"/>
+                                    <p class="">Medium</p>
+                                </div>
+                                <div class="flex gap-2 align-center">
+                                    <input type="checkbox" value="Large" name="size"/>
+                                    <p class="">Large</p>
+                                </div>
                             </div>
                         </div>
 
@@ -168,32 +183,32 @@
 
         <script>
 
-            function changeSize(color, productId) {
-                'application/x-www-form-urlencoded; charset=UTF-8'
-                $.ajax({
-                    url: "type",
-                    type: 'POST',
-                    data: jQuery.param({color: color, productId: productId}),
-                    dataType: 'application/json',
-                    success: function (res) {
-                        const classname = ".home-teddy-" + productId;
-                        document.querySelector(classname).innerHTML = res;
-                    }
-                });
-            }
+                                                function changeSize(color, productId) {
+                                                    'application/x-www-form-urlencoded; charset=UTF-8'
+                                                    $.ajax({
+                                                        url: "type",
+                                                        type: 'POST',
+                                                        data: jQuery.param({color: color, productId: productId}),
+                                                        dataType: 'application/json',
+                                                        success: function (res) {
+                                                            const classname = ".home-teddy-" + productId;
+                                                            document.querySelector(classname).innerHTML = res;
+                                                        }
+                                                    });
+                                                }
 
-            function changeColor(size, productId) {
-                $.ajax({
-                    url: "type",
-                    type: 'POST',
-                    data: jQuery.param({size: size, productId: productId}),
-                    dataType: 'application/json',
-                    success: function (res) {
-                        const classname = ".home-teddy-" + productId;
-                        document.querySelector(classname).innerHTML = res;
-                    }
-                });
-            }
+                                                function changeColor(size, productId) {
+                                                    $.ajax({
+                                                        url: "type",
+                                                        type: 'POST',
+                                                        data: jQuery.param({size: size, productId: productId}),
+                                                        dataType: 'application/json',
+                                                        success: function (res) {
+                                                            const classname = ".home-teddy-" + productId;
+                                                            document.querySelector(classname).innerHTML = res;
+                                                        }
+                                                    });
+                                                }
 
         </script>
     </body>

@@ -1,5 +1,6 @@
 package controller;
 
+import dal.ColorDao;
 import dal.ProductDao;
 import dal.TeddyDao;
 import java.io.IOException;
@@ -24,6 +25,10 @@ public class TypeServlet extends HttpServlet {
         String type = req.getParameter("type");
         type = (type == null || type.length() <= 0) ? "all" : type;
         list = pd.getProductByType(type);
+        ColorDao cd = new ColorDao();
+        List<String> colors = cd.getAllColor();
+        
+        req.setAttribute("colors", colors);
 
         req.setAttribute("title", type);
         req.setAttribute("data", list);
