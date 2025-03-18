@@ -24,8 +24,9 @@ header {
 
 nav {
     display: flex;
-    justify-content: right;
+    justify-content: space-between;
     margin: 16px 0;
+    align-items: center;
 }
 
 .search {
@@ -255,4 +256,49 @@ nav {
 .button-container {
     display: flex;
     justify-content: space-between;
+}
+
+.type-icon {
+    width: 44px;
+    padding: 10px 10px 8px 10px;
+    background-color: var(--sub-color);
+    border-radius: 4px;
+    cursor: pointer;
+}
+.type-icon:hover{
+    opacity: 9.5;
+    box-shadow: 0 0 2px black;
+}
+.type-form {
+    position:absolute;
+    background-color:var(--sub-color);
+    padding: 16px;
+    border-radius: 4px;
+    box-shadow: 0 0 3px black;
+    display: none;
+}
+
+.type + .type {
+    margin-top: 10px;
+}
+
+.type label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.type input {
+    margin-left: 6px;
+}
+
+.type-form button {
+    background: var(--main-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 15px;
+    border-radius: 4px;
+    margin-top: 10px;
+    float: right;
 }

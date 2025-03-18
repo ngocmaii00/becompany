@@ -64,8 +64,8 @@
                             <div class="flex flex-col col-span-2 sm:col-span-1">
                                 <label for="username" class="py-3.5">Username: </label>
                                 <c:if test="${user.password != null}">
-                                    <label for="password" class="py-3.5">Password:</label>
-                                    <label for="re-enter-password" class="confirmPassword py-3.5" hidden>Confirm
+                                    <label for="password" class="py-3 my-0.5">Password:</label>
+                                    <label for="re-enter-password" class="confirmPassword py-3" hidden>Confirm
                                         Password:</label>
                                 </c:if>
 
@@ -86,7 +86,7 @@
                                     <div class="max-w-sm">
                                         <div class="relative">
                                             <input id="hs-toggle-password" name="password" type="password"
-                                                class="py-3.5 ps-4 pe-10 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
+                                                class="py-4 ps-4 pe-10 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
                                                 placeholder="Enter password" value="${user.password}" disabled>
 
                                             <button type="button" data-hs-toggle-password="{#hs-toggle-password&quot;
@@ -114,7 +114,7 @@
                                     </div>
                                     <div class="confirmPassword relative" hidden>
                                         <input id="hs-toggle-confirm-password" name="re-enter-password" type="password"
-                                            class="py-3.5 ps-4 pe-10 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
+                                            class="py-4 ps-4 pe-10 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
                                             placeholder="Enter password" disabled>
 
                                         <button type="button" data-hs-toggle-password="{#hs-toggle-password&quot;

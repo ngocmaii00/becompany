@@ -15,13 +15,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import model.AttributePair;
 import model.ColorInfo;
 import model.Product;
 import model.Teddy;
 import com.google.gson.JsonObject;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
+import dal.RatingDao;
+import jakarta.servlet.http.HttpSession;
+import model.Rating;
 /**
  *
  * @author Admin
@@ -35,7 +35,7 @@ public class ProductServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
-        String name= request.getParameter("name");
+        String id= request.getParameter("id");
         
         try{
             ProductDao pd = new ProductDao();
@@ -44,9 +44,9 @@ public class ProductServlet extends HttpServlet {
             Map<String, List<String>> type = new HashMap();
             Map<String, Boolean> colorList = new HashMap();
             
-            Product viewProduct= pd.getProductByName(name);
-            List<Integer> ratingList = pd.getProductStar(viewProduct.getProductId());
-            List<Teddy>detailList = td.getAllTeddyOfProduct(viewProduct.getProductId());
+            Product viewProduct= pd.getProductById(id);
+            List<Integer> ratingList = pd.getProductStar(id);
+            List<Teddy> detailList = td.getAllTeddyOfProduct(id);
             permanentList = detailList;
             
             double overalRating = 0;
@@ -70,26 +70,20 @@ public class ProductServlet extends HttpServlet {
             }
             
             int length = detailList.size();
-            
-            
-            
-            
-            
             for(int i = 0; i < length ;i++){
                 String color = detailList.get(i).getColor();
                 ColorInfo c= ColorInfo.getColorByName(color);
                 colorList.put (color,c.isLightColor());
             }
-            
-            
-            
-            
             request.setAttribute("product", viewProduct);
             request.setAttribute("type",type);
             //request.setAttribute("images", viewProduct.getImages());
             request.setAttribute("rating", overalRating);
             request.setAttribute("color", colorList);
             
+            RatingDao od = new RatingDao();
+            List<Rating> list = od.getAll(id);
+            request.setAttribute("data", list);
       
             request.getRequestDispatcher("product.jsp").forward(request, response);
         }catch(ServletException | IOException e){

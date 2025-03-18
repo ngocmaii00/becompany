@@ -6,9 +6,16 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>BeCompany</title>
         <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
-        <link rel="stylesheet" href="css/styles.css"/>
-        <link rel="stylesheet" href="css/responsiveHome.css"/>
-        
+<<<<<<< Updated upstream
+        <link rel="stylesheet" href="CSS/styles.css"/>
+=======
+        <link rel="stylesheet" href="CSS/styles.css"/>
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+        <link rel="stylesheet" href="CSS/responsiveHome.css"/>
+
     </head>
     <body>
         <%@include file="header.jsp" %>
@@ -60,6 +67,9 @@
                                 </div>
                             </div>
                         </div>
+
+
+
                     </c:forEach>
                 </div>
 
@@ -70,34 +80,34 @@
         <%@include file="footer.jsp" %>
 
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-        
+
         <script>
 
-            function changeSize(color, productId) {
-                $.ajax({
-                    url: "home",
-                    type: 'POST',
-                    data: jQuery.param({color: color, productId: productId}),
-                    dataType: 'application/json',
-                    success: function (res) {
-                        const classname = ".home-teddy-" + productId;
-                        document.querySelector(classname).innerHTML = res;
-                    }
-                });
-            }
+                                            function changeSize(color, productId) {
+                                                $.ajax({
+                                                    url: "home",
+                                                    type: 'POST',
+                                                    data: jQuery.param({color: color, productId: productId}),
+                                                    dataType: 'application/json',
+                                                    success: function (res) {
+                                                        const classname = ".home-teddy-" + productId;
+                                                        document.querySelector(classname).innerHTML = res;
+                                                    }
+                                                });
+                                            }
 
-            function changeColor(size, productId) {
-                $.ajax({
-                    url: "home",
-                    type: 'POST',
-                    data: jQuery.param({size: size, productId: productId}),
-                    dataType: 'application/json',
-                    success: function (res) {
-                        const classname = ".home-teddy-" + productId;
-                        document.querySelector(classname).innerHTML = res;
-                    }
-                });
-            }
+                                            function changeColor(size, productId) {
+                                                $.ajax({
+                                                    url: "home",
+                                                    type: 'POST',
+                                                    data: jQuery.param({size: size, productId: productId}),
+                                                    dataType: 'application/json',
+                                                    success: function (res) {
+                                                        const classname = ".home-teddy-" + productId;
+                                                        document.querySelector(classname).innerHTML = res;
+                                                    }
+                                                });
+                                            }
 
         </script>
     </body>

@@ -35,4 +35,6 @@ public class RatingDao extends DBConnect {
         }
         return list;
     }
+    
+    
 }
