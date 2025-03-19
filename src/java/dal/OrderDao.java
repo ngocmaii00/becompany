@@ -44,16 +44,16 @@ public class OrderDao extends DBConnect {
     
     
 
-        public int addNewOrder(String userId, Date orderDate, String orderStatus, String purpose) {
-            String sql = "INSERT INTO [Order](userId, orderDate, orderStatus, purpose) VALUES (?, ?, ?, ?);";
+        public int addNewOrder(String userId, Date orderDate, String purpose) {
+            String sql = "INSERT INTO [Order](userId, orderDate, purpose) VALUES (?, ?, ?);";
             try {
                 // Use RETURN_GENERATED_KEYS to get the auto-generated ID
                 PreparedStatement st = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
                 st.setString(1, userId);
                 st.setDate(2, orderDate);
-                st.setString(3, orderStatus);
-                st.setString(4, purpose);
+                
+                st.setString(3, purpose);
 
                 // Execute the insert
                 int rowsInserted = st.executeUpdate();
@@ -73,8 +73,8 @@ public class OrderDao extends DBConnect {
         }
 
     
-    public void insertOrderDetail(int OrderId, String teddyId, String deliveryId, int quantity,Date orderDate){
-        String sql = "INSERT INTO OrderDetail (orderId, teddyId, deliveryId, boughtQuantity, orderDate) values(?,?,?,?,?)";
+    public void insertOrderDetail(int OrderId, String teddyId, String deliveryId, int quantity,Date orderDate,Date receiveDate, String orderStatus){
+        String sql = "INSERT INTO OrderDetail (orderId, teddyId, deliveryId, boughtQuantity, orderDate,receiveDate,orderStatus) values(?,?,?,?,?,?,?)";
         
         try{
             PreparedStatement st = connection.prepareStatement(sql);
@@ -83,6 +83,8 @@ public class OrderDao extends DBConnect {
             st.setString(3, deliveryId);
             st.setInt(4, quantity);
             st.setDate(5, orderDate);
+            st.setDate(6, receiveDate);
+            st.setString(7,orderStatus);
             st.executeUpdate();
         }catch(SQLException e){
             System.err.println(e);

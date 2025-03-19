@@ -45,5 +45,19 @@ public class ShippingDAO extends DBConnect {
         }
         return null;
     }
+    public int getDeliveryDuration(String id){
+        String sql = "select duration from Delivery where deliveryId = ?";
+        try{
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1,id);
+            ResultSet rs = st.executeQuery();
+            if(rs.next())
+                return rs.getInt("duration");
+            
+        }catch(SQLException e){
+            System.err.println(e);
+        }
+        return 0;
+    }
 
 }

@@ -1,3 +1,10 @@
+
+<%-- 
+    Document   : product.jsp
+    Created on : Feb 18, 2025, 7:49:19 PM
+    Author     : zeryus
+--%>
+
 <%@page import="java.util.List" %>
 <%@page import="java.util.ArrayList" %>
 
@@ -9,12 +16,12 @@
 <html>
 
     <head>
+
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
             <link rel="icon" type="image/svg+xml" href="images/head.png" />
             <title>Product</title>
             <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
             <link rel="stylesheet" href="css/index.css">
-    </head>
 
     <body class="bg-white">
                     <%@include file="header.jsp" %>
@@ -46,6 +53,7 @@
                                         </div>
                                     </label>
                                 </c:forEach>
+
                             </div>
                         </div>
 
@@ -326,95 +334,77 @@
                                 }
                             }
                         })();
-                                function submitForm() {
-                                const color = document.querySelector('input[name="color"]:checked')?.value;
-                                        showedSize = document.querySelector('ul[name="size"]:not([style="display: none;"])');
-                                        const size = showedSize.querySelector('input[name="size"]:checked').value;
-                                        if (!color || !size) {
-                                console.error("Color or size not selected");
-                                        return;
-                                }
-
-                                let price = document.querySelector("#price");
-                                        let instock = document.querySelector("#instock");
-                                        const formData = new URLSearchParams();
-                                        formData.append("color", color);
-                                        formData.append("size", size);
-                                        fetch("product", {
-                                        method: "POST",
-                                                headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                                                body: formData.toString()
-                                        })
-                                        .then(response => {
-                                        if (!response.ok) {
-                                        throw new Error("Network response was not ok");
-                                        }
-                                        return response.json();
-                                        })
-                                        .then(data => {
-                                        price.innerHTML = "$ " + data.price;
-                                                instock.innerHTML = data.quantity || "N/A"; // Hiển thị "N/A" nếu không có quantity
-                                        })
-                                        .catch(error => {
-                                        console.error("Error in submitForm:", error);
-                                                instock.innerHTML = "N/A";
-                                        });
-                                }
-
-                        window.onload = function() {
-                        submitForm();
-                        showSize();
-                        }
-                        (function () {
-                        let selectedValue = document.querySelector("input[name='color']:checked").value;
-                                let sizeArray = document.querySelectorAll('ul[name="size"]');
-                                for (let i = 0; i < sizeArray.length; i++) {
-                        if (sizeArray[i].getAttribute('id') === selectedValue) {
-                        sizeArray[i].style.display = "block";
-                                sizeArray[i].firstChild.checked = true;
-                        } else {
-                        sizeArray[i].style.display = "none";
-                                let sizeArrayChild = sizeArray[i].querySelectorAll('input');
-                                for (let j = 0; j < sizeArrayChild.length; j++) {
-                        sizeArrayChild[j].checked = false;
-                        }
-                        }
-                        }
-                        })();
-                    </script>
-
-                    <form id="cartForm" action="cart" method="post">
-                    <input type="hidden" name="id" value="${product.getProductId()}">
-                    <input type="hidden" name="image" value="${product.getImages()[0]}">
-                    <input type="hidden" name="name" value="${product.getProductName()}">
-                    <input type="hidden" id="sizeInput" name="size" value="">
-                    <input type="hidden" id="colorInput" name="color" value="">
-                    <input type="hidden" id="priceInput" name="price" value="${requestScope.price}">
-                    <input type="hidden" id="quantityInput" name="quantity" value="1">
-                    </form>
-
-                    <script>
-                        function submitCart() {
-                            updateForm();
-                        document.getElementById("cartForm").submit();
-                        }
-
-                        function updateForm() {
-                        const selectedColor = document.querySelector('input[name="color"]:checked')?.value;
-                        const selectedSize = document.querySelector('input[name="size"]:checked')?.value;
-                        const quantity = document.querySelector("#quantity-num").innerText;
-                        const price = document.querySelector("#price").innerText.replace("$", "").trim();
-                        if (!selectedColor || !selectedSize) {
-                            console.error("Color or size not selected");
-                            return;
-                        }
-
-                        document.querySelector("#colorInput").value = selectedColor;
-                        document.querySelector("#sizeInput").value = selectedSize;
-                        document.querySelector("#quantityInput").value = quantity;
-                        document.querySelector("#priceInput").value = price;
-                        }
-                    </script>
-              
+                                
+                
+            function submitForm() {
+                const color = document.querySelector('input[name="color"]:checked')?.value;
+                const size = document.querySelector('input[name="size"]:checked')?.value;
+                if (!color || !size) {
+                    console.error("Color or size not selected");
+                    return;
+                }
+                let price = document.querySelector("#price");
+                let instock = document.querySelector("#instock");
+                
+                const formData = new URLSearchParams();
+                formData.append("color", color);
+                formData.append("size", size);
+                
+                fetch("product", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                    body: formData.toString()
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Network response was not ok");
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    price.innerHTML = "$ " + data.price;
+                    instock.innerHTML = data.quantity || "N/A"; // Hiển thị "N/A" nếu không có quantity
+                })
+                .catch(error => {
+                    console.error("Error in submitForm:", error);
+                    instock.innerHTML = "N/A";
+                });
+            }
+            window.onload = submitForm;
+        </script>
+        
+        <form id="cartForm" action="cart" method="post">
+            <input type="hidden" name="id" value="${product.getProductId()}">
+            <input type="hidden" name="image" value="${product.getImages()[0]}">
+            <input type="hidden" name="name" value="${product.getProductName()}">
+            <input type="hidden" id="sizeInput" name="size" value="">
+            <input type="hidden" id="colorInput" name="color" value="">
+            <input type="hidden" id="priceInput" name="price" value="${requestScope.price}">
+            <input type="hidden" id="quantityInput" name="quantity" value="1">
+            <input type="hidden" id="instockInput" name="instock" value="${requestScope.instock}">
+        </form>
+        <script>
+            function submitCart() {
+                updateForm();
+                document.getElementById("cartForm").submit();
+            }
+            function updateForm() {
+                const selectedColor = document.querySelector('input[name="color"]:checked')?.value;
+                const selectedSize = document.querySelector('input[name="size"]:checked')?.value;
+                const quantity = document.querySelector("#quantity-num").innerText;
+                const price = document.querySelector("#price").innerText.replace("$", "").trim();
+                const instock = document.querySelector("#instock").innerText;
+                if (!selectedColor || !selectedSize) {
+                    console.error("Color or size not selected");
+                    return;
+                }
+                document.querySelector("#colorInput").value = selectedColor;
+                document.querySelector("#sizeInput").value = selectedSize;
+                document.querySelector("#quantityInput").value = quantity;
+                document.querySelector("#priceInput").value = price;
+                document.querySelector("#instockInput").value = instock;
+            }
+        </script>
+>>>>>>> ducanhNew
     </body>
 </html>

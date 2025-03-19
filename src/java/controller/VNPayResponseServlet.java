@@ -39,9 +39,9 @@ public class VNPayResponseServlet extends HttpServlet {
         String amount = (String) session.getAttribute("amount");
         
             //delete used Session
-//            session.removeAttribute("purpose");
-//            session.removeAttribute("shippingOption");
-//            session.removeAttribute("bankCode");
+            session.removeAttribute("purpose");
+            session.removeAttribute("shippingOption");
+            session.removeAttribute("bankCode");
         Map fields = new HashMap();
         for (Enumeration params = request.getParameterNames(); params.hasMoreElements();) {
             String fieldName = URLEncoder.encode((String) params.nextElement(), StandardCharsets.US_ASCII.toString());
@@ -84,7 +84,8 @@ public class VNPayResponseServlet extends HttpServlet {
                 <div class="form-group">
                     <label >Thời gian thanh toán:</label>
                     <label><%=request.getParameter("vnp_PayDate")%>*/
-        String vnp_Amount = request.getParameter("vnp_Amount");
+        Double  doublevnp_Amount = Double.valueOf(request.getParameter("vnp_Amount"))/100;
+        String vnp_Amount = doublevnp_Amount.toString();
         String vnp_OrderInfo = request.getParameter("vnp_OrderInfo");
         String vnp_ResponseCode = request.getParameter("vnp_ResponseCode");
         String vnp_TransactionNo = request.getParameter("vnp_TransactionNo");
@@ -93,10 +94,10 @@ public class VNPayResponseServlet extends HttpServlet {
 
         if (signValue.equals(vnp_SecureHash)) {
             if ("00".equals(request.getParameter("vnp_TransactionStatus"))) {
-                    request.setAttribute("amount", vnp_Amount);
-                    request.setAttribute("purpose", purpose);
-                    request.setAttribute("shippingOption", shippingOption);
-                    request.setAttribute("bankCode", bankCode);
+                    session.setAttribute("amount", vnp_Amount);
+                    session.setAttribute("purpose", purpose);
+                    session.setAttribute("shippingOption", shippingOption);
+                    session.setAttribute("bankCode", bankCode);
                 request.getRequestDispatcher("checkout_info").forward(request, response);
             } else {
                 request.setAttribute("error", "Transaction failed, please try again!");

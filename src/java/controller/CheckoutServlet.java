@@ -105,14 +105,17 @@ public class CheckoutServlet extends HttpServlet {
             List<CartItem> cart = (List<CartItem>)session.getAttribute("cart");
             
             
-            OrderDao od = new OrderDao();
-            LocalDate today = LocalDate.now();
-        
-            TeddyDao td = new TeddyDao();
-            int orderId = od.addNewOrder(u.getId(),Date.valueOf(today) ,"Pending", purpose);
-            for(CartItem i : cart){
-                od.insertOrderDetail(orderId,td.searchTeddyId(i.id, i.color, i.size), deliveryId, i.getQuantity(), Date.valueOf(today));
-            }
+            ShippingDAO shd = new ShippingDAO();
+        String delivery = shd.getDeliveryDescribe(deliveryId);
+        OrderDao od = new OrderDao();
+        LocalDate today = LocalDate.now();
+
+        TeddyDao td = new TeddyDao();//"Pending"
+        int orderId = od.addNewOrder(u.getId(), Date.valueOf(today), purpose);
+        for (CartItem i : cart) {
+            LocalDate receiveDate = today.plusDays(shd.getDeliveryDuration(deliveryId));
+            od.insertOrderDetail(orderId, td.searchTeddyId(i.id, i.color, i.size), deliveryId, i.getQuantity(), Date.valueOf(today), Date.valueOf(receiveDate), "Pending");
+        }
             Cookie[] cookies = request.getCookies();
     
             if (cookies != null) {
