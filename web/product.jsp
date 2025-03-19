@@ -311,7 +311,6 @@
             <input type="hidden" id="colorInput" name="color" value="">
             <input type="hidden" id="priceInput" name="price" value="${requestScope.price}">
             <input type="hidden" id="quantityInput" name="quantity" value="1">
-            <input type="hidden" id="instockInput" name="instock" value="${requestScope.instock}">
         </form>
 
         <script>
@@ -325,7 +324,6 @@
                 const selectedSize = document.querySelector('input[name="size"]:checked')?.value;
                 const quantity = document.querySelector("#quantity-num").innerText;
                 const price = document.querySelector("#price").innerText.replace("$", "").trim();
-                const instock = document.querySelector("#instock").innerText;
 
                 if (!selectedColor || !selectedSize) {
                     console.error("Color or size not selected");
@@ -336,7 +334,6 @@
                 document.querySelector("#sizeInput").value = selectedSize;
                 document.querySelector("#quantityInput").value = quantity;
                 document.querySelector("#priceInput").value = price;
-                document.querySelector("#instockInput").value = instock;
             }
         </script>
     </body>
