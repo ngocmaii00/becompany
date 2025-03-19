@@ -3,7 +3,6 @@
     Created on : Feb 18, 2025, 7:49:19 PM
     Author     : zeryus
 --%>
-
 <%@page import="java.util.List" %>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -20,7 +19,6 @@
         <link rel="stylesheet" href="css/index.css">
        
        
-
     </head>
    
     <body class="bg-white">
@@ -177,7 +175,6 @@
             sliderElement = document.querySelector("#slider");
             totalSlide = sliderElement.childElementCount;
             console.log(totalSlide);
-
             function next() {
                 if (currentSlideId < totalSlide) {
                     currentSlideId++;
@@ -187,7 +184,6 @@
                     showSlide();
                 }
             }
-
             function previous() {
                 if (currentSlideId > 1) {
                     currentSlideId--;
@@ -197,7 +193,6 @@
                     showSlide();
                 }
             }
-
             function showSlide() {
                 slide = document.querySelector("#slider").querySelectorAll("li");
                 for (let i = 0; i < totalSlide; i++) {
@@ -221,7 +216,6 @@
                     document.querySelector("#quantity-num").innerHTML = quantity;
                 }
             }
-
             function minus() {
                 let quantity = parseInt(document.querySelector("#quantity-num").innerText, 10);
                 if (quantity > 1) { // Đảm bảo quantity không nhỏ hơn 1
@@ -229,7 +223,6 @@
                     document.querySelector("#quantity-num").innerHTML = quantity;
                 }
             }
-
             function selectImg(element) {
                 let img = document.querySelector("#main-img");
                 let nextSibling = element.nextElementSibling;
@@ -251,7 +244,6 @@
                     }
                 }
             }
-
             (function() {
                 let selectedValue = document.querySelector("input[name='color']:checked").value;
                 let sizeArray = document.querySelectorAll('ul[name="size"]');
@@ -271,7 +263,6 @@
                     console.error("Color or size not selected");
                     return;
                 }
-
                 let price = document.querySelector("#price");
                 let instock = document.querySelector("#instock");
                 
@@ -299,7 +290,6 @@
                     instock.innerHTML = "N/A";
                 });
             }
-
             window.onload = submitForm;
         </script>
         
@@ -311,29 +301,28 @@
             <input type="hidden" id="colorInput" name="color" value="">
             <input type="hidden" id="priceInput" name="price" value="${requestScope.price}">
             <input type="hidden" id="quantityInput" name="quantity" value="1">
+            <input type="hidden" id="instockInput" name="instock" value="${requestScope.instock}">
         </form>
-
         <script>
             function submitCart() {
                 updateForm();
                 document.getElementById("cartForm").submit();
             }
-
             function updateForm() {
                 const selectedColor = document.querySelector('input[name="color"]:checked')?.value;
                 const selectedSize = document.querySelector('input[name="size"]:checked')?.value;
                 const quantity = document.querySelector("#quantity-num").innerText;
                 const price = document.querySelector("#price").innerText.replace("$", "").trim();
-
+                const instock = document.querySelector("#instock").innerText;
                 if (!selectedColor || !selectedSize) {
                     console.error("Color or size not selected");
                     return;
                 }
-
                 document.querySelector("#colorInput").value = selectedColor;
                 document.querySelector("#sizeInput").value = selectedSize;
                 document.querySelector("#quantityInput").value = quantity;
                 document.querySelector("#priceInput").value = price;
+                document.querySelector("#instockInput").value = instock;
             }
         </script>
     </body>

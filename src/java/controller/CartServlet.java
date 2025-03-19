@@ -2,24 +2,23 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 package controller;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import java.io.IOException;
+
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;    
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
 @WebServlet(name = "CartServlet", urlPatterns = {"/cart"})
 public class CartServlet extends HttpServlet {
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -35,7 +34,6 @@ public class CartServlet extends HttpServlet {
             out.println("</html>");
         }
     }
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -53,20 +51,22 @@ public class CartServlet extends HttpServlet {
                     }
                 }
             }
-
             if (!cartData.isEmpty()) {
                 String[] items = cartData.split(",");
                 String id = request.getParameter("id");
-                String size = request.getParameter("size"); // Lấy size từ request
-                String color = request.getParameter("color"); // Lấy color từ request
+                String size = request.getParameter("size");
+                String color = request.getParameter("color");
                 StringBuilder newCart = new StringBuilder();
 
                 if (action.equals("update")) {
                     String newQuantity = request.getParameter("quantity");
+                    int newQty = Integer.parseInt(newQuantity);
                     for (String item : items) {
                         String[] details = item.split("\\$");
-                        if (details[0].equals(id) && details[3].equals(size) && details[4].equals(color)) {
-                            details[6] = newQuantity; // Cập nhật số lượng
+                        if (details.length >= 8 && details[0].equals(id) && details[3].equals(size) && details[4].equals(color)) {
+                            int stockLimit = Integer.parseInt(details[7]);
+                            newQty = Math.min(newQty, stockLimit); // đặt in stock làm giới hạn
+                            details[6] = String.valueOf(newQty); // update quan
                             newCart.append(String.join("$", details));
                         } else {
                             newCart.append(item);
@@ -78,13 +78,11 @@ public class CartServlet extends HttpServlet {
                 } else if (action.equals("remove")) {
                     for (String item : items) {
                         String[] details = item.split("\\$");
-                        // Chỉ giữ lại các sản phẩm không khớp cả id, size và color
                         if (!(details[0].equals(id) && details[3].equals(size) && details[4].equals(color))) {
                             newCart.append(item).append(",");
                         }
                     }
                 }
-
                 String updatedCart = newCart.toString();
                 if (updatedCart.endsWith(",")) {
                     updatedCart = updatedCart.substring(0, updatedCart.length() - 1);
@@ -99,7 +97,6 @@ public class CartServlet extends HttpServlet {
             request.getRequestDispatcher("cart.jsp").forward(request, response);
         }
     }
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -109,12 +106,11 @@ public class CartServlet extends HttpServlet {
             for (Cookie o : arr) {
                 if (o.getName().equals("cart")) {
                     txt = URLDecoder.decode(o.getValue(), StandardCharsets.UTF_8.toString());
-                    o.setMaxAge(0); // Xóa cookie cũ
+                    o.setMaxAge(0); // xoá cookie cũ
                     response.addCookie(o);
                 }
             }
         }
-
         String id = request.getParameter("id");
         String image = request.getParameter("image");
         String name = request.getParameter("name");
@@ -122,9 +118,10 @@ public class CartServlet extends HttpServlet {
         String color = request.getParameter("color");
         String price = request.getParameter("price");
         String quantity = request.getParameter("quantity");
+        String instock = request.getParameter("instock");
 
-        if (id != null && image != null && name != null && size != null && color != null && price != null && quantity != null) {
-            String cartItem = id + "$" + image + "$" + name + "$" + size + "$" + color + "$" + price + "$" + quantity;
+        if (id != null && image != null && name != null && size != null && color != null && price != null && quantity != null && instock != null) {
+            String cartItem = id + "$" + image + "$" + name + "$" + size + "$" + color + "$" + price + "$" + quantity + "$" + instock;
 
             if (txt.isEmpty()) {
                 txt = cartItem;
@@ -135,7 +132,7 @@ public class CartServlet extends HttpServlet {
 
                 for (String item : items) {
                     String[] details = item.split("\\$");
-                    if (details.length == 7) {
+                    if (details.length >= 7) { // check độ dài
                         String existingId = details[0];
                         String existingSize = details[3];
                         String existingColor = details[4];
@@ -143,7 +140,10 @@ public class CartServlet extends HttpServlet {
                         if (existingId.equals(id) && existingSize.equals(size) && existingColor.equals(color)) {
                             int existingQuantity = Integer.parseInt(details[6]);
                             int newQuantity = Integer.parseInt(quantity);
-                            details[6] = String.valueOf(existingQuantity + newQuantity);
+                            int totalQuantity = existingQuantity + newQuantity;
+                            int stockLimit = details.length > 7 ? Integer.parseInt(details[7]) : Integer.MAX_VALUE; // lấy instock hoặc mặc định không giới hạn
+                            totalQuantity = Math.min(totalQuantity, stockLimit); // Giới hạn theo instock
+                            details[6] = String.valueOf(totalQuantity);
                             productExists = true;
                             newCart.append(String.join("$", details));
                         } else {
@@ -160,16 +160,13 @@ public class CartServlet extends HttpServlet {
                     txt = txt.substring(0, txt.length() - 1);
                 }
             }
-
             String encodedTxt = URLEncoder.encode(txt, StandardCharsets.UTF_8.toString());
             Cookie c = new Cookie("cart", encodedTxt);
             c.setMaxAge(60 * 60 * 24 * 7);
             response.addCookie(c);
         }
-
         response.sendRedirect("cart");
     }
-
     @Override
     public String getServletInfo() {
         return "Short description";
