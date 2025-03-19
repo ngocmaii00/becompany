@@ -67,7 +67,7 @@
 
                                         <!--Print grayed-out Star -->
                                         <c:forEach begin="1" end="${5-requestScope.rating}">
-                                            <svg class="w-4 h-4 text-gray-300 dark:text-gray-500 ms-1"
+                                            <svg class="w-4 h-4 text-gray-300 ms-1"
                                                  aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                                  fill="currentColor" viewBox="0 0 22 20">
                                                 <path
@@ -76,7 +76,7 @@
                                         </c:forEach>
                                         <p
                                             class="ms-1 text-xl font-semibold notosans-font text-lg text-gray-500 ">
-                                            &nbsp; ${requestScope.rating}</p>
+                                            &nbsp; ${requestScope.rating}.0</p>
                                         </c:if>
                                         <c:if test="${requestScope.rating == -1}">
                                         <p
@@ -265,8 +265,8 @@
                                     </div>
                                     <div class="flex col-span-2 col-start-4 lg:col-start-6 justify-center items-baseline text-nowrap">
                                         <!--Print yellow Star -->
-                                        <c:if test="${requestScope.rating != -1}">
-                                            <c:forEach begin="1" end="${requestScope.rating}">
+                                        <c:if test="${r.stars != -1}">
+                                            <c:forEach begin="1" end="${r.stars}">
                                                 <svg class="w-4 h-4 text-yellow-300 ms-1" aria-hidden="true"
                                                      xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                                                      viewBox="0 0 22 20">
@@ -276,8 +276,8 @@
                                             </c:forEach>
 
                                             <!--Print grayed-out Star -->
-                                            <c:forEach begin="1" end="${5-requestScope.rating}">
-                                                <svg class="w-4 h-4 text-gray-300 dark:text-gray-500 ms-1"
+                                            <c:forEach begin="1" end="${5-r.stars}">
+                                                <svg class="w-4 h-4 text-gray-300 ms-1"
                                                      aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                                      fill="currentColor" viewBox="0 0 22 20">
                                                     <path
@@ -286,9 +286,9 @@
                                             </c:forEach>
                                             <p
                                                 class="ms-1 text-xl font-semibold notosans-font text-lg text-gray-500 ">
-                                                &nbsp; ${requestScope.rating}</p>
+                                                &nbsp; ${r.stars}.0</p>
                                             </c:if>
-                                            <c:if test="${requestScope.rating == -1}">
+                                            <c:if test="${r.stars == -1}">
                                             <p
                                                 class="ms-1 text-xl font-semibold notosans-font text-lg text-gray-500 ">
                                                 No rating</p>
@@ -303,115 +303,121 @@
                         </div>
                         <div class="flex flex-col bg-white drop-shadow-md z-5 border rounded-md">
                             <span class="peacesans-font px-8 py-4 uppercase text-2xl bg-[#f2e6e6] w-full">Rating</span>
-
-                            <div class=" flex flex-col gap-y-4 mt-4">
-                                <div class="flex justify-start items-center text-nowrap px-10">
-                                    <input type="radio" name="rate" class="accent-[#543520] mr-4">
-                                        <c:forEach begin="1" end="5">
-                                            <svg class="w-4 h-4 text-yellow-300 ms-1" aria-hidden="true"
-                                                 xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                                 viewBox="0 0 22 20">
-                                                <path
-                                                    d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                                            </svg>
-                                        </c:forEach>
-                                        <span class="ms-2 font-semibold text-[#543520]">5.0</span>
+                            <form action="rating">
+                                <input class="product-id" name="id" type="text" readonly hidden/>
+                                <div class=" flex flex-col gap-y-4 mt-4">
+                                    <div class="flex justify-start items-center text-nowrap px-10">
+                                        <input type="radio" name="rate" value="5" class="accent-[#543520] mr-4">
+                                            <c:forEach begin="1" end="5">
+                                                <svg class="w-4 h-4 text-yellow-300 ms-1" aria-hidden="true"
+                                                     xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                                     viewBox="0 0 22 20">
+                                                    <path
+                                                        d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                                </svg>
+                                            </c:forEach>
+                                            <span class="ms-2 font-semibold text-[#543520]">5.0</span>
+                                    </div>
+                                    <div class="flex justify-start items-baseline text-nowrap px-10">
+                                        <input type="radio" name="rate" value="4" class="accent-[#543520] mr-4">
+                                            <c:forEach begin="1" end="4">
+                                                <svg class="w-4 h-4 text-yellow-300 ms-1" aria-hidden="true"
+                                                     xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                                     viewBox="0 0 22 20">
+                                                    <path
+                                                        d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                                </svg>
+                                            </c:forEach>
+                                            <c:forEach begin="1" end="1">
+                                                <svg class="w-4 h-4 text-gray-300 ms-1"
+                                                     aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                     fill="currentColor" viewBox="0 0 22 20">
+                                                    <path
+                                                        d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                                </svg>
+                                            </c:forEach>
+                                            <span class="ms-2 font-semibold text-[#543520]">4.0</span>
+                                    </div>
+                                    <div class="flex justify-start items-baseline text-nowrap px-10">
+                                        <input type="radio" name="rate" value="3" class="accent-[#543520] mr-4">
+                                            <c:forEach begin="1" end="3">
+                                                <svg class="w-4 h-4 text-yellow-300 ms-1" aria-hidden="true"
+                                                     xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                                     viewBox="0 0 22 20">
+                                                    <path
+                                                        d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                                </svg>
+                                            </c:forEach>
+                                            <c:forEach begin="1" end="2">
+                                                <svg class="w-4 h-4 text-gray-300 ms-1"
+                                                     aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                     fill="currentColor" viewBox="0 0 22 20">
+                                                    <path
+                                                        d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                                </svg>
+                                            </c:forEach>
+                                            <span class="ms-2 font-semibold text-[#543520]">3.0</span>
+                                    </div>
+                                    <div class="flex justify-start items-baseline text-nowrap px-10">
+                                        <input type="radio" name="rate" value="2" class="accent-[#543520] mr-4">
+                                            <c:forEach begin="1" end="2">
+                                                <svg class="w-4 h-4 text-yellow-300 ms-1" aria-hidden="true"
+                                                     xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                                     viewBox="0 0 22 20">
+                                                    <path
+                                                        d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                                </svg>
+                                            </c:forEach>
+                                            <c:forEach begin="1" end="3">
+                                                <svg class="w-4 h-4 text-gray-300 ms-1"
+                                                     aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                     fill="currentColor" viewBox="0 0 22 20">
+                                                    <path
+                                                        d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                                </svg>
+                                            </c:forEach>
+                                            <span class="ms-2 font-semibold text-[#543520]">2.0</span>
+                                    </div>
+                                    <div class="flex justify-start items-baseline text-nowrap px-10">
+                                        <input type="radio" name="rate" value="1" class="accent-[#543520] mr-4">
+                                            <c:forEach begin="1" end="1">
+                                                <svg class="w-4 h-4 text-yellow-300 ms-1" aria-hidden="true"
+                                                     xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                                     viewBox="0 0 22 20">
+                                                    <path
+                                                        d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                                </svg>
+                                            </c:forEach>
+                                            <c:forEach begin="1" end="4">
+                                                <svg class="w-4 h-4 text-gray-300 ms-1"
+                                                     aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                     fill="currentColor" viewBox="0 0 22 20">
+                                                    <path
+                                                        d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                                </svg>
+                                            </c:forEach>
+                                            <span class="ms-2 font-semibold text-[#543520]">1.0</span>
+                                    </div>
                                 </div>
-                                <div class="flex justify-start items-baseline text-nowrap px-10">
-                                    <input type="radio" name="rate" class="accent-[#543520] mr-4">
-                                        <c:forEach begin="1" end="4">
-                                            <svg class="w-4 h-4 text-yellow-300 ms-1" aria-hidden="true"
-                                                 xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                                 viewBox="0 0 22 20">
-                                                <path
-                                                    d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                                            </svg>
-                                        </c:forEach>
-                                        <c:forEach begin="1" end="1">
-                                            <svg class="w-4 h-4 text-gray-300 ms-1"
-                                                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                                 fill="currentColor" viewBox="0 0 22 20">
-                                                <path
-                                                    d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                                            </svg>
-                                        </c:forEach>
-                                        <span class="ms-2 font-semibold text-[#543520]">4.0</span>
-                                </div>
-                                <div class="flex justify-start items-baseline text-nowrap px-10">
-                                    <input type="radio" name="rate" class="accent-[#543520] mr-4">
-                                        <c:forEach begin="1" end="3">
-                                            <svg class="w-4 h-4 text-yellow-300 ms-1" aria-hidden="true"
-                                                 xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                                 viewBox="0 0 22 20">
-                                                <path
-                                                    d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                                            </svg>
-                                        </c:forEach>
-                                        <c:forEach begin="1" end="2">
-                                            <svg class="w-4 h-4 text-gray-300 ms-1"
-                                                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                                 fill="currentColor" viewBox="0 0 22 20">
-                                                <path
-                                                    d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                                            </svg>
-                                        </c:forEach>
-                                        <span class="ms-2 font-semibold text-[#543520]">3.0</span>
-                                </div>
-                                <div class="flex justify-start items-baseline text-nowrap px-10">
-                                    <input type="radio" name="rate" class="accent-[#543520] mr-4">
-                                        <c:forEach begin="1" end="2">
-                                            <svg class="w-4 h-4 text-yellow-300 ms-1" aria-hidden="true"
-                                                 xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                                 viewBox="0 0 22 20">
-                                                <path
-                                                    d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                                            </svg>
-                                        </c:forEach>
-                                        <c:forEach begin="1" end="3">
-                                            <svg class="w-4 h-4 text-gray-300 ms-1"
-                                                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                                 fill="currentColor" viewBox="0 0 22 20">
-                                                <path
-                                                    d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                                            </svg>
-                                        </c:forEach>
-                                        <span class="ms-2 font-semibold text-[#543520]">2.0</span>
-                                </div>
-                                <div class="flex justify-start items-baseline text-nowrap px-10">
-                                    <input type="radio" name="rate" class="accent-[#543520] mr-4">
-                                        <c:forEach begin="1" end="1">
-                                            <svg class="w-4 h-4 text-yellow-300 ms-1" aria-hidden="true"
-                                                 xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                                 viewBox="0 0 22 20">
-                                                <path
-                                                    d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                                            </svg>
-                                        </c:forEach>
-                                        <c:forEach begin="1" end="4">
-                                            <svg class="w-4 h-4 text-gray-300 ms-1"
-                                                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                                 fill="currentColor" viewBox="0 0 22 20">
-                                                <path
-                                                    d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                                            </svg>
-                                        </c:forEach>
-                                        <span class="ms-2 font-semibold text-[#543520]">1.0</span>
-                                </div>
-                            </div>
-                            <form action="rating" class="flex flex-row px-8 gap-x-2 py-6">
-                                <c:if test="${sessionScope.user == null}">
-                                    <div class="border-2 rounded-md w-full cursor-not-allowed"></div>
-                                    <div type="submit" class="rounded-md px-2 py-1 bg-[#543520] opacity-60 text-white font-semibold cursor-not-allowed">Send</div>
-                                </c:if>
-                                <c:if test="${sessionScope.user != null}">
-                                    <input type="text" name="rate" class="border-2 rounded-md w-full">
-                                        <button type="submit" class="rounded-md px-2 py-1 bg-[#543520] text-white font-semibold"/>Send
+                                <div class="flex flex-row px-8 py-4 gap-x-2 ">
+                                    <c:if test="${sessionScope.user == null}">
+                                        <div class="border-2 rounded-md w-full cursor-not-allowed"></div>
+                                        <div type="submit" class="rounded-md px-2 py-1 bg-[#543520] opacity-60 text-white font-semibold cursor-not-allowed">Send</div>
                                     </c:if>
+                                    <c:if test="${sessionScope.user != null}">
+                                        <input type="text" name="comment" class="comment border-2 rounded-md w-full px-2">
+                                            <button type="submit" class="rating-button rounded-md px-2 py-1 bg-[#543520] text-white font-semibold"/>Send
+                                        </c:if>
+                                </div>
                             </form>
 
                         </div>
                     </div> 
                     <%@include file="footer.jsp" %> 
+                    <script>
+                            const id = window.location.href.split('id=')[1];
+                            document.querySelector('.product-id').value=id;
+                    </script>
                     <script>
                         function plus() {
                             let quantity = parseInt(document.querySelector("#quantity-num").innerText, 10);

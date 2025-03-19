@@ -18,6 +18,7 @@ import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import model.Product;
 import model.Rating;
+import model.User;
 
 /**
  *
@@ -27,12 +28,18 @@ import model.Rating;
 public class RatingServlet extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RatingDao od = new RatingDao();
-        HttpSession ss = req.getSession();
-        Product product = (Product) ss.getAttribute("product");
-        List<Rating> list = od.getAll(product.getProductId());
-        req.setAttribute("data", list);
-        req.getRequestDispatcher("product.jsp").forward(req, resp);    }
-   
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String comment = request.getParameter("comment");
+        String stars = request.getParameter("rate");
+        String id = request.getParameter("id");
+        
+        try {
+            int star = Integer.parseInt(stars);
+            HttpSession session = request.getSession();
+            RatingDao rd = new RatingDao();
+            rd.insertRating(((User) session.getAttribute("user")).getId(), id, comment, star);
+            response.sendRedirect("product?id=" + id);
+        } catch (Exception e) {
+        }
+    }
 }

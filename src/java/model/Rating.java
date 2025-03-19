@@ -10,18 +10,18 @@ package model;
  */
 public class Rating {
     private String comment;
-    private String date;
     private String username;
     private String image;
-
+    private int stars;
+    
     public Rating() {
     }
 
-    public Rating(String comment, String date, String username, String image) {
+    public Rating(String comment, String username, String image, int stars) {
         this.comment = comment;
-        this.date = date;
         this.username = username;
         this.image = image.split(", ")[0];
+        this.stars = stars;
     }
 
     public String getComment() {
@@ -30,14 +30,6 @@ public class Rating {
 
     public void setComment(String comment) {
         this.comment = comment;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
     }
 
     public String getUsername() {
@@ -54,6 +46,14 @@ public class Rating {
 
     public void setImage(String image) {
         this.image = image.split(", ")[0];
+    }
+
+    public int getStars() {
+        return stars;
+    }
+
+    public void setStars(int stars) {
+        this.stars = stars;
     }
     
     

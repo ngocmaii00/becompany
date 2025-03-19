@@ -22,6 +22,7 @@ import com.google.gson.JsonObject;
 import dal.RatingDao;
 import jakarta.servlet.http.HttpSession;
 import model.Rating;
+import model.User;
 /**
  *
  * @author Admin
@@ -35,7 +36,7 @@ public class ProductServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
-        String id= request.getParameter("id");
+        String id = request.getParameter("id");
         
         try{
             ProductDao pd = new ProductDao();
@@ -49,7 +50,7 @@ public class ProductServlet extends HttpServlet {
             List<Teddy> detailList = td.getAllTeddyOfProduct(id);
             permanentList = detailList;
             
-            double overalRating = 0;
+            int overalRating = 0;
             for(int i : ratingList){
                 overalRating += i;
             }   
@@ -81,8 +82,8 @@ public class ProductServlet extends HttpServlet {
             request.setAttribute("rating", overalRating);
             request.setAttribute("color", colorList);
             
-            RatingDao od = new RatingDao();
-            List<Rating> list = od.getAll(id);
+            RatingDao rd = new RatingDao();
+            List<Rating> list = rd.getAll(id);
             request.setAttribute("data", list);
       
             request.getRequestDispatcher("product.jsp").forward(request, response);

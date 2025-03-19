@@ -63,7 +63,7 @@
                                 </div>
                                 <div class="flex justify-end">
                                     <button class="button">
-                                        <a href="product?name=${p.getProductName()}">Details</a>
+                                        <a href="product?id=${p.productId}">Details</a>
                                     </button>
                                 </div>
                             </div>
