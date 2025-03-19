@@ -6,6 +6,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>BeCompany</title>
         <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+<<<<<<< HEAD
 <<<<<<< Updated upstream
         <link rel="stylesheet" href="CSS/styles.css"/>
 =======
@@ -16,6 +17,11 @@
 >>>>>>> Stashed changes
         <link rel="stylesheet" href="CSS/responsiveHome.css"/>
 
+=======
+        <link rel="stylesheet" href="css/styles.css"/>
+        <link rel="stylesheet" href="css/responsiveHome.css"/>
+        
+>>>>>>> origin/ducanhNew
     </head>
     <body>
         <%@include file="header.jsp" %>
