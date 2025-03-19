@@ -6,15 +6,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>BeCompany</title>
         <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
-
         <link rel="stylesheet" href="CSS/styles.css"/>
 
         <link rel="stylesheet" href="CSS/responsiveHome.css"/>
-
-
-
-
-    </head>
+</head>
     <body>
         <%@include file="header.jsp" %>
         <main style="min-height: 80vh">

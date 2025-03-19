@@ -24,7 +24,7 @@ header {
 
 nav {
     display: flex;
-    justify-content: right;
+    justify-content: space-between;
     margin: 16px 0;
     align-items: center;
 }
@@ -34,7 +34,7 @@ nav {
     margin-right: 10px;
 }
 
-.search svg {
+nav svg {
     display: block;
     width: 40px;
     padding: 10px;
@@ -42,6 +42,16 @@ nav {
     fill: var(--sub-color);
     border-radius: 4px;
     margin-left: 1px;
+}
+
+.action-all {
+    display: flex;
+    gap: 5px;
+}
+
+.action-all svg {
+    padding: 8px;
+    cursor: pointer;
 }
 
 .search svg:hover{
