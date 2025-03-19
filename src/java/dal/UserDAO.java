@@ -109,7 +109,7 @@ public class UserDAO extends DBConnect {
 
 
     public void addUser(String usrId, String email, String username, String password) {
-        String sql = "insert into [User] (userId,email,username,password,status,auth_provider,role) values(?,?,?,?,'active','LOCAL',USER)";
+        String sql = "insert into [User] (userId,email,username,password,status,auth_provider,role) values(?,?,?,?,'active','LOCAL','USER')";
 
         try {
             PreparedStatement st = connection.prepareStatement(sql);

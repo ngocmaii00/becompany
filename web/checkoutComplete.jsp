@@ -47,8 +47,20 @@
                             <span class="text-[#563a2d]">${requestScope.date}</span>
                         </div>
                         <div class="flex justify-between">
+                            <span class="text-[#563a2d]/80">Payment Method:</span>
+                            <span class="text-[#563a2d]">${requestScope.paymentMethod}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-[#563a2d]/80">Delivery Option:</span>
+                            <span class="text-[#563a2d]">${requestScope.delivery}</span>
+                        </div>
+                        <div class="flex justify-between">
                             <span class="text-[#563a2d]/80">Total Amount:</span>
                             <span class="text-[#563a2d] font-semibold"><fmt:formatNumber value="${requestScope.totalAmount}" type="currency"/></span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-[#563a2d]/80">Message:</span>
+                            <span class="text-[#563a2d]">${requestScope.purpose}</span>
                         </div>
                     </div>
                 </div>

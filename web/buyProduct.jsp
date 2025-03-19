@@ -80,7 +80,7 @@
       <div class=" mx-16 grid grid-cols-11 border-b-4 py-2 pb-8 border-[#543520]">
         <div class="flex flex-col col-span-5">
             <span class="font-bold text-2xl text-[#543520]">Message: </span>
-            <textarea 
+                <textarea 
                 id="purpose" name="purpose"
                 class="border-2 border-[#543520] rounded p-2 w-full max-w-xs h-28 resize-none overflow-auto"
                 placeholder="Text here..."></textarea>
@@ -96,9 +96,9 @@
                     </c:forEach>  
                 </select>
             <span class="font-bold text-xl text-[#543520]">Payment Method: </span>
-            <select name="bankCode" onchange="redirect()" class="payment-method border-2 border-[#543520] w-full max-w-xs  px-2 py-2 rounded-lg my-2 bg-white">
+            <select id="bankCode" name="bankCode" onchange="redirect()" class="payment-method border-2 border-[#543520] w-full max-w-xs  px-2 py-2 rounded-lg my-2 bg-white">
                 <option value="CASH">Cash on Delivery</option>
-                <option value="VNBANK">Domestic card and bank account</option>
+                <option value="VNBANK">Domestic payment card</option>
                 <option value="INTCARD">International payment card</option>
             </select>
 <!--            <h5>Cách 2: Tách phương thức tại site của đơn vị kết nối</h5>
@@ -146,30 +146,76 @@
         
         <link href="https://pay.vnpay.vn/lib/vnpay/vnpay.css" rel="stylesheet" />
         <script src="https://pay.vnpay.vn/lib/vnpay/vnpay.min.js"></script>
+        <script>
+          function redirectToServlet() {
+          // Create a form element
+          const form = document.createElement("form");
+          form.method = "POST";
+          form.action = "checkout_info"; // Replace with your servlet URL
+
+          // Add data as hidden inputs
+          const input1 = document.createElement("input");
+          input1.type = "hidden";
+          input1.name = "amount"; // Replace with your parameter name
+          input1.value = document.querySelector("#amount").value; // Replace with your parameter value
+          form.appendChild(input1);
+
+          const input2 = document.createElement("input");
+          input2.type = "hidden";
+          input2.name = "purpose"; // Another parameter name
+          input2.value = document.querySelector("#purpose").value; // Another parameter value
+          form.appendChild(input2);
+          
+          const input3 = document.createElement("input");
+          input3.type = "hidden";
+          input3.name = "deliveryId"; // Another parameter name
+          input3.value = document.querySelector("#shippingOption").value; // Another parameter value
+          form.appendChild(input3);
+
+          const input4 = document.createElement("input");
+          input4.type = "hidden";
+          input4.name = "bankCode"; // Another parameter name
+          input4.value = document.querySelector("#bankCode").value; // Another parameter value
+          form.appendChild(input4);
+          // Add as many fields as needed
+          // ...
+
+  // Append the form to the body and submit it
+  document.body.appendChild(form);
+  form.submit();
+}
+        </script>
         <script id="vnpayScript" type="text/javascript">
-            $("#frmCreateOrder").submit(function () {
+        
+            $("#frmCreateOrder").submit(function (event) {
+                event.preventDefault();
                 var postData = $("#frmCreateOrder").serialize();
                 var submitUrl = $("#frmCreateOrder").attr("action");
                 $.ajax({
                     type: "POST",
                     url: submitUrl,
                     data: postData,
-                    dataType: 'JSON',
-                    success: function (x) {
-                        if (x.code === '00') {
+                    dataType: 'json',
+                    success: function (response) {
+                        if (response.code === '00') {
                             if (window.vnpay) {
-                                vnpay.open({width: 768, height: 600, url: x.data});
+                                vnpay.open({width: 768, height: 600, url: response.data});
                             } else {
-                                location.href = x.data;
+                                location.href = response.data;
                             }
-                            return false;
                         } else {
-                            alert(x.Message);
+                            alert(response.message);
                         }
-                    }
+                      },
+                        error: function (xhr, status, error) {
+                            // Redirecting to a servlet
+                            //indow.location.href = "checkout_info";
+                            redirectToServlet();
+                        }
+                    
                 });
-                return false;
             });
+        
         </script>       
       <script>
           const formatter = new Intl.NumberFormat('vi-VN', {
@@ -185,9 +231,12 @@
               if(payment_method === "CASH"){
                   form.setAttribute("action","checkout_info");
                   vnpayScript.setAttribute("type","text/plain");
+                  
               }else if(payment_method === "VNBANK" || payment_method === "INTCARD"){
                   form.setAttribute("action","vnpayajax");
+                  
                   vnpayScript.setAttribute("type","text/javascript");
+                  
                   
               }
 

@@ -23,6 +23,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import utilities.VNPayConfig;
 /**
  *
@@ -33,7 +34,17 @@ public class ajaxServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        
+            String purpose = req.getParameter("purpose");
+            String deliveryId = req.getParameter("shippingOption");
+            String totalAmount =req.getParameter("amount");
+            String paymentMethod = req.getParameter("bankCode");
+            
+            HttpSession session = req.getSession();
+            session.setAttribute("purpose", purpose);
+            session.setAttribute("shippingOption", deliveryId);
+            
+            session.setAttribute("bankCode",paymentMethod);
+            
         String vnp_Version = "2.1.0";
         String vnp_Command = "pay";
         String orderType = "other";
@@ -112,6 +123,8 @@ public class ajaxServlet extends HttpServlet {
         job.addProperty("message", "success");
         job.addProperty("data", paymentUrl);
         Gson gson = new Gson();
+        resp.setContentType("application/json");
+        resp.setCharacterEncoding("UTF-8");
         resp.getWriter().write(gson.toJson(job));
     }
 

@@ -41,6 +41,7 @@ public class CheckoutServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession userSession = request.getSession(false);
+        String vnPayError = (String)request.getAttribute("error");
         User user = (User) userSession.getAttribute("user");
         String cartId = user.getUsername() + "_cart";
         
@@ -81,6 +82,9 @@ public class CheckoutServlet extends HttpServlet {
         ShippingDAO shd = new ShippingDAO();
         List<ShippingOption> shippings = shd.getAllShippingOption();
         HttpSession session = request.getSession();
+        if(vnPayError != null){
+            request.setAttribute("error", vnPayError);
+        }
         session.setAttribute("cart", products);
         request.setAttribute("products", products);
         request.setAttribute("shippings", shippings);
@@ -120,8 +124,7 @@ public class CheckoutServlet extends HttpServlet {
                         // Set maxAge to 0 to delete the cookie immediately
                         cookie.setMaxAge(0);
 
-                        // Ensure the correct path (important if cookie has a path set)
-                        cookie.setPath("/");
+                        
 
                         // Add the cookie back to the response to overwrite it
                         response.addCookie(cookie);
@@ -137,6 +140,7 @@ public class CheckoutServlet extends HttpServlet {
             request.setAttribute("orderId", orderId);
             request.setAttribute("totalAmount",totalAmount);
             request.setAttribute("order",cart);
+            session.removeAttribute("cart");
            
 //            request.getRequestDispatcher("checkout-complete").forward(request, response);
     request.getRequestDispatcher("checkoutComplete.jsp").forward(request, response);
