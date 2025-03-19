@@ -38,13 +38,15 @@ public class StoreCheckoutInfoServlet extends HttpServlet {
             throws ServletException, IOException {
             HttpSession order = request.getSession();
             
-            String purpose = request.getParameter("purpose");            
+            String purpose = request.getParameter("purpose");
+         
             String deliveryId = request.getParameter("shippingOption");
+           
             
             String totalAmount =request.getParameter("amount");            
+            
             String paymentMethod = request.getParameter("bankCode");
-            if(paymentMethod == null)
-                totalAmount = (String)request.getAttribute("bankCode");
+            
 //            Double totalAmount = 0.0;
             switch(paymentMethod){
                 case"CASH" -> paymentMethod = "Cash on Delivery";

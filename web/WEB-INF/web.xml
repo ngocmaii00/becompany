@@ -8,7 +8,14 @@
         <servlet-name>CartServlet</servlet-name>
         <servlet-class>controller.CartServlet</servlet-class>
     </servlet>
-    
+    <servlet>
+        <servlet-name>StoreCheckoutInfoServlet</servlet-name>
+        <servlet-class>controller.StoreCheckoutInfoServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>VNPayReturn</servlet-name>
+        <servlet-class>controller.VNPayReturn</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ResetPasswordServlet</servlet-name>
         <url-pattern>/reset_password</url-pattern>
@@ -25,7 +32,7 @@
         <servlet-name>CartServlet</servlet-name>
         <url-pattern>/cart</url-pattern>
     </servlet-mapping>
-     <servlet>
+    <servlet>
         <servlet-name>ajaxServlet</servlet-name>
         <servlet-class>controller.ajaxServlet</servlet-class>
     </servlet>
@@ -48,5 +55,13 @@
     <servlet-mapping>
         <servlet-name>vnpayRefund</servlet-name>
         <url-pattern>/vnpayrefund/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StoreCheckoutInfoServlet</servlet-name>
+        <url-pattern>/checkout_info</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VNPayReturn</servlet-name>
+        <url-pattern>/vnpay-return</url-pattern>
     </servlet-mapping>
 </web-app>

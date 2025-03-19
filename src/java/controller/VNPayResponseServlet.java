@@ -5,27 +5,28 @@
 package controller;
 
 import java.io.IOException;
-
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import utilities.VNPayConfig;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
+import utilities.VNPayConfig;
 
 /**
  *
  * @author zeryus
  */
-@WebServlet(name = "VNPayReturn", urlPatterns = {"/vnpay-return"})
-public class VNPayReturn extends HttpServlet {
+@WebServlet(name = "VNPayResponseServlet", urlPatterns = {"/vnpay-response"})
+public class VNPayResponseServlet extends HttpServlet {
 
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -92,11 +93,11 @@ public class VNPayReturn extends HttpServlet {
 
         if (signValue.equals(vnp_SecureHash)) {
             if ("00".equals(request.getParameter("vnp_TransactionStatus"))) {
-                    session.setAttribute("amount", vnp_Amount);
-                    session.setAttribute("purpose", purpose);
-                    session.setAttribute("shippingOption", shippingOption);
-                    session.setAttribute("bankCode", bankCode);
-                response.sendRedirect("checkout_info");
+                    request.setAttribute("amount", vnp_Amount);
+                    request.setAttribute("purpose", purpose);
+                    request.setAttribute("shippingOption", shippingOption);
+                    request.setAttribute("bankCode", bankCode);
+                request.getRequestDispatcher("checkout_info").forward(request, response);
             } else {
                 request.setAttribute("error", "Transaction failed, please try again!");
                 request.getRequestDispatcher("checkout").forward(request, response);
@@ -106,7 +107,9 @@ public class VNPayReturn extends HttpServlet {
             System.err.println("Invalid Signature");
         }
     }
+    
 
+   
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
