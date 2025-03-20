@@ -1,4 +1,3 @@
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
@@ -12,7 +11,6 @@ import java.io.IOException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
-
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.PrintWriter;
@@ -20,7 +18,6 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import model.User;
-
 
 @WebServlet(name = "CartServlet", urlPatterns = {"/cart"})
 public class CartServlet extends HttpServlet {
@@ -43,7 +40,8 @@ public class CartServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession userSession = request.getSession(false);
-        User user = (User)userSession.getAttribute("user");
+
+        User user = (User) userSession.getAttribute("user");
         String cartId = user.getUsername() + "_cart";
         String action = request.getParameter("action");
         if (action != null) {
@@ -96,7 +94,6 @@ public class CartServlet extends HttpServlet {
                     updatedCart = updatedCart.substring(0, updatedCart.length() - 1);
                 }
                 String encodedCart = URLEncoder.encode(updatedCart, StandardCharsets.UTF_8.toString());
-                
                 Cookie c = new Cookie(cartId, encodedCart);
                 c.setMaxAge(60 * 60 * 24 * 7);
                 response.addCookie(c);
@@ -109,15 +106,18 @@ public class CartServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession userSession = request.getSession(false);
+   
+        User user = (User) userSession.getAttribute("user");
+        String cartId = user.getUsername() + "_cart";
         Cookie[] arr = request.getCookies();
         String txt = "";
         if (arr != null) {
             for (Cookie o : arr) {
-                if (o.getName().equals("cart")) {
+                if (o.getName().equals(cartId)) {
                     txt = URLDecoder.decode(o.getValue(), StandardCharsets.UTF_8.toString());
                     o.setMaxAge(0); // xoá cookie cũ
                     response.addCookie(o);
-
                 }
             }
         }
@@ -171,7 +171,7 @@ public class CartServlet extends HttpServlet {
                 }
             }
             String encodedTxt = URLEncoder.encode(txt, StandardCharsets.UTF_8.toString());
-            Cookie c = new Cookie("cart", encodedTxt);
+            Cookie c = new Cookie(cartId, encodedTxt);
             c.setMaxAge(60 * 60 * 24 * 7);
             response.addCookie(c);
         }
@@ -182,4 +182,3 @@ public class CartServlet extends HttpServlet {
         return "Short description";
     }
 }
-
