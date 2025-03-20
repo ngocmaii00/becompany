@@ -15,13 +15,47 @@ public class TeddyDao extends DBConnect {
             st.setString(1, productId);
             ResultSet result = st.executeQuery();
             while (result.next()) {
-                Teddy teddy = new Teddy(result.getString("teddyId"), result.getString("color"), result.getString("size"), result.getInt("quantity"), result.getDouble("price"), result.getString("productId"));
+                Teddy teddy = new Teddy(result.getString("productId"), result.getString("color"), result.getString("size"), result.getInt("quantity"), result.getDouble("price"), result.getString("productId"));
                 list.add(teddy);
             }
         } catch (SQLException e) {
             System.out.println(e);
         }
         return list;
+    }
+    
+    public void updateTeddy(String teddyId, String color, String size, double price, int quantity) {
+        String sql = "update TeddyDetail set color=?, size=?, quantity=?, price=? where teddyId=?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, color);
+            st.setString(2, size);
+            st.setInt(3, quantity);
+            st.setDouble(4, price);
+            st.setString(5, teddyId);
+
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+    
+    public void addTeddy(String teddyId, String color, String size, double price, int quantity, String productId) {
+        String sql = "insert into TeddyDetail(teddyId, color, size, quantity, price, productId) values "
+                + "(?,?,?,?,?,?)";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, teddyId);
+            st.setString(2, color);
+            st.setString(3, size);
+            st.setInt(4, quantity);
+            st.setDouble(5, price);
+            st.setString(6, productId);
+
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
     }
     
     public String getLastTeddyId() {
@@ -37,39 +71,20 @@ public class TeddyDao extends DBConnect {
         }
         return null;
     }
-
-    public void updateTeddy(String teddyId, String color, String size, double price, int quantity) {
-        String sql = "update TeddyDetail set color=?, size=?, quantity=?, price=? where teddyId=?";
-        try {
+    public String searchTeddyId(String productId, String color, String size){
+        String sql ="select teddyId from TeddyDetail where productId = ? and color = ? and size =?";
+        try{
             PreparedStatement st = connection.prepareStatement(sql);
-            st.setString(1, color);
-            st.setString(2, size);
-            st.setInt(3, quantity);
-            st.setDouble(4, price);
-            st.setString(5, teddyId);
-
-            st.executeUpdate();
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-    }
-
-    public void addTeddy(String teddyId, String color, String size, double price, int quantity, String productId) {
-        String sql = "insert into TeddyDetail(teddyId, color, size, quantity, price, productId) values "
-                + "(?,?,?,?,?,?)";
-        try {
-            PreparedStatement st = connection.prepareStatement(sql);
-            st.setString(1, teddyId);
+            st.setString(1, productId);
             st.setString(2, color);
             st.setString(3, size);
-            st.setInt(4, quantity);
-            st.setDouble(5, price);
-            st.setString(6, productId);
-
-            st.executeUpdate();
-        } catch (Exception e) {
-            System.out.println(e);
+            ResultSet rs = st.executeQuery();
+            if(rs.next()){
+                return rs.getString("teddyId");
+            }
+        }catch(SQLException e){
+            System.err.println(e);
         }
+        return null;
     }
-    
 }

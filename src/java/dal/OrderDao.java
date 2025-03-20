@@ -4,19 +4,82 @@
  */
 package dal;
 
+import java.sql.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.Order;
 import model.Product;
 
+
 /**
  *
  * @author PC
  */
 public class OrderDao extends DBConnect {
+
+    
+
+        public int addNewOrder(String userId, Date orderDate, String purpose) {
+            String sql = "INSERT INTO [Order](userId, orderDate, purpose) VALUES (?, ?, ?);";
+            try {
+                // Use RETURN_GENERATED_KEYS to get the auto-generated ID
+                PreparedStatement st = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+                st.setString(1, userId);
+                st.setDate(2, orderDate);
+                
+                st.setString(3, purpose);
+
+                // Execute the insert
+                int rowsInserted = st.executeUpdate();
+
+                // Retrieve the generated key (orderId)
+                if (rowsInserted > 0) {
+                    ResultSet rs = st.getGeneratedKeys();
+                    if (rs.next()) {
+                        int orderId = rs.getInt(1);  // Fetch by column index (not name)
+                        return orderId;  // Successfully return the order ID
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace(); // Log the error
+            }
+            return -1; // Return -1 if something goes wrong
+        }
+
+    
+    public void insertOrderDetail(int OrderId, String teddyId, String deliveryId, int quantity,Date orderDate,Date receiveDate, String orderStatus){
+        String sql = "INSERT INTO OrderDetail (orderId, teddyId, deliveryId, boughtQuantity, orderDate,receiveDate,orderStatus) values(?,?,?,?,?,?,?)";
+        
+        try{
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1,OrderId);
+            st.setString(2, teddyId);
+            st.setString(3, deliveryId);
+            st.setInt(4, quantity);
+            st.setDate(5, orderDate);
+            st.setDate(6, receiveDate);
+            st.setString(7,orderStatus);
+            st.executeUpdate();
+        }catch(SQLException e){
+            System.err.println(e);
+        }
+    }
+    
+    //String orderId, String teddyId,String deliveryId,int quantity,Date orderDate,Date receiveDate
+    
+    
+//    public static void main(String[] args) {
+//        OrderDao od = new OrderDao();
+//        List<Order> list = od.getAll();
+//        System.out.println(list.get(0).getProductName());
+//        
+//    }
+
     
     public List<Order> getAll() {
         List<Order> list = new ArrayList<>();
@@ -91,4 +154,5 @@ public class OrderDao extends DBConnect {
         od.checkOrder("ggg", "sss", "sss", "1");
         
     }
+
 }

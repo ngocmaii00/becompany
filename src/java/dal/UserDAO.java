@@ -4,7 +4,6 @@
  */
 package dal;
 
-import java.sql.Date;
 import model.Customer;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
@@ -108,8 +107,9 @@ public class UserDAO extends DBConnect {
         return false;
     }
 
+
     public void addUser(String usrId, String email, String username, String password) {
-        String sql = "insert into [User] (userId,email,username,password,status,auth_provider,role) values(?,?,?,?,'active','LOCAL',USER)";
+        String sql = "insert into [User] (userId,email,username,password,status,auth_provider,role) values(?,?,?,?,'active','LOCAL','USER')";
 
         try {
             PreparedStatement st = connection.prepareStatement(sql);
@@ -181,9 +181,6 @@ public class UserDAO extends DBConnect {
         return null;
     }
 
-    public static void main(String[] args) {
-        UserDAO ud = new UserDAO();
-    }
 
     public void update(Customer user) {
         String sql = "update [User] set reset_password_token = ? and role = 'USER'";
@@ -260,11 +257,12 @@ public class UserDAO extends DBConnect {
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet result = st.executeQuery();
-            while (result.next()) { //                       
-                Customer c = new Customer(result.getString("userId"), result.getString("email"), result.getString("username"), "", result.getString("status"), result.getString("role"), "", "", "", new CustomerDetail(result.getString("firstname"), result.getString("lastname"), result.getInt("gender") == 1, result.getString("phone"), result.getString("address"), result.getDate("dob")));
+            while(result.next()) { //                       
+                Customer c = new Customer(result.getString("userId"), result.getString("email"), result.getString("username"), "", result.getString("status"), result.getString("role"),"", "", "", new CustomerDetail(result.getString("firstname"), result.getString("lastname"), result.getInt("gender") == 1 , result.getString("phone"), result.getString("address"), result.getDate("dob")));
+               
                 list.add(c);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e);
         }
         return list;
@@ -337,7 +335,8 @@ public class UserDAO extends DBConnect {
                                 result.getDouble("price")));
                 list.add(c);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
+
             System.out.println(e);
         }
         return list;

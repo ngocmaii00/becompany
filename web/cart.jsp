@@ -3,9 +3,12 @@
     Created on : Feb 17, 2025, 9:31:39 PM
     Author     : DucAnhDepTrai
 --%>
+<%@page import="model.User"%>
 <%@page import="java.util.*" %>
 <%@page import="java.net.URLDecoder" %>
 <%@page import="java.nio.charset.StandardCharsets" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<fmt:setLocale value="vi_VN" />
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -28,11 +31,14 @@
             </span>
             <div class="border-2 border-[#543520] mx-16 rounded-lg py-4 bg-[#f2e6e6]">
                 <%
+                    HttpSession userSession = request.getSession(false);
+                    User user = (User)userSession.getAttribute("user");
+                    String cartId = user.getUsername() + "_cart";
                     Cookie[] cookies = request.getCookies();
                     String cartData = "";
                     if (cookies != null) {
                         for (Cookie cookie : cookies) {
-                            if (cookie.getName().equals("cart")) {
+                            if (cookie.getName().equals(cartId)) {
                                 cartData = URLDecoder.decode(cookie.getValue(), StandardCharsets.UTF_8.toString());
                                 break;
                             }
@@ -44,7 +50,7 @@
                     }
                 %>
                 <c:choose>
-                    <c:when test="${not empty cartItems}">
+                        <c:when test="${not empty cartItems}">
                         <c:forEach var="item" items="${cartItems}">
                             <%
                                 String[] details = ((String) pageContext.getAttribute("item")).split("\\$");
@@ -65,8 +71,10 @@
                                     pageContext.setAttribute("color", color);
                                     pageContext.setAttribute("price", price);
                                     pageContext.setAttribute("quantity", quantity);
+
                                     pageContext.setAttribute("instock", instock);
                                     pageContext.setAttribute("estimate", String.format("%.2f", estimate));
+
                                 }
                             %>
                             <div class="grid grid-cols-11 items-center py-4">
@@ -86,7 +94,7 @@
                                     </div>
                                 </div>
                                 <div class="col-span-2 text-center text-xl font-bold">
-                                    <span>${price}</span>
+                                    <span><fmt:formatNumber value="${price}" type="currency"/></span>
                                 </div>
                                 <div class="col-span-2 place-items-center">
                                     <div class="flex flex-row border-2 border-black h-fit w-fit rounded-md col-span-2 items-center">
@@ -104,7 +112,7 @@
                                     </div>
                                 </div>
                                 <div class="col-span-2 text-center text-xl font-bold">
-                                    <span>${estimate}</span>
+                                    <span><fmt:formatNumber value="${estimate}" type="currency"/></span>
                                 </div>
                                 <div class="col-span-1 place-items-center">
                                     <div class="flex flex-row gap-x-4 lg:mx-8 mx-4 col-span-1 items-end">
@@ -124,24 +132,30 @@
                     </c:otherwise>
                 </c:choose>
             </div>
+
             <!-- Tổng tiền + nút mua -->
+
             <div class="mt-12 bottom-8 left-0 right-0 grid grid-cols-9 border-2 border-[#543520] rounded-lg bg-[#f2e6e6] mx-16 h-20 items-center">
                 <div class="col-span-3 text-center">
                     <span class="text-3xl font-bold text-[#543520]"> Total Amount: </span>
                 </div>
                 <div class="col-span-4 text-center">
+
                     <span id="totalAmount" class="text-4xl font-bold text-[#543520]">0.00$</span>
+
                 </div>
                 <div class="col-span-2 flex justify-center">
-                    <button class="flex border-2 border-[#543520] bg-[#543520] rounded-md w-40 h-14 text-center items-center justify-center align-center">
+                    <a href="checkout"  class="flex border-2 border-[#543520] bg-[#543520] rounded-md w-40 h-14 text-center items-center justify-center align-center">
                         <span class="text-2xl font-bold text-white">Buy</span>
-                    </button>
+                    </a>
+<!--                    onclick="postToServlet('checkout')"-->
                 </div>
             </div>
         </div>
 
         <script>
             function updateQuantity(id, newQuantity, size, color, instock) {
+
                 if (newQuantity < 1) return;
                 if (newQuantity > instock) {
                     alert("Quantity cannot exceed available stock (" + instock + ")!");
@@ -181,6 +195,18 @@
             window.onload = function() {
                 updateTotalAmount();
             };
+        </script>
+        <script>
+            function postToServlet(url) {
+                // Create a hidden form
+         
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = url;
+
+                document.body.appendChild(form);
+                form.submit();
+        }
         </script>
     </body>
 </html>
