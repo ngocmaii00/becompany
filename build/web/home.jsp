@@ -14,7 +14,7 @@
     </head>
     <body>
         <%@include file="header.jsp" %>
- 
+
         <main>
             <div class="slide relative">
                 <div class="slide-title">
@@ -123,18 +123,7 @@
                                                     }
                                                 });
                                             }
-                                            function loadHeader() {
-                                                $.ajax({
-                                                    url: "header",
-                                                    type: 'GET',
-                                                    dataType: 'application/json',
-                                                    success: function (res) {
-                                                        document.querySelector(".type-names").innerHTML = res;
-                                                    }
-                                                });
-                                            }
 
-                                            loadHeader();
 
         </script>
     </body>
