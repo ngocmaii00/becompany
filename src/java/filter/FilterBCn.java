@@ -62,12 +62,12 @@ public class FilterBCn implements Filter {
         String path = requestURI.substring(contextPath.length());
 
         // không cần đăng nhập
-        boolean isPublicPage = path.equals("/home") || path.equals("/product")
-                || path.equals("/login") || path.equals("/signup");
+        boolean isPublicPage = path.contains("/home") || path.contains("/product")
+                || path.contains("/login") || path.contains("/signup");
 
         // tài nguyên tĩnh
         boolean isStaticResource = path.endsWith(".png") || path.endsWith(".jpg")
-                || path.endsWith(".css");
+                || path.endsWith(".css") || path.endsWith(".js");
 
         // kiểm tra đnhap
         boolean isLoggedIn = (session != null && session.getAttribute("user") != null);
@@ -78,7 +78,7 @@ public class FilterBCn implements Filter {
                 chain.doFilter(request, response); 
             } else if (isLoggedIn) {
                 // nếu đã đăng nhập
-                if (path.equals("/login")) {
+                if (path.contains("/login")) {
                     // nếu đang ở login -> chuyển về home
                     res.sendRedirect(requestURI);
                     System.out.println(requestURI);
@@ -90,7 +90,7 @@ public class FilterBCn implements Filter {
             } else {
                 // Nếu chưa đăng nhập và không phải trang công khai, chuyển đến /login
                 HttpSession newSession = req.getSession(true);
-                newSession.setAttribute("redirectAfterLogin", requestURI);
+//                newSession.setAttribute("redirectAfterLogin", requestURI);
                 res.sendRedirect(contextPath + "/login");
                 System.out.println(requestURI);
             }
