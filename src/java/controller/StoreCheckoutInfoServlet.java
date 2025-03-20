@@ -16,10 +16,14 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Iterator;
 import java.util.List;
 import model.CartItem;
 import model.User;
@@ -68,7 +72,9 @@ public class StoreCheckoutInfoServlet extends HttpServlet {
 
         purpose = purpose == null ? "" : purpose;
         deliveryId = deliveryId == null ? "D1" : deliveryId;
-
+        List<CartItem> totalItemCart = (List<CartItem>) order.getAttribute("allCart");//cart item
+        
+        
         User u = (User) order.getAttribute("user");
         ShippingDAO shd = new ShippingDAO();
         String delivery = shd.getDeliveryDescribe(deliveryId);
@@ -76,7 +82,7 @@ public class StoreCheckoutInfoServlet extends HttpServlet {
 //            String purpose = (String)order.getAttribute("purpose");
 //            String deliveryId = (String)order.getAttribute("deliveryId");
 //            Double totalAmount = (Double)session.getAttribute("totalAmount");
-        List<CartItem> cart = (List<CartItem>) order.getAttribute("cart");
+        List<CartItem> cart = (List<CartItem>) order.getAttribute("cart"); //checkout item
 
         OrderDao od = new OrderDao();
         LocalDate today = LocalDate.now();
@@ -87,26 +93,42 @@ public class StoreCheckoutInfoServlet extends HttpServlet {
             LocalDate receiveDate = today.plusDays(shd.getDeliveryDuration(deliveryId));
             od.insertOrderDetail(orderId, td.searchTeddyId(i.id, i.color, i.size), deliveryId, i.getQuantity(), Date.valueOf(today), Date.valueOf(receiveDate), "Pending");
         }
+//==================================== REMOVE THE ORDERED ITEM =============================================        
+        
+        for (Iterator<CartItem> iterator = totalItemCart.iterator(); iterator.hasNext();) {
+            CartItem i = iterator.next();
+            for (CartItem j : cart) {
+                if (i.id.equals(j.id)) {
+                    iterator.remove(); // ✅ Safely remove without exception
+                    break; // Exit inner loop once match is found
+                }
+            }
+        }
+        StringBuilder cartCookie = new StringBuilder();
+        for(CartItem i : totalItemCart){
+            String cartItem = i.id + "$" + i.image + "$" + i.name + "$" + i.size + "$" + i.color + "$" + i.price + "$" + i.quantity + "$" + i.instock;
+            cartCookie.append(cartItem).append(",");
+        }
+        
+        String txt = cartCookie.toString();
+                if (txt.endsWith(",")) {
+                    txt = txt.substring(0, txt.length() - 1);
+                }
+        String encodedTxt = URLEncoder.encode(txt, StandardCharsets.UTF_8.toString());
         Cookie[] cookies = request.getCookies();
 
+       
         if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals(u.getUsername() + "_cart")) {
-                    // Set the cookie to an empty value
-                    cookie.setValue("");
-
-                    // Set maxAge to 0 to delete the cookie immediately
-                    cookie.setMaxAge(0);
-
-                    // Ensure the correct path (important if cookie has a path set)
-                    cookie.setPath("/");
-
-                    // Add the cookie back to the response to overwrite it
-                    response.addCookie(cookie);
+            for (Cookie userCart : cookies) {
+                if (userCart.getName().equals(u.getUsername() + "_cart")) {
+                    userCart.setValue(encodedTxt);
+                    userCart.setMaxAge(60 * 60 * 24 * 7); // xoá cookie cũ
+                    response.addCookie(userCart);
                     break;
                 }
             }
         }
+//===========================================================================================================         
         LocalDateTime datetime = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         String date = datetime.format(formatter);
@@ -150,7 +172,8 @@ public class StoreCheckoutInfoServlet extends HttpServlet {
                 paymentMethod = "International Payment Card";
         }
         User u = (User) order.getAttribute("user");
-
+        String cartId = u.getUsername() + "_cart";
+        List<CartItem> totalItemCart = (List<CartItem>) order.getAttribute("allCart");//cart item
 //            String purpose = (String)order.getAttribute("purpose");
 //            String deliveryId = (String)order.getAttribute("deliveryId");
 //            Double totalAmount = (Double)session.getAttribute("totalAmount");
@@ -167,18 +190,42 @@ public class StoreCheckoutInfoServlet extends HttpServlet {
             LocalDate receiveDate = today.plusDays(shd.getDeliveryDuration(deliveryId));
             od.insertOrderDetail(orderId, td.searchTeddyId(i.id, i.color, i.size), deliveryId, i.getQuantity(), Date.valueOf(today), Date.valueOf(receiveDate), "Pending");
         }
+       //==================================== REMOVE THE ORDERED ITEM =============================================        
+        
+       for (Iterator<CartItem> iterator = totalItemCart.iterator(); iterator.hasNext();) {
+            CartItem i = iterator.next();
+            for (CartItem j : cart) {
+                if (i.id.equals(j.id)) {
+                    iterator.remove(); // ✅ Safely remove without exception
+                    break; // Exit inner loop once match is found
+                }
+            }
+        }
+        StringBuilder cartCookie = new StringBuilder();
+        for(CartItem i : totalItemCart){
+            String cartItem = i.id + "$" + i.image + "$" + i.name + "$" + i.size + "$" + i.color + "$" + i.price + "$" + i.quantity + "$" + i.instock;
+            cartCookie.append(cartItem).append(",");
+        }
+        
+        String txt = cartCookie.toString();
+                if (txt.endsWith(",")) {
+                    txt = txt.substring(0, txt.length() - 1);
+                }
+        String encodedTxt = URLEncoder.encode(txt, StandardCharsets.UTF_8.toString());
         Cookie[] cookies = request.getCookies();
 
+       
         if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals(u.getUsername() + "_cart")) {
-                    cookie.setMaxAge(0);
-                    // Add the cookie back to the response to overwrite it
-                    response.addCookie(cookie);
+            for (Cookie userCart : cookies) {
+                if (userCart.getName().equals(u.getUsername() + "_cart")) {
+                    userCart.setValue(encodedTxt);
+                    userCart.setMaxAge(60 * 60 * 24 * 7); // xoá cookie cũ
+                    response.addCookie(userCart);
                     break;
                 }
             }
         }
+//===========================================================================================================     
         LocalDateTime datetime = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         String date = datetime.format(formatter);
@@ -187,7 +234,7 @@ public class StoreCheckoutInfoServlet extends HttpServlet {
         request.setAttribute("orderId", orderId);
         request.setAttribute("totalAmount", totalAmount);
         request.setAttribute("order", cart);
-         order.removeAttribute("purpose");
+            order.removeAttribute("purpose");
             order.removeAttribute("shippingOption");
             order.removeAttribute("bankCode");
             order.removeAttribute("amount");

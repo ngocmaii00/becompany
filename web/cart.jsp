@@ -2,6 +2,10 @@
 <%@page import="java.net.URLDecoder" %>
 <%@page import="java.nio.charset.StandardCharsets" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<fmt:setLocale value="vi_VN" />
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -23,6 +27,12 @@
             </span>
             <div class="border-2 border-[#543520] mx-16 rounded-lg py-4 bg-[#f2e6e6]">
                 <%
+
+                    HttpSession userSession = request.getSession(false);
+
+                    User user = (User) userSession.getAttribute("user");
+                    String cartId = user.getUsername() + "_cart";   
+
                     Cookie[] cookies = request.getCookies();
                     String cartData = "";
                     if (cookies != null) {
@@ -62,8 +72,6 @@
                                     pageContext.setAttribute("quantity", quantity);
                                     pageContext.setAttribute("instock", instock);
                                     pageContext.setAttribute("estimate", String.format("%.2f", estimate));
-
-
                                 }
                             %>
                             <div class="grid grid-cols-11 items-center py-4">
@@ -127,22 +135,18 @@
                     <span class="text-3xl font-bold text-[#543520]"> Total Amount: </span>
                 </div>
                 <div class="col-span-4 text-center">
-
-                    <span id="totalAmount" class="text-4xl font-bold text-[#543520]">0.00$</span>
-
+                    <span id="totalAmount" class="text-4xl font-bold text-[#543520]">0₫</span>
                 </div>
                 <div class="col-span-2 flex justify-center">
-                    <a href="checkout"  class="flex border-2 border-[#543520] bg-[#543520] rounded-md w-40 h-14 text-center items-center justify-center align-center">
+                    <button id="buy" href="checkout" class="flex border-2 border-[#543520] bg-[#543520] rounded-md w-40 h-14 text-center items-center justify-center align-center">
                         <span class="text-2xl font-bold text-white">Buy</span>
-                    </a>
-<!--                    onclick="postToServlet('checkout')"-->
+                    </button>
                 </div>
             </div>
         </div>
 
         <script>
             function updateQuantity(id, newQuantity, size, color, instock) {
-
                 if (newQuantity < 1) return;
                 if (newQuantity > instock) {
                     alert("Quantity cannot exceed available stock (" + instock + ")!");
@@ -163,7 +167,7 @@
                         total += estimate;
                     }
                 });
-                document.getElementById('totalAmount').textContent = total.toFixed(2) + '$';
+                document.getElementById('totalAmount').textContent = total.toFixed(2) + '₫';
             }
             // Tick checkbox
             document.querySelectorAll('.item-checkbox').forEach(checkbox => {
@@ -183,5 +187,35 @@
                 updateTotalAmount();
             };
         </script>
+
+        <script>
+            function getSelectedItems() {
+                let selectedItems = [];
+
+                // Get all checked checkboxes with the class 'item-checkbox'
+                const checkboxes = document.querySelectorAll('.item-checkbox:checked');
+
+                checkboxes.forEach((checkbox) => {
+                    
+                        let id = checkbox.getAttribute('data-id');
+                        
+                    
+                    selectedItems.push(id);
+                });
+
+                console.log(selectedItems);
+                return selectedItems;
+            }
+            document.querySelector("#buy").addEventListener("click", function() {
+                const selectedItems = getSelectedItems();
+                if (selectedItems.length === 0) {
+                    alert("Please select at least one item to buy!");
+                    return;
+                }
+                window.location.href = "checkout?selectedItems=" + selectedItems.join(",");
+            });
+            
+        </script>
+
     </body>
 </html>
