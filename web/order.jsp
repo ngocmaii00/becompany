@@ -19,7 +19,7 @@
 
                     <div class="flex flex-col items-center">
                         <img src="${user.image}"
-                             class="avatar bg-cover bg-center size-[18em] rounded-full mb-8 shadow-lg border-2 border-[#563a2d]"></img>
+                             class="avatar bg-cover bg-center size-[18em] rounded-full mb-8 shadow-lg border-2 border-[#563a2d]"/>
 
                         <span class="peacesans-font uppercase text-5xl text-center mb-6">${user.username}</span>
                     </div>
