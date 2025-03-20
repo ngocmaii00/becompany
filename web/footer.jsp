@@ -27,10 +27,10 @@
                             <h2 class="mb-4 font-bold text-[#543520] peacesans-font text-xl py-2">About Us</h2>
                             <ul class="text-[#543520] font-medium">
                                 <li class="mb-4">
-                                    <a href="https://flowbite.com/" class="hover:underline">Our stories</a>
+                                    <a href="" class="hover:underline">Our stories</a>
                                 </li>
                                 <li>
-                                    <a href="https://tailwindcss.com/" class="hover:underline">Our members</a>
+                                    <a href="" class="hover:underline">Our members</a>
                                 </li>
                             </ul>
                         </div>
