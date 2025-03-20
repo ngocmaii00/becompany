@@ -147,7 +147,7 @@ public class ProductDao extends DBConnect {
         List<Product> list = new ArrayList<>();
         TeddyDao td = new TeddyDao();
         String sql = "select distinct p.productId, p.productName, p.origin, p.description, p.image, p.manufacturer, p.status, p.type, h.sold \n"
-                + "from product p join rating r on p.productId = r.productId join TeddyDetail td on td.productId = p.productId join (\n"
+                + "from product p left join rating r on p.productId = r.productId join TeddyDetail td on td.productId = p.productId join (\n"
                 + "select distinct p.productId, p.productName, p.origin, p.description, p.manufacturer, p.image, p.type, p.status, iif(m.sold is null,  0, m.sold) as [sold] from Product p join TeddyDetail t on p.productId = t.productId\n"
                 + "left join (\n"
                 + "select td.productId ,sum(od.boughtQuantity) as [sold] from OrderDetail od join TeddyDetail td on td.teddyId = od.teddyId\n"
