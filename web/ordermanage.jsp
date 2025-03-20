@@ -5,7 +5,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Becompany</title>
-        <link rel="stylesheet" href="css/orderManageStyle.css"/>
+        <link rel="stylesheet" href="CSS/orderManageStyle.css"/>
     </head>
     <body>
         <header>

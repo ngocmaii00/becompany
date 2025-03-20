@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< Updated upstream
             <file>file:/D:/PRJ/becompany/web/image.jsp</file>
             <file>file:/D:/PRJ/becompany/web/admin.jsp</file>
             <file>file:/D:/PRJ/becompany/src/java/filter/FilterBCn.java</file>
@@ -10,6 +11,10 @@
             <file>file:/D:/PRJ/becompany/src/java/controller/CartServlet.java</file>
             <file>file:/D:/PRJ/becompany/src/java/dal/ProductDao.java</file>
             <file>file:/D:/PRJ/becompany/web/pros.jsp</file>
+=======
+            <file>file:/D:/PRJ/becompany/src/java/controller/CartServlet.java</file>
+            <file>file:/D:/PRJ/becompany/src/java/dal/ProductDao.java</file>
+>>>>>>> Stashed changes
         </group>
     </open-files>
 </project-private>
