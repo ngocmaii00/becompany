@@ -16,7 +16,7 @@
         <title>Product</title>      
         <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
         
-        <link rel="stylesheet" href="css/index.css">
+        <link rel="stylesheet" href="CSS/index.css">
        
        
     </head>
