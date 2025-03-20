@@ -54,7 +54,7 @@ public class FilterBCn implements Filter {
 ////////////////////////////////////////////////////////////////////////////////
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
-        HttpSession session = req.getSession(false); // Không tạo session mới ngay
+        HttpSession session = req.getSession(); // Không tạo session mới ngay
 
         // Lấy đường dẫn mà người dùng đang truy cập
         String requestURI = req.getRequestURI();

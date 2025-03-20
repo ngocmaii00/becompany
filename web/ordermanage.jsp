@@ -28,7 +28,7 @@
 
                 </div>
 
-                <form action="pros" method="post" class="search">
+                <form action="ordermanage" method="post" class="search">
                     <input name="search" class="search-input" type="text" placeholder="Search"/>
                     <button style="background: transparent; border: none">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
