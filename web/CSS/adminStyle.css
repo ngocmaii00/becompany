@@ -70,3 +70,22 @@ svg {
     cursor: pointer;
 }
 
+button {
+    background-color: var(--main-color);
+    border: none;
+    box-shadow: 0 0 2px var(--main-color);
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+button a {
+    display: block;
+    padding: 10px 28px;
+    color: var(--sub-color);
+}
+
+button:hover,
+.manage-item:hover {
+    box-shadow: 0 0 5px var(--main-color);
+    opacity: 0.9;
+}

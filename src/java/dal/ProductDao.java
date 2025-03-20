@@ -143,11 +143,11 @@ public class ProductDao extends DBConnect {
     }
 
 //    //////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public List<Product> getProductByFilter(String type, String color, String size, String from, String to, String[] status, String[] rating) {
+    public List<Product> getProductByFilter(String type, String[] colors, String[] sizes, String from, String to, String[] status, String[] rating) {
         List<Product> list = new ArrayList<>();
         TeddyDao td = new TeddyDao();
         String sql = "select distinct p.productId, p.productName, p.origin, p.description, p.image, p.manufacturer, p.status, p.type, h.sold \n"
-                + "from product p join rating r on p.productId = r.productId join TeddyDetail td on td.productId = p.productId join (\n"
+                + "from product p left join rating r on p.productId = r.productId join TeddyDetail td on td.productId = p.productId join (\n"
                 + "select distinct p.productId, p.productName, p.origin, p.description, p.manufacturer, p.image, p.type, p.status, iif(m.sold is null,  0, m.sold) as [sold] from Product p join TeddyDetail t on p.productId = t.productId\n"
                 + "left join (\n"
                 + "select td.productId ,sum(od.boughtQuantity) as [sold] from OrderDetail od join TeddyDetail td on td.teddyId = od.teddyId\n"
@@ -158,11 +158,13 @@ public class ProductDao extends DBConnect {
         if (type.compareToIgnoreCase("all") != 0) {
             filters.add("p.type = '" + type + "'");
         }
-        if (color != null && color.compareTo("") != 0) {
-            filters.add("td.color='" + color + "'");
+        if (colors != null && colors.length > 0) {
+            String cc = String.join("', '", colors);
+            filters.add("td.color in ('" + cc + "')");
         }
-        if (size != null && size.compareTo("") != 0) {
-            filters.add("td.size='" + size + "'");
+        if (sizes != null && sizes.length > 0) {
+            String ss = String.join("', '", sizes);
+            filters.add("td.size in ('" + ss + "')");
         }
         if (from != null && from.compareTo("") != 0 && to != null && to.compareTo("") != 0) {
             filters.add("td.price between " + from + " and " + to + "");
@@ -254,33 +256,64 @@ public class ProductDao extends DBConnect {
         }
     }
 
-    public Product getProductByFilter(int gender, String types, String type, int top) {
-
-        String sql = "select top "+top+" * from (\n"
-                + "select sum(a.boughtQuantity) as [boughtQuantity], a.productId from (\n"
+    public List<Product> getProductByFilter(int gender, String types, String type, int top) {
+        List<Product> list = new ArrayList<>();
+        String sql = "select top " + top + " * from (\n"
+                + "select sum(a.boughtQuantity) as [sold], a.productId from (\n"
                 + "(select b.orderId, b.teddyId, b.boughtQuantity, b.userId, b.gender, td.productId from (\n"
                 + "select o.orderId, od.teddyId, od.boughtQuantity, ud.userId, ud.gender from [Order] o join OrderDetail od on o.orderId = od.orderId\n"
                 + "join [User] u on u.userId = o.userId \n"
-                + "join [UserDetail] ud on ud.userId = u.userId where ud.gender = "+gender+") as b join TeddyDetail td on td.teddyId = b.teddyId\n"
+                + "join [UserDetail] ud on ud.userId = u.userId where ud.gender = " + gender + ") as b join TeddyDetail td on td.teddyId = b.teddyId\n"
                 + ") ) as a group by a.productId\n"
-                + ") as m join Product p on m.productId = p.productId;";
+                + ") as m right join Product p on m.productId = p.productId ";
 
+        if(gender == 2) {
+            sql = "select top " + top + " * from (\n"
+                + "select sum(a.boughtQuantity) as [sold], a.productId from (\n"
+                + "(select b.orderId, b.teddyId, b.boughtQuantity, b.userId, b.gender, td.productId from (\n"
+                + "select o.orderId, od.teddyId, od.boughtQuantity, ud.userId, ud.gender from [Order] o join OrderDetail od on o.orderId = od.orderId\n"
+                + "join [User] u on u.userId = o.userId \n"
+                + "join [UserDetail] ud on ud.userId = u.userId) as b join TeddyDetail td on td.teddyId = b.teddyId\n"
+                + ") ) as a group by a.productId\n"
+                + ") as m right join Product p on m.productId = p.productId ";
+        }
+        if (types.compareToIgnoreCase("all") != 0) {
+            sql += " " + types;
+        }
+        switch (type) {
+            case "mostorder":
+                sql += "order by sold desc";
+                break;
+            case "leastorder":
+                sql += "order by sold";
+                break;
+        }
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet result = st.executeQuery();
-            if (result.next()) {
-                Product p = new Product(result.getString("productId"), result.getString("productName"), result.getString("origin"), result.getString("description"), result.getString("manufacturer"), result.getInt("sold"), result.getString("image"), result.getString("type"), result.getString("status"));
-                return p;
+            while (result.next()) {
+                Product p = new Product(
+                        result.getString("productId"),
+                        result.getString("productName"),
+                        result.getString("origin"),
+                        result.getString("description"),
+                        result.getString("manufacturer"),
+                        result.getInt("sold"),
+                        result.getString("image"),
+                        result.getString("type"),
+                        result.getString("status"));
+                list.add(p);
             }
+            return list;
         } catch (SQLException e) {
             System.out.println(e);
         }
         return null;
     }
 
-//    public static void main(String[] args) {
-//        ProductDao pd = new ProductDao();
-//        pd.updateProductImage("P00020", "https://gaubongcaocap.com/wp-content/uploads/2025/01/gaubong-baby-three-galaxy-1.jpg, https://bizweb.dktcdn.net/thumb/1024x1024/100/510/400/products/f9add37b-4202-48b1-a924-d81c584227a7.jpg?v=1734779390567");
-//        
-//    }
+    public static void main(String[] args) {
+        ProductDao pd = new ProductDao();
+        List<Product> list = pd.getProductByFilter(1, "", "", 3);
+        System.out.println(list.get(0).getProductName());
+    }
 }
