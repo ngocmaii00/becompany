@@ -10,10 +10,10 @@ package model;
  */
 public class CartItem {
     public String id,image,name ,size ,color;
-    public int quantity,instock;
+    public int quantity;
     public double estimate, price ;
 
-    public CartItem(String id, String image, String name, String size, String color,  double price ,int quantity,int instock) {
+    public CartItem(String id, String image, String name, String size, String color,  double price ,int quantity) {
         this.id = id;
         this.image = image;
         this.name = name;
@@ -22,7 +22,6 @@ public class CartItem {
         this.quantity = quantity;
         this.estimate = (double)price * quantity;
         this.price = price;
-        this.instock = instock;
     }
 
     public void setId(String id) {
@@ -57,13 +56,6 @@ public class CartItem {
         this.price = price;
     }
 
-    public int getInstock() {
-        return instock;
-    }
-
-    
-    
-
     public String getId() {
         return id;
     }
@@ -95,11 +87,6 @@ public class CartItem {
     public double getPrice() {
         return price;
     }
-
-    public void setInstock(int instock) {
-        this.instock = instock;
-    }
-    
     
 }
 

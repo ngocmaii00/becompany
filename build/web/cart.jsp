@@ -1,13 +1,13 @@
+<%@page import="model.User"%>
 <%@page import="java.util.*" %>
 <%@page import="java.net.URLDecoder" %>
 <%@page import="java.nio.charset.StandardCharsets" %>
+<
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<<<<<<< HEAD
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <fmt:setLocale value="vi_VN" />
-=======
->>>>>>> ngocmai
-<!DOCTYPE html>
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -28,13 +28,11 @@
             </span>
             <div class="border-2 border-[#543520] mx-16 rounded-lg py-4 bg-[#f2e6e6]">
                 <%
-<<<<<<< HEAD
-                    HttpSession userSession = request.getSession(false);
 
+                    HttpSession userSession = request.getSession();
                     User user = (User) userSession.getAttribute("user");
                     String cartId = user.getUsername() + "_cart";   
-=======
->>>>>>> ngocmai
+
                     Cookie[] cookies = request.getCookies();
                     String cartData = "";
                     if (cookies != null) {
@@ -51,7 +49,7 @@
                     }
                 %>
                 <c:choose>
-                    <c:when test="${not empty cartItems}">
+                        <c:when test="${not empty cartItems}">
                         <c:forEach var="item" items="${cartItems}">
                             <%
                                 String[] details = ((String) pageContext.getAttribute("item")).split("\\$");
@@ -72,8 +70,10 @@
                                     pageContext.setAttribute("color", color);
                                     pageContext.setAttribute("price", price);
                                     pageContext.setAttribute("quantity", quantity);
+
                                     pageContext.setAttribute("instock", instock);
                                     pageContext.setAttribute("estimate", String.format("%.2f", estimate));
+
                                 }
                             %>
                             <div class="grid grid-cols-11 items-center py-4">
@@ -131,12 +131,15 @@
                     </c:otherwise>
                 </c:choose>
             </div>
+
             <!-- Tổng tiền + nút mua -->
+
             <div class="mt-12 bottom-8 left-0 right-0 grid grid-cols-9 border-2 border-[#543520] rounded-lg bg-[#f2e6e6] mx-16 h-20 items-center">
                 <div class="col-span-3 text-center">
                     <span class="text-3xl font-bold text-[#543520]"> Total Amount: </span>
                 </div>
                 <div class="col-span-4 text-center">
+<<<<<<< HEAD
 <<<<<<< HEAD
                     <span id="totalAmount" class="text-4xl font-bold text-[#543520]">0₫</span>
                 </div>
@@ -148,14 +151,24 @@
                 <div class="col-span-2 flex justify-center">
                     <button class="flex border-2 border-[#543520] bg-[#543520] rounded-md w-40 h-14 text-center items-center justify-center align-center">
 >>>>>>> ngocmai
+=======
+
+                    <span id="totalAmount" class="text-4xl font-bold text-[#543520]">0.00$</span>
+
+                </div>
+                <div class="col-span-2 flex justify-center">
+                    <a href="checkout"  class="flex border-2 border-[#543520] bg-[#543520] rounded-md w-40 h-14 text-center items-center justify-center align-center">
+>>>>>>> parent of 1c7ad27 (fix checkout, vnpay, etc, sync to cart)
                         <span class="text-2xl font-bold text-white">Buy</span>
-                    </button>
+                    </a>
+<!--                    onclick="postToServlet('checkout')"-->
                 </div>
             </div>
         </div>
 
         <script>
             function updateQuantity(id, newQuantity, size, color, instock) {
+
                 if (newQuantity < 1) return;
                 if (newQuantity > instock) {
                     alert("Quantity cannot exceed available stock (" + instock + ")!");
@@ -176,7 +189,7 @@
                         total += estimate;
                     }
                 });
-                document.getElementById('totalAmount').textContent = total.toFixed(2) + '₫';
+                document.getElementById('totalAmount').textContent = total.toFixed(2) + '$';
             }
             // Tick checkbox
             document.querySelectorAll('.item-checkbox').forEach(checkbox => {
@@ -198,32 +211,16 @@
         </script>
 <<<<<<< HEAD
         <script>
-            function getSelectedItems() {
-                let selectedItems = [];
+            function postToServlet(url) {
+                // Create a hidden form
+         
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = url;
 
-                // Get all checked checkboxes with the class 'item-checkbox'
-                const checkboxes = document.querySelectorAll('.item-checkbox:checked');
-
-                checkboxes.forEach((checkbox) => {
-                    
-                        let id = checkbox.getAttribute('data-id');
-                        
-                    
-                    selectedItems.push(id);
-                });
-
-                console.log(selectedItems);
-                return selectedItems;
-            }
-            document.querySelector("#buy").addEventListener("click", function() {
-                const selectedItems = getSelectedItems();
-                if (selectedItems.length === 0) {
-                    alert("Please select at least one item to buy!");
-                    return;
-                }
-                window.location.href = "checkout?selectedItems=" + selectedItems.join(",");
-            });
-            
+                document.body.appendChild(form);
+                form.submit();
+        }
         </script>
 =======
 >>>>>>> ngocmai

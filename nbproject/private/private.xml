@@ -2,28 +2,49 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
         <group>
+<<<<<<< HEAD
 <<<<<<< HEAD
             <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/src/java/controller/ProductServlet.java</file>
             <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/web/product.jsp</file>
             <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/web/home.jsp</file>
             <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/src/java/controller/StoreCheckoutInfoServlet.java</file>
             <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/web/cart.jsp</file>
+=======
+>>>>>>> parent of 1c7ad27 (fix checkout, vnpay, etc, sync to cart)
             <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/src/java/dal/UserDAO.java</file>
-            <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/web/WEB-INF/web.xml</file>
-            <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/src/java/dal/OrderDao.java</file>
-            <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/src/java/controller/LoginServlet.java</file>
+            <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/src/java/controller/ProductServlet.java</file>
             <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/src/java/controller/CheckoutServlet.java</file>
-            <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/web/login.jsp</file>
-            <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/src/java/controller/CheckOrderServlet.java</file>
-            <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/src/java/controller/CartServlet.java</file>
-            <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/web/search.jsp</file>
+            <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/src/java/controller/StoreCheckoutInfoServlet.java</file>
+            <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/web/checkoutComplete.jsp</file>
+            <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/src/java/utilities/VNPayConfig.java</file>
+            <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/src/java/controller/ajaxServlet.java</file>
+            <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/src/java/dal/ShippingDAO.java</file>
             <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/web/buyProduct.jsp</file>
+<<<<<<< HEAD
 =======
             <file>file:/C:/Users/PC/OneDrive/Desktop/New%20folder/becompany/web/order.jsp</file>
             <file>file:/C:/Users/PC/OneDrive/Desktop/New%20folder/becompany/web/product.jsp</file>
             <file>file:/C:/Users/PC/OneDrive/Desktop/New%20folder/becompany/src/java/dal/OrderDao.java</file>
 >>>>>>> ngocmai
+=======
+            <file>file:/mnt/sda1/Study%20documents/University%20Works/Semester%204/PRJ302_Java%20Web/ASM/becompany/src/java/controller/VNPayReturn.java</file>
+=======
+            <file>file:/D:/KODE/BeCompany/web/WEB-INF/web.xml</file>
+            <file>file:/D:/KODE/BeCompany/web/admin.jsp</file>
+            <file>file:/D:/KODE/BeCompany/src/java/controller/LoginServlet.java</file>
+            <file>file:/D:/KODE/BeCompany/src/java/controller/FilterServlet.java</file>
+            <file>file:/D:/KODE/BeCompany/web/login.jsp</file>
+            <file>file:/D:/KODE/BeCompany/web/header.jsp</file>
+            <file>file:/D:/KODE/BeCompany/web/cart.jsp</file>
+            <file>file:/D:/KODE/BeCompany/web/home.jsp</file>
+            <file>file:/D:/KODE/BeCompany/web/buyProduct.jsp</file>
+>>>>>>> ducanhNew
+>>>>>>> parent of 1c7ad27 (fix checkout, vnpay, etc, sync to cart)
         </group>
+=======
+        <group/>
+>>>>>>> NewNga
     </open-files>
 </project-private>

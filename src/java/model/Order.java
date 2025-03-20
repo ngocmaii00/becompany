@@ -14,17 +14,14 @@ import java.util.Set;
  * @author PC
  */
 public class Order {
-<<<<<<< HEAD
     private String teddyId;
-=======
->>>>>>> ngocmai
+
     private String productName;
     private String color, size;
     private int boughtQuantity;
     private double price;
     private String image;
     private String orderStatus;
-<<<<<<< HEAD
     private double pricePerPros;
     private String delivery;
     private String username;
@@ -51,9 +48,7 @@ public class Order {
 
     
     
-=======
 
->>>>>>> ngocmai
     public Order() {
     }
 
@@ -67,7 +62,7 @@ public class Order {
         this.orderStatus = orderStatus;
     }
 
-<<<<<<< HEAD
+
     public String getOrderId() {
         return orderId;
     }
@@ -98,8 +93,7 @@ public class Order {
     }
 
     
-=======
->>>>>>> ngocmai
+
     public String getProductName() {
         return productName;
     }
@@ -144,11 +138,8 @@ public class Order {
         return image;
     }
 
-<<<<<<< HEAD
     public void setImages(String image) {
-=======
-    public void setImage(String image) {
->>>>>>> ngocmai
+
         this.image = image.split(", ")[0];
     }
 

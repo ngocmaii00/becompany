@@ -40,10 +40,6 @@ public class CheckoutServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String checkoutId = request.getParameter("selectedItems");
-        String []checkoutIdList = checkoutId.split(",");
-        
-        
         HttpSession userSession = request.getSession(false);
         String vnPayError = (String)request.getAttribute("error");
         User user = (User) userSession.getAttribute("user");
@@ -75,26 +71,12 @@ public class CheckoutServlet extends HttpServlet {
 //                                    double estimate = Double.parseDouble(price) * Integer.parseInt(quantity);
 
         List<CartItem> products = new ArrayList<>();
-        List<CartItem> allCart = new ArrayList<>();
-         if (items != null ){
-            for (String j : items) {
-                    String[] details = j.split("\\$");
+        if (items != null) {
+            for (String i : items) {
+                String[] details = i.split("\\$");
+                CartItem ct = new CartItem(details[0], details[1], details[2], details[3], details[4], Double.parseDouble(details[5]), Integer.parseInt(details[6]));
+                products.add(ct);
 
-                        CartItem ct = new CartItem(details[0], details[1], details[2], details[3], details[4], Double.parseDouble(details[5]), Integer.parseInt(details[6]),Integer.parseInt(details[7]));
-                        allCart.add(ct);
-            }
-        }
-        
-        
-        if (items != null && checkoutIdList != null) {
-            for(String i : checkoutIdList){
-                for (String j : items) {
-                    String[] details = j.split("\\$");
-                    if(i.equals(details[0])){
-                        CartItem ct = new CartItem(details[0], details[1], details[2], details[3], details[4], Double.parseDouble(details[5]), Integer.parseInt(details[6]),Integer.parseInt(details[7]));
-                        products.add(ct);
-                    }
-                }
             }
         }
         ShippingDAO shd = new ShippingDAO();
@@ -104,7 +86,6 @@ public class CheckoutServlet extends HttpServlet {
             request.setAttribute("error", vnPayError);
         }
         session.setAttribute("cart", products);
-        session.setAttribute("allCart", allCart);
         request.setAttribute("products", products);
         request.setAttribute("shippings", shippings);
         request.getRequestDispatcher("buyProduct.jsp").forward(request, response);
@@ -124,7 +105,7 @@ public class CheckoutServlet extends HttpServlet {
             List<CartItem> cart = (List<CartItem>)session.getAttribute("cart");
             
             
-        ShippingDAO shd = new ShippingDAO();
+            ShippingDAO shd = new ShippingDAO();
         String delivery = shd.getDeliveryDescribe(deliveryId);
         OrderDao od = new OrderDao();
         LocalDate today = LocalDate.now();
@@ -153,7 +134,7 @@ public class CheckoutServlet extends HttpServlet {
                         break;
                     }
                 }
-            
+            }
             LocalDateTime datetime = LocalDateTime.now();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
             String date = datetime.format(formatter);
@@ -167,7 +148,7 @@ public class CheckoutServlet extends HttpServlet {
 //            request.getRequestDispatcher("checkout-complete").forward(request, response);
     request.getRequestDispatcher("checkoutComplete.jsp").forward(request, response);
     
-            }
+            
     }
 
     /**

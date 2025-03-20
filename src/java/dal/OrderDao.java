@@ -12,16 +12,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.Order;
-<<<<<<< HEAD
 import model.Product;
-=======
->>>>>>> ngocmai
+
 
 public class OrderDao extends DBConnect {
-<<<<<<< HEAD
 
-    
-=======
     public List<Order> getAll(String userId) {
         List<Order> list = new ArrayList<>();
         String sql = "select * from [Order] o left join (select od.orderStatus, od.orderId, A.productName, A.image, od.boughtQuantity, A.color, A.price, A.size from OrderDetail od join (select p.productName, p.image, td.teddyId, td.color, td.price, td.size from Product p join TeddyDetail td on p.productId = td.productId) as A on od.teddyId = A.teddyId) as B on o.orderId = B.orderId where o.userId = ?";
@@ -44,7 +39,7 @@ public class OrderDao extends DBConnect {
         return list;
     }
         
->>>>>>> ngocmai
+
 
         public int addNewOrder(String userId, Date orderDate, String purpose) {
             String sql = "INSERT INTO [Order](userId, orderDate, purpose) VALUES (?, ?, ?);";
@@ -92,8 +87,6 @@ public class OrderDao extends DBConnect {
             System.err.println(e);
         }
     }
-<<<<<<< HEAD
-    
     //String orderId, String teddyId,String deliveryId,int quantity,Date orderDate,Date receiveDate
     
     
@@ -179,6 +172,5 @@ public class OrderDao extends DBConnect {
         
     }
 
-=======
->>>>>>> ngocmai
+
 }
