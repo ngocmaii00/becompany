@@ -10,10 +10,11 @@
         <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
         <link rel="stylesheet" href="css/styles.css"/>
         <link rel="stylesheet" href="css/responsiveHome.css"/>
-        
+
     </head>
     <body>
         <%@include file="header.jsp" %>
+ 
         <main>
             <div class="slide relative">
                 <div class="slide-title">
@@ -81,47 +82,59 @@
         <script type="text/javascript" src="scripts/home.js"></script>
         <script>
 //            change slide show
-            const slides = ${requestScope.slide.toString()};
-            const dots = document.querySelector('.dots');
+                                            const slides = ${requestScope.slide.toString()};
+                                            const dots = document.querySelector('.dots');
 
-            for (var i = 0; i < slides.length; i++) {
-                dots.innerHTML += `
+                                            for (var i = 0; i < slides.length; i++) {
+                                                dots.innerHTML += `
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="size-4 dot">
                         <path d="M2 6.342a3.375 3.375 0 0 1 6-2.088 3.375 3.375 0 0 1 5.997 2.26c-.063 2.134-1.618 3.76-2.955 4.784a14.437 14.437 0 0 1-2.676 1.61c-.02.01-.038.017-.05.022l-.014.006-.004.002h-.002a.75.75 0 0 1-.592.001h-.002l-.004-.003-.015-.006a5.528 5.528 0 0 1-.232-.107 14.395 14.395 0 0 1-2.535-1.557C3.564 10.22 1.999 8.558 1.999 6.38L2 6.342Z" />
                     </svg>
                 `;
-            }
-            changeSlide(slides);
+                                            }
+                                            changeSlide(slides);
         </script>
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-        
+
         <script>
 
-            function changeSize(color, productId) {
-                $.ajax({
-                    url: "home",
-                    type: 'POST',
-                    data: jQuery.param({color: color, productId: productId}),
-                    dataType: 'application/json',
-                    success: function (res) {
-                        const classname = ".home-teddy-" + productId;
-                        document.querySelector(classname).innerHTML = res;
-                    }
-                });
-            }
+                                            function changeSize(color, productId) {
+                                                $.ajax({
+                                                    url: "home",
+                                                    type: 'POST',
+                                                    data: jQuery.param({color: color, productId: productId}),
+                                                    dataType: 'application/json',
+                                                    success: function (res) {
+                                                        const classname = ".home-teddy-" + productId;
+                                                        document.querySelector(classname).innerHTML = res;
+                                                    }
+                                                });
+                                            }
 
-            function changeColor(size, productId) {
-                $.ajax({
-                    url: "home",
-                    type: 'POST',
-                    data: jQuery.param({size: size, productId: productId}),
-                    dataType: 'application/json',
-                    success: function (res) {
-                        const classname = ".home-teddy-" + productId;
-                        document.querySelector(classname).innerHTML = res;
-                    }
-                });
-            }
+                                            function changeColor(size, productId) {
+                                                $.ajax({
+                                                    url: "home",
+                                                    type: 'POST',
+                                                    data: jQuery.param({size: size, productId: productId}),
+                                                    dataType: 'application/json',
+                                                    success: function (res) {
+                                                        const classname = ".home-teddy-" + productId;
+                                                        document.querySelector(classname).innerHTML = res;
+                                                    }
+                                                });
+                                            }
+                                            function loadHeader() {
+                                                $.ajax({
+                                                    url: "header",
+                                                    type: 'GET',
+                                                    dataType: 'application/json',
+                                                    success: function (res) {
+                                                        document.querySelector(".type-names").innerHTML = res;
+                                                    }
+                                                });
+                                            }
+
+                                            loadHeader();
 
         </script>
     </body>

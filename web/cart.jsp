@@ -2,6 +2,7 @@
 <%@page import="java.net.URLDecoder" %>
 <%@page import="java.nio.charset.StandardCharsets" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="model.User" %>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <fmt:setLocale value="vi_VN" />
@@ -37,7 +38,7 @@
                     String cartData = "";
                     if (cookies != null) {
                         for (Cookie cookie : cookies) {
-                            if (cookie.getName().equals("cart")) {
+                            if (cookie.getName().equals(cartId)) {
                                 cartData = URLDecoder.decode(cookie.getValue(), StandardCharsets.UTF_8.toString());
                                 break;
                             }

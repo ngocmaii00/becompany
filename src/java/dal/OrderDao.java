@@ -120,7 +120,7 @@ public class OrderDao extends DBConnect {
     public List<Order> getAllProductForStaff() {
         List<Order> list = new ArrayList<>();
         String sql = "select A.orderId, td.teddyId, p.productName, td.color, td.size,td.price as [pricePerPros], A.boughtQuantity, U.username, ud.address, d.describe, (d.price + A.boughtQuantity * td.price) as [price], p.image, o.purpose, A.orderStatus \n"
-                + "from (select * from [OrderDetail] od where od.orderStatus = 'Processing') as A  join [Order] o on o.orderId = A.orderId\n"
+                + "from (select * from [OrderDetail] od where od.orderStatus in ('Processing', 'Pending')) as A  join [Order] o on o.orderId = A.orderId\n"
                 + "join [User] U on U.userId = o.userId join UserDetail ud on ud.userId= o.userId\n"
                 + "join TeddyDetail td on td.teddyId = A.teddyId\n"
                 + "join Product p on p.productId = td.productId\n"

@@ -19,7 +19,7 @@
                         <img src="images/logo.png" alt="logo" class="h-10 md:h-12 lg:h-14 ms-2">
                     </a>
                 </div>
-                
+
                 <!--search-->
                 <form action="search" class="flex flex-row border-2 border-[#563a2d] rounded-full basis-2/6 mr-2">
                     <button type="submit">
@@ -30,7 +30,7 @@
                     </button>
                     <input type="text" name="search" class="focus:outline-none grow px-2 bg-transparent w-16 border-none focus:border-none checked:border-none ouline-0 ring-0" placeholder="Search" style="color: #563a2d" >
                 </form>
-                
+
                 <div class="basis-1/6 flex flex-row items-center md:gap-x-2  justify-end notosans-font">
 
                     <!--Home-->
@@ -60,9 +60,19 @@
                         </svg>
                     </a>
 
+
                     <!--Account-->
                     <div class="flex rounded-full md:size-12 size-10 hover:bg-[#f2e6e6] items-center justify-center cursor-pointer">
                         <c:if test="${sessionScope.user != null}">
+
+
+                            <a href="order" class="flex rounded-full md:size-12 size-10 hover:bg-[#f2e6e6] items-center justify-center cursor-pointer">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="md:size-8 size-7">
+                                <path fill-rule="evenodd" d="M7.5 6v.75H5.513c-.96 0-1.764.724-1.865 1.679l-1.263 12A1.875 1.875 0 0 0 4.25 22.5h15.5a1.875 1.875 0 0 0 1.865-2.071l-1.263-12a1.875 1.875 0 0 0-1.865-1.679H16.5V6a4.5 4.5 0 1 0-9 0ZM12 3a3 3 0 0 0-3 3v.75h6V6a3 3 0 0 0-3-3Zm-3 8.25a3 3 0 1 0 6 0v-.75a.75.75 0 0 1 1.5 0v.75a4.5 4.5 0 1 1-9 0v-.75a.75.75 0 0 1 1.5 0v.75Z" clip-rule="evenodd" />
+
+                                <title>Order</title>
+                                </svg>
+                            </a>
                             <a href="profile">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#563a2d" class="md:size-8 size-7">
                                 <path fill-rule="evenodd" d="M18.685 19.097A9.723 9.723 0 0 0 21.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 0 0 3.065 7.097A9.716 9.716 0 0 0 12 21.75a9.716 9.716 0 0 0 6.685-2.653Zm-12.54-1.285A7.486 7.486 0 0 1 12 15a7.486 7.486 0 0 1 5.855 2.812A8.224 8.224 0 0 1 12 20.25a8.224 8.224 0 0 1-5.855-2.438ZM15.75 9a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" clip-rule="evenodd"></path>
@@ -77,6 +87,7 @@
                                 <title>Login</title>
                                 </svg>
                             </a>
+
                         </c:if>
                     </div>
 
