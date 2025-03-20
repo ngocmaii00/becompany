@@ -1,8 +1,3 @@
-<%-- 
-    Document   : cart
-    Created on : Feb 17, 2025, 9:31:39 PM
-    Author     : DucAnhDepTrai
---%>
 <%@page import="java.util.*" %>
 <%@page import="java.net.URLDecoder" %>
 <%@page import="java.nio.charset.StandardCharsets" %>

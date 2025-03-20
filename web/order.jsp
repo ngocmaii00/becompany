@@ -11,33 +11,30 @@
     </head>
     <body>
         <%@include file="header.jsp" %>
+        <c:set var="user" value="${sessionScope.user}" />
+
         <main>
-            <div class="grid md:grid-cols-3 mt-28 md:mt-40">
+            <div class="grid md:grid-cols-3 md:mt-10 mt-8">
                 <div class="flex flex-col items-center py-4 md:col-span-1">
-                    <div class="bg-[url('images/head_left.png')] bg-cover bg-center size-[14em] rounded-full mb-8 shadow-lg border-2 border-[#563a2d]"></div>
-                    <span class="peacesans-font uppercase text-4xl text-center mb-6">Account</span>
-                    <div class="flex flex-col justify-start">
-                        <a href="editprofile.jsp" class="text-nowrap">
-                            <span class="flex flex-row items-center gap-x-4 mb-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-8">
-                                <path d="M21.731 2.269a2.625 2.625 0 0 0-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 0 0 0-3.712ZM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 0 0-1.32 2.214l-.8 2.685a.75.75 0 0 0 .933.933l2.685-.8a5.25 5.25 0 0 0 2.214-1.32l8.4-8.4Z"></path>
-                                <path d="M5.25 5.25a3 3 0 0 0-3 3v10.5a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3V13.5a.75.75 0 0 0-1.5 0v5.25a1.5 1.5 0 0 1-1.5 1.5H5.25a1.5 1.5 0 0 1-1.5-1.5V8.25a1.5 1.5 0 0 1 1.5-1.5h5.25a.75.75 0 0 0 0-1.5H5.25Z"></path>
-                                </svg>
-                                <button class="notosans-font font-bold text-center text-xl hover:underline">
-                                    Edit profile
-                                </button>
-                            </span>
-                        </a>
-                        <a href="home">
-                            <span class="flex flex-row items-center gap-x-4 mb-8">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-8">
-                                <path fill-rule="evenodd" d="M16.5 3.75a1.5 1.5 0 0 1 1.5 1.5v13.5a1.5 1.5 0 0 1-1.5 1.5h-6a1.5 1.5 0 0 1-1.5-1.5V15a.75.75 0 0 0-1.5 0v3.75a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3V5.25a3 3 0 0 0-3-3h-6a3 3 0 0 0-3 3V9A.75.75 0 1 0 9 9V5.25a1.5 1.5 0 0 1 1.5-1.5h6ZM5.78 8.47a.75.75 0 0 0-1.06 0l-3 3a.75.75 0 0 0 0 1.06l3 3a.75.75 0 0 0 1.06-1.06l-1.72-1.72H15a.75.75 0 0 0 0-1.5H4.06l1.72-1.72a.75.75 0 0 0 0-1.06Z" clip-rule="evenodd"></path>
-                                </svg>
-                                <button class="notosans-font font-bold text-xl hover:underline">
-                                    Log out
-                                </button>
-                            </span> 
-                        </a>
+
+                    <div class="flex flex-col items-center">
+                        <img src="${user.image}"
+                             class="avatar bg-cover bg-center size-[18em] rounded-full mb-8 shadow-lg border-2 border-[#563a2d]"></img>
+
+                        <span class="peacesans-font uppercase text-5xl text-center mb-6">${user.username}</span>
+                    </div>
+                    <div class="flex flex-col mx-20 justify-start">
+                        <span class="flex flex-row items-center gap-x-4 mb-12">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                 class="size-8">
+                            <path fill-rule="evenodd"
+                                  d="M16.5 3.75a1.5 1.5 0 0 1 1.5 1.5v13.5a1.5 1.5 0 0 1-1.5 1.5h-6a1.5 1.5 0 0 1-1.5-1.5V15a.75.75 0 0 0-1.5 0v3.75a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3V5.25a3 3 0 0 0-3-3h-6a3 3 0 0 0-3 3V9A.75.75 0 1 0 9 9V5.25a1.5 1.5 0 0 1 1.5-1.5h6ZM5.78 8.47a.75.75 0 0 0-1.06 0l-3 3a.75.75 0 0 0 0 1.06l3 3a.75.75 0 0 0 1.06-1.06l-1.72-1.72H15a.75.75 0 0 0 0-1.5H4.06l1.72-1.72a.75.75 0 0 0 0-1.06Z"
+                                  clip-rule="evenodd"></path>
+                            </svg>
+                            <a href="logout" class="notosans-font font-bold text-xl hover:underline">
+                                Log out
+                            </a>
+                        </span>
                     </div>
                 </div>
                 <div class="flex flex-col md:col-span-2">
@@ -86,8 +83,7 @@
                 </div>
             </div>
         </main>
-        
+
         <%@include file="footer.jsp" %>
-        <h1>Hello World!</h1>
     </body>
 </html>

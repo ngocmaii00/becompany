@@ -15,7 +15,7 @@ import model.Order;
 public class OrderDao extends DBConnect {
     public List<Order> getAll(String userId) {
         List<Order> list = new ArrayList<>();
-        String sql = "select * from [Order] o left join (select od.orderId, A.productName, A.image, od.boughtQuantity, A.color, A.price, A.size from OrderDetail od join (select p.productName, p.image, td.teddyId, td.color, td.price, td.size from Product p join TeddyDetail td on p.productId = td.productId) as A on od.teddyId = A.teddyId) as B on o.orderId = B.orderId where o.userId = ?";
+        String sql = "select * from [Order] o left join (select od.orderStatus, od.orderId, A.productName, A.image, od.boughtQuantity, A.color, A.price, A.size from OrderDetail od join (select p.productName, p.image, td.teddyId, td.color, td.price, td.size from Product p join TeddyDetail td on p.productId = td.productId) as A on od.teddyId = A.teddyId) as B on o.orderId = B.orderId where o.userId = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, userId);

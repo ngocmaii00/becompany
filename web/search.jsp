@@ -8,14 +8,14 @@
         <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
 <<<<<<< HEAD
 <<<<<<< Updated upstream
-        <link rel="stylesheet" href="CSS/styles.css"/>
+        <link rel="stylesheet" href="css/styles.css"/>
 =======
-        <link rel="stylesheet" href="CSS/styles.css"/>
+        <link rel="stylesheet" href="css/styles.css"/>
 <<<<<<< Updated upstream
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
-        <link rel="stylesheet" href="CSS/responsiveHome.css"/>
+        <link rel="stylesheet" href="css/responsiveHome.css"/>
 
 =======
         <link rel="stylesheet" href="css/styles.css"/>
