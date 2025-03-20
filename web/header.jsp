@@ -82,7 +82,7 @@
 
                 </div>
             </div>
-            <div class="flex flex-row bg-[#f2e6e6] h-10 notosans-font font-bold uppercase overflow-auto scrollbar-hidden">
+            <div class="flex flex-row bg-[#f2e6e6] h-10 notosans-font font-bold uppercase overflow-auto scrollbar-hidden text-nowrap">
                 <button class="flex justify-center items-center hover:bg-[#563a2d] hover:text-white text-sm md:text-base">
                     <a class="md:px-12 px-6" href="type?type=all">All</a>
                 </button>

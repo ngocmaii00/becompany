@@ -24,7 +24,7 @@
                             <img src="${user.image}"
                                 class="avatar bg-cover bg-center size-[18em] rounded-full mb-8 shadow-lg border-2 border-[#563a2d]"></img>
 
-                            <span class="peacesans-font uppercase text-5xl text-center mb-6">Account</span>
+                            <span class="peacesans-font uppercase text-5xl text-center mb-6">${user.username}</span>
                         </div>
                         <div class="flex flex-col mx-20 justify-start">
                             <span class="flex flex-row items-center gap-x-4 mb-4">
