@@ -27,13 +27,13 @@
                 <div class="hightlight-container">
                     <c:forEach items="${requestScope.data}" var="p">
                         <div class="home-teddy">
-                            <a href="product?name=${p.getProductName()}">
+                            <a href="product?id=${p.productId}">
                                 <div class="home-teddy-img" style="
                                      background-image: url('${p.getImages()[0]}');
                                      "></div>
                             </a>
                             <div class="flex justify-between items-baseline">
-                                <a href="product?name=${p.getProductName()}" class="home-teddy-name">${p.getProductName()}</a>
+                                <a href="product?id=${p.productId}" class="home-teddy-name">${p.getProductName()}</a>
                                 <p class="home-teddy-price"><fmt:formatNumber value="${p.getTeddies().get(0).getPrice()}" type="currency"/></p>
                             </div>
                             <div class="home-teddy-${p.productId}">
@@ -63,7 +63,7 @@
                                 </div>
                                 <div class="flex justify-end">
                                     <button class="button">
-                                        <a href="product?name=${p.getProductName()}">Details</a>
+                                        <a href="product?id=${p.productId}">Details</a>
                                     </button>
                                 </div>
                             </div>

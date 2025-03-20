@@ -1,7 +1,10 @@
+<<<<<<< HEAD
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
+=======
+>>>>>>> ngocmai
 package controller;
 
 import jakarta.servlet.ServletException;
@@ -12,12 +15,18 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+<<<<<<< HEAD
 import jakarta.servlet.http.HttpSession;
+=======
+>>>>>>> ngocmai
 import java.io.PrintWriter;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+<<<<<<< HEAD
 import model.User;
+=======
+>>>>>>> ngocmai
 
 @WebServlet(name = "CartServlet", urlPatterns = {"/cart"})
 public class CartServlet extends HttpServlet {
@@ -39,17 +48,20 @@ public class CartServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+<<<<<<< HEAD
         HttpSession userSession = request.getSession(false);
 
         User user = (User) userSession.getAttribute("user");
         String cartId = user.getUsername() + "_cart";
+=======
+>>>>>>> ngocmai
         String action = request.getParameter("action");
         if (action != null) {
             Cookie[] cookies = request.getCookies();
             String cartData = "";
             if (cookies != null) {
                 for (Cookie cookie : cookies) {
-                    if (cookie.getName().equals(cartId)) {
+                    if (cookie.getName().equals("cart")) {
                         cartData = URLDecoder.decode(cookie.getValue(), StandardCharsets.UTF_8.toString());
                         cookie.setMaxAge(0); // Xóa cookie cũ
                         response.addCookie(cookie);
@@ -94,7 +106,11 @@ public class CartServlet extends HttpServlet {
                     updatedCart = updatedCart.substring(0, updatedCart.length() - 1);
                 }
                 String encodedCart = URLEncoder.encode(updatedCart, StandardCharsets.UTF_8.toString());
+<<<<<<< HEAD
                 Cookie c = new Cookie(cartId, encodedCart);
+=======
+                Cookie c = new Cookie("cart", encodedCart);
+>>>>>>> ngocmai
                 c.setMaxAge(60 * 60 * 24 * 7);
                 response.addCookie(c);
             }

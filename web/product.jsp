@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 <%-- 
     Document   : product.jsp
@@ -5,6 +6,8 @@
     Author     : zeryus
 --%>
 
+=======
+>>>>>>> ngocmai
 <%@page import="java.util.List" %>
 <%@page import="java.util.ArrayList" %>
 
@@ -16,14 +19,21 @@
 <html>
 
     <head>
+<<<<<<< HEAD
 
+=======
+>>>>>>> ngocmai
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
             <link rel="icon" type="image/svg+xml" href="images/head.png" />
             <title>Product</title>
             <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
             <link rel="stylesheet" href="css/index.css">
+<<<<<<< HEAD
+=======
+                </head>
+>>>>>>> ngocmai
 
-    <body class="bg-white">
+                <body class="bg-white">
                     <%@include file="header.jsp" %>
                     <c:set var="product" value="${requestScope.product}" />
                     <c:set var="teddy" value="${requestScope.teddy}" />
@@ -53,15 +63,17 @@
                                         </div>
                                     </label>
                                 </c:forEach>
+<<<<<<< HEAD
 
+=======
+>>>>>>> ngocmai
                             </div>
                         </div>
 
                         <div id="description" class="px-10 lg:col-span-3 col-span-1 lg:mt-20 mt-16">
                             <div class="flex flex-row justify-between items-center mb-6">
-                                <p
-                                    class=" text-[#563a2d] lg:text-5xl text-4xl uppercase peacesans-font justify-items-start">
-                                    ${product.getProductName()}</p>
+                                <p class=" text-[#563a2d] lg:text-5xl md:text-4xl text-3xl uppercase peacesans-font justify-items-start">${product.getProductName()}</p>
+
                                 <div class="flex flex-row justify-center items-baseline text-nowrap">
                                     <!--Print yellow Star -->
                                     <c:if test="${requestScope.rating != -1}">
@@ -76,7 +88,7 @@
 
                                         <!--Print grayed-out Star -->
                                         <c:forEach begin="1" end="${5-requestScope.rating}">
-                                            <svg class="w-4 h-4 text-gray-300 dark:text-gray-500 ms-1"
+                                            <svg class="w-4 h-4 text-gray-300 ms-1"
                                                  aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                                  fill="currentColor" viewBox="0 0 22 20">
                                                 <path
@@ -85,7 +97,7 @@
                                         </c:forEach>
                                         <p
                                             class="ms-1 text-xl font-semibold notosans-font text-lg text-gray-500 ">
-                                            &nbsp; ${requestScope.rating}</p>
+                                            &nbsp; ${requestScope.rating}.0</p>
                                         </c:if>
                                         <c:if test="${requestScope.rating == -1}">
                                         <p
@@ -217,89 +229,276 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="fixed bottom-6 right-6 font-bold z-10">
-                                <button onclick="submitCart()"
-                                        class="flex gap-x-2 text-[#543520] text-nowrap border-4 border-[#543520] rounded-lg px-4 py-3 text-xl uppercase bg-white hover:bg-[#543520] hover:text-white hover:-translate-y-1 hover:scale-105 htext-[#543520]over:duration-300 hover:transition-all hover:ease-in-out animate-bounce">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                         fill="currentColor" class="size-7">
-                                        <path fill-rule="evenodd"
-                                              d="M7.5 6v.75H5.513c-.96 0-1.764.724-1.865 1.679l-1.263 12A1.875 1.875 0 0 0 4.25 22.5h15.5a1.875 1.875 0 0 0 1.865-2.071l-1.263-12a1.875 1.875 0 0 0-1.865-1.679H16.5V6a4.5 4.5 0 1 0-9 0ZM12 3a3 3 0 0 0-3 3v.75h6V6a3 3 0 0 0-3-3Zm-3 8.25a3 3 0 1 0 6 0v-.75a.75.75 0 0 1 1.5 0v.75a4.5 4.5 0 1 1-9 0v-.75a.75.75 0 0 1 1.5 0v.75Z"
-                                              clip-rule="evenodd" />
+                            <!--Add to Cart-->
+                            <div class="fixed bottom-6 right-6 font-bold z-10 drop-shadow-xl">
+                                <button onclick="submitCart()" class="flex gap-x-2 text-[#543520] text-nowrap border-4 border-[#543520] rounded-lg px-4 py-3 text-xl uppercase bg-white hover:bg-[#543520] hover:text-white hover:-translate-y-1 hover:scale-105 htext-[#543520]over:duration-300 hover:transition-all hover:ease-in-out animate-bounce">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-7">
+                                        <path fill-rule="evenodd" d="M7.5 6v.75H5.513c-.96 0-1.764.724-1.865 1.679l-1.263 12A1.875 1.875 0 0 0 4.25 22.5h15.5a1.875 1.875 0 0 0 1.865-2.071l-1.263-12a1.875 1.875 0 0 0-1.865-1.679H16.5V6a4.5 4.5 0 1 0-9 0ZM12 3a3 3 0 0 0-3 3v.75h6V6a3 3 0 0 0-3-3Zm-3 8.25a3 3 0 1 0 6 0v-.75a.75.75 0 0 1 1.5 0v.75a4.5 4.5 0 1 1-9 0v-.75a.75.75 0 0 1 1.5 0v.75Z" clip-rule="evenodd" />
                                     </svg>
                                     Add to cart
                                 </button>
                             </div>
                         </div>
 
-                        <!--Information-->
-                        <div>
-                            <div class="bg-white drop-shadow-xl mx-10 mb-16 z-5 border">
-                                <span class="peacesans-font">Information About
-                                    ${product.getProductName()}</span>
-                            </div>
-                        </div>
                     </main>
-                    <%@include file="footer.jsp" %>
+                    <div class="grid md:grid-cols-2 grid-cols-1 md:mx-14 mx-10 gap-10 mt-8">
+                        <!--Information-->
+                        <div class="flex flex-col bg-white drop-shadow-md z-5 border rounded-md">
+                            <span class="peacesans-font px-8 py-4 uppercase text-2xl bg-[#f2e6e6] w-full">Information</span>
+                            <div class="grid grid-cols-2">
+                                <div class="col-span-1 px-8 py-4 font-semibold">
+                                    <p>Name</p>
+                                    <p>Type</p>
+                                    <p>Status</p>
+                                    <p>Origin</p>
+                                    <p>Manufacturer</p>
+                                </div>
+                                <div class="col-span-1 py-4">
+                                    <p>${product.getProductName()}</p>
+                                    <p>${product.getType()}</p>
+                                    <p>${product.getStatus()}</p>
+                                    <p>${product.getOrigin()}</p>
+                                    <p>${product.getManufacturer()}</p>
+                                </div>
+                            </div>
+
+                        </div> 
+
+                        <!--Description-->
+                        <div class="flex flex-col bg-white drop-shadow-md z-5 border rounded-md">
+                            <span class="peacesans-font px-8 py-4 uppercase text-2xl bg-[#f2e6e6] w-full">Description</span>
+                            <p class="py-4 px-8">${product.getDescription()}</p>
+
+                        </div> 
+                    </div>  
+                    <!--Rating-->
+                    <div class="grid md:grid-cols-2 grid-cols-1 md:mx-14 mx-10 gap-10 mt-10 mb-16">
+                        <div class="flex flex-col bg-white drop-shadow-md z-5 border rounded-md">
+                            <span class="peacesans-font px-8 py-4 uppercase text-2xl bg-[#f2e6e6] w-full">Comment</span>
+                            <c:if test="${requestScope.data.size() == 0}">
+                                <span class="px-8 py-4">No comment</span>
+                            </c:if>
+                            <c:forEach items="${requestScope.data}" var="r">
+                                <div class="grid grid-cols-5 lg:grid-cols-7 px-8 py-4 items-center">
+                                    <img src="${r.image}" class="aspect rounded-full border-[#543520] border-2 size-[3.5em] lg:size-[4em]"/>
+                                    <div class="flex flex-col col-span-2 ms-2">
+                                        <strong>${r.username}</strong>
+                                        <span>${r.comment}</span>
+                                    </div>
+                                    <div class="flex col-span-2 col-start-4 lg:col-start-6 justify-center items-baseline text-nowrap">
+                                        <!--Print yellow Star -->
+                                        <c:if test="${r.stars != -1}">
+                                            <c:forEach begin="1" end="${r.stars}">
+                                                <svg class="w-4 h-4 text-yellow-300 ms-1" aria-hidden="true"
+                                                     xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                                     viewBox="0 0 22 20">
+                                                    <path
+                                                        d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                                </svg>
+                                            </c:forEach>
+
+                                            <!--Print grayed-out Star -->
+                                            <c:forEach begin="1" end="${5-r.stars}">
+                                                <svg class="w-4 h-4 text-gray-300 ms-1"
+                                                     aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                     fill="currentColor" viewBox="0 0 22 20">
+                                                    <path
+                                                        d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                                </svg>
+                                            </c:forEach>
+                                            <p
+                                                class="ms-1 text-xl font-semibold notosans-font text-lg text-gray-500 ">
+                                                &nbsp; ${r.stars}.0</p>
+                                            </c:if>
+                                            <c:if test="${r.stars == -1}">
+                                            <p
+                                                class="ms-1 text-xl font-semibold notosans-font text-lg text-gray-500 ">
+                                                No rating</p>
+                                            </c:if>
+                                    </div>
+                                </div>
+                            </c:forEach>
+                        </div>
+                        <div class="flex flex-col bg-white drop-shadow-md z-5 border rounded-md">
+                            <span class="peacesans-font px-8 py-4 uppercase text-2xl bg-[#f2e6e6] w-full">Rating</span>
+                            <form action="rating">
+                                <input class="product-id" name="id" type="text" readonly hidden/>
+                                <div class=" flex flex-col gap-y-4 mt-4">
+                                    <div class="flex justify-start items-center text-nowrap px-10">
+                                        <input type="radio" name="rate" value="5" class="accent-[#543520] mr-4">
+                                            <c:forEach begin="1" end="5">
+                                                <svg class="w-4 h-4 text-yellow-300 ms-1" aria-hidden="true"
+                                                     xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                                     viewBox="0 0 22 20">
+                                                    <path
+                                                        d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                                </svg>
+                                            </c:forEach>
+                                            <span class="ms-2 font-semibold text-[#543520]">5.0</span>
+                                    </div>
+                                    <div class="flex justify-start items-baseline text-nowrap px-10">
+                                        <input type="radio" name="rate" value="4" class="accent-[#543520] mr-4">
+                                            <c:forEach begin="1" end="4">
+                                                <svg class="w-4 h-4 text-yellow-300 ms-1" aria-hidden="true"
+                                                     xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                                     viewBox="0 0 22 20">
+                                                    <path
+                                                        d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                                </svg>
+                                            </c:forEach>
+                                            <c:forEach begin="1" end="1">
+                                                <svg class="w-4 h-4 text-gray-300 ms-1"
+                                                     aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                     fill="currentColor" viewBox="0 0 22 20">
+                                                    <path
+                                                        d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                                </svg>
+                                            </c:forEach>
+                                            <span class="ms-2 font-semibold text-[#543520]">4.0</span>
+                                    </div>
+                                    <div class="flex justify-start items-baseline text-nowrap px-10">
+                                        <input type="radio" name="rate" value="3" class="accent-[#543520] mr-4">
+                                            <c:forEach begin="1" end="3">
+                                                <svg class="w-4 h-4 text-yellow-300 ms-1" aria-hidden="true"
+                                                     xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                                     viewBox="0 0 22 20">
+                                                    <path
+                                                        d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                                </svg>
+                                            </c:forEach>
+                                            <c:forEach begin="1" end="2">
+                                                <svg class="w-4 h-4 text-gray-300 ms-1"
+                                                     aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                     fill="currentColor" viewBox="0 0 22 20">
+                                                    <path
+                                                        d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                                </svg>
+                                            </c:forEach>
+                                            <span class="ms-2 font-semibold text-[#543520]">3.0</span>
+                                    </div>
+                                    <div class="flex justify-start items-baseline text-nowrap px-10">
+                                        <input type="radio" name="rate" value="2" class="accent-[#543520] mr-4">
+                                            <c:forEach begin="1" end="2">
+                                                <svg class="w-4 h-4 text-yellow-300 ms-1" aria-hidden="true"
+                                                     xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                                     viewBox="0 0 22 20">
+                                                    <path
+                                                        d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                                </svg>
+                                            </c:forEach>
+                                            <c:forEach begin="1" end="3">
+                                                <svg class="w-4 h-4 text-gray-300 ms-1"
+                                                     aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                     fill="currentColor" viewBox="0 0 22 20">
+                                                    <path
+                                                        d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                                </svg>
+                                            </c:forEach>
+                                            <span class="ms-2 font-semibold text-[#543520]">2.0</span>
+                                    </div>
+                                    <div class="flex justify-start items-baseline text-nowrap px-10">
+                                        <input type="radio" name="rate" value="1" class="accent-[#543520] mr-4">
+                                            <c:forEach begin="1" end="1">
+                                                <svg class="w-4 h-4 text-yellow-300 ms-1" aria-hidden="true"
+                                                     xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                                     viewBox="0 0 22 20">
+                                                    <path
+                                                        d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                                </svg>
+                                            </c:forEach>
+                                            <c:forEach begin="1" end="4">
+                                                <svg class="w-4 h-4 text-gray-300 ms-1"
+                                                     aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                     fill="currentColor" viewBox="0 0 22 20">
+                                                    <path
+                                                        d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                                </svg>
+                                            </c:forEach>
+                                            <span class="ms-2 font-semibold text-[#543520]">1.0</span>
+                                    </div>
+                                </div>
+                                <div class="flex flex-row px-8 py-4 gap-x-2 ">
+                                    <c:if test="${sessionScope.user == null}">
+                                        <div class="border-2 rounded-md w-full cursor-not-allowed"></div>
+                                        <div type="submit" class="rounded-md px-2 py-1 bg-[#543520] opacity-60 text-white font-semibold cursor-not-allowed">Send</div>
+                                    </c:if>
+                                    <c:if test="${sessionScope.user != null}">
+                                        <input type="text" name="comment" class="comment border-2 rounded-md w-full px-2">
+                                            <button type="submit" class="rating-button rounded-md px-2 py-1 bg-[#543520] text-white font-semibold"/>Send
+                                        </c:if>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div> 
                     
+                    <%@include file="footer.jsp" %>
+
                     <script>
-                        function plus(){
-                            let quantity = parseInt(document.querySelector("#quantity-num").innerText, 10);
-                            let stockText = document.querySelector("#instock").innerText;
-                            let stock = stockText ? parseInt(stockText, 10) : 0;
-                            if (quantity < stock) {
-                                quantity = quantity + 1;
-                                document.querySelector("#quantity-num").innerHTML = quantity;
+                        const id = window.location.href.split('id=')[1];
+                        document.querySelector('.product-id').value = id;
+                    </script>
+                    <script>
+                        currentSlideId = 1;
+                        sliderElement = document.querySelector("#slider");
+                        totalSlide = sliderElement.childElementCount;
+                        console.log(totalSlide);
+                        function next() {
+                            if (currentSlideId < totalSlide) {
+                                currentSlideId++;
+                                showSlide();
+                            } else if (currentSlideId === totalSlide) {
+                                currentSlideId = 1;
+                                showSlide();
                             }
                         }
-                        function minus(){
-                            let quantity = parseInt(document.querySelector("#quantity-num").innerText, 10);
-                            if (quantity > 1) {
-                                quantity = quantity - 1;
-                                document.querySelector("#quantity-num").innerHTML = quantity;
+                        function previous() {
+                            if (currentSlideId > 1) {
+                                currentSlideId--;
+                                showSlide();
+                            } else if (currentSlideId === 1) {
+                                currentSlideId = totalSlide;
+                                showSlide();
+                            }
+                        }
+                        function showSlide() {
+                            slide = document.querySelector("#slider").querySelectorAll("li");
+                            for (let i = 0; i < totalSlide; i++) {
+                                const element = slide[i];
+                                if (currentSlideId === i + 1) {
+                                    element.classList.remove('hidden');
+                                } else {
+                                    element.classList.add('hidden');
+                                }
                             }
                         }
                     </script>
 
                     <script>
-                        function plus(){
+                        function plus() {
                             let quantity = parseInt(document.querySelector("#quantity-num").innerText, 10);
                             let stockText = document.querySelector("#instock").innerText;
-                            let stock = stockText ? parseInt(stockText, 10) : 0;
+                            let stock = stockText ? parseInt(stockText, 10) : Infinity; // Nếu không có stock, cho phép tăng vô hạn
                             if (quantity < stock) {
                                 quantity = quantity + 1;
                                 document.querySelector("#quantity-num").innerHTML = quantity;
                             }
                         }
-                        function minus(){
+                        function minus() {
                             let quantity = parseInt(document.querySelector("#quantity-num").innerText, 10);
-                            if (quantity > 1) {
+                            if (quantity > 1) { // Đảm bảo quantity không nhỏ hơn 1
                                 quantity = quantity - 1;
                                 document.querySelector("#quantity-num").innerHTML = quantity;
                             }
                         }
-
                         function selectImg(element) {
-                        let img = document.querySelector("#main-img");
-                                let nextSibling = element.nextElementSibling;
-                                if (nextSibling && nextSibling.children.length > 0) {
-                        let imgChild = nextSibling.querySelector('img');
+                            let img = document.querySelector("#main-img");
+                            let nextSibling = element.nextElementSibling;
+                            if (nextSibling && nextSibling.children.length > 0) {
+                                let imgChild = nextSibling.querySelector('img');
                                 img.src = imgChild.src;
+                            }
                         }
-
-
-                        function updateForm() {
-                        const selectedColor = document.querySelector('input[name="color"]:checked')?.value;
-                                const selectedSize = document.querySelector('input[name="size"]:checked')?.value;
-                                const quantity = document.querySelector("#quantity-num").innerText;
-                                const price = document.querySelector("#price").innerText.replace("$", "").trim();
-                                if (!selectedColor || !selectedSize) {
-                        console.error("Color or size not selected");
-                                return;
-                        }
-
-
-                        }
-
                     </script>
                     <script>
                         function showSize() {
@@ -307,14 +506,9 @@
                             let sizeArray = document.querySelectorAll('ul[name="size"]');
                             for (let i = 0; i < sizeArray.length; i++) {
                                 if (sizeArray[i].getAttribute('id') === selectedValue) {
-                                sizeArray[i].style.display = "block";
-                                        sizeArray[i].querySelector('input').checked = true;
+                                    sizeArray[i].style.display = "block";
                                 } else {
-                                sizeArray[i].style.display = "none";
-                                    let sizeArrayChild = sizeArray[i].querySelectorAll('input');
-                                    for (let j = 0; j < sizeArrayChild.length; j++) {
-                                        sizeArrayChild[j].checked = false;
-                                    }
+                                    sizeArray[i].style.display = "none";
                                 }
                             }
                         }
@@ -323,17 +517,13 @@
                             let sizeArray = document.querySelectorAll('ul[name="size"]');
                             for (let i = 0; i < sizeArray.length; i++) {
                                 if (sizeArray[i].getAttribute('id') === selectedValue) {
-                                sizeArray[i].style.display = "block";
-                                        sizeArray[i].querySelector('input').checked = true;
+                                    sizeArray[i].style.display = "block";
                                 } else {
-                                sizeArray[i].style.display = "none";
-                                    let sizeArrayChild = sizeArray[i].querySelectorAll('input');
-                                    for (let j = 0; j < sizeArrayChild.length; j++) {
-                                        sizeArrayChild[j].checked = false;
-                                    }
+                                    sizeArray[i].style.display = "none";
                                 }
                             }
                         })();
+<<<<<<< HEAD
                                 
                 
             function submitForm() {
@@ -408,3 +598,78 @@
 >>>>>>> ducanhNew
     </body>
 </html>
+=======
+
+                        function submitForm() {
+                            const color = document.querySelector('input[name="color"]:checked')?.value;
+                            const size = document.querySelector('input[name="size"]:checked')?.value;
+                            if (!color || !size) {
+                                console.error("Color or size not selected");
+                                return;
+                            }
+                            let price = document.querySelector("#price");
+                            let instock = document.querySelector("#instock");
+
+                            const formData = new URLSearchParams();
+                            formData.append("color", color);
+                            formData.append("size", size);
+
+                            fetch("product", {
+                                method: "POST",
+                                headers: {"Content-Type": "application/x-www-form-urlencoded"},
+                                body: formData.toString()
+                            })
+                                    .then(response => {
+                                        if (!response.ok) {
+                                            throw new Error("Network response was not ok");
+                                        }
+                                        return response.json();
+                                    })
+                                    .then(data => {
+                                        price.innerHTML = "$ " + data.price;
+                                        instock.innerHTML = data.quantity || "N/A"; // Hiển thị "N/A" nếu không có quantity
+                                    })
+                                    .catch(error => {
+                                        console.error("Error in submitForm:", error);
+                                        instock.innerHTML = "N/A";
+                                    });
+                        }
+                        window.onload = submitForm;
+                    </script>
+
+                    <form id="cartForm" action="cart" method="post">
+                        <input type="hidden" name="id" value="${product.getProductId()}"/>
+                        <input type="hidden" name="image" value="${product.getImages()[0]}"/>
+                        <input type="hidden" name="name" value="${product.getProductName()}"/>
+                        <input type="hidden" id="sizeInput" name="size" value=""/>
+                        <input type="hidden" id="colorInput" name="color" value=""/>
+                        <input type="hidden" id="priceInput" name="price" value="${requestScope.price}"/>
+                        <input type="hidden" id="quantityInput" name="quantity" value="1"/>
+                        <input type="hidden" id="instockInput" name="instock" value="${requestScope.instock}"/>
+                    </form>
+                    <script>
+                        function submitCart() {
+                            updateForm();
+                            document.getElementById("cartForm").submit();
+                        }
+                        function updateForm() {
+                            const selectedColor = document.querySelector('input[name="color"]:checked')?.value;
+                            const selectedSize = document.querySelector('input[name="size"]:checked')?.value;
+                            const quantity = document.querySelector("#quantity-num").innerText;
+                            const price = document.querySelector("#price").innerText.replace("$", "").trim();
+                            const instock = document.querySelector("#instock").innerText;
+                            if (!selectedColor || !selectedSize) {
+                                console.error("Color or size not selected");
+                                return;
+                            }
+                            document.querySelector("#colorInput").value = selectedColor;
+                            document.querySelector("#sizeInput").value = selectedSize;
+                            document.querySelector("#quantityInput").value = quantity;
+                            document.querySelector("#priceInput").value = price;
+                            document.querySelector("#instockInput").value = instock;
+                        }
+                    </script>
+
+                </body>
+                </html>
+>>>>>>> ngocmai
