@@ -14,6 +14,7 @@ import java.util.Random;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import jakarta.servlet.http.HttpServletRequest;
+import java.security.InvalidKeyException;
 
 /**
  *
@@ -22,7 +23,11 @@ import jakarta.servlet.http.HttpServletRequest;
 public class VNPayConfig {
 
     public static String vnp_PayUrl = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-    public static String vnp_ReturnUrl = "http://localhost:8080/becompany/vnpay-response";
+
+    /**
+     *
+     */
+    public static String vnp_ReturnUrl = "http://localhost:9999/becompany/vnpay-response";
     public static String vnp_TmnCode = "RBWPFIZY";
     public static String secretKey = "TV520AIIQC7MFS3I94SBHSJWRYIOQBI4";
     public static String vnp_ApiUrl = "https://sandbox.vnpayment.vn/merchant_webapi/api/transaction";
@@ -37,9 +42,7 @@ public class VNPayConfig {
                 sb.append(String.format("%02x", b & 0xff));
             }
             digest = sb.toString();
-        } catch (UnsupportedEncodingException ex) {
-            digest = "";
-        } catch (NoSuchAlgorithmException ex) {
+        } catch (UnsupportedEncodingException | NoSuchAlgorithmException ex) {
             digest = "";
         }
         return digest;
@@ -55,9 +58,7 @@ public class VNPayConfig {
                 sb.append(String.format("%02x", b & 0xff));
             }
             digest = sb.toString();
-        } catch (UnsupportedEncodingException ex) {
-            digest = "";
-        } catch (NoSuchAlgorithmException ex) {
+        } catch (UnsupportedEncodingException | NoSuchAlgorithmException ex) {
             digest = "";
         }
         return digest;
@@ -102,7 +103,7 @@ public class VNPayConfig {
             }
             return sb.toString();
 
-        } catch (Exception ex) {
+        } catch (IllegalStateException | NullPointerException | InvalidKeyException | NoSuchAlgorithmException ex) {
             return "";
         }
     }

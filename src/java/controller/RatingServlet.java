@@ -5,19 +5,16 @@
 
 package controller;
 
-import dal.OrderDao;
+
 import dal.RatingDao;
 import java.io.IOException;
-import java.io.PrintWriter;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.util.List;
-import model.Product;
-import model.Rating;
 import model.User;
 
 /**

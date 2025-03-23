@@ -16,7 +16,7 @@ import java.util.ArrayList;
  */
 public class ShippingDAO extends DBConnect {
     public List<ShippingOption> getAllShippingOption(){
-        List<ShippingOption> list = new ArrayList();
+        List<ShippingOption> list = new ArrayList<>();
         String sql="select * from Delivery";
         try{
             PreparedStatement st = connection.prepareStatement(sql);

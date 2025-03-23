@@ -30,7 +30,7 @@ public class UserUpdateServlet extends HttpServlet {
             UserDAO st = new UserDAO();
             st.updateCustomerStatus(userId, status);
             resp.sendRedirect("/becompany/user");
-        } catch (Exception e) {
+        } catch (IOException e) {
             System.out.println(e);
         }
     }

@@ -60,7 +60,7 @@ public class ProsUpdateServlet extends HttpServlet {
             ProductDao pd = new ProductDao();
             pd.updateProduct(productId, productName, origin, description, manufacturer, type, status);
             resp.sendRedirect("pros");
-        } catch (Exception e) {
+        } catch (IOException e) {
             System.out.println(e);
         }
     }

@@ -42,8 +42,8 @@ public class ProductServlet extends HttpServlet {
             ProductDao pd = new ProductDao();
             TeddyDao td = new TeddyDao();
             
-            Map<String, List<String>> type = new HashMap();
-            Map<String, Boolean> colorList = new HashMap();
+            Map<String, List<String>> type = new HashMap<>();
+            Map<String, Boolean> colorList = new HashMap<>();
             
             Product viewProduct= pd.getProductById(id);
             List<Integer> ratingList = pd.getProductStar(id);
@@ -64,7 +64,7 @@ public class ProductServlet extends HttpServlet {
                 if(type.containsKey(i.getColor())){
                     type.get(i.getColor()).add(i.getSize());
                 }else{
-                    List<String> li = new ArrayList();
+                    List<String> li = new ArrayList<>();
                     li.add(i.getSize());
                     type.put(i.getColor(), li);
                 }

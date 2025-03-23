@@ -71,9 +71,9 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
         String rememberMe = request.getParameter("rem");
         
-        Cookie cUsername = new Cookie("usr",username);
-        Cookie cPassword = new Cookie("pwd",password);
-        
+//        Cookie cUsername = new Cookie("usr",username);
+//        Cookie cPassword = new Cookie("pwd",password);
+//        
         
         
         

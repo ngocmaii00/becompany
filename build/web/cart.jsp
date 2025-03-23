@@ -37,7 +37,7 @@
                     String cartData = "";
                     if (cookies != null) {
                         for (Cookie cookie : cookies) {
-                            if (cookie.getName().equals("cart")) {
+                            if (cookie.getName().equals(cartId)) {
                                 cartData = URLDecoder.decode(cookie.getValue(), StandardCharsets.UTF_8.toString());
                                 break;
                             }
@@ -139,26 +139,18 @@
                     <span class="text-3xl font-bold text-[#543520]"> Total Amount: </span>
                 </div>
                 <div class="col-span-4 text-center">
-<<<<<<< HEAD
-<<<<<<< HEAD
+
                     <span id="totalAmount" class="text-4xl font-bold text-[#543520]">0₫</span>
                 </div>
                 <div class="col-span-2 flex justify-center">
                     <button id="buy" href="checkout" class="flex border-2 border-[#543520] bg-[#543520] rounded-md w-40 h-14 text-center items-center justify-center align-center">
-=======
-                    <span id="totalAmount" class="text-4xl font-bold text-[#543520]">0.00$</span>
-                </div>
-                <div class="col-span-2 flex justify-center">
-                    <button class="flex border-2 border-[#543520] bg-[#543520] rounded-md w-40 h-14 text-center items-center justify-center align-center">
->>>>>>> ngocmai
-=======
 
                     <span id="totalAmount" class="text-4xl font-bold text-[#543520]">0.00$</span>
 
                 </div>
                 <div class="col-span-2 flex justify-center">
                     <a href="checkout"  class="flex border-2 border-[#543520] bg-[#543520] rounded-md w-40 h-14 text-center items-center justify-center align-center">
->>>>>>> parent of 1c7ad27 (fix checkout, vnpay, etc, sync to cart)
+
                         <span class="text-2xl font-bold text-white">Buy</span>
                     </a>
 <!--                    onclick="postToServlet('checkout')"-->
@@ -209,7 +201,7 @@
                 updateTotalAmount();
             };
         </script>
-<<<<<<< HEAD
+
         <script>
             function postToServlet(url) {
                 // Create a hidden form
@@ -222,7 +214,6 @@
                 form.submit();
         }
         </script>
-=======
->>>>>>> ngocmai
+
     </body>
 </html>

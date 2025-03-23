@@ -52,7 +52,7 @@ public class TeddyServlet extends HttpServlet {
             
             td.addTeddy(teddyId, color, size, price, quantity, productId);
             resp.sendRedirect("pros");
-        } catch (Exception e) {
+        } catch (IOException | NumberFormatException e) {
             System.out.println(e);
         }
 

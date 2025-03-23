@@ -86,11 +86,11 @@ public class VNPayResponseServlet extends HttpServlet {
                     <label><%=request.getParameter("vnp_PayDate")%>*/
         Double  doublevnp_Amount = Double.valueOf(request.getParameter("vnp_Amount"))/100;
         String vnp_Amount = doublevnp_Amount.toString();
-        String vnp_OrderInfo = request.getParameter("vnp_OrderInfo");
-        String vnp_ResponseCode = request.getParameter("vnp_ResponseCode");
-        String vnp_TransactionNo = request.getParameter("vnp_TransactionNo");
-        String vnp_BankCode = request.getParameter("vnp_BankCode");
-        String vnp_PayDate = request.getParameter("vnp_PayDate");
+//        String vnp_OrderInfo = request.getParameter("vnp_OrderInfo");
+//        String vnp_ResponseCode = request.getParameter("vnp_ResponseCode");
+//        String vnp_TransactionNo = request.getParameter("vnp_TransactionNo");
+//        String vnp_BankCode = request.getParameter("vnp_BankCode");
+//        String vnp_PayDate = request.getParameter("vnp_PayDate");
 
         if (signValue.equals(vnp_SecureHash)) {
             if ("00".equals(request.getParameter("vnp_TransactionStatus"))) {

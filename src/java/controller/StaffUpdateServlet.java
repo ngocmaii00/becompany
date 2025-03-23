@@ -60,7 +60,7 @@ public class StaffUpdateServlet extends HttpServlet {
             StaffDao st = new StaffDao();
             st.updateStaff(staffId, lastname, firstname, position, email, address, dob, status);
             resp.sendRedirect("staff");
-        } catch (Exception e) {
+        } catch (IOException e) {
             System.out.println(e);
         }
     }
