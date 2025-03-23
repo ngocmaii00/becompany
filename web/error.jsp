@@ -13,6 +13,6 @@
 <body>
     <h1>Oops! Page not found (404)</h1>
     <p>The page you are looking for does not exist.</p>
-    <a href="/home">Go to Home</a>
+    <a href="home">Go to Home</a>
 </body>
 </html>

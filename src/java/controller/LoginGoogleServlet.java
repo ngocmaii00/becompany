@@ -104,12 +104,13 @@ public class LoginGoogleServlet extends HttpServlet {
         String error_subtype=request.getParameter("error_subtype");
         if ("interaction_required".equals(error) || "login_required".equals(error) ||"access_denied".equals(error_subtype) ) {
         // Customer is not logged in, so redirect them to normal login flow
-        response.sendRedirect("https://accounts.google.com/o/oauth2/auth?scope=email%20profile&redirect_uri=http://localhost:8080/becompany/login-google&response_type=code&client_id=852116808382-82db8ra9hkc52bsm7dmq7utbej4d9hi3.apps.googleusercontent.com&prompt=consent"); // Force login again
+        response.sendRedirect("https://accounts.google.com/o/oauth2/auth?scope=email%20profile&redirect_uri=http://localhost:9999/becompany/login-google&response_type=code&client_id=852116808382-82db8ra9hkc52bsm7dmq7utbej4d9hi3.apps.googleusercontent.com&prompt=consent"); // Force login again
         
         }else{
             
         String code = request.getParameter("code");
         GoogleUtils gg = new GoogleUtils();
+        
         String accessToken = gg.getToken(code);
         GooglePojo googleAccountInfo = gg.getUserInfo(accessToken);
         System.err.println(googleAccountInfo.toString());

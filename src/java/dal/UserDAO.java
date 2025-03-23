@@ -167,7 +167,7 @@ public class UserDAO extends DBConnect {
     }
 
     public Customer findByResetPasswordToken(String token) {
-        String sql = "select userId,email,username,password from [User] where reset_password_token =? AND role ='USER'";
+        String sql = "select * from [User] where reset_password_token =? AND role ='USER'";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, token);
@@ -183,7 +183,7 @@ public class UserDAO extends DBConnect {
 
 
     public void update(Customer user) {
-        String sql = "update [User] set reset_password_token = ? and role = 'USER'";
+        String sql = "update [User] set reset_password_token = ?, role = 'USER'";
 
         if (user.getPassword() != null) {
             sql += ", [password] = '" + user.getPassword() + "' ";
@@ -193,7 +193,7 @@ public class UserDAO extends DBConnect {
         try {
             PreparedStatement st = connection.prepareStatement(sql);
 
-            st.setString(1, user.getResetPasswordToken());
+                st.setString(1, user.getResetPasswordToken());
 
             st.executeUpdate();
         } catch (SQLException e) {
