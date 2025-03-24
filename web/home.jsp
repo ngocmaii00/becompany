@@ -11,6 +11,7 @@
         
     </head>
     <body>
+
         <%@include file="header.jsp" %>
         <main>
             <div class="slide relative">

@@ -24,7 +24,11 @@ import model.User;
  *
  * @author OS
  */
-@WebFilter(filterName = "FilterBeCpn", urlPatterns = {"/cart.jsp","/cart","/admin"})
+@WebFilter(filterName = "FilterBeCpn", urlPatterns = {"/cart.jsp","/cart","/admin","/buyProduct.jsp","/error.jsp","/footer.jsp","/header.jsp"
+                                                        ,"/image.jsp","/order.jsp","/profile.jsp","/pros.jsp","/search.jsp","/slides.jsp","/staff.jsp"
+                                                        ,"/user.jsp","/filter","/header","/image","/logout","/profile_avatar","/profile"
+                                                        ,"/prosfilter","/pros","/prosupdate","/search","/slide","/staff","/staffupdate"
+                                                        ,"/userfilter","/user","/userupdate"})
 public class FilterBeCpn implements Filter {
 
     private static final boolean debug = true;
@@ -121,12 +125,11 @@ public class FilterBeCpn implements Filter {
         Throwable problem = null;
         try {
             chain.doFilter(request, response);
-        } catch (Throwable t) {
+        } catch (IOException t) {
             // If an exception is thrown somewhere down the filter chain,
             // we still want to execute our after processing, and then
             // rethrow the problem after that.
-            problem = t;
-            t.printStackTrace();
+            req.getRequestDispatcher("/login").forward(request, response);
         }
 
         doAfterProcessing(request, response);
