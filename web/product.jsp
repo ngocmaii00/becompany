@@ -410,7 +410,7 @@
 
                         </div>
                     </div> 
-                    
+
                     <%@include file="footer.jsp" %>
 
                     <script>
@@ -486,8 +486,13 @@
                             for (let i = 0; i < sizeArray.length; i++) {
                                 if (sizeArray[i].getAttribute('id') === selectedValue) {
                                     sizeArray[i].style.display = "block";
+                                    sizeArray[i].querySelector('input').checked = true;
                                 } else {
                                     sizeArray[i].style.display = "none";
+                                    let sizeArrayChild = sizeArray[i].querySelectorAll('input');
+                                    for (let j = 0; j < sizeArrayChild.length; j++) {
+                                        sizeArrayChild[j].checked = false;
+                                    }
                                 }
                             }
                         }
@@ -497,11 +502,20 @@
                             for (let i = 0; i < sizeArray.length; i++) {
                                 if (sizeArray[i].getAttribute('id') === selectedValue) {
                                     sizeArray[i].style.display = "block";
+                                    sizeArray[i].firstChild.checked = true;
                                 } else {
                                     sizeArray[i].style.display = "none";
+                                    let sizeArrayChild = sizeArray[i].querySelectorAll('input');
+                                    for (let j = 0; j < sizeArrayChild.length; j++) {
+                                        sizeArrayChild[j].checked = false;
+
+
+
+                                    }
                                 }
                             }
                         })();
+
 
                         function submitForm() {
                             const color = document.querySelector('input[name="color"]:checked')?.value;
@@ -537,7 +551,10 @@
                                         instock.innerHTML = "N/A";
                                     });
                         }
-                        window.onload = submitForm;
+                        window.onload = function () {
+                            showSize();
+                            submitForm();
+                        }
                     </script>
 
                     <form id="cartForm" action="cart" method="post">
