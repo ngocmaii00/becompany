@@ -125,7 +125,7 @@ public class LoginGoogleServlet extends HttpServlet {
             response.sendRedirect("home");
         }else if(ggUser!= null && !ggUser.getAuth_provider().equals("GOOGLE")){
             //check if the user is using a google acount email on local login
-            request.setAttribute("nonLocalError", "This email has already been Sign Up");
+            request.setAttribute("error", "This email has already been Sign Up");
             request.getRequestDispatcher("login").forward(request, response);
             
         }else{

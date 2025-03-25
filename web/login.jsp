@@ -76,7 +76,7 @@
                             <!-- type="checkbox" name="peer remember" id="remember" -->
                             <!-- <label class="text-xl  font-bold text-[#563a2d] cursor-pointer"for="remember"> Remember me</label> -->
                         </div>
-                        <p class="text-red-700 ml-2" id="error"></p>
+                                   <p class="text-red-700 ml-2" id="error">${requestScope.error}</p>
                         <div class="grid grid-cols-2 mb-2 mx-2">
                             <div class="inline-flex items-center">
                                 <label class="flex items-center cursor-pointer relative" for="check-2">

@@ -50,6 +50,9 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String error = (String)request.getAttribute("error");
+        if(error!= null)
+            request.setAttribute("error", error);
         request.getRequestDispatcher("login.jsp").forward(request,response);
     }
 
