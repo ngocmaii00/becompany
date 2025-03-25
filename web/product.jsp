@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 
 <%-- 
     Document   : product.jsp
@@ -6,8 +5,7 @@
     Author     : zeryus
 --%>
 
-=======
->>>>>>> ngocmai
+
 <%@page import="java.util.List" %>
 <%@page import="java.util.ArrayList" %>
 
@@ -19,19 +17,14 @@
 <html>
 
     <head>
-<<<<<<< HEAD
-
-=======
->>>>>>> ngocmai
+        
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
             <link rel="icon" type="image/svg+xml" href="images/head.png" />
             <title>Product</title>
             <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
             <link rel="stylesheet" href="css/index.css">
-<<<<<<< HEAD
-=======
+
                 </head>
->>>>>>> ngocmai
 
                 <body class="bg-white">
                     <%@include file="header.jsp" %>
@@ -63,10 +56,7 @@
                                         </div>
                                     </label>
                                 </c:forEach>
-<<<<<<< HEAD
 
-=======
->>>>>>> ngocmai
                             </div>
                         </div>
 
@@ -133,7 +123,7 @@
                                         <c:if test="${color.value == false}">
                                             <label class="relative h-full w-auto cursor-pointer">
                                                 <input name="color" type="radio"
-
+                                                       
                                                        class="peer aspect-square size-8 w-auto cursor-pointer appearance-none rounded-full border-[3px] border bg-[${color.key}] border-gray-900 checked:border-[${color.key}] text-[${color.key}] checked:ring-[#000000] focus:ring-[${color.key}] transition-all"
                                                        value="${color.key}" ${status.index == 0?"checked":""} onclick="showSize();submitForm();" />
                                                 <span
@@ -151,7 +141,7 @@
                                         <c:if test="${color.value == true}">
                                             <label class="relative h-full w-auto">
                                                 <input name="color" type="radio"
-
+                                                       
                                                        class="peer aspect-square size-8 w-auto cursor-pointer appearance-none rounded-full border-2 border bg-[${color.key}] border-gray-300    checked:border-gray-900 text-[${color.key}] checked:ring-[#000000] focus:ring-[${color.key}] transition-all"
                                                        value="${color.key}" ${status.index == 0?"checked":""} onclick="showSize();submitForm();" />
                                                 <span
@@ -502,28 +492,41 @@
                     </script>
                     <script>
                         function showSize() {
-                            let selectedValue = document.querySelector("input[name='color']:checked").value;
-                            let sizeArray = document.querySelectorAll('ul[name="size"]');
-                            for (let i = 0; i < sizeArray.length; i++) {
-                                if (sizeArray[i].getAttribute('id') === selectedValue) {
-                                    sizeArray[i].style.display = "block";
-                                } else {
-                                    sizeArray[i].style.display = "none";
+                                let selectedValue = document.querySelector("input[name='color']:checked").value;
+                                let sizeArray = document.querySelectorAll('ul[name="size"]');
+                                for (let i = 0; i < sizeArray.length; i++) {
+                                    if (sizeArray[i].getAttribute('id') === selectedValue) {
+                                        sizeArray[i].style.display = "block";
+                                        sizeArray[i].querySelector('input').checked = true;
+                                    } else {
+                                        sizeArray[i].style.display = "none";
+                                        let sizeArrayChild = sizeArray[i].querySelectorAll('input');
+                                        for (let j = 0; j < sizeArrayChild.length; j++) {
+                                            sizeArrayChild[j].checked = false;
+                                        }
+                                    }
                                 }
                             }
-                        }
-                        (function () {
-                            let selectedValue = document.querySelector("input[name='color']:checked").value;
-                            let sizeArray = document.querySelectorAll('ul[name="size"]');
-                            for (let i = 0; i < sizeArray.length; i++) {
-                                if (sizeArray[i].getAttribute('id') === selectedValue) {
-                                    sizeArray[i].style.display = "block";
-                                } else {
-                                    sizeArray[i].style.display = "none";
+                         (function () {
+                                let selectedValue = document.querySelector("input[name='color']:checked").value;
+                                let sizeArray = document.querySelectorAll('ul[name="size"]');
+                                for (let i = 0; i < sizeArray.length; i++) {
+                                    if (sizeArray[i].getAttribute('id') === selectedValue) {
+                                        sizeArray[i].style.display = "block";
+                                        sizeArray[i].firstChild.checked = true;
+                                    } else {
+                                        sizeArray[i].style.display = "none";
+                                        let sizeArrayChild = sizeArray[i].querySelectorAll('input');
+                                        for (let j = 0; j < sizeArrayChild.length; j++) {
+                                            sizeArrayChild[j].checked = false;
+
+
+
+                                        }
+                                    }
                                 }
-                            }
-                        })();
-<<<<<<< HEAD
+                            })();
+
                                 
                 
             function submitForm() {
@@ -560,7 +563,11 @@
                     instock.innerHTML = "N/A";
                 });
             }
-            window.onload = submitForm;
+            window.onload = function () {
+                showSize();
+                submitForm();
+                
+             }
         </script>
         
         <form id="cartForm" action="cart" method="post">
@@ -595,81 +602,7 @@
                 document.querySelector("#instockInput").value = instock;
             }
         </script>
->>>>>>> ducanhNew
+
     </body>
 </html>
-=======
 
-                        function submitForm() {
-                            const color = document.querySelector('input[name="color"]:checked')?.value;
-                            const size = document.querySelector('input[name="size"]:checked')?.value;
-                            if (!color || !size) {
-                                console.error("Color or size not selected");
-                                return;
-                            }
-                            let price = document.querySelector("#price");
-                            let instock = document.querySelector("#instock");
-
-                            const formData = new URLSearchParams();
-                            formData.append("color", color);
-                            formData.append("size", size);
-
-                            fetch("product", {
-                                method: "POST",
-                                headers: {"Content-Type": "application/x-www-form-urlencoded"},
-                                body: formData.toString()
-                            })
-                                    .then(response => {
-                                        if (!response.ok) {
-                                            throw new Error("Network response was not ok");
-                                        }
-                                        return response.json();
-                                    })
-                                    .then(data => {
-                                        price.innerHTML = "$ " + data.price;
-                                        instock.innerHTML = data.quantity || "N/A"; // Hiển thị "N/A" nếu không có quantity
-                                    })
-                                    .catch(error => {
-                                        console.error("Error in submitForm:", error);
-                                        instock.innerHTML = "N/A";
-                                    });
-                        }
-                        window.onload = submitForm;
-                    </script>
-
-                    <form id="cartForm" action="cart" method="post">
-                        <input type="hidden" name="id" value="${product.getProductId()}"/>
-                        <input type="hidden" name="image" value="${product.getImages()[0]}"/>
-                        <input type="hidden" name="name" value="${product.getProductName()}"/>
-                        <input type="hidden" id="sizeInput" name="size" value=""/>
-                        <input type="hidden" id="colorInput" name="color" value=""/>
-                        <input type="hidden" id="priceInput" name="price" value="${requestScope.price}"/>
-                        <input type="hidden" id="quantityInput" name="quantity" value="1"/>
-                        <input type="hidden" id="instockInput" name="instock" value="${requestScope.instock}"/>
-                    </form>
-                    <script>
-                        function submitCart() {
-                            updateForm();
-                            document.getElementById("cartForm").submit();
-                        }
-                        function updateForm() {
-                            const selectedColor = document.querySelector('input[name="color"]:checked')?.value;
-                            const selectedSize = document.querySelector('input[name="size"]:checked')?.value;
-                            const quantity = document.querySelector("#quantity-num").innerText;
-                            const price = document.querySelector("#price").innerText.replace("$", "").trim();
-                            const instock = document.querySelector("#instock").innerText;
-                            if (!selectedColor || !selectedSize) {
-                                console.error("Color or size not selected");
-                                return;
-                            }
-                            document.querySelector("#colorInput").value = selectedColor;
-                            document.querySelector("#sizeInput").value = selectedSize;
-                            document.querySelector("#quantityInput").value = quantity;
-                            document.querySelector("#priceInput").value = price;
-                            document.querySelector("#instockInput").value = instock;
-                        }
-                    </script>
-
-                </body>
-                </html>
->>>>>>> ngocmai
